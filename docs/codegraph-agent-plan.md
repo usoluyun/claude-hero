@@ -1,5 +1,7 @@
 # ATLWork Java 项目批量 codegraph → 项目级 subagent 描述
 
+> 实操步骤/命令/经验见配套手册 [`project-agent-cookbook.md`](./project-agent-cookbook.md)。
+
 ## Context（为什么做这件事）
 
 为 `~/Documents/ATLWork` 下的 ~40 个 Java 微服务批量生成 codegraph 代码图谱，再以此为素材生成每个项目对应的「项目级 subagent」描述，让团队能把任务路由到对应服务的代码专家 agent。先验证思路可行性（pilot），确认质量后再批量。
