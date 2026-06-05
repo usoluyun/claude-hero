@@ -37,8 +37,11 @@
 - **可观测**：日志带 SkyWalking TraceId，异常不吞、不打印敏感信息。
 - **测试**：TDD 由 `superpowers` 驱动（RED-GREEN-REFACTOR），Java 测试栈 **JUnit 5 + Mockito +
   AssertJ**；BDD 用 `gherkin` skill 写 `.feature` + Cucumber-JVM。
-- **agent 团队**：大型项目用 `agents/` 下 Java 团队（`java-tech-lead` 统筹 → dev/data/test →
-  code-reviewer + security-auditor 把关）。
+- **agent 团队与工作流**：
+  - 日常编码：调用对应 agent（backend-developer / data-engineer / test-engineer）
+  - **PRD 驱动开发**：触发 `hero 开发工作流` skill，自动编排 8 步流程（PRD 摄入 → 设计 → 规划 →
+    分派 → 并行开发 → 测试 → 审查 → 合并），全程有确认门控（STOP & CONFIRM）、多需求隔离
+   （worktree）、跨需求验证合并。见 `skills/java-prd-workflow/SKILL.md`。
 
 ## 飞书
 

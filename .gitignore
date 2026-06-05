@@ -3,6 +3,13 @@
 config/CLAUDE.md
 config/settings.json
 
+# Worktree 隔离工作区（git worktree，每个 PRD 独占）
+.worktrees/
+worktrees/
+
+# 临时验证分支（跨需求合并时创建）
+validate/
+
 # 备份与临时
 *.bak.*
 .DS_Store

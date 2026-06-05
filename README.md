@@ -6,6 +6,8 @@
 
 ## 快速开始
 
+### 安装
+
 ```bash
 git clone <repo-url> claude-hero
 cd claude-hero
@@ -15,16 +17,35 @@ bash install.sh        # 软链 skills/agents/hooks 到 ~/.claude
 安装结束后，脚本会提示哪些**模板文件**（`CLAUDE.md` / `settings.json` / `.mcp.json`）需要你
 手动合并——因为它们含密钥或高度个人化，不会被自动覆盖。
 
-保持更新：
+### 启动 PRD 驱动开发流程
+
+```bash
+# 触发 Java PRD 开发工作流（读取飞书 PRD，自动生成设计 + 计划，分派 agent，并行开发，
+# 全程确认门控，最后跨需求验证合并）
+hero 开发工作流 https://feishu.cn/docx/xxxxxxxxxxxxx
+
+# 或用 Slash 命令
+/hero-prd-to-java https://feishu.cn/docx/xxxxxxxxxxxxx
+
+# 查看所有在飞的 PRD 及进度
+hero 工作流状态
+
+# 触发已准备就绪的 PRD 跨需求验证合并
+hero 合并验证
+```
+
+详见 `skills/java-prd-workflow/SKILL.md`。
+
+### 保持更新
 
 ```bash
 git pull        # skills/agents 是软链，pull 后自动生效，无需重装
 ```
 
-卸载（只移除指向本仓库的软链，不动你的个人文件与备份）：
+### 卸载
 
 ```bash
-bash uninstall.sh
+bash uninstall.sh      # 只移除指向本仓库的软链，不动你的个人文件与备份
 ```
 
 ## 目录结构

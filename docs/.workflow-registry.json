@@ -1,0 +1,5 @@
+{
+  "$comment": "Java PRD 开发工作流注册表。记录所有在飞及已合并的 PRD。安装时由 install.sh 软链到 ~/.claude/docs/，日常开发时在此跟踪 PRD 进度。",
+  "active": [],
+  "merged": []
+}
