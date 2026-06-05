@@ -30,7 +30,7 @@
 - **配置分层**：公共配置进 Apollo `common.*` namespace，私有进 `application`；敏感配置进 Apollo
   并设权限，代码里只留 key。
 - **中间件接入约定**：Apollo / Eureka / SkyWalking / RocketMQ / JetCache 的接入示例与最佳实践
-  由 agent 实现体现（参考 `agents/java-backend-developer.md`），按团队约定执行。
+  由 agent 实现体现（参考 `agents/hero-java-backend-developer.md`），按团队约定执行。
 - **MyBatis 安全**：参数用 `#{}`，**禁止 `${}` 拼接用户输入**；动态表名/列名走白名单。
 - **事务边界**：`@Transactional` 自调用失效、传播行为、避免大事务与事务内远程调用/发 MQ。
 - **缓存/消息幂等**：JetCache 设 TTL + 防穿透击穿；RocketMQ 消费端用业务唯一键做幂等。
@@ -41,7 +41,7 @@
   - 日常编码：调用对应 agent（backend-developer / data-engineer / test-engineer）
   - **PRD 驱动开发**：触发 `hero 开发工作流` skill，自动编排 8 步流程（PRD 摄入 → 设计 → 规划 →
     分派 → 并行开发 → 测试 → 审查 → 合并），全程有确认门控（STOP & CONFIRM）、多需求隔离
-   （worktree）、跨需求验证合并。见 `skills/java-prd-workflow/SKILL.md`。
+   （worktree）、跨需求验证合并。见 `skills/hero-prd-to-java/SKILL.md`。
 
 ## 飞书
 

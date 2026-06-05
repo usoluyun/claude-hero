@@ -1,5 +1,5 @@
 ---
-name: java-code-reviewer
+name: hero-java-code-reviewer
 description: Java/Spring Boot/MyBatis 代码审查专家（只读）。当需要审查 Java 代码的正确性与质量时使用，覆盖空指针、并发、事务、MyBatis SQL 注入、中间件用法、可观测性、多 JDK 兼容、资源管理。只提问题与建议，不直接改代码。
 model: opus
 tools: Read, Grep, Glob, Bash

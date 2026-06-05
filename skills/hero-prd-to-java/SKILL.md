@@ -81,11 +81,11 @@ hero 合并验证
 → 用户确认：继续 / 修改特性名重新开始 / 终止
 ```
 
-### Step 1：技术设计（java-tech-lead，opus）
+### Step 1：技术设计（hero-java-tech-lead，opus）
 
 **输入**：Step 0 的 PRD 摘要 + 用户确认
 
-**执行**：使用 `java-tech-lead` agent（在当前 worktree 内）：
+**执行**：使用 `hero-java-tech-lead` agent（在当前 worktree 内）：
 - 根据功能清单 + 初判服务拆解成完整的微服务架构
 - 画出服务依赖图（mermaid 图，支持 claude-mermaid 渲染）
 - 设计接口契约（REST /API 路径 + Feign DTO）
@@ -121,7 +121,7 @@ hero 合并验证
 → 用户确认：继续 / 修改返工 / 保存设计止步
 ```
 
-### Step 2：Sprint 规划（java-tech-lead，opus）
+### Step 2：Sprint 规划（hero-java-tech-lead，opus）
 
 **输入**：Step 1 的设计文档
 
@@ -161,7 +161,7 @@ Sprint 2（1 周）：[任务数] 任务，重点：主服务实现 + 子服务�
 
 **输入**：Sprint 计划 + 用户确认
 
-**执行**：java-tech-lead 生成分派说明文档（写入 worktree，可独立保存或追加进 sprint doc）：
+**执行**：hero-java-tech-lead 生成分派说明文档（写入 worktree，可独立保存或追加进 sprint doc）：
 - **主服务 Tech Lead 的职责**：
   - 全局接口协调（确保子服务接口对齐）
   - 等待子服务接口定义就绪（Step 1 接口委托清单）后才开始主服务 Feign 调用实现
@@ -197,12 +197,12 @@ Sprint 2（1 周）：[任务数] 任务，重点：主服务实现 + 子服务�
 
 **输入**：分派清单 + 用户确认
 
-**执行**：在同一个 worktree 内，并行调用多个 `java-backend-developer` + `mybatis-data-engineer` agent，
+**执行**：在同一个 worktree 内，并行调用多个 `hero-java-backend-developer` + `hero-java-data-engineer` agent，
 分别实现各服务：
 
 - **子服务优先**：接口定义 → 子服务业务实现 → 通知主服务
 - **主服务等待**：接收子服务接口 → 实现 Feign 调用 + 业务逻辑
-- 每个服务的实现 agent 遵循 team-conventions + best-practices.md 中的中间件约定
+- 每个服务的实现 agent 遵循 hero-conventions + best-practices.md 中的中间件约定
 
 **产物**：`.worktrees/prd-{name}/src/` 下各服务的业务代码
 
@@ -213,12 +213,12 @@ Sprint 2（1 周）：[任务数] 任务，重点：主服务实现 + 子服务�
 ✓ 各服务实现已完成（概览）：
 
 主服务 [name]：
-  + java-backend-developer 实现的内容：[行数/功能数]
-  + mybatis-data-engineer 实现的内容：[mapper 数/SQL 复杂度]
+  + hero-java-backend-developer 实现的内容：[行数/功能数]
+  + hero-java-data-engineer 实现的内容：[mapper 数/SQL 复杂度]
 
 子服务 A：
-  + java-backend-developer：[摘要]
-  + mybatis-data-engineer：[摘要]
+  + hero-java-backend-developer：[摘要]
+  + hero-java-data-engineer：[摘要]
 
 子服务 B：...
 
@@ -231,7 +231,7 @@ Git diff 概览：[+XXX -YYY 行]
 
 **输入**：各服务实现代码 + 用户确认
 
-**执行**：`java-test-engineer` agent（在 worktree 内）：
+**执行**：`hero-java-test-engineer` agent（在 worktree 内）：
 - **TDD 单测**：JUnit 5 + Mockito + AssertJ（每服务独立跑 `mvn test` / `./gradlew test`）
 - **BDD 验收**：用 `gherkin` skill 写 `.feature` 文件，实现 Cucumber-JVM step definitions，
   验证关键业务场景
@@ -267,9 +267,9 @@ BDD 验收：
 
 **输入**：完整实现代码 + 测试通过
 
-**执行**：同时调用 `java-code-reviewer` 和 `java-security-auditor` agent（只读，不改代码）：
+**执行**：同时调用 `hero-java-code-reviewer` 和 `hero-java-security-auditor` agent（只读，不改代码）：
 
-**java-code-reviewer**：
+**hero-java-code-reviewer**：
 - 空指针 / Optional 误用
 - 并发（线程池 / ThreadLocal 泄漏 / 共享可变状态）
 - 事务（`@Transactional` 自调用失效 / 传播行为 / 大事务 / 事务内远程调用）
@@ -279,7 +279,7 @@ BDD 验收：
 - 多 JDK 兼容（1.8 vs 11/17 API）
 - 资源关闭
 
-**java-security-auditor**：
+**hero-java-security-auditor**：
 - 依赖漏洞（CVE 扫描）
 - SQL 注入
 - 鉴权 / 越权
@@ -312,7 +312,7 @@ BDD 验收：
 
 **输入**：所有审查问题已修复
 
-**执行**：`java-tech-lead` agent：
+**执行**：`hero-java-tech-lead` agent：
 - 核对设计文档（`docs/design-*.md`）与实现一致性（接口 / 数据模型）
 - 更新 `docs/sprint-*.md`，添加"验收报告"小节（完成日期 / 完成人 / 是否有遗留 issue）
 - 所有产物 commit 到 feature/prd-{name} 分支
@@ -328,7 +328,7 @@ BDD 验收：
 ```
 ✓ 验收报告已生成（追加到 docs/sprint-{name}-{yyyymmdd}.md）：
 
-验收人：Claude（java-tech-lead）
+验收人：Claude（hero-java-tech-lead）
 验收日期：2026-06-10
 完成度：100%（所有任务已完成 + 审查通过）
 
@@ -498,7 +498,7 @@ A：可以。Step 8（跨需求验证）会列出所有已 `ready-to-merge` 的 
 **Q：Step 4 开发时发现设计有问题，怎么回退？**
 
 A：在该步 STOP 时，你回复"返工"或"修改设计"，指定返工给 Step 1。
-java-tech-lead agent 重新执行 Step 1（新的设计文档），待用户确认后继续 Step 2。
+hero-java-tech-lead agent 重新执行 Step 1（新的设计文档），待用户确认后继续 Step 2。
 
 **Q：Step 8 中两个 PRD 冲突了，我只想先合并一个，行吗？**
 
@@ -510,14 +510,14 @@ A：不行。Step 8 是原子操作（all or nothing）——要么所有 ready 
 
 ## 与其他 Agent 的协作
 
-- **java-tech-lead**：Step 1/2/3/7，负责设计 + 规划 + 分派 + 验收
-- **java-backend-developer**：Step 4，实现业务逻辑（主/子服务）+ 中间件接入
-- **mybatis-data-engineer**：Step 4（按需），实现 MyBatis + SQL
-- **java-test-engineer**：Step 5，TDD 单测 + BDD 验收 + 集成测试
-- **java-code-reviewer**：Step 6（只读），代码审查
-- **java-security-auditor**：Step 6（只读），安全审计
+- **hero-java-tech-lead**：Step 1/2/3/7，负责设计 + 规划 + 分派 + 验收
+- **hero-java-backend-developer**：Step 4，实现业务逻辑（主/子服务）+ 中间件接入
+- **hero-java-data-engineer**：Step 4（按需），实现 MyBatis + SQL
+- **hero-java-test-engineer**：Step 5，TDD 单测 + BDD 验收 + 集成测试
+- **hero-java-code-reviewer**：Step 6（只读），代码审查
+- **hero-java-security-auditor**：Step 6（只读），安全审计
 
-所有 agent 遵循 `team-conventions` + `docs/best-practices.md` 中的中间件约定。
+所有 agent 遵循 `hero-conventions` + `docs/best-practices.md` 中的中间件约定。
 
 ---
 

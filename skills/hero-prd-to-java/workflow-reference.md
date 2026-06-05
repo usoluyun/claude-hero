@@ -31,7 +31,7 @@ PRD 摘要
 ⏸ STOP — 请确认特性名、初判服务列表，或要求修改后重新开始
 ```
 
-## Step 1：设计文档模板（java-tech-lead）
+## Step 1：设计文档模板（hero-java-tech-lead）
 
 ### 输出文件：`docs/design-{name}-{yyyymmdd}.md`
 
@@ -179,7 +179,7 @@ Response: { status: "SUCCESS" }
 ⏸ STOP — 请审阅设计，确认无遗漏，或返工修改
 ```
 
-## Step 2：Sprint 规划模板（java-tech-lead）
+## Step 2：Sprint 规划模板（hero-java-tech-lead）
 
 ### 输出文件：`docs/sprint-{name}-{yyyymmdd}.md`
 
@@ -196,11 +196,11 @@ Response: { status: "SUCCESS" }
 
 | # | 功能 / 任务 | 服务 | 估算 | Agent | 前置依赖 | 优先级 |
 |---|-----------|-----|------|-------|---------|--------|
-| 1 | 库存服务：接口定义 + 数据模型设计 | stock-service | 1d | java-tech-lead | - | P0 |
-| 2 | 库存服务：Mapper + 基础 CRUD | stock-service | 2d | mybatis-data-engineer | 1 | P0 |
-| 3 | 支付服务：接口定义 + 数据模型 | payment-service | 1d | java-tech-lead | - | P0 |
-| 4 | 支付服务：Mapper + 基础 CRUD | payment-service | 2d | mybatis-data-engineer | 3 | P0 |
-| 5 | 订单服务：Feign 调用框架 + Apollo / Eureka 接入 | order-service | 2d | java-backend-developer | 1,3 | P0 |
+| 1 | 库存服务：接口定义 + 数据模型设计 | stock-service | 1d | hero-java-tech-lead | - | P0 |
+| 2 | 库存服务：Mapper + 基础 CRUD | stock-service | 2d | hero-java-data-engineer | 1 | P0 |
+| 3 | 支付服务：接口定义 + 数据模型 | payment-service | 1d | hero-java-tech-lead | - | P0 |
+| 4 | 支付服务：Mapper + 基础 CRUD | payment-service | 2d | hero-java-data-engineer | 3 | P0 |
+| 5 | 订单服务：Feign 调用框架 + Apollo / Eureka 接入 | order-service | 2d | hero-java-backend-developer | 1,3 | P0 |
 
 ### Sprint 目标达成标准
 - [ ] 库存 / 支付接口定义已完成并提交到 feature 分支
@@ -216,13 +216,13 @@ Response: { status: "SUCCESS" }
 
 | # | 功能 / 任务 | 服务 | 估算 | Agent | 前置依赖 | 优先级 |
 |---|-----------|-----|------|-------|---------|--------|
-| 6 | 库存服务：业务逻辑（check / reserve / deduct） | stock-service | 2d | java-backend-developer | 2 | P0 |
-| 7 | 支付服务：业务逻辑（check / execute / refund） | payment-service | 2d | java-backend-developer | 4 | P0 |
-| 8 | 订单服务：业务逻辑（create / query / cancel） + RocketMQ 异步 | order-service | 3d | java-backend-developer | 5,6,7 | P0 |
-| 9 | TDD 单测（所有服务） | - | 2d | java-test-engineer | 6,7,8 | P0 |
-| 10 | BDD 验收场景 + 集成测试 | - | 1d | java-test-engineer | 9 | P0 |
-| 11 | 代码审查（质量 + 安全） | - | 1d | java-code-reviewer, java-security-auditor | 10 | P0 |
-| 12 | 汇总 + 合并 | - | 0.5d | java-tech-lead | 11 | P0 |
+| 6 | 库存服务：业务逻辑（check / reserve / deduct） | stock-service | 2d | hero-java-backend-developer | 2 | P0 |
+| 7 | 支付服务：业务逻辑（check / execute / refund） | payment-service | 2d | hero-java-backend-developer | 4 | P0 |
+| 8 | 订单服务：业务逻辑（create / query / cancel） + RocketMQ 异步 | order-service | 3d | hero-java-backend-developer | 5,6,7 | P0 |
+| 9 | TDD 单测（所有服务） | - | 2d | hero-java-test-engineer | 6,7,8 | P0 |
+| 10 | BDD 验收场景 + 集成测试 | - | 1d | hero-java-test-engineer | 9 | P0 |
+| 11 | 代码审查（质量 + 安全） | - | 1d | hero-java-code-reviewer, hero-java-security-auditor | 10 | P0 |
+| 12 | 汇总 + 合并 | - | 0.5d | hero-java-tech-lead | 11 | P0 |
 
 ### Sprint 目标达成标准
 - [ ] 所有业务逻辑已实现并测试通过
@@ -335,13 +335,13 @@ Sprint 2（1 周）：实现 + 测试 + 审查阶段
 
 | 模块 | AI Agent | 人工（可选） |
 |------|---------|-----------|
-| 接口定义 | java-tech-lead | 人工审核 + 确认 |
-| 数据模型 | java-tech-lead | 人工调整（如有性能考虑） |
-| Mapper + CRUD | mybatis-data-engineer | 人工审核 SQL |
-| 业务逻辑 | java-backend-developer | 人工处理复杂逻辑 / 文化因素 |
-| 单测 / BDD | java-test-engineer | 人工补充缺失的场景 |
-| 代码审查 | java-code-reviewer | 人工最终确认 |
-| 安全审计 | java-security-auditor | 人工修复 🔴 问题 |
+| 接口定义 | hero-java-tech-lead | 人工审核 + 确认 |
+| 数据模型 | hero-java-tech-lead | 人工调整（如有性能考虑） |
+| Mapper + CRUD | hero-java-data-engineer | 人工审核 SQL |
+| 业务逻辑 | hero-java-backend-developer | 人工处理复杂逻辑 / 文化因素 |
+| 单测 / BDD | hero-java-test-engineer | 人工补充缺失的场景 |
+| 代码审查 | hero-java-code-reviewer | 人工最终确认 |
+| 安全审计 | hero-java-security-auditor | 人工修复 🔴 问题 |
 ```
 
 ## Step 5-6：测试 & 审查
@@ -460,7 +460,7 @@ Sprint 2（1 周）：实现 + 测试 + 审查阶段
 
 ## 验收报告
 
-**验收人**：Claude（java-tech-lead）
+**验收人**：Claude（hero-java-tech-lead）
 **验收日期**：2026-06-19
 **完成度**：100%（所有任务已完成 + 代码审查通过）
 

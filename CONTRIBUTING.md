@@ -1,15 +1,31 @@
 # 贡献指南
 
+## 命名规范（统一 `hero` 前缀）
+
+仓库内所有 agent / skill 一律以 `hero` 开头，便于在 `~/.claude` 里和个人/其它来源的资源区分。
+
+- **Agent：`hero-<语言>-<...>`**（带语言）
+  | 类型 | 规则 | 例子 |
+  |------|------|------|
+  | 角色 agent | `hero-<lang>-<role>` | `hero-java-backend-developer`、`hero-java-tech-lead`、`hero-java-data-engineer` |
+  | 项目领航 agent | `hero-<lang>-<project>` | `hero-java-ecrm`、`hero-java-crm` |
+  | 大项目按业务域拆 | `hero-<lang>-<project>-<domain>` | `hero-java-pms-api-folio` |
+- **Skill：`hero-<能力>`**（**不带语言**，skill 是跨语言/跨项目能力）
+  - 工作流/转换类 → `hero-<源>-to-<目标>` 或 `hero-<动词>-<对象>`：`hero-prd-to-java`、`hero-codegraph-agents`
+  - 知识/规范类 → `hero-<主题>`：`hero-conventions`
+
+全部小写 kebab-case。文件/目录名与 frontmatter 的 `name` 必须一致。
+
 ## 新增一个共享 skill
 
-1. 在 `skills/<skill-name>/` 下放 `SKILL.md`，frontmatter 必须含 `name` 与 `description`
+1. 在 `skills/hero-<能力>/` 下放 `SKILL.md`，frontmatter 必须含 `name`（= 目录名）与 `description`
    （description 决定触发时机，写清楚"何时使用"）。
 2. 需要的辅助资源放同目录下（脚本、模板、references）。
-3. 提交 PR。安装方 `install.sh` 后软链到 `~/.claude/skills/<skill-name>`。
+3. 提交 PR。安装方 `install.sh` 后软链到 `~/.claude/skills/hero-<能力>`。
 
 ## 新增一个共享 agent
 
-在 `agents/` 放 `<name>.md`（含 `name`/`description` frontmatter）。
+在 `agents/` 放 `hero-<语言>-<...>.md`（含 `name`/`description` frontmatter，`name` = 文件名去掉 `.md`）。
 
 ## 新增一个 hook
 

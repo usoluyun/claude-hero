@@ -1,9 +1,9 @@
 ---
-name: team-conventions
+name: hero-conventions
 description: 团队 Claude Code 通用约定。当涉及代理设置、数据库查询工具选择、容器镜像仓库、飞书操作入口等团队基础约定时触发，确保行为与团队一致。
 ---
 
-# 团队约定（team-conventions）
+# 团队约定（hero-conventions）
 
 这是一个示例 skill，演示 claude-hero 仓库如何共享 skill。请按团队实际情况替换内容。
 
