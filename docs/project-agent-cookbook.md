@@ -1,7 +1,7 @@
 # 项目领航 Agent 生成手册（codegraph 实操）
 
 > 配套方案见 [`codegraph-agent-plan.md`](./codegraph-agent-plan.md)。本文是**怎么做**——从一个 Java 服务生成一个 `hero-<lang>-<project>` 领航 agent 的可复用步骤、命令、经验与坑。
-> 已据此产出：`hero-java-ecrm`、`hero-java-hotel-product-center`。
+> 已据此产出：`hero-java-ecrm`、`hero-java-hotel-product-center`、`hero-java-owner-biz`。
 
 ## 0. 这个 agent 是什么 / 不是什么
 - **是**：某个服务的"代码领航员/知识层"——懂业务定位、技术栈、代码地图、入口、对外契约，能用 codegraph 圈定改动影响面。只读。
@@ -19,7 +19,7 @@ codegraph init -i .          # init + 首次索引
 codegraph status .           # 看符号数/语言分布，确认解析有效（>0）
 git status --short           # 必须干净
 ```
-**实测成本**：ecrm 35 文件→0.25s/1.7MB；hotel-product-center 854 文件→10s/41MB。外推全量 ~4 万文件 ≈ 8–12 分钟 / ~2GB。
+**实测成本**：ecrm 35 文件→0.25s/1.7MB；hotel-product-center 854 文件→10s/41MB；owner-biz 1395 文件→33s/87MB。外推全量 ~4 万文件 ≈ 12–18 分钟 / ~2.5GB（文件越多近似线性偏上）。
 
 ### Step 2 · 探测源码布局（不要假设 `src/main/java` 在根）
 ```bash
@@ -83,6 +83,20 @@ done
 4. **`route`/`@Controller` 数量是栈信号**：codegraph `route` 节点>0 基本就是 Web 服务。
 5. **领域知识(第⑥部分)无法自动化**：codegraph 只给结构，坑/状态机靠人逐步沉淀，初版留占位。
 6. **codegraph CLI 当下即用**（`query/files/callers/callees/impact -p`），MCP 可后置。
+
+## 2.5 三个 pilot 案例（覆盖不同形态）
+| | ecrm | hotel-product-center | owner-biz |
+|---|---|---|---|
+| 形态 | 小项目(单模块) | Gradle 多模块服务 | **单体多业务域** |
+| 规模 | 35 文件 | 854 文件 | 1395 文件 |
+| 栈 | ActionSoft BPM(非 Spring) | Spring Boot 2.7.12 | Spring Boot 2.7.18 |
+| 语义种子 | ATLWork/CLAUDE.md(且**标错**) | ATLWork/CLAUDE.md | **项目内 owner-biz/CLAUDE.md** |
+| 重点产出 | 纠偏栈+定位 | api/core 契约分离 | **业务域地图(23 域)** |
+
+**owner-biz 的两条增量经验**：
+1. **优先吃项目内的 `CLAUDE.md`**：owner-biz 在 `ATLWork/CLAUDE.md` 里根本没有条目，但项目根目录自带一份团队写的 `CLAUDE.md`（栈/分层/外部依赖/关键业务能力齐全）。evidence pack 的语义种子顺序应是：**项目内 CLAUDE.md/README > ATLWork/CLAUDE.md > 包命名推断**。
+2. **单体把"业务域地图"做厚**：单体最大痛点是"需求落在哪个包"。把 `*-api` 顶层子包逐个列出 + 中文注释（owner-biz 有 banner/合同/通讯录/GOP/供应商评价/连锁用户/日月报/消息/战区… 23 个域），让人/agent 按域秒级定位入口；并强调单体跨域复用多，改前必 `codegraph impact`。DDD 项目额外点明 `acl` 防腐层约定（外部调用不在 service 直连）。
+3. 1395 文件仍 < 2000 阈值 → 单 agent。按域拆的阈值留待更大项目（pms-api/crs）验证。
 
 ## 3. 验证清单（每个 agent 交付前）
 - [ ] `codegraph status` 符号数 > 0、语言含 java
