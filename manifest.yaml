@@ -1,0 +1,39 @@
+# claude-hero 资源映射清单
+#
+# install.sh / uninstall.sh 读取本文件，决定把仓库里的哪些资源、用什么方式、
+# 安装到 ~/.claude 的哪个位置。
+#
+# 字段：
+#   source : 相对本仓库根目录的路径
+#   target : 相对 ~/.claude 的路径
+#   mode   : 安装方式
+#     - link     软链接。若 source 是目录，则按"子项逐个软链"（不整目录链，
+#                避免覆盖成员自有的其它 skill/agent）。git pull 后全员自动更新。
+#     - copy     复制（一次性，之后不随仓库变动）。按需使用。
+#     - template 不自动安装。仅在安装结尾打印提示，让使用方手动合并（用于含
+#                密钥或高度个人化的文件：CLAUDE.md / settings.json / .mcp.json）。
+
+entries:
+  - source: skills
+    target: skills
+    mode: link
+
+  - source: agents
+    target: agents
+    mode: link
+
+  - source: config/hooks
+    target: hooks
+    mode: link
+
+  - source: config/CLAUDE.md.example
+    target: CLAUDE.md
+    mode: template
+
+  - source: config/settings.json.example
+    target: settings.json
+    mode: template
+
+  - source: mcp/servers
+    target: .mcp.json
+    mode: template

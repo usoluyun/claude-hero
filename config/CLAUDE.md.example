@@ -1,0 +1,45 @@
+# CLAUDE.md（团队基线模板）
+#
+# 这是团队共享的 Claude Code 行为基线。install.sh 不会自动覆盖你的个人
+# ~/.claude/CLAUDE.md —— 请把下面需要的段落手动合并进去，再补充你自己的私有项。
+
+## 语言
+
+* 无论使用什么语言提问，都用中文回复。
+
+## 代理访问
+
+命令行通过 127.0.0.1:7890 代理访问互联网；遇到企业内部域名（如 yaduo.com、
+at-our.com）时，把它们加入 NO_PROXY。
+
+## 容器镜像
+
+远程私有 Podman 镜像仓库地址：zot.chester.monster
+
+## 数据库
+
+* 查询 PostgreSQL 用 pgcli
+* 查询 MySQL 用 mycli
+
+## Java 技术栈（团队基线）
+
+* **JDK**：1.8 / 11 / 17 共存，**手动切换 `JAVA_HOME`**（无 sdkman/jenv）。构建前先切到项目
+  所需版本，见 `cli/jdk-multiversion.md`。
+* **框架/构建**：Spring Boot；Maven 与 Gradle 并存（Gradle 用 `./gradlew`）。
+* **ORM**：MyBatis —— SQL 参数一律 `#{}`，**禁止 `${}` 拼接用户输入**。
+* **配置中心 Apollo** / **服务发现 Eureka** / **APM SkyWalking** / **队列 RocketMQ** /
+  **缓存 JetCache（底层 Redis）**：接入先参考对应 `skills/*`（apollo-config、eureka-discovery、
+  skywalking-apm、rocketmq-messaging、jetcache-cache）。
+* **数据库**：MySQL 用 `mycli`、SQLServer 用 `sqlcmd`/`mssql-cli`，**查库一律 CLI 人工执行**，
+  不给 Claude 配数据库直连。
+* **可靠性红线**：远程调用必设超时+降级；MQ 消费端必做幂等；注意 `@Transactional` 自调用失效。
+* 大型项目可调用 `agents/` 下的 Java agent 团队（tech-lead 统筹，dev/data/test/review/security 分工）。
+
+## 飞书
+
+* 团队主要通过 lark-cli + lark-* skills 操作飞书（文档/表格/日历/IM 等）。
+* 用花名在飞书内搜索同事。
+
+## 个人段落（按需自行补充）
+
+<!-- 例如：你的花名、真名、邮箱、个人偏好等。不要把私密信息提交回本仓库。 -->

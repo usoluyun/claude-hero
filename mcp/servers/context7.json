@@ -1,0 +1,12 @@
+{
+  "$comment": "MCP 配置模板，把本片段合并进 ~/.claude.json 或项目 .mcp.json。CONTEXT7_API_KEY 可选，用于提升文档拉取额度；不填则用免费额度。",
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@context7/mcp"],
+      "env": {
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+      }
+    }
+  }
+}

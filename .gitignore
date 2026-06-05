@@ -1,0 +1,11 @@
+# 本地实际配置（含密钥），不入库；仓库只放 *.example
+.mcp.json
+config/CLAUDE.md
+config/settings.json
+
+# 备份与临时
+*.bak.*
+.DS_Store
+
+# 演练用的临时 HOME
+/tmp-home/

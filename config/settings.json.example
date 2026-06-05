@@ -1,0 +1,28 @@
+{
+  "$comment": "团队共享的 settings.json 基线。install.sh 不会覆盖你的个人 ~/.claude/settings.json，请手动按需合并。permissions/hooks/env 按团队约定填写。",
+
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(java -version)",
+      "Bash(mvn -v)",
+      "Bash(mvn -version)",
+      "Bash(mvn dependency:tree)",
+      "Bash(./gradlew -v)",
+      "Bash(./gradlew tasks)",
+      "Bash(./gradlew dependencies)",
+      "Bash(/usr/libexec/java_home:*)"
+    ],
+    "deny": []
+  },
+
+  "env": {
+    "NO_PROXY": "yaduo.com,at-our.com,localhost,127.0.0.1"
+  },
+
+  "hooks": {
+    "$comment": "可共享的 hook 脚本放在仓库 config/hooks/，安装后软链到 ~/.claude/hooks/。在此引用，如 ~/.claude/hooks/your-hook.sh"
+  }
+}
