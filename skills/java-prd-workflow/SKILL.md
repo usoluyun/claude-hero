@@ -91,7 +91,7 @@ hero 合并验证
 - 设计接口契约（REST /API 路径 + Feign DTO）
 - 设计数据模型（ER 图，说明涉及的表与字段）
 - 画出关键业务时序（mermaid sequence diagram）
-- 说明中间件选型（Apollo / Eureka / RocketMQ / JetCache / SkyWalking，参考对应 skills）
+- 说明中间件选型（Apollo / Eureka / RocketMQ / JetCache / SkyWalking，参考 best-practices.md）
 
 **产物**：`docs/design-{name}-{yyyymmdd}.md`（写入 worktree）
 
@@ -202,7 +202,7 @@ Sprint 2（1 周）：[任务数] 任务，重点：主服务实现 + 子服务�
 
 - **子服务优先**：接口定义 → 子服务业务实现 → 通知主服务
 - **主服务等待**：接收子服务接口 → 实现 Feign 调用 + 业务逻辑
-- 每个服务的实现 agent 遵循 team-conventions + 相关 skills（Apollo / Eureka / RocketMQ / JetCache）
+- 每个服务的实现 agent 遵循 team-conventions + best-practices.md 中的中间件约定
 
 **产物**：`.worktrees/prd-{name}/src/` 下各服务的业务代码
 
@@ -517,7 +517,7 @@ A：不行。Step 8 是原子操作（all or nothing）——要么所有 ready 
 - **java-code-reviewer**：Step 6（只读），代码审查
 - **java-security-auditor**：Step 6（只读），安全审计
 
-所有 agent 遵循 `team-conventions` + 对应 middleware skills（apollo-config / eureka-discovery 等）。
+所有 agent 遵循 `team-conventions` + `docs/best-practices.md` 中的中间件约定。
 
 ---
 

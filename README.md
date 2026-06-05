@@ -52,7 +52,7 @@ bash uninstall.sh      # 只移除指向本仓库的软链，不动你的个人�
 
 | 目录 | 内容 | 安装方式 |
 |------|------|----------|
-| `skills/` | 共享自定义 skill（每个一个目录，含 `SKILL.md`） | 子项逐个软链到 `~/.claude/skills/` |
+| `skills/` | 共享自定义 skill（team-conventions 团队通用约定、java-prd-workflow PRD 驱动工作流） | 子项逐个软链到 `~/.claude/skills/` |
 | `agents/` | 共享 subagent 定义（`*.md`） | 子项逐个软链到 `~/.claude/agents/` |
 | `config/hooks/` | 可共享的 hook 脚本 | 软链到 `~/.claude/hooks/` |
 | `config/*.example` | `CLAUDE.md` / `settings.json` 模板 | 模板，提示手动合并 |

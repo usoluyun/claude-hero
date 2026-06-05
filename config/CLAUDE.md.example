@@ -27,9 +27,9 @@ at-our.com）时，把它们加入 NO_PROXY。
   所需版本，见 `cli/jdk-multiversion.md`。
 * **框架/构建**：Spring Boot；Maven 与 Gradle 并存（Gradle 用 `./gradlew`）。
 * **ORM**：MyBatis —— SQL 参数一律 `#{}`，**禁止 `${}` 拼接用户输入**。
-* **配置中心 Apollo** / **服务发现 Eureka** / **APM SkyWalking** / **队列 RocketMQ** /
-  **缓存 JetCache（底层 Redis）**：接入先参考对应 `skills/*`（apollo-config、eureka-discovery、
-  skywalking-apm、rocketmq-messaging、jetcache-cache）。
+* **中间件**：Apollo（配置）/ Eureka（服务发现）/ SkyWalking（APM）/ RocketMQ（消息队列）/
+  JetCache（缓存，底层 Redis）。接入时参考 `docs/best-practices.md` 的中间件约定与对应 agent
+  实现示例。
 * **数据库**：MySQL 用 `mycli`、SQLServer 用 `sqlcmd`/`mssql-cli`，**查库一律 CLI 人工执行**，
   不给 Claude 配数据库直连。
 * **可靠性红线**：远程调用必设超时+降级；MQ 消费端必做幂等；注意 `@Transactional` 自调用失效。

@@ -12,10 +12,13 @@ JetCache、MyBatis、MySQL/SQLServer，Java 1.8/11/17，Maven/Gradle。
 
 - 实现业务：Controller（参数校验/统一响应）、Service（业务编排/事务边界）、
   DAO 调用（调 Mapper，复杂 SQL 交数据工程师）。
-- **中间件接入**，严格参考对应 skill：
-  - Apollo → `apollo-config`；Eureka/Feign → `eureka-discovery`
-  - RocketMQ 收发 + **消费幂等** → `rocketmq-messaging`
-  - JetCache 缓存 → `jetcache-cache`；链路/埋点 → `skywalking-apm`
+- **中间件接入**，遵循团队约定（见 `docs/best-practices.md`）：
+  - **Apollo**：bootstrap 配置、@Value / @ConfigurationProperties / @ApolloConfig、
+    namespace 命名约定、热更新监听
+  - **Eureka**：client 注册配置、Feign 调用、@LoadBalanced、服务名命名约定
+  - **RocketMQ**：生产/消费模板、**消费端幂等**、重试与死信队列、topic/group 命名约定
+  - **JetCache**：@Cached / @CreateCache / @CacheInvalidate、两级缓存、key 约定、防穿透击穿
+  - **SkyWalking**：-javaagent 接入、SW_AGENT_NAME、日志打 TraceId、跨线程透传、@Trace/@Tags
 - 遵循 `team-conventions`（代理、私服、命名等）。
 
 ## 工作方式

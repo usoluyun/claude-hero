@@ -29,7 +29,8 @@ bash install.sh
 
 ## 4. 验证
 
-- 在 Claude Code 里查看 skill 列表，应能看到团队共享的 skill（如 `team-conventions`）。
+- 在 Claude Code 里查看 skill 列表，应能看到团队共享的 skill（`team-conventions`、
+  `hero-prd-to-java` 等）。
 - 改一下仓库里某个 `SKILL.md`，无需重装即生效（软链）。
 
 ## 5. 日常

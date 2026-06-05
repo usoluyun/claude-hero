@@ -420,11 +420,11 @@ Sprint 2（1 周）：实现 + 测试 + 审查阶段
    ```
 
 3. **stock-service/StockService.java:80** - RocketMQ 幂等
-   消息消费端缺少幂等检查，需补充去重逻辑（参考 rocketmq-messaging skill）
+   消息消费端缺少幂等检查，需补充去重逻辑（参考 best-practices.md 中 RocketMQ 约定）
 
 ## 🟡 建议改进（2 项）
 
-1. order-service 缺少 SkyWalking TraceId 日志打印（参考 skywalking-apm skill）
+1. order-service 缺少 SkyWalking TraceId 日志打印（参考 best-practices.md 中 SkyWalking 约定）
 2. JetCache 配置的 TTL 过长（30min），建议降到 10min 以减少缓存不一致窗口
 
 ## 🟢 代码风格建议（1 项）

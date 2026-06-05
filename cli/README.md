@@ -11,7 +11,7 @@
 | mycli | 查询 **MySQL**（补全/高亮） | `brew install mycli` | 查 MySQL 一律用它，人工执行 |
 | sqlcmd / mssql-cli | 查询 **SQLServer** | `brew install sqlcmd`（go-sqlcmd）或 `pip install mssql-cli` | 查 SQLServer 用它，人工执行 |
 | redis-cli | JetCache 后端 Redis 排障 | `brew install redis` | 仅排障，缓存读写走 JetCache |
-| mqadmin | RocketMQ 运维（topic/消费进度/死信） | 随 RocketMQ 发行包 | 配合控制台，见 `rocketmq-messaging` skill |
+| mqadmin | RocketMQ 运维（topic/消费进度/死信） | 随 RocketMQ 发行包 | 配合控制台，详见 best-practices.md |
 | podman | 容器构建/运行，连私有仓库 | `brew install podman` | 私服 `zot.chester.monster` |
 
 ## 数据库访问约定
@@ -23,7 +23,7 @@
 
 - RocketMQ：`mqadmin` 看 topic / 消费堆积 / 死信队列（`%DLQ%`）；优先用控制台。
 - Redis（JetCache 后端）：`redis-cli` 仅用于排障查 key，业务读写走 JetCache。
-- SkyWalking：UI 看链路（地址放团队内部文档/Apollo），见 `skywalking-apm` skill。
+- SkyWalking：UI 看链路（地址放团队内部文档/Apollo），详见 best-practices.md。
 
 ## 代理约定
 

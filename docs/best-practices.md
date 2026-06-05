@@ -29,8 +29,8 @@
   Gradle toolchain 锁定版本（见 `cli/jdk-multiversion.md`），别只靠 shell `JAVA_HOME`。
 - **配置分层**：公共配置进 Apollo `common.*` namespace，私有进 `application`；敏感配置进 Apollo
   并设权限，代码里只留 key。
-- **中间件接入清单**：Apollo / Eureka / SkyWalking / RocketMQ / JetCache 一律先看对应 `skills/*`，
-  统一命名与可靠性约定。
+- **中间件接入约定**：Apollo / Eureka / SkyWalking / RocketMQ / JetCache 的接入示例与最佳实践
+  由 agent 实现体现（参考 `agents/java-backend-developer.md`），按团队约定执行。
 - **MyBatis 安全**：参数用 `#{}`，**禁止 `${}` 拼接用户输入**；动态表名/列名走白名单。
 - **事务边界**：`@Transactional` 自调用失效、传播行为、避免大事务与事务内远程调用/发 MQ。
 - **缓存/消息幂等**：JetCache 设 TTL + 防穿透击穿；RocketMQ 消费端用业务唯一键做幂等。
