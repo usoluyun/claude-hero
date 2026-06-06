@@ -11,6 +11,7 @@ required_input: 审计范围
 怀疑/排查安全风险（越权、注入、漏洞依赖、敏感信息泄漏），先审计、再按需修复。
 
 ## 复用的 superpowers skill
+- `superpowers:systematic-debugging`（审计段：用证据（日志/代码/依赖树）定位风险，不臆测）
 - `superpowers:test-driven-development`（修复段：漏洞复现测试当 RED，修到测试转绿）
 
 ## 参与的角色 agent

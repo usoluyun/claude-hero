@@ -2,7 +2,7 @@
 lane: research
 archetype: readonly
 intent_keywords: [调研, 评估, 能不能, 影响面, 怎么改, 要不要]
-required_input: 问题或范围
+required_input: 问题/范围
 ---
 
 # research lane（需求/变更调研 · readonly）

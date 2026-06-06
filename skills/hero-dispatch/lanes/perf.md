@@ -2,7 +2,7 @@
 lane: perf
 archetype: two-phase
 intent_keywords: [慢, 性能, 瓶颈, 优化耗时, 压测, 超时]
-required_input: 慢的位置或指标
+required_input: 慢的位置/指标
 ---
 
 # perf lane（性能瓶颈与优化 · two-phase）

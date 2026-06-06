@@ -2,7 +2,7 @@
 lane: bugfix
 archetype: mutate
 intent_keywords: [修bug, 报错, 异常, 复现, 修一下, 不对, 不生效]
-required_input: 现象或复现路径
+required_input: 现象/复现路径
 ---
 
 # bugfix lane（修 bug · mutate）
