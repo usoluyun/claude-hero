@@ -1,15 +1,15 @@
-# ATLWork Java 项目批量 codegraph → 项目级 subagent 描述
+# 项目批量 codegraph → 项目级 subagent 描述
 
 > 实操步骤/命令/经验见配套手册 [`project-agent-cookbook.md`](./project-agent-cookbook.md)。
 
 ## Context（为什么做这件事）
 
-为 `~/Documents/ATLWork` 下的 ~40 个 Java 微服务批量生成 codegraph 代码图谱，再以此为素材生成每个项目对应的「项目级 subagent」描述，让团队能把任务路由到对应服务的代码专家 agent。先验证思路可行性（pilot），确认质量后再批量。
+为 atour 项目（本地目录 `~/Documents/ATLWork`）下的 ~40 个 Java 微服务批量生成 codegraph 代码图谱，再以此为素材生成每个项目对应的「项目级 subagent」描述，让团队能把任务路由到对应服务的代码专家 agent。先验证思路可行性（pilot），确认质量后再批量。
 
 ### 现状盘点
 - **工具**：`codegraph` v0.9.7 已装（`~/.codegraph/versions/v0.9.7`），支持 Java/Kotlin（tree-sitter-java/kotlin.wasm）。命令含 `init/index/status/query/files/context/callers/callees/impact/serve --mcp/install`。
-- **规模**：ATLWork 共 **39,619 个 .java / 3.2GB**，~40 个独立 git 仓库（Maven 23 + Gradle 13 + 其他）。crm 单项目 990 个 java 文件。
-- **语义种子已存在**：`ATLWork/CLAUDE.md` 已有每个项目的一句话说明 + 架构分组。
+- **规模**：atour 项目共 **39,619 个 .java / 3.2GB**，~40 个独立 git 仓库（Maven 23 + Gradle 13 + 其他）。crm 单项目 990 个 java 文件。
+- **语义种子已存在**：atour 项目根的 `CLAUDE.md` 已有每个项目的一句话说明 + 架构分组。
 - **目标格式参考**：`claude-hero/agents/hero-java-backend-developer.md` —— frontmatter（name/description/model/tools）+ 中文正文。
 
 ### 可行性结论
@@ -23,7 +23,7 @@
 5. **粒度**：默认 **1 项目 = 1 个领航 agent**；**超阈值的大项目按业务域拆 2-3 个** bounded-context agent（命名 `hero-java-<proj>-<domain>`）。阈值初定：`>2000 .java 文件` 或 `>15 顶层业务模块`。拆分依据是 `com.atour.<svc>.module.*` / 顶层包的业务边界，不按技术分层、不按角色。
 
 ## 项目级 agent 的解剖（合格标准）
-**Frontmatter**：`name: hero-java-<proj>[-<domain>]`；`model: sonnet`；`tools: Read, Grep, Glob, Bash`（+ codegraph MCP 只读导航类）；`description` 必须含三要素——①服务一句话定位 ②**何时路由到它**（触发场景）③边界（不做什么、跨服务交谁），这是 Claude 决定调用与否的唯一依据。
+**Frontmatter**：`name: hero-java-<proj>[-<domain>]`（全小写、与项目目录同名、统一 `hero-java-` 前缀）；`model: sonnet`；`tools: Read, Grep, Glob, Bash`（+ codegraph MCP 只读导航类）；`description` 必须遵循**四段式命令规范**——①服务一句话定位 ②**触发词锚点**（`触发词：<proj> / <中文名> / <核心业务名词…> / <别名> / <关联系统>`，词面命中是 orchestrator 稳定路由的关键，缺它易漏触发）③**何时路由到它**（触发场景）④边界（不做什么、跨服务交谁）。description 是 Claude 决定调用与否的唯一依据。**生成后须在 `docs/hero-agent-roster.md` 登记一行**，业务关键词与「触发词」那行保持一致。
 
 **正文七部分**：①服务定位（业务域/架构位置/上下游）②技术栈指纹（框架·中间件·JDK，来自 pom·gradle）③代码地图（顶层包/模块→职责、分层与命名规律）④关键入口（Controller·对外 API、Feign Client、MQ 消费者、定时任务，真实类名）⑤对外契约与依赖（下游服务、暴露接口、MQ topic/group、二方包）⑥领域知识/坑（核心实体·状态机·易错点——codegraph 给不了，靠代码+经验沉淀，初版留占位）⑦导航工作法 + 协作边界（先 codegraph MCP 定位再动手；实现/SQL/测试/架构分别交对应角色 agent）。
 
@@ -51,7 +51,7 @@
    - `codegraph files --format grouped --filter src/main/java`（模块/包结构 + 符号数）
    - `codegraph query` 抓 Controller / Feign / Service / Mapper / MQ 消费者 入口符号
    - `pom.xml` / `build.gradle` 关键依赖（spring-boot / eureka / apollo / rocketmq / mybatis / jetcache / xxljob 等中间件指纹）
-   - `ATLWork/CLAUDE.md` 中该项目的一句话说明 + 所属架构分组
+   - atour 项目根 `CLAUDE.md` 中该项目的一句话说明 + 所属架构分组
    - 顶层包树（`com.atour.<svc>...`）、README（若有）
 
 4. **按模板生成 subagent `.md`**（模板见下）。
@@ -63,7 +63,7 @@
 
 ### 阶段 1 · 批量（确认后，全量 ~40 个）
 
-6. **驱动脚本**（放 `claude-hero/cli/` 或临时脚本）做确定性部分：遍历 ATLWork 下所有 Java 项目目录 → `codegraph init -i` → 写 `.git/info/exclude` → 导出 evidence pack 到临时目录。
+6. **驱动脚本**（放 `claude-hero/cli/` 或临时脚本）做确定性部分：遍历 atour 项目下所有 Java 子项目目录 → `codegraph init -i` → 写 `.git/info/exclude` → 导出 evidence pack 到临时目录。
    - 串行或小并发（控磁盘/CPU）；支持断点续跑（已 init 的跳过）。
    - 跳过非 Java 项目（`code_to_word` Python、`atour-query` 空目录等）。
 
@@ -76,9 +76,10 @@
 ```markdown
 ---
 name: hero-java-<proj>[-<domain>]
-description: 亚朵 <中文名>(<proj>[/<域>]) 服务代码领航。当需要理解/定位 <proj> 代码、
-  圈定改动影响面、排查 Controller/Service/Mapper/MQ 走向时路由到它。它带路与定位、
-  不直接写业务代码：实现交 hero-java-backend-developer、SQL 交 hero-java-data-engineer、
+description: 亚朵 <中文名>(<proj>[/<域>]) 服务代码领航。
+  触发词：<proj> / <中文名> / <核心业务名词1> / <名词2> / <别名> / <关联系统名>。
+  当需要理解/定位 <proj> 代码、圈定改动影响面、排查 Controller/Service/Mapper/MQ 走向时路由到它。
+  它带路与定位、不直接写业务代码：实现交 hero-java-backend-developer、SQL 交 hero-java-data-engineer、
   测试交 hero-java-test-engineer、架构交 hero-java-tech-lead。仅限本服务[本业务域]。
 model: sonnet
 tools: Read, Grep, Glob, Bash   # + codegraph MCP（query/callers/callees/impact）
@@ -111,7 +112,7 @@ tools: Read, Grep, Glob, Bash   # + codegraph MCP（query/callers/callees/impact
 ```
 
 ### 设计取舍 / 待 pilot 验证的风险
-- **agent 总数膨胀**：默认 ~40 个，大项目按域拆后可能 50-60 个。缓解：`hero-java-` 前缀统一命名；若过重，可改放 `ATLWork/.claude/agents/`（项目作用域加载）。
+- **agent 总数膨胀**：默认 ~40 个，大项目按域拆后可能 50-60 个。缓解：`hero-java-` 前缀统一命名；若过重，可改放 atour 项目根的 `.claude/agents/`（项目作用域加载）。
 - **按域拆的阈值与边界**需 pilot 在大项目上实测校准。
 - **领域知识（第⑥部分）无法自动化**：codegraph 只给结构，初版留占位，靠后续人工/经验沉淀。
 - **索引成本未知**：3.2GB/4 万文件，全量索引耗时与磁盘待 pilot 实测外推。

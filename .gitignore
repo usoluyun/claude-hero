@@ -16,3 +16,7 @@ validate/
 
 # 演练用的临时 HOME
 /tmp-home/
+
+# hero-refresh 临时产物（evidence pack 与待评审草稿不进 git）
+docs/.refresh-work/
+docs/.refresh-drafts/

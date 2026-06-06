@@ -64,8 +64,9 @@ grep -riE "sourceCompatibility|JavaVersion|springBootVersion" build.gradle */bui
 ### Step 5 · 套模板生成 agent
 模板与七部分结构见 `codegraph-agent-plan.md`。要点：
 - frontmatter `name = hero-<lang>-<project>`（命名规范见 `CONTRIBUTING.md`）。
-- `description` 三要素：①一句话定位 ②何时路由到它 ③边界（交给哪个角色 agent）。栈非主流时在 description 里**警示**（如 ecrm 那句"非 Spring Boot，团队约定多数不适用"）。
+- `description` **四段式命令规范**：①一句话定位 ②**触发词锚点**（`触发词：<proj> / <中文名> / <核心业务名词…> / <别名> / <关联系统>`，词面命中是 orchestrator 稳定路由的关键）③何时路由到它 ④边界（交给哪个角色 agent）。栈非主流时在 description 里**警示**（如 ecrm 那句"非 Spring Boot，团队约定多数不适用"）。
 - 正文七部分：①定位 ②技术栈指纹 ③代码地图 ④关键入口(真实类名) ⑤对外契约与依赖 ⑥领域知识/坑(留占位) ⑦导航工作法+协作边界。
+- **生成后在 `docs/hero-agent-roster.md` 登记一行**（业务关键词与「触发词」那行一致），供 `hero-prd-to-java` Step 0 确定性查表 + `hero 领航 <X>` 命令解析。
 
 ### Step 6 · 反编造验证（必做，硬门槛）
 正文引用的每个类/接口/方法都要在代码里真实存在：
@@ -101,6 +102,13 @@ done
 ## 3. 验证清单（每个 agent 交付前）
 - [ ] `codegraph status` 符号数 > 0、语言含 java
 - [ ] 该服务 `git status` 干净（exclude 生效）
-- [ ] frontmatter `name` = 文件名、含三要素 description
+- [ ] frontmatter `name` = 文件名、description 含四段（定位 / 触发词锚点 / 何时路由 / 边界）
 - [ ] 正文引用类/接口/方法全部 grep 命中（零编造）
 - [ ] 技术栈如实（非 Spring 栈有警示）、协作边界指向 `hero-java-*` 角色 agent
+- [ ] 已在 `docs/hero-agent-roster.md` 登记一行，关键词与 description「触发词」一致
+
+## 开荒 vs 保鲜
+
+- **本手册（开荒）**：新服务从无到有——首次 `codegraph init` + 首次生成领航 agent + 登记花名册。
+- **hero-refresh（保鲜）**：已接入项目随代码漂移而刷新——见 `skills/hero-refresh/SKILL.md`。
+  新 agent 生成并登记花名册后，把它加进 `docs/.refresh-state.json` 的 `projects`，即纳入保鲜。

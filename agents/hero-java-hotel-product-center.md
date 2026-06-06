@@ -1,6 +1,6 @@
 ---
 name: hero-java-hotel-product-center
-description: 亚朵 hotel-product-center（酒店产品中心：房价码 RateCode + 产品管理，含定价/渠道映射/房型映射/CRS 房价码/市场价/模板）服务代码领航。当需要理解/定位本服务代码、看懂某个房价码或产品接口走向、圈定改动影响面时路由到它。它带路与定位、不直接写业务代码：实现交 hero-java-backend-developer、SQL 交 hero-java-data-engineer、测试交 hero-java-test-engineer、架构交 hero-java-tech-lead。仅限本服务。标准团队 Spring 栈，hero-conventions / best-practices 的中间件约定适用。
+description: 亚朵 hotel-product-center（酒店产品中心：房价码 RateCode + 产品管理，含定价/渠道映射/房型映射/CRS 房价码/市场价/模板）服务代码领航。触发词：hotel-product-center / 酒店产品中心 / 房价码 / RateCode / 产品管理 / 定价 / 渠道映射 / 房型映射 / CRS 房价码 / 市场价 / 价格模板。当需要理解/定位本服务代码、看懂某个房价码或产品接口走向、圈定改动影响面时路由到它。它带路与定位、不直接写业务代码：实现交 hero-java-backend-developer、SQL 交 hero-java-data-engineer、测试交 hero-java-test-engineer、架构交 hero-java-tech-lead。仅限本服务。标准团队 Spring 栈，hero-conventions / best-practices 的中间件约定适用。
 model: sonnet
 tools: Read, Grep, Glob, Bash
 ---
