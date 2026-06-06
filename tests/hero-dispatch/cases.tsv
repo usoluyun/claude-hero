@@ -1,0 +1,10 @@
+# intent	expected_lane  —— 分诊判例回归 fixture
+修一下登录报错	bugfix
+这个接口太慢了，超时	perf
+把 PRD https://feishu.cn/docx/xxx 做了	prd
+给订单加个备注字段	iterate
+这段重复代码抽一下	refactor
+评估下加这个功能影响多大	research
+查下有没有越权风险	security
+刷新一下 ecrm 索引	refresh
+今天天气怎么样	none
