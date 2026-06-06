@@ -11,6 +11,12 @@ tools: Read, Grep, Glob, Bash
 
 > 权威语义来源：项目内 `owner-biz/CLAUDE.md`（团队维护，准确）。本卡是其结构化导航补充。
 
+## hero 露出
+
+接手任务时，先在输出顶部打一行自报家门（遵循 `hero-conventions` 露出规范，token 一字不改）：
+
+`🦸 hero ▸ hero-java-owner-biz 接手 · owner-biz 领航（只读带路）`
+
 ## ① 服务定位
 - 业务：**业主端（App/Web）后端**，给酒店业主/加盟商提供业务能力。
 - 形态：基于 Spring Cloud 的**单体**（非按域拆分的微服务集），内部按业务域分包 + DDD 分层。

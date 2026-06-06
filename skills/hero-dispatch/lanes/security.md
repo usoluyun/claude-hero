@@ -7,6 +7,14 @@ required_input: 审计范围
 
 # security lane（信息安全问题优化 · two-phase）
 
+## hero 露出
+
+按 `hero-conventions` 露出规范，本 lane 运作时打 `🦸 hero ▸` 标记（token 一字不改）：
+- 进入：`🦸 hero ▸ security lane · <纪律/门控>`
+- STOP 门：`🦸 hero ▸ STOP <门控> · <等什么>`
+- 收尾：`🦸 hero ▸ security lane 完成 · 已交付，退出 hero 体系`
+- 若派子 agent：派单处打 `🦸 hero ▸ <agent> 接手 · <职责>`
+
 ## 触发画像
 怀疑/排查安全风险（越权、注入、漏洞依赖、敏感信息泄漏），先审计、再按需修复。
 

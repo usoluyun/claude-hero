@@ -7,6 +7,14 @@ required_input: 重构对象
 
 # refactor lane（小重构 · mutate）
 
+## hero 露出
+
+按 `hero-conventions` 露出规范，本 lane 运作时打 `🦸 hero ▸` 标记（token 一字不改）：
+- 进入：`🦸 hero ▸ refactor lane · <纪律/门控>`
+- 每个 STOP 门：`🦸 hero ▸ STOP<n> <门控> · <等什么>`
+- 收尾：`🦸 hero ▸ refactor lane 完成 · 已交付，退出 hero 体系`
+- 若派子 agent：派单处打 `🦸 hero ▸ <agent> 接手 · <职责>`
+
 ## 触发画像
 不改变外部行为、只改善内部结构（抽取/改名/拆分/去重），范围限定在指定对象内。
 
