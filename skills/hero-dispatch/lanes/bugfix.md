@@ -23,8 +23,8 @@ required_input: 现象或复现路径
 定位缺陷落点与受影响 caller（复用 `docs/hero-agent-roster.md` 花名册）。
 
 ## 门控骨架
-见 `SKILL.md` 的 **Archetype A（mutate）**。特例：STOP① 之前必须先用 systematic-debugging
-稳定复现，复现不出来不进入修复。
+见 `SKILL.md` 的 **Archetype A（mutate）**。特例：步骤 1（勘察定位）须先用 systematic-debugging
+稳定复现缺陷，复现不出来不得进入 STOP①。
 
 ## 交接产物
 修复代码 + 复现/回归测试 + 影响面复核结论。

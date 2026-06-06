@@ -19,8 +19,8 @@ description: hero 意图分诊入口。触发词：hero <自由意图>。听用�
 | prd-大需求 | PRD、飞书链接、新功能、大需求、开发工作流 | 飞书 URL | 委派 `hero-prd-to-java` |
 | refresh-保鲜 | 刷新、保鲜、索引漂移、领航过期 | proj（可选） | 委派 `hero-refresh` |
 | bugfix | 修bug、报错、异常、复现、修一下、不对/不生效 | 现象/复现路径 | `lanes/bugfix.md` |
-| iterate | 小迭代、加个字段、改个逻辑、小改动、加个开关 | 改动目标 | `lanes/iterate.md` |
-| refactor | 重构、抽方法、改命名、拆类、消除重复 | 重构对象 | `lanes/refactor.md` |
+| iterate | 小迭代、加个字段、改个逻辑、小改动、加个开关、微调 | 改动目标 | `lanes/iterate.md` |
+| refactor | 重构、抽方法、改命名、拆类、消除重复、整理代码 | 重构对象 | `lanes/refactor.md` |
 | research | 调研、评估、能不能、影响面、怎么改、要不要 | 问题/范围 | `lanes/research.md` |
 | perf | 慢、性能、瓶颈、优化耗时、压测、超时 | 慢的位置/指标 | `lanes/perf.md` |
 | security | 安全、越权、注入、漏洞、CVE、敏感信息 | 审计范围 | `lanes/security.md` |

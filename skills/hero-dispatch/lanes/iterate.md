@@ -15,7 +15,7 @@ required_input: 改动目标
 - `superpowers:brainstorming`（仅当改动目标模糊时，先澄清再动手）
 
 ## 参与的角色 agent
-- `hero-java-backend-developer` / `hero-java-data-engineer`
+- `hero-java-backend-developer` / `hero-java-data-engineer`（按改动在业务层还是数据层）
 - `hero-java-test-engineer`
 
 ## 领航 agent 介入点
