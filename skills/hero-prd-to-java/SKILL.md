@@ -45,7 +45,10 @@ hero 合并验证
    - 功能清单 / 用户故事
    - 非功能需求（性能 / 安全 / 兼容性）
    - 业务规则与数据约束
-   - 初判涉及的微服务（按功能域）
+   - **涉及服务识别**：拿功能清单的业务关键词比对**领航 agent 花名册**
+     （`docs/hero-agent-roster.md`，确定性查找表，列了每个 `hero-java-<proj>` 的业务关键词/别名）
+     精准命中**存量服务**，而非凭空编造服务名。命中的服务记下其领航 agent 名，供 Step 1 勘察；
+     未命中领航 agent 的功能域，按功能划归新服务或回退现场 grep（见「关键约定·七」降级策略）。
 2. 按 `superpowers:using-git-worktrees` 创建隔离工作区：
    - 检测已有 worktree（避免嵌套）
    - 创建 `.worktrees/prd-{name}-{yyyymmdd}/` 目录
@@ -75,18 +78,40 @@ hero 合并验证
 ✓ Worktree 已创建：.worktrees/prd-{name}/
 ✓ 分支已创建：feature/prd-{name}
 ✓ PRD 摘要：[功能清单]
-✓ 初判涉及服务：[服务列表]
+✓ 涉及存量服务（已匹配领航 agent）：
+    - [服务A] → hero-java-[a]（有领航 agent）
+    - [服务B] → 无领航 agent，Step 1 回退现场勘察
+✓ 新增服务（无对应存量）：[列表 / 无]
 ✓ Registry 已注册：状态 = intake
 
-→ 用户确认：继续 / 修改特性名重新开始 / 终止
+→ 用户确认：继续 / 修改特性名或服务映射重新开始 / 终止
 ```
 
 ### Step 1：技术设计（hero-java-tech-lead，opus）
 
-**输入**：Step 0 的 PRD 摘要 + 用户确认
+**输入**：Step 0 的 PRD 摘要 + 服务→领航 agent 映射 + 用户确认
 
-**执行**：使用 `hero-java-tech-lead` agent（在当前 worktree 内）：
-- 根据功能清单 + 初判服务拆解成完整的微服务架构
+**执行**：
+
+**1a. 存量现状勘察（先勘察，后设计）**
+
+对 Step 0 命中的每个**有领航 agent 的存量服务**，tech-lead 派发对应领航 agent（`hero-java-<proj>`，
+只读 + codegraph），让它产出**勘察报告**——这是 tech-lead 做增量设计的事实底座，避免凭空编造：
+- 该服务现有**代码地图 / 关键入口**（真实 Controller、Feign Client、MQ 消费者、定时任务类名）
+- 现有**接口契约、数据模型、MQ topic/group**（设计要对齐而非另造）
+- 用 `codegraph impact` 圈出本 PRD 改动的**影响面**（受影响的 caller / 下游）
+- 该服务的**领域坑**（领航 agent 第⑥部分沉淀的状态机/易错点）
+
+> **降级**：命中的服务若**无领航 agent**，tech-lead 回退到现场勘察（`codegraph` CLI 或 `Grep/Glob`
+> 直接扫该服务代码）。新增服务无存量可勘察，按绿地设计。详见「关键约定·七」。
+
+> **边界**：领航 agent **只勘察单服务、只读、不跨服务**；跨服务的整体拆分/契约对齐/拓扑排序由
+> tech-lead 汇总各勘察报告后统一完成。领航不替 tech-lead 做跨服务决策。
+
+**1b. 增量技术设计（hero-java-tech-lead，opus）**
+
+tech-lead 汇总勘察报告 + PRD，产出设计（存量服务为**增量改动**，新服务为绿地设计）：
+- 根据功能清单 + 勘察到的存量现状拆解 / 增量微服务架构
 - 画出服务依赖图（mermaid 图，支持 claude-mermaid 渲染）
 - 设计接口契约（REST /API 路径 + Feign DTO）
 - 设计数据模型（ER 图，说明涉及的表与字段）
@@ -108,7 +133,10 @@ hero 合并验证
 
 呈现设计文档摘要给用户：
 ```
-✓ 技术设计文档已生成：docs/design-{name}-{yyyymmdd}.md
+✓ 存量现状勘察已完成（领航 agent 产出）：
+    - [服务A]（hero-java-a）：现有入口 N 个，本次影响面 M 个 caller
+    - [服务B]（无领航 agent，现场勘察）：...
+✓ 技术设计文档已生成：docs/design-{name}-{yyyymmdd}.md（存量为增量改动 / 新服务为绿地）
 
 主服务：[name]
 子服务：[list]
@@ -203,6 +231,9 @@ Sprint 2（1 周）：[任务数] 任务，重点：主服务实现 + 子服务�
 - **子服务优先**：接口定义 → 子服务业务实现 → 通知主服务
 - **主服务等待**：接收子服务接口 → 实现 Feign 调用 + 业务逻辑
 - 每个服务的实现 agent 遵循 hero-conventions + best-practices.md 中的中间件约定
+- **存量服务的开发导航**：改动**已有领航 agent 的存量服务**时，实现 agent 动手前先向该服务领航
+  agent 取导航——「这个改动该落在哪个类/包、要动哪几处、影响哪些 caller」（领航复用 Step 1 勘察 +
+  `codegraph callers/impact`）。领航喂定位与影响面，角色 agent 写代码。无领航 agent 的服务跳过此步。
 
 **产物**：`.worktrees/prd-{name}/src/` 下各服务的业务代码
 
@@ -286,7 +317,11 @@ BDD 验收：
 - 敏感信息泄漏（日志 / 异常 / 配置）
 - 反序列化
 
-**产物**：审查报告（每个问题标记严重级别）
+**领航 agent 影响面复核（存量服务，可选）**：改动了带领航 agent 的存量服务时，叫该服务领航
+agent 用 `codegraph impact` 复核——本次改动的**全部受影响 caller / 下游是否都被审查与测试覆盖**，
+防止漏改老调用方。领航只读、只报遗漏，不改代码。
+
+**产物**：审查报告（每个问题标记严重级别）+ 影响面复核结论
 
 **⏸ STOP**
 
@@ -445,6 +480,22 @@ Registry 已更新：所有 PRD 状态 = merged
 - 其他已 ready 的 PRD（如 PRD-C）**保留隔离**，可等 PRD-A 和 PRD-B 修复后再统一验证合并
 - 不会因为一个 PRD 的问题而破坏已验证的其他 PRD
 
+### 七、项目领航 agent：知识层 + 降级策略
+
+- **定位**：领航 agent（`hero-java-<proj>`）是**单服务、只读、codegraph 驱动**的知识/导航层，
+  **正交于** 6 个横向角色 agent——它「懂该服务·带路·圈影响面」，自己**不写代码**。
+- **插入点**：Step 0 服务识别（比对花名册命中存量服务）、Step 1 现状勘察（设计前喂事实底座）、
+  Step 4 开发导航（实现 agent 取定位）、Step 6 影响面复核（防漏改老调用方）。
+- **协作边界**：领航只管单服务内「代码长啥样、改了影响谁」；跨服务的整体拆分 / 契约对齐 / 拓扑
+  排序归 **tech-lead**；实现归 backend-developer，SQL 归 data-engineer，测试归 test-engineer。
+  领航产出**喂给** tech-lead / 角色 agent，自己不下场。
+- **降级策略（有则用，无则回退）**：
+  - 命中服务**有领航 agent** → 派发它勘察 / 导航。
+  - 命中服务**无领航 agent** → tech-lead / 实现 agent 回退到现场勘察（`codegraph` CLI 或 `Grep/Glob`
+    直接扫该服务），workflow **不阻塞**。
+  - **新增服务** → 无存量可勘察，走绿地设计。
+  - 缺领航 agent 的存量服务，可事后用 codegraph 手册补齐其领航 agent，逐步覆盖 ~40 个服务。
+
 ---
 
 ## 状态机
@@ -479,6 +530,7 @@ merged (Step 8 成功)
 | 启动新 PRD | `/hero-prd-to-java <URL>` | Slash 命令形式 |
 | 查看在飞 PRD | `hero 工作流状态` | 列出 registry 中所有 active PRD + 当前步骤 |
 | 触发跨需求验证 | `hero 合并验证` | 手动触发 Step 8（多 PRD 集成测试 + 合并） |
+| 调起项目领航 agent | `hero 领航 <proj或关键词>` | 按 `docs/hero-agent-roster.md` 解析关键词，路由到对应 `hero-java-<proj>` 领航 agent（摸地图/定位/圈影响面）。别名：`hero 摸地图 <X>` |
 
 ---
 
@@ -510,14 +562,17 @@ A：不行。Step 8 是原子操作（all or nothing）——要么所有 ready 
 
 ## 与其他 Agent 的协作
 
-- **hero-java-tech-lead**：Step 1/2/3/7，负责设计 + 规划 + 分派 + 验收
+- **hero-java-tech-lead**：Step 1/2/3/7，负责设计 + 规划 + 分派 + 验收（跨服务）
 - **hero-java-backend-developer**：Step 4，实现业务逻辑（主/子服务）+ 中间件接入
 - **hero-java-data-engineer**：Step 4（按需），实现 MyBatis + SQL
 - **hero-java-test-engineer**：Step 5，TDD 单测 + BDD 验收 + 集成测试
 - **hero-java-code-reviewer**：Step 6（只读），代码审查
 - **hero-java-security-auditor**：Step 6（只读），安全审计
+- **hero-java-\<proj\>（项目领航 agent）**：Step 0/1/4/6（只读·单服务·codegraph），存量服务的
+  现状勘察 / 开发导航 / 影响面复核，知识层带路、不写代码（详见「关键约定·七」）
 
-所有 agent 遵循 `hero-conventions` + `docs/best-practices.md` 中的中间件约定。
+横向角色 agent 遵循 `hero-conventions` + `docs/best-practices.md` 中的中间件约定；
+领航 agent 是纵向的单服务知识层，二者正交配合。
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: hero-java-ecrm
-description: 亚朵 ecrm（企业/连锁/促销活动 申请审批工作流，跑在 ActionSoft AWS BPM 平台上）服务代码领航。当需要理解/定位 ecrm 代码、看懂某个 OpenAPI 或 BPMN 审批流走向、圈定改动影响面时路由到它。它带路与定位、不直接写业务代码：实现交 hero-java-backend-developer、SQL（注意是裸 DBSql 非 MyBatis）交 hero-java-data-engineer、测试交 hero-java-test-engineer、架构交 hero-java-tech-lead。仅限 ecrm 本服务。注意：本服务非 Spring Boot，团队通用 Spring/Eureka/Apollo 约定多数不适用。
+description: 亚朵 ecrm（企业/连锁/促销活动 申请审批工作流，跑在 ActionSoft AWS BPM 平台上）服务代码领航。触发词：ecrm / 企业连锁促销审批 / 申请审批工作流 / OpenAPI / BPMN / ActionSoft / AWS BPM / 企业协议 / 连锁申请 / 促销活动审批。当需要理解/定位 ecrm 代码、看懂某个 OpenAPI 或 BPMN 审批流走向、圈定改动影响面时路由到它。它带路与定位、不直接写业务代码：实现交 hero-java-backend-developer、SQL（注意是裸 DBSql 非 MyBatis）交 hero-java-data-engineer、测试交 hero-java-test-engineer、架构交 hero-java-tech-lead。仅限 ecrm 本服务。注意：本服务非 Spring Boot，团队通用 Spring/Eureka/Apollo 约定多数不适用。
 model: sonnet
 tools: Read, Grep, Glob, Bash
 ---
