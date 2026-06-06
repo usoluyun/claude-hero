@@ -36,6 +36,18 @@ hero 合并验证
 
 详见 `skills/hero-prd-to-java/SKILL.md`。
 
+### 保鲜团队资产（hero 刷新）
+
+```bash
+hero 刷新            # 刷全部已接入项目（codegraph 索引 + 领航 agent + vendor docs）
+hero 刷新 <proj>     # 只刷一个
+hero 刷新 评审       # 逐个过领航 agent 漂移草稿（人工 gate）
+hero 刷新 状态       # 看谁该刷了
+```
+
+确定性层（重索引/抓文档）自动跑，领航 agent 变更需人工评审。详见 `skills/hero-refresh/SKILL.md`。
+开 Claude 时若某接入项目有新 commit，SessionStart hook 会提醒你刷新。
+
 ### 保持更新
 
 ```bash

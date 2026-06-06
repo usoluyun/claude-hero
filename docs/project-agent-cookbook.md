@@ -106,3 +106,9 @@ done
 - [ ] 正文引用类/接口/方法全部 grep 命中（零编造）
 - [ ] 技术栈如实（非 Spring 栈有警示）、协作边界指向 `hero-java-*` 角色 agent
 - [ ] 已在 `docs/hero-agent-roster.md` 登记一行，关键词与 description「触发词」一致
+
+## 开荒 vs 保鲜
+
+- **本手册（开荒）**：新服务从无到有——首次 `codegraph init` + 首次生成领航 agent + 登记花名册。
+- **hero-refresh（保鲜）**：已接入项目随代码漂移而刷新——见 `skills/hero-refresh/SKILL.md`。
+  新 agent 生成并登记花名册后，把它加进 `docs/.refresh-state.json` 的 `projects`，即纳入保鲜。
