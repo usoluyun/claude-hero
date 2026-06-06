@@ -15,4 +15,10 @@ assert_ok "grep -qx 'eureka' <<<\"\$libs\"" "命中 eureka"
 assert_eq "1" "$(grep -c 'mybatis' <<<"$libs")" "mybatis 系只出现一次（mybatis-plus）"
 assert_eq "spring-cloud" "$(vendor_slug 'spring cloud')" "slug 空格转横杠"
 
+# 否定行（不是/非/无）整行跳过，不误命中其声明「不用」的库；同行正向库仍命中
+nslibs="$(extract_fingerprint_libs "$DIR/fixtures/agent-nonspring.md")"
+assert_eq "" "$(grep -E 'spring boot|eureka|apollo|rocketmq|jetcache|mybatis' <<<"$nslibs")" "否定行里的库不被误命中"
+assert_ok "grep -qx 'druid' <<<\"\$nslibs\"" "正向行的 druid 仍命中"
+assert_ok "grep -qx 'quartz' <<<\"\$nslibs\"" "正向行的 quartz 仍命中"
+
 assert_summary

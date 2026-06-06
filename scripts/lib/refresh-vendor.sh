@@ -48,19 +48,25 @@ _lib_dict_value() {
 
 agent_file() { echo "$(repo_root)/agents/$1.md"; }
 
-# 抽出②技术栈指纹段（从 "## ②" 到下一个 "## " 之间），小写后扫字典命中关键词。
+# 抽出②技术栈指纹段（从 "## ②" 到下一个 "## " 之间），小写后按行扫字典命中关键词。
+# 按行处理：含否定标记（不是/非/无/不用）的整行跳过，避免把「不是 Spring Boot」误命中。
 # 同时做 mybatis dedup：若 mybatis-plus 已命中，则去掉裸 mybatis。
 extract_fingerprint_libs() {
   local file="$1" section
   section="$(awk '/^## ②/{f=1;next} /^## /{f=0} f' "$file" | tr '[:upper:]' '[:lower:]')"
-  local k hits=""
-  while IFS= read -r k; do
-    [[ -z "$k" ]] && continue
-    if grep -qF "$k" <<<"$section"; then
-      local v; v="$(_lib_dict_value "$k")"
-      [[ -n "$v" ]] && hits="${hits:+$hits$'\n'}$v"
-    fi
-  done < <(_lib_dict_keys)
+  local line k v hits=""
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    # 否定行整行跳过：不是 / 非 / 无 / 不用
+    grep -qE '不是|非|无|不用' <<<"$line" && continue
+    while IFS= read -r k; do
+      [[ -z "$k" ]] && continue
+      if grep -qF "$k" <<<"$line"; then
+        v="$(_lib_dict_value "$k")"
+        [[ -n "$v" ]] && hits="${hits:+$hits$'\n'}$v"
+      fi
+    done < <(_lib_dict_keys)
+  done <<<"$section"
   printf '%s\n' "$hits" | sort -u | awk '
     { lines[NR]=$0; seen[$0]=1 }
     END {
