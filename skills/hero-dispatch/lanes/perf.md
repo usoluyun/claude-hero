@@ -7,6 +7,14 @@ required_input: 慢的位置/指标
 
 # perf lane（性能瓶颈与优化 · two-phase）
 
+## hero 露出
+
+按 `hero-conventions` 露出规范，本 lane 运作时打 `🦸 hero ▸` 标记（token 一字不改）：
+- 进入：`🦸 hero ▸ perf lane · <纪律/门控>`
+- STOP 门：`🦸 hero ▸ STOP <门控> · <等什么>`
+- 收尾：`🦸 hero ▸ perf lane 完成 · 已交付，退出 hero 体系`
+- 若派子 agent：派单处打 `🦸 hero ▸ <agent> 接手 · <职责>`
+
 ## 触发画像
 某处响应慢/超时/资源占用高，需先诊断瓶颈、再按需优化。
 

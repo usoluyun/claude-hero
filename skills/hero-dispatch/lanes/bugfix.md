@@ -7,6 +7,14 @@ required_input: 现象/复现路径
 
 # bugfix lane（修 bug · mutate）
 
+## hero 露出
+
+按 `hero-conventions` 露出规范，本 lane 运作时打 `🦸 hero ▸` 标记（token 一字不改）：
+- 进入：`🦸 hero ▸ bugfix lane · <纪律/门控>`
+- 每个 STOP 门：`🦸 hero ▸ STOP<n> <门控> · <等什么>`
+- 收尾：`🦸 hero ▸ bugfix lane 完成 · 已交付，退出 hero 体系`
+- 若派子 agent：派单处打 `🦸 hero ▸ <agent> 接手 · <职责>`
+
 ## 触发画像
 用户报告某处行为错误/抛异常/不生效，目标是定位并修复单个缺陷（非新增功能）。
 

@@ -12,6 +12,14 @@ description: hero 意图分诊入口。触发词：hero <自由意图>。听用�
 `hero <自由意图>`，例：`hero 修一下登录报错` / `hero 这个接口太慢` / `hero 评估下加 X 影响多大`。
 老触发词 `hero 开发工作流 <URL>` / `hero 刷新` 仍直达对应 skill，不必绕本入口。
 
+## hero 露出
+
+本入口及其交接的每条 lane 都属 hero 体系，运作时按 `hero-conventions`《hero 露出规范》打
+`🦸 hero ▸` 单行标记，让用户感知 hero 在接管：
+- **分诊命中**：`🦸 hero ▸ 分诊 → <lane>`
+- **交接 lane/skill**：`🦸 hero ▸ <lane> · <加载的纪律/门控>`
+- **派子 agent**（由本编排方打，主线可见）：`🦸 hero ▸ <agent> 接手 · <职责>`
+
 ## lane catalog（路由表，唯一事实源）
 
 | Lane | 触发关键词（意图信号） | 必需输入 | 交接目标 |

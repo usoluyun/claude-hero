@@ -18,4 +18,14 @@ for f in "$REPO"/agents/hero-java-*.md; do
   assert_ok "grep -qF '$TOKEN' '$f'" "$base has hero token"
 done
 
+# 3. hero-dispatch SKILL 含 token
+DISPATCH="$REPO/skills/hero-dispatch/SKILL.md"
+assert_ok "grep -qF '$TOKEN' '$DISPATCH'" "hero-dispatch SKILL has hero token"
+
+# 4. 6 条 lane 含 token（门控/收尾打点）
+for lane in bugfix iterate refactor research perf security; do
+  f="$REPO/skills/hero-dispatch/lanes/$lane.md"
+  assert_ok "grep -qF '$TOKEN' '$f'" "lane $lane has hero token"
+done
+
 assert_summary
