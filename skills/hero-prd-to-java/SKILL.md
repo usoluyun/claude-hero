@@ -10,6 +10,14 @@ description: Java 微服务 PRD 驱动开发工作流（整体编排）。触发
 
 ---
 
+## hero 露出
+
+PRD 工作流运作时按 `hero-conventions` 露出规范打 `🦸 hero ▸` 标记：
+- 启动：`🦸 hero ▸ hero-prd-to-java · PRD→设计→Sprint→并行开发→测试→审查→合并`
+- 每个确认门：`🦸 hero ▸ STOP<n> <门控> · <等什么>`
+- 派子 agent（编排方打，主线可见）：`🦸 hero ▸ <agent> 接手 · <职责>`
+- 收尾：`🦸 hero ▸ PRD 工作流完成 · 已交付，退出 hero 体系`
+
 ## 快速开始
 
 ```

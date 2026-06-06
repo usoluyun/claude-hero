@@ -28,4 +28,11 @@ for lane in bugfix iterate refactor research perf security; do
   assert_ok "grep -qF '$TOKEN' '$f'" "lane $lane has hero token"
 done
 
+# 5. hero-refresh / hero-prd-to-java SKILL 含 token
+for s in hero-refresh hero-prd-to-java; do
+  f="$REPO/skills/$s/SKILL.md"
+  assert_ok "[ -f '$f' ]" "$s SKILL.md exists"
+  assert_ok "grep -qF '$TOKEN' '$f'" "$s has hero token"
+done
+
 assert_summary

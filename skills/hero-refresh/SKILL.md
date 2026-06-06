@@ -9,6 +9,13 @@ description: hero 资产统一刷新工作流。触发词：hero 刷新 / hero �
 
 设计依据：`docs/superpowers/specs/2026-06-06-hero-refresh-design.md`。
 
+## hero 露出
+
+hero-refresh 运作时按 `hero-conventions` 露出规范打 `🦸 hero ▸` 标记：
+- 启动：`🦸 hero ▸ hero-refresh · 确定性层 + 漂移评审 gate`
+- 评审 STOP：`🦸 hero ▸ STOP 漂移评审 · 请人工裁定再写回`
+- 收尾：`🦸 hero ▸ hero-refresh 完成 · 已交付，退出 hero 体系`
+
 ## 触发词
 
 | 命令 | 作用 |
