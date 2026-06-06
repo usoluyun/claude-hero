@@ -19,6 +19,12 @@ assert_ok() {
   else ASSERT_FAIL=$((ASSERT_FAIL+1)); echo "  ✗ ${msg:-assert_ok}: [$1] failed"; fi
 }
 
+assert_fail() {  # 命令应失败
+  local msg="${2:-}"
+  if eval "$1"; then ASSERT_FAIL=$((ASSERT_FAIL+1)); echo "  ✗ ${msg:-assert_fail}: [$1] should fail"; \
+  else ASSERT_PASS=$((ASSERT_PASS+1)); fi
+}
+
 assert_summary() {
   echo "  → $ASSERT_PASS passed, $ASSERT_FAIL failed"
   [[ "$ASSERT_FAIL" -eq 0 ]]

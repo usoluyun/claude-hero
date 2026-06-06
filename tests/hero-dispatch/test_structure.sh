@@ -8,7 +8,7 @@ LANES="$REPO/skills/hero-dispatch/lanes"
 
 # 1. SKILL.md 存在且 frontmatter name 正确
 assert_ok "[ -f '$SKILL' ]" "SKILL.md exists"
-name="$(sed -n 's/^name:[[:space:]]*//p' "$SKILL" | head -1)"
+name="$(sed -n 's/^name:[[:space:]]*//p' "$SKILL" 2>/dev/null | head -1)"
 assert_eq "hero-dispatch" "$name" "SKILL name"
 
 # 2. catalog 引用的 lanes/*.md 都存在
