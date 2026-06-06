@@ -17,6 +17,20 @@ bash install.sh        # 软链 skills/agents/hooks 到 ~/.claude
 安装结束后，脚本会提示哪些**模板文件**（`CLAUDE.md` / `settings.json` / `.mcp.json`）需要你
 手动合并——因为它们含密钥或高度个人化，不会被自动覆盖。
 
+### 一句话入口（hero 意图分诊）
+
+不想记具体工作流？直接说意图，分诊器帮你选线：
+
+```bash
+hero 修一下登录报错          # → bugfix 线
+hero 这个接口太慢            # → perf 线（先诊断后优化）
+hero 评估下加 X 影响多大      # → research 调研线（只读）
+hero 开发工作流 https://...   # → PRD 重型线（仍可直达）
+```
+
+分诊器把意图归类到 8 条 lane（prd / refresh / bugfix / iterate / refactor / research /
+perf / security），补齐输入、确认后交接给对应 workflow。详见 `skills/hero-dispatch/SKILL.md`。
+
 ### 启动 PRD 驱动开发流程
 
 ```bash
