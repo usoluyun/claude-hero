@@ -11,4 +11,11 @@ assert_ok "[ -f '$CONV' ]" "hero-conventions exists"
 assert_ok "grep -q '## hero 露出规范' '$CONV'" "conventions has 露出规范 section"
 assert_ok "grep -qF '$TOKEN' '$CONV'" "conventions has token"
 
+# 2. 每个 hero-java-* agent 含统一 token（子 agent 自报家门兜底）
+for f in "$REPO"/agents/hero-java-*.md; do
+  [ -f "$f" ] || continue
+  base="$(basename "$f")"
+  assert_ok "grep -qF '$TOKEN' '$f'" "$base has hero token"
+done
+
 assert_summary
