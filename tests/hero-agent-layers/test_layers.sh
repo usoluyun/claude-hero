@@ -106,4 +106,11 @@ assert_ok "grep -qF 'gitleaks' '$LAYERS'" "矩阵含 gitleaks"
 assert_ok "grep -qF '设计时' '$LAYERS'" "矩阵含双模（设计时）"
 assert_ok "grep -qF '强制门槛' '$LAYERS'" "矩阵含强制门槛"
 
+# 14. 合规规范文档（海姆达尔判定敏感/加密/鉴权的权威口径）
+STD="$REPO/docs/security-standards.md"
+assert_ok "[ -f '$STD' ]" "security-standards.md 存在"
+assert_ok "grep -qF 'PCI-DSS' '$STD'" "含 PCI-DSS"
+assert_ok "grep -qF '等保' '$STD'" "含 等保"
+assert_ok "grep -qF 'PIPL' '$STD'" "含 PIPL"
+
 assert_summary
