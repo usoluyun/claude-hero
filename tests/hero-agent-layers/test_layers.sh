@@ -51,4 +51,12 @@ CONV="$REPO/skills/hero-conventions/SKILL.md"
 assert_ok "grep -q '英雄名' '$CONV'" "conventions template mentions 英雄名"
 assert_ok "grep -qF '<英雄名>（<agent>）接手' '$CONV'" "conventions has 英雄名（agent）接手 format"
 
+# 4. CLAUDE.md 含指向 hero-agent-layers.md 的链接
+CLAUDEMD="$REPO/CLAUDE.md"
+assert_ok "grep -qF 'hero-agent-layers.md' '$CLAUDEMD'" "CLAUDE.md links layers doc"
+
+# 5. roster 含指向 hero-agent-layers.md 的 cross-link
+ROSTER="$REPO/docs/hero-agent-roster.md"
+assert_ok "grep -qF 'hero-agent-layers.md' '$ROSTER'" "roster cross-links layers doc"
+
 assert_summary
