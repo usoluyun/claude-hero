@@ -30,6 +30,7 @@ Claude Code 使用习惯。**安装靠软链**，`git pull` 即全员生效，�
 | [`codegraph-agent-plan.md`](./docs/codegraph-agent-plan.md) | **方案**：为 ~40 个 Java 服务批量生成「项目领航 agent」的整体设计、agent 解剖、模板 | 理解领航 agent 体系 |
 | [`project-agent-cookbook.md`](./docs/project-agent-cookbook.md) | **实操手册**：怎么从一个 Java 服务生成领航 agent（六步流程、命令、踩坑） | **开荒**：建索引+首次生成 agent |
 | [`hero-agent-roster.md`](./docs/hero-agent-roster.md) | 领航 agent **花名册**（确定性查找表）：proj / 中文名 / 触发关键词 / 栈类型 / 路径 | 路由/查表/登记新 agent |
+| [`hero-agent-layers.md`](./docs/hero-agent-layers.md) | agent 分层总图 + 能力矩阵（双轴 + 角色三梯 + 漫威代号，skills/CLI 施工底图） | 看全景分层 / 加新 agent / 查 skill 用在哪 |
 | `.refresh-state.json` | 已接入项目的刷新记账（`last_commit`/`last_refreshed`），团队共享 | hero-refresh 读写 |
 | `.workflow-registry.json` | PRD 工作流注册表（在飞 / 已合并） | hero-prd-to-java 读写 |
 | `vendor-docs/*.md` | context7 抓的库文档缓存（进 git，agent 本地读） | — |
@@ -37,9 +38,9 @@ Claude Code 使用习惯。**安装靠软链**，`git pull` 即全员生效，�
 
 ## 资产目录速查
 
-- **`agents/`** — 共享 subagent（`hero-java-*.md`）。两类：**角色 agent**（backend-developer / data-engineer /
-  test-engineer / code-reviewer / tech-lead / security-auditor，横向干活）+ **项目领航 agent**
-  （ecrm / hotel-product-center / owner-biz，懂某服务、只读带路）。二者**正交**。
+- **`agents/`** — 共享 subagent（`hero-java-*.md`），按**双轴分层**组织：角色 agent（规划/执行/
+  评审门控三梯，横向干活）× 项目领航 agent（按服务只读带路）。完整分层 + 漫威代号 + 能力矩阵见
+  [`docs/hero-agent-layers.md`](./docs/hero-agent-layers.md)。
 - **`skills/`** — `hero-dispatch`（意图分诊入口）、`hero-conventions`（团队通用约定）、`hero-prd-to-java`（PRD 工作流）、`hero-refresh`（资产保鲜）。
 - **`scripts/`** — `hero-refresh.sh` 确定性层入口 + `lib/refresh-*.sh`（common/state/evidence/vendor）。
 - **`config/`** — `hooks/`（含 `hero-refresh-check.sh` 的 SessionStart 漂移提醒）、`CLAUDE.md.example`、`settings.json.example`。

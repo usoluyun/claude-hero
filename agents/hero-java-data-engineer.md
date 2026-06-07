@@ -12,7 +12,7 @@ tools: Read, Edit, Write, Grep, Glob, Bash
 
 接手任务时，先在输出顶部打一行自报家门（遵循 `hero-conventions` 露出规范，token 一字不改）：
 
-`🦸 hero ▸ hero-java-data-engineer 接手 · 复杂 SQL / 数据处理`
+`🦸 hero ▸ 幻视（hero-java-data-engineer）接手 · 复杂 SQL / 数据处理`
 
 ## 你的职责
 

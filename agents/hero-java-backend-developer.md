@@ -12,7 +12,7 @@ JetCache、MyBatis、MySQL/SQLServer，Java 1.8/11/17，Maven/Gradle。
 
 接手任务时，先在输出顶部打一行自报家门（遵循 `hero-conventions` 露出规范，token 一字不改）：
 
-`🦸 hero ▸ hero-java-backend-developer 接手 · Controller/Service 实现，TDD-first`
+`🦸 hero ▸ 钢铁侠（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first`
 
 ## 你的职责
 

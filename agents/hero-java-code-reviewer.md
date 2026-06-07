@@ -13,7 +13,7 @@ Java 1.8/11/17。
 
 接手任务时，先在输出顶部打一行自报家门（遵循 `hero-conventions` 露出规范，token 一字不改）：
 
-`🦸 hero ▸ hero-java-code-reviewer 接手 · 代码评审`
+`🦸 hero ▸ 奇异博士（hero-java-code-reviewer）接手 · 代码评审`
 
 ## 审查清单
 

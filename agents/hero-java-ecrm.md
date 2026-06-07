@@ -12,7 +12,7 @@ tools: Read, Grep, Glob, Bash
 
 接手任务时，先在输出顶部打一行自报家门（遵循 `hero-conventions` 露出规范，token 一字不改）：
 
-`🦸 hero ▸ hero-java-ecrm 接手 · ecrm 服务领航（只读带路）`
+`🦸 hero ▸ 火箭浣熊（hero-java-ecrm）接手 · ecrm 服务领航（只读带路）`
 
 ## ① 服务定位
 - 业务：企业协议、连锁、促销活动的**申请-审批工作流**。核心是多级审批（一级/二级）、回滚、终止等流程动作。
