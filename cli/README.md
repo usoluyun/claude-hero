@@ -9,6 +9,9 @@
 | **mvn** | Maven 构建 | `brew install maven` 或私服 wrapper | 走私服，见 `maven.md` |
 | **gradle** | Gradle 构建 | 用项目 `./gradlew` | wrapper 优先，见 `gradle.md` |
 | **codegraph** | 代码图谱：符号查找 / 结构 / 调用方 / 影响面 | 见详情 | 领航 agent 与 tech-lead 定位必用，见 `codegraph.md` |
+| **semgrep** | SAST：注入/越权/危险模式扫描（🔴 设计安全） | `brew install semgrep` | 海姆达尔代码时验门槛主力，见 `semgrep.md` |
+| **gitleaks** | 密钥/凭据硬编码扫描（🔴 敏感数据） | `brew install gitleaks` | 命中即 🔴 强制门槛，见 `gitleaks.md` |
+| **codeql** | 深度污点分析（🔴 可选重档） | 见详情 | 越权/注入污点佐证，见 `codeql.md` |
 | mycli | 查询 **MySQL**（补全/高亮） | `brew install mycli` | 查 MySQL 一律用它，人工执行 |
 | sqlcmd / mssql-cli | 查询 **SQLServer** | `brew install sqlcmd`（go-sqlcmd）或 `pip install mssql-cli` | 查 SQLServer 用它，人工执行 |
 | redis-cli | JetCache 后端 Redis 排障 | `brew install redis` | 仅排障，缓存读写走 JetCache |

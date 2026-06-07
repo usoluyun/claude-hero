@@ -113,4 +113,10 @@ assert_ok "grep -qF 'PCI-DSS' '$STD'" "含 PCI-DSS"
 assert_ok "grep -qF '等保' '$STD'" "含 等保"
 assert_ok "grep -qF 'PIPL' '$STD'" "含 PIPL"
 
+# 15. 安全 CLI 文档 + README 收录
+for c in semgrep gitleaks codeql; do
+  assert_ok "[ -f '$REPO/cli/$c.md' ]" "cli/$c.md 存在"
+  assert_ok "grep -qF '$c' '$REPO/cli/README.md'" "cli README 含 $c"
+done
+
 assert_summary
