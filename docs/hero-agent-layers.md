@@ -84,7 +84,7 @@
 
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
-| `hero-java-code-reviewer` | 奇异博士 | opus（只读） | TODO | superpowers:requesting-code-review, hero-conventions | —（只读评审，Read/Grep/git diff 为主） | 给它 diff/SHA → 产出正确性与质量问题清单（不改码） |
+| `hero-java-code-reviewer` | 奇异博士 | opus（只读） | TODO | —（自带评审 checklist + 严重级/`file:line` 格式，不依赖外部 skill） | —（只读评审，Read/Grep/git diff 为主） | 给它 diff/SHA → 产出正确性与质量问题清单（不改码） |
 | `hero-java-security-auditor` | 海姆达尔 | opus（只读） | TODO | —（自带审计 checklist，prompt 内置 CVE/注入/越权） | maven, gradle（依赖树）+ WebSearch/WebFetch（查 CVE） | 给它代码/配置 → 产出安全风险（CVE/注入/越权）与修复建议（只读） |
 
 ### 领航研究层（只读带路）

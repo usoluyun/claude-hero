@@ -81,4 +81,10 @@ assert_ok "grep -qE '^tools:.*WebSearch' '$AG/hero-java-security-auditor.md'" "s
 #    10c. tech-lead 要落盘 docs/*.md → tools 必含 Write
 assert_ok "grep -qE '^tools:.*Write' '$AG/hero-java-tech-lead.md'" "tech-lead tools include Write"
 
+# 11. code-reviewer 自带评审格式（复盘类A）：不再引用加载不了的 requesting-code-review skill
+#     （白名单无 Skill 工具 → 加载不了；对齐 security-auditor 的自洽范式）
+assert_fail "grep -qF 'requesting-code-review' '$LAYERS'" "matrix no longer lists requesting-code-review skill"
+assert_fail "grep -qF 'requesting-code-review' '$AG/hero-java-code-reviewer.md'" "code-reviewer body no longer references requesting-code-review"
+assert_ok "grep -qF '自带评审 checklist' '$LAYERS'" "code-reviewer matrix marks self-contained review format"
+
 assert_summary
