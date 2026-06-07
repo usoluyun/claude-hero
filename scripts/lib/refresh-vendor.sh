@@ -115,3 +115,27 @@ refresh_vendor_docs() {  # 对一个项目的 agent 跑整套
     else echo "  · $lib：抓取失败，跳过" >&2; fi
   done < <(extract_fingerprint_libs "$file")
 }
+
+# 安全标准常抓清单：独立于项目技术栈指纹，固定抓 OWASP 进 vendor-docs（全局一次，非按项目）。
+# 供海姆达尔（security-auditor）本地读 docs/vendor-docs/owasp-*.md。
+_security_standard_libs() {
+  cat <<'EOF'
+OWASP Top 10
+OWASP Cheat Sheet Series
+OWASP Developer Guide
+EOF
+}
+
+refresh_security_standards() {  # 抓 OWASP 标准进 vendor-docs
+  local vendor_dir lib id out
+  vendor_dir="$(repo_root)/docs/vendor-docs"
+  mkdir -p "$vendor_dir"
+  while IFS= read -r lib; do
+    [[ -z "$lib" ]] && continue
+    out="${vendor_dir}/$(vendor_slug "$lib").md"
+    id="$(context7_resolve "$lib")"
+    if [[ -z "$id" ]]; then echo "  · $lib：未解析到 context7 id，跳过" >&2; continue; fi
+    if context7_fetch "$id" "$out"; then echo "  ✓ $lib → $out";
+    else echo "  · $lib：抓取失败，跳过" >&2; fi
+  done < <(_security_standard_libs)
+}

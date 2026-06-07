@@ -21,4 +21,10 @@ assert_eq "" "$(grep -E 'spring boot|eureka|apollo|rocketmq|jetcache|mybatis' <<
 assert_ok "grep -qx 'druid' <<<\"\$nslibs\"" "正向行的 druid 仍命中"
 assert_ok "grep -qx 'quartz' <<<\"\$nslibs\"" "正向行的 quartz 仍命中"
 
+# 安全标准常抓清单（独立于项目指纹，固定抓 OWASP）
+stds="$(_security_standard_libs)"
+assert_ok "grep -qi 'owasp' <<<\"\$stds\"" "安全标准清单含 OWASP"
+assert_eq "owasp-top-10" "$(vendor_slug 'OWASP Top 10')" "OWASP slug 正确"
+assert_ok "declare -f refresh_security_standards >/dev/null" "refresh_security_standards 已定义"
+
 assert_summary
