@@ -85,7 +85,7 @@
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
 | `hero-java-code-reviewer` | 奇异博士 | opus（只读） | TODO | superpowers:requesting-code-review, hero-conventions | —（只读评审，Read/Grep/git diff 为主） | 给它 diff/SHA → 产出正确性与质量问题清单（不改码） |
-| `hero-java-security-auditor` | 海姆达尔 | opus（只读） | TODO | —（自带审计 checklist，prompt 内置 CVE/注入/越权） | maven, gradle（依赖树扫描） | 给它代码/配置 → 产出安全风险（CVE/注入/越权）与修复建议（只读） |
+| `hero-java-security-auditor` | 海姆达尔 | opus（只读） | TODO | —（自带审计 checklist，prompt 内置 CVE/注入/越权） | maven, gradle（依赖树）+ WebSearch/WebFetch（查 CVE） | 给它代码/配置 → 产出安全风险（CVE/注入/越权）与修复建议（只读） |
 
 ### 领航研究层（只读带路）
 
@@ -99,6 +99,10 @@
 > 角色 agent 暂无显式触发锚点，标 `TODO`，待后续补。
 > 领航 agent 由 `hero-refresh` 工作流定期保鲜（随代码漂移重生 agent 卡），但那是**对其维护、非运行时加载**；
 > 它们干活只用 codegraph，故「应加载 skills」列记 `—`。
+> **框架/库文档核实**统一分层：先读 `docs/vendor-docs/` 本地缓存（hero-refresh 维护）+ codegraph →
+> 本地缺再用 **context7 MCP** 兜底。为此 backend / code-reviewer / security-auditor / tech-lead 的 `tools`
+> 已含 context7 MCP（`mcp__plugin_context7_context7__*`）；security-auditor 另含 WebSearch/WebFetch 查 CVE，
+> tech-lead 另含 Write/Edit 以落盘设计文档。
 
 ## 新增 agent 登记规则
 

@@ -70,4 +70,15 @@ assert_ok "grep -qF 'codegraph 带路，无需加载 skill' '$LAYERS'" "navigato
 assert_ok "grep -qF 'codegraph' '$REPO/cli/README.md'" "cli README lists codegraph"
 assert_ok "[ -f '$REPO/cli/codegraph.md' ]" "cli/codegraph.md exists"
 
+# 10. 能力充足性加固（防回退）：正文点名要用的工具，必须真在 tools 白名单里
+AG="$REPO/agents"
+#    10a. backend/reviewer/security/tech-lead 正文都「查 context7」→ tools 必含 context7 MCP
+for a in hero-java-backend-developer hero-java-code-reviewer hero-java-security-auditor hero-java-tech-lead; do
+  assert_ok "grep -qE '^tools:.*context7' '$AG/$a.md'" "$a tools include context7 MCP"
+done
+#    10b. security 要查 CVE → tools 必含 WebSearch
+assert_ok "grep -qE '^tools:.*WebSearch' '$AG/hero-java-security-auditor.md'" "security-auditor tools include WebSearch"
+#    10c. tech-lead 要落盘 docs/*.md → tools 必含 Write
+assert_ok "grep -qE '^tools:.*Write' '$AG/hero-java-tech-lead.md'" "tech-lead tools include Write"
+
 assert_summary
