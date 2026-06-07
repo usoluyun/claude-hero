@@ -85,7 +85,7 @@
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
 | `hero-java-code-reviewer` | 奇异博士 | opus（只读） | TODO | —（自带评审 checklist + 严重级/`file:line` 格式，不依赖外部 skill） | —（只读评审，Read/Grep/git diff 为主） | 给它 diff/SHA → 产出正确性与质量问题清单（不改码） |
-| `hero-java-security-auditor` | 海姆达尔 | opus（只读） | TODO | —（自带审计 checklist，prompt 内置 CVE/注入/越权） | maven, gradle（依赖树）+ WebSearch/WebFetch（查 CVE） | 给它代码/配置 → 产出安全风险（CVE/注入/越权）与修复建议（只读） |
+| `hero-java-security-auditor` | 海姆达尔 | opus（只读） | TODO | —（自带审计 checklist + OWASP/合规清单骨架，不依赖外部 skill） | semgrep, gitleaks（🔴 设计安全）；maven/gradle 依赖树 + WebSearch（🟡 CVE） | **设计时**评审 design 文档定 🔴 门槛 + **代码时** semgrep/gitleaks/grep 验门槛。系统设计安全（未授权/越权/敏感数据/注入/不安全设计）= 🔴 强制门槛（⛔阻断）；组件 CVE = 🟡 提醒确认（不阻断） |
 
 ### 领航研究层（只读带路）
 
@@ -103,6 +103,9 @@
 > 本地缺再用 **context7 MCP** 兜底。为此 backend / code-reviewer / security-auditor / tech-lead 的 `tools`
 > 已含 context7 MCP（`mcp__plugin_context7_context7__*`）；security-auditor 另含 WebSearch/WebFetch 查 CVE，
 > tech-lead 另含 Write/Edit 以落盘设计文档。
+> 海姆达尔（security-auditor）双模：设计时读 `docs/design-*.md` 定 🔴 门槛、代码时验；🔴=系统设计安全（强制），
+> 🟡=组件依赖 CVE（提醒确认）。CLI（semgrep/gitleaks/CodeQL）经 Bash、OWASP 经 context7→`vendor-docs`、
+> 合规口径见 `docs/security-standards.md`——`tools:` 白名单不变。详见 spec `2026-06-07-security-auditor-design-gate.md`。
 
 ## 新增 agent 登记规则
 

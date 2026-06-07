@@ -100,4 +100,10 @@ assert_ok "grep -qF 'security-standards.md' '$SA'" "security 卡引用合规规�
 assert_ok "grep -qE '^tools:.*WebSearch.*context7' '$SA'" "security tools 仍含 WebSearch+context7"
 assert_fail "grep -qE '^tools:.*(Skill|Edit|Write)' '$SA'" "security tools 未引入 Skill/Edit/Write"
 
+# 13. 矩阵 security 行反映双模 + 强制门槛 + SAST 工具
+assert_ok "grep -qF 'semgrep' '$LAYERS'" "矩阵含 semgrep"
+assert_ok "grep -qF 'gitleaks' '$LAYERS'" "矩阵含 gitleaks"
+assert_ok "grep -qF '设计时' '$LAYERS'" "矩阵含双模（设计时）"
+assert_ok "grep -qF '强制门槛' '$LAYERS'" "矩阵含强制门槛"
+
 assert_summary
