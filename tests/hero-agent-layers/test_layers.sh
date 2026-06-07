@@ -87,4 +87,17 @@ assert_fail "grep -qF 'requesting-code-review' '$LAYERS'" "matrix no longer list
 assert_fail "grep -qF 'requesting-code-review' '$AG/hero-java-code-reviewer.md'" "code-reviewer body no longer references requesting-code-review"
 assert_ok "grep -qF '自带评审 checklist' '$LAYERS'" "code-reviewer matrix marks self-contained review format"
 
+# 12. security-auditor 系统设计安全门控强化（spec 2026-06-07）
+SA="$AG/hero-java-security-auditor.md"
+assert_ok "grep -qF '🔴 强制门槛' '$SA'" "security 卡含 🔴 强制门槛"
+assert_ok "grep -qF '🟡 提醒确认' '$SA'" "security 卡含 🟡 提醒确认"
+assert_ok "grep -qF '⛔ 阻断' '$SA'" "security 卡含 ⛔ 阻断标记"
+assert_ok "grep -qF '设计时' '$SA'" "security 卡含设计时工作法"
+assert_ok "grep -qF '代码时' '$SA'" "security 卡含代码时工作法"
+assert_ok "grep -qF 'semgrep' '$SA'" "security 卡引用 semgrep"
+assert_ok "grep -qF 'gitleaks' '$SA'" "security 卡引用 gitleaks"
+assert_ok "grep -qF 'security-standards.md' '$SA'" "security 卡引用合规规范"
+assert_ok "grep -qE '^tools:.*WebSearch.*context7' '$SA'" "security tools 仍含 WebSearch+context7"
+assert_fail "grep -qE '^tools:.*(Skill|Edit|Write)' '$SA'" "security tools 未引入 Skill/Edit/Write"
+
 assert_summary
