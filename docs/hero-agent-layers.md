@@ -77,26 +77,28 @@
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
 | `hero-java-backend-developer` | 钢铁侠 | sonnet | TODO | hero-conventions, superpowers:test-driven-development | maven, gradle, jdk-multiversion | 给它明确任务 → 实现 Controller/Service/DAO 与中间件接入，TDD-first |
-| `hero-java-data-engineer` | 幻视 | sonnet | TODO | hero-conventions | mycli（MySQL）, SQLServer CLI TODO | 给它 SQL/数据层需求 → 产出 MyBatis mapper/XML、resultMap、慢查询调优 |
+| `hero-java-data-engineer` | 幻视 | sonnet | TODO | hero-conventions | mycli（MySQL）, sqlcmd（SQLServer） | 给它 SQL/数据层需求 → 产出 MyBatis mapper/XML、resultMap、慢查询调优 |
 | `hero-java-test-engineer` | 蜘蛛侠 | sonnet | TODO | superpowers:test-driven-development, gherkin, allure | maven, gradle | 给它待测代码 → 产出 JUnit5 单测 / Gherkin BDD .feature / 集成测试 |
 
 ### 评审门控层
 
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
-| `hero-java-code-reviewer` | 奇异博士 | opus（只读） | TODO | superpowers:requesting-code-review, hero-conventions | TODO | 给它 diff/SHA → 产出正确性与质量问题清单（不改码） |
-| `hero-java-security-auditor` | 海姆达尔 | opus（只读） | TODO | security-review | TODO | 给它代码/配置 → 产出安全风险（CVE/注入/越权）与修复建议（只读） |
+| `hero-java-code-reviewer` | 奇异博士 | opus（只读） | TODO | superpowers:requesting-code-review, hero-conventions | —（只读评审，Read/Grep/git diff 为主） | 给它 diff/SHA → 产出正确性与质量问题清单（不改码） |
+| `hero-java-security-auditor` | 海姆达尔 | opus（只读） | TODO | —（自带审计 checklist，prompt 内置 CVE/注入/越权） | maven, gradle（依赖树扫描） | 给它代码/配置 → 产出安全风险（CVE/注入/越权）与修复建议（只读） |
 
 ### 领航研究层（只读带路）
 
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
-| `hero-java-ecrm` | 火箭浣熊 | sonnet（只读） | ecrm、企业连锁促销审批、申请审批工作流、OpenAPI、BPMN、ActionSoft、AWS BPM、企业协议、连锁申请、促销活动审批 | hero-refresh | codegraph | 给它 ecrm 意图 → 定位代码/讲 BPMN 审批流走向/圈影响面（只读带路） |
-| `hero-java-hotel-product-center` | 星爵 | sonnet（只读） | 房价码、RateCode、产品管理、定价、渠道映射、房型映射、CRS 房价码、市场价、价格模板 | hero-refresh | codegraph | 给它产品中心意图 → 定位代码/讲房价码或产品接口走向/圈影响面（只读带路） |
-| `hero-java-owner-biz` | 猎鹰 | sonnet（只读） | 业主 App、业主 Web 后端、Banner、连锁用户、业主通讯录、合同、供应商评价、GOP 大数据、日报月报、消息推送、摸地图 | hero-refresh | codegraph | 给它业主端意图 → 在多业务域里找入口/看跨域调用/圈影响面（只读带路） |
+| `hero-java-ecrm` | 火箭浣熊 | sonnet（只读） | ecrm、企业连锁促销审批、申请审批工作流、OpenAPI、BPMN、ActionSoft、AWS BPM、企业协议、连锁申请、促销活动审批 | —（codegraph 带路，无需加载 skill） | codegraph | 给它 ecrm 意图 → 定位代码/讲 BPMN 审批流走向/圈影响面（只读带路） |
+| `hero-java-hotel-product-center` | 星爵 | sonnet（只读） | 房价码、RateCode、产品管理、定价、渠道映射、房型映射、CRS 房价码、市场价、价格模板 | —（codegraph 带路，无需加载 skill） | codegraph | 给它产品中心意图 → 定位代码/讲房价码或产品接口走向/圈影响面（只读带路） |
+| `hero-java-owner-biz` | 猎鹰 | sonnet（只读） | 业主 App、业主 Web 后端、Banner、连锁用户、业主通讯录、合同、供应商评价、GOP 大数据、日报月报、消息推送、摸地图 | —（codegraph 带路，无需加载 skill） | codegraph | 给它业主端意图 → 在多业务域里找入口/看跨域调用/圈影响面（只读带路） |
 
 > 触发词列：领航 agent 取自 [`hero-agent-roster.md`](./hero-agent-roster.md)「业务关键词/别名」，须与之一致；
 > 角色 agent 暂无显式触发锚点，标 `TODO`，待后续补。
+> 领航 agent 由 `hero-refresh` 工作流定期保鲜（随代码漂移重生 agent 卡），但那是**对其维护、非运行时加载**；
+> 它们干活只用 codegraph，故「应加载 skills」列记 `—`。
 
 ## 新增 agent 登记规则
 

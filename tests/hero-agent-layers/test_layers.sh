@@ -59,4 +59,15 @@ assert_ok "grep -qF 'hero-agent-layers.md' '$CLAUDEMD'" "CLAUDE.md links layers 
 ROSTER="$REPO/docs/hero-agent-roster.md"
 assert_ok "grep -qF 'hero-agent-layers.md' '$ROSTER'" "roster cross-links layers doc"
 
+# 9. 能力对齐加固（防回退）：phantom skill 已清 / 领航层 skills 已纠错 / codegraph 进 cli 清单
+#    9a. 矩阵不再引用不存在的 security-review skill
+assert_fail "grep -qF 'security-review' '$LAYERS'" "no phantom security-review skill in matrix"
+#    9b. 领航三行不再把 hero-refresh 当 skills（旧式 '| hero-refresh | codegraph |' 配对应消失）
+assert_fail "grep -qF 'hero-refresh | codegraph' '$LAYERS'" "navigators no longer list hero-refresh as skill"
+#    9c. 领航层正向校验：codegraph 带路 字样在矩阵存在
+assert_ok "grep -qF 'codegraph 带路，无需加载 skill' '$LAYERS'" "navigators use codegraph 带路"
+#    9d. codegraph 已进 cli 清单且有专页
+assert_ok "grep -qF 'codegraph' '$REPO/cli/README.md'" "cli README lists codegraph"
+assert_ok "[ -f '$REPO/cli/codegraph.md' ]" "cli/codegraph.md exists"
+
 assert_summary

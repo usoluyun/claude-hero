@@ -31,6 +31,8 @@ Apollo、Eureka。
 
 ## 工作方式
 
+- 审计清单为本 agent 自带（上方 CVE/注入/越权/反序列化等），不依赖外部 skill；依赖扫描走
+  `mvn dependency:tree` / `./gradlew dependencies`。
 - 聚焦本次变更与其依赖面，结合 `git diff`。
 - 按风险级输出：🔴高危（可被利用）／🟡中危／🟢加固建议；每条给位置、攻击场景、修复方案。
 - 用 context7 / 公开 CVE 信息核实依赖版本风险，不臆断。中文输出。

@@ -8,6 +8,7 @@
 | **JDK 切换** | 1.8/11/17 手动 `JAVA_HOME` 管理 | 见详情 | **重点**，见 `jdk-multiversion.md` |
 | **mvn** | Maven 构建 | `brew install maven` 或私服 wrapper | 走私服，见 `maven.md` |
 | **gradle** | Gradle 构建 | 用项目 `./gradlew` | wrapper 优先，见 `gradle.md` |
+| **codegraph** | 代码图谱：符号查找 / 结构 / 调用方 / 影响面 | 见详情 | 领航 agent 与 tech-lead 定位必用，见 `codegraph.md` |
 | mycli | 查询 **MySQL**（补全/高亮） | `brew install mycli` | 查 MySQL 一律用它，人工执行 |
 | sqlcmd / mssql-cli | 查询 **SQLServer** | `brew install sqlcmd`（go-sqlcmd）或 `pip install mssql-cli` | 查 SQLServer 用它，人工执行 |
 | redis-cli | JetCache 后端 Redis 排障 | `brew install redis` | 仅排障，缓存读写走 JetCache |

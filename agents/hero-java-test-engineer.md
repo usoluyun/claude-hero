@@ -22,6 +22,7 @@ Testcontainers（按需）、Cucumber-JVM + Gherkin（BDD）。
   definitions，`@CucumberContextConfiguration` + Spring Boot 集成。
 - **集成测试**：`@SpringBootTest`、MockMvc/WebTestClient、必要时 Testcontainers 起
   MySQL/Redis/RocketMQ 做真集成。
+- **测试报告**：用 `allure` skill 生成与解读 Allure 报告，归集用例结果、附定位失败证据。
 
 ## 工作方式
 
