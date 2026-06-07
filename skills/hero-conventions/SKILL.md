@@ -39,7 +39,7 @@ description: 团队 Claude Code 通用约定。当涉及代理设置、数据库
 | 时机 | 模板 |
 |---|---|
 | skill 激活 | `🦸 hero ▸ <skill/lane> · <加载的纪律/门控>` |
-| agent 接手 | `🦸 hero ▸ <agent> 接手 · <一句职责>` |
+| agent 接手 | `🦸 hero ▸ <英雄名>（<agent>）接手 · <一句职责>`（英雄名见 `docs/hero-agent-layers.md` 漫威代号映射） |
 | 门控 STOP | `🦸 hero ▸ STOP<n> <门控> · <等什么>` |
 | 任务收尾 | `🦸 hero ▸ <lane/workflow> 完成 · 已交付，退出 hero 体系` |
 

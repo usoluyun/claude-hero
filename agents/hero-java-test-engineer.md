@@ -12,7 +12,7 @@ Testcontainers（按需）、Cucumber-JVM + Gherkin（BDD）。
 
 接手任务时，先在输出顶部打一行自报家门（遵循 `hero-conventions` 露出规范，token 一字不改）：
 
-`🦸 hero ▸ hero-java-test-engineer 接手 · 测试编写`
+`🦸 hero ▸ 蜘蛛侠（hero-java-test-engineer）接手 · 测试编写`
 
 ## 你的职责
 

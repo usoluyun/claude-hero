@@ -29,4 +29,26 @@ for hero in 神盾局长 钢铁侠 幻视 蜘蛛侠 奇异博士 海姆达尔 �
   assert_ok "grep -qF '$hero' '$LAYERS'" "marvel name $hero in doc"
 done
 
+# 7. 9 个 agent 露出行：含本 agent 漫威名 + token（漫威名与 hero 露出都不漏）
+TOKEN='🦸 hero ▸'
+check_agent_hero() { # $1=agent file stem, $2=中文漫威名
+  local f="$REPO/agents/$1.md"
+  assert_ok "grep -qF '$TOKEN' '$f'" "$1 still has hero token"
+  assert_ok "grep -qF '$2' '$f'" "$1 露出行 has marvel name $2"
+}
+check_agent_hero hero-java-tech-lead 神盾局长
+check_agent_hero hero-java-backend-developer 钢铁侠
+check_agent_hero hero-java-data-engineer 幻视
+check_agent_hero hero-java-test-engineer 蜘蛛侠
+check_agent_hero hero-java-code-reviewer 奇异博士
+check_agent_hero hero-java-security-auditor 海姆达尔
+check_agent_hero hero-java-ecrm 火箭浣熊
+check_agent_hero hero-java-hotel-product-center 星爵
+check_agent_hero hero-java-owner-biz 猎鹰
+
+# 8. hero-conventions 露出模板含「英雄名（agent）」格式（含全角括号 （ 与 英雄名 字样）
+CONV="$REPO/skills/hero-conventions/SKILL.md"
+assert_ok "grep -q '英雄名' '$CONV'" "conventions template mentions 英雄名"
+assert_ok "grep -qF '<英雄名>（<agent>）接手' '$CONV'" "conventions has 英雄名（agent）接手 format"
+
 assert_summary
