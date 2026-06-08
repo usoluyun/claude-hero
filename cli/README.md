@@ -9,6 +9,8 @@
 | **mvn** | Maven 构建 | `brew install maven` 或私服 wrapper | 走私服，见 `maven.md` |
 | **gradle** | Gradle 构建 | 用项目 `./gradlew` | wrapper 优先，见 `gradle.md` |
 | **codegraph** | 代码图谱：符号查找 / 结构 / 调用方 / 影响面 | 见详情 | 领航 agent 与 tech-lead 定位必用，见 `codegraph.md` |
+| **httpie** | 接口冒烟探测（`http` 命令打 localhost） | `brew install httpie` | test-engineer 接口冒烟，见 `httpie.md` |
+| **allure** | 测试报告生成/查看 | `brew install allure` | test-engineer 报告，见 `allure.md` |
 | **semgrep** | SAST：注入/越权/危险模式扫描（🔴 设计安全） | `brew install semgrep` | 海姆达尔代码时验门槛主力，见 `semgrep.md` |
 | **gitleaks** | 密钥/凭据硬编码扫描（🔴 敏感数据） | `brew install gitleaks` | 命中即 🔴 强制门槛，见 `gitleaks.md` |
 | **codeql** | 深度污点分析（🔴 可选重档） | 见详情 | 越权/注入污点佐证，见 `codeql.md` |

@@ -143,4 +143,10 @@ assert_ok "grep -qF 'playwright' '$PW'" "含 playwright server"
 assert_ok "grep -q 'headless' '$PW'" "无头模式"
 assert_ok "grep -qF 'playwright' '$REPO/mcp/README.md'" "mcp README 收录 playwright"
 
+# 18. CLI httpie + allure
+for c in httpie allure; do
+  assert_ok "[ -f '$REPO/cli/$c.md' ]" "cli/$c.md 存在"
+  assert_ok "grep -qF '$c' '$REPO/cli/README.md'" "cli README 含 $c"
+done
+
 assert_summary
