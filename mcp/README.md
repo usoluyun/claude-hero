@@ -16,11 +16,15 @@
 | 名称 | 作用 | 作用域建议 | 所需 env / 前置 |
 |------|------|-----------|----------------|
 | context7 | 拉取最新库/框架文档 | 用户级 | **优先用插件方式**（见下） |
+| playwright | 无头浏览器自动化（E2E 测试，给 AI 驱动） | 用户级 | 需 Node/npx；首次自动装浏览器 |
 | <name> | <作用> | 用户级/项目级 | <env> |
 
 > **context7 优先用插件方式**：团队必装的 `context7` 插件（见 `docs/plugins.md`）已自带其 MCP
 > server，装了插件就有，无需再手动配下面的模板。`servers/context7.json` 仅作为「不装插件、
 > 手动配 MCP」场景的兜底。
+
+> **playwright** 给 `hero-java-test-engineer` 做无头 E2E；install.sh 以 template 模式处理、不自动写入，
+> 成员自行把 `servers/playwright.json` 合并进 `~/.claude.json` 后，卡片里的 `mcp__playwright__*` 工具才真可用。
 
 ## server 配置片段格式
 

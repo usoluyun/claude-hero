@@ -136,4 +136,11 @@ assert_ok "grep -qF 'httpie' '$LAYERS'" "矩阵含 httpie"
 assert_ok "grep -qF 'Playwright MCP' '$LAYERS'" "矩阵含 Playwright MCP"
 assert_ok "grep -qF '预加载' '$LAYERS'" "矩阵注脚提到 skills 预加载"
 
+# 17. Playwright MCP 模板
+PW="$REPO/mcp/servers/playwright.json"
+assert_ok "[ -f '$PW' ]" "playwright.json 存在"
+assert_ok "grep -qF 'playwright' '$PW'" "含 playwright server"
+assert_ok "grep -q 'headless' '$PW'" "无头模式"
+assert_ok "grep -qF 'playwright' '$REPO/mcp/README.md'" "mcp README 收录 playwright"
+
 assert_summary
