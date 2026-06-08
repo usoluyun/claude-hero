@@ -119,7 +119,7 @@ for c in semgrep gitleaks codeql; do
   assert_ok "grep -qF '$c' '$REPO/cli/README.md'" "cli README 含 $c"
 done
 
-# 15. test-engineer 本地测试重塑（spec 2026-06-08）
+# 19. test-engineer 本地测试重塑（spec 2026-06-08）
 TE="$AG/hero-java-test-engineer.md"
 assert_ok "grep -qE '^skills:[[:space:]]*$' '$TE'" "test 卡有 skills: 字段（YAML 列表）"
 assert_ok "grep -qE '^[[:space:]]*-[[:space:]]*superpowers:test-driven-development' '$TE'" "skills: 预加载 tdd"
@@ -132,19 +132,19 @@ assert_ok "grep -qF 'Playwright MCP' '$TE'" "卡含 Playwright E2E"
 assert_ok "grep -qF 'localhost' '$TE'" "卡含本地起服务打 localhost"
 assert_fail "grep -qF 'Testcontainers' '$TE'" "卡不再依赖 Testcontainers"
 
-# 16. 矩阵 test-engineer 行反映本地四类 + skills 预加载 + Playwright MCP
+# 20. 矩阵 test-engineer 行反映本地四类 + skills 预加载 + Playwright MCP
 assert_ok "grep -qF 'httpie' '$LAYERS'" "矩阵含 httpie"
 assert_ok "grep -qF 'Playwright MCP' '$LAYERS'" "矩阵含 Playwright MCP"
 assert_ok "grep -qF '预加载' '$LAYERS'" "矩阵注脚提到 skills 预加载"
 
-# 17. Playwright MCP 模板
+# 21. Playwright MCP 模板
 PW="$REPO/mcp/servers/playwright.json"
 assert_ok "[ -f '$PW' ]" "playwright.json 存在"
 assert_ok "grep -qF 'playwright' '$PW'" "含 playwright server"
 assert_ok "grep -q 'headless' '$PW'" "无头模式"
 assert_ok "grep -qF 'playwright' '$REPO/mcp/README.md'" "mcp README 收录 playwright"
 
-# 18. CLI httpie + allure
+# 22. CLI httpie + allure
 for c in httpie allure; do
   assert_ok "[ -f '$REPO/cli/$c.md' ]" "cli/$c.md 存在"
   assert_ok "grep -qF '$c' '$REPO/cli/README.md'" "cli README 含 $c"
