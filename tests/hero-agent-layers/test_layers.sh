@@ -72,8 +72,8 @@ assert_ok "[ -f '$REPO/cli/codegraph.md' ]" "cli/codegraph.md exists"
 
 # 10. 能力充足性加固（防回退）：正文点名要用的工具，必须真在 tools 白名单里
 AG="$REPO/agents"
-#    10a. backend/reviewer/security/tech-lead 正文都「查 context7」→ tools 必含 context7 MCP
-for a in hero-java-backend-developer hero-java-code-reviewer hero-java-security-auditor hero-java-tech-lead; do
+#    10a. backend/reviewer/security/tech-lead/data-engineer 正文都「查 context7」→ tools 必含 context7 MCP
+for a in hero-java-backend-developer hero-java-code-reviewer hero-java-security-auditor hero-java-tech-lead hero-java-data-engineer; do
   assert_ok "grep -qE '^tools:.*context7' '$AG/$a.md'" "$a tools include context7 MCP"
 done
 #    10b. security 要查 CVE → tools 必含 WebSearch

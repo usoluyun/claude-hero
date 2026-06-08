@@ -100,7 +100,7 @@
 > 领航 agent 由 `hero-refresh` 工作流定期保鲜（随代码漂移重生 agent 卡），但那是**对其维护、非运行时加载**；
 > 它们干活只用 codegraph，故「应加载 skills」列记 `—`。
 > **框架/库文档核实**统一分层：先读 `docs/vendor-docs/` 本地缓存（hero-refresh 维护）+ codegraph →
-> 本地缺再用 **context7 MCP** 兜底。为此 backend / code-reviewer / security-auditor / tech-lead 的 `tools`
+> 本地缺再用 **context7 MCP** 兜底。为此 backend / code-reviewer / security-auditor / tech-lead / data-engineer 的 `tools`
 > 已含 context7 MCP（`mcp__plugin_context7_context7__*`）；security-auditor 另含 WebSearch/WebFetch 查 CVE，
 > tech-lead 另含 Write/Edit 以落盘设计文档。
 > 海姆达尔（security-auditor）双模：设计时读 `docs/design-*.md` 定 🔴 门槛、代码时验；🔴=系统设计安全（强制），
