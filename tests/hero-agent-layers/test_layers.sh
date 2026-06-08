@@ -119,4 +119,16 @@ for c in semgrep gitleaks codeql; do
   assert_ok "grep -qF '$c' '$REPO/cli/README.md'" "cli README 含 $c"
 done
 
+# 15. test-engineer 本地测试重塑（spec 2026-06-08）
+TE="$AG/hero-java-test-engineer.md"
+assert_ok "grep -qE '^skills:.*test-driven-development' '$TE'" "test 卡 skills: 预加载 tdd"
+assert_ok "grep -qE '^skills:.*gherkin' '$TE'" "skills: 含 gherkin"
+assert_ok "grep -qE '^skills:.*allure' '$TE'" "skills: 含 allure"
+assert_ok "grep -qE '^tools:.*mcp__playwright__' '$TE'" "tools 含 Playwright MCP"
+assert_ok "grep -qE '^tools:.*Edit.*Write' '$TE'" "tools 仍含 Edit/Write"
+assert_ok "grep -qF 'httpie' '$TE'" "卡含 httpie 接口冒烟"
+assert_ok "grep -qF 'Playwright MCP' '$TE'" "卡含 Playwright E2E"
+assert_ok "grep -qF 'localhost' '$TE'" "卡含本地起服务打 localhost"
+assert_fail "grep -qF 'Testcontainers' '$TE'" "卡不再依赖 Testcontainers"
+
 assert_summary
