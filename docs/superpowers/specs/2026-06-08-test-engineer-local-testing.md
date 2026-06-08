@@ -123,3 +123,19 @@ tools: Read, Edit, Write, Grep, Glob, Bash, <Playwright MCP 浏览器工具集>
 - 不做 E2E 可重复套件的 Playwright-Java 代码化（本轮 E2E 走 MCP 驱动；可重复套件后续按需）。
 - C-systemic 推广到 tech-lead/backend/data-engineer：**待本试点验证 `skills:` 字段生效后**再单独铺开。
 - httpie 不替代 Java 接口断言套件（MockMvc/REST Assured 仍在 TDD 内）。
+
+## 试点验证结论（2026-06-08）
+
+C-systemic 试点（首次用 `skills:` 字段）落地结论：
+
+- **字段格式 = YAML 列表（已核实并修正）**：经 claude-code-guide 查 Claude Code 官方文档（sub-agents docs 430-440、skills docs 244）确认——`skills:` **必须是 YAML 列表**（`- 项`），**不接受**逗号分隔单行。初版误用逗号分隔，已修正为：
+  ```yaml
+  skills:
+    - superpowers:test-driven-development
+    - gherkin
+    - allure
+  ```
+  命名规则：plugin skill 用冒号 `superpowers:test-driven-development`、user skill 裸目录名 `gherkin`/`allure`——本卡写法正确。frontmatter 经 YAML 解析为 3 元素列表，校验通过。
+- **preload 不需 `tools:` 含 `Skill`**：`skills:` 字段是"预加载进上下文"，与运行时 `Skill` 工具调用是两套机制。test-engineer 只需常驻这 3 个、不调别的 skill，故保持不加 `Skill` 工具。
+- **运行时 preload 实测 = 延后**：test-engineer 未软链进真实 `~/.claude/agents`（遵守"不碰真实 ~/.claude"红线），本会话不能把它当 subagent 派发实测。**待合并 + `install.sh` 软链 + 新会话**后，派 `hero-java-test-engineer` 问"已预加载哪些 skill"确认内容确进上下文。
+- **试点价值已兑现**：本轮已捕获并修正了 `skills:` 的格式错误——若直接铺到 tech-lead/backend 会全错。**C-systemic 推广前，沿用本卡验证过的 YAML 列表写法。**
