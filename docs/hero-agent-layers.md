@@ -78,7 +78,7 @@
 |---|---|---|---|---|---|---|
 | `hero-java-backend-developer` | 钢铁侠 | sonnet | TODO | hero-conventions, superpowers:test-driven-development | maven, gradle, jdk-multiversion | 给它明确任务 → 实现 Controller/Service/DAO 与中间件接入，TDD-first |
 | `hero-java-data-engineer` | 幻视 | sonnet | TODO | hero-conventions | mycli（MySQL）, sqlcmd（SQLServer） | 给它 SQL/数据层需求 → 产出 MyBatis mapper/XML、resultMap、慢查询调优 |
-| `hero-java-test-engineer` | 蜘蛛侠 | sonnet | TODO | superpowers:test-driven-development, gherkin, allure | maven, gradle | 给它待测代码 → 产出 JUnit5 单测 / Gherkin BDD .feature / 集成测试 |
+| `hero-java-test-engineer` | 蜘蛛侠 | sonnet | TODO | superpowers:test-driven-development, gherkin, allure（经 `skills:` 字段预加载） | maven, gradle, httpie（接口冒烟）, allure（报告）；E2E 用 Playwright MCP | 给它待测代码 → 单元(TDD)/BDD(.feature)/接口冒烟(httpie)/E2E(Playwright 无头)/Allure 报告，纯本地无容器 |
 
 ### 评审门控层
 
@@ -106,6 +106,9 @@
 > 海姆达尔（security-auditor）双模：设计时读 `docs/design-*.md` 定 🔴 门槛、代码时验；🔴=系统设计安全（强制），
 > 🟡=组件依赖 CVE（提醒确认）。CLI（semgrep/gitleaks/CodeQL）经 Bash、OWASP 经 context7→`vendor-docs`、
 > 合规口径见 `docs/security-standards.md`——`tools:` 白名单不变。详见 spec `2026-06-07-security-auditor-design-gate.md`。
+> 蜘蛛侠（test-engineer）的 skills（tdd/gherkin/allure）经 frontmatter `skills:` 字段**预加载**（本仓首次用该字段，
+> C-systemic 试点）；E2E 的 Playwright MCP 经 `tools:` 白名单（`mcp__playwright__*`）+ `mcp/servers/playwright.json` 模板启用。
+> 纯本地测试、不依赖容器。详见 spec `2026-06-08-test-engineer-local-testing.md`。
 
 ## 新增 agent 登记规则
 

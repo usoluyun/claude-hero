@@ -131,4 +131,9 @@ assert_ok "grep -qF 'Playwright MCP' '$TE'" "卡含 Playwright E2E"
 assert_ok "grep -qF 'localhost' '$TE'" "卡含本地起服务打 localhost"
 assert_fail "grep -qF 'Testcontainers' '$TE'" "卡不再依赖 Testcontainers"
 
+# 16. 矩阵 test-engineer 行反映本地四类 + skills 预加载 + Playwright MCP
+assert_ok "grep -qF 'httpie' '$LAYERS'" "矩阵含 httpie"
+assert_ok "grep -qF 'Playwright MCP' '$LAYERS'" "矩阵含 Playwright MCP"
+assert_ok "grep -qF '预加载' '$LAYERS'" "矩阵注脚提到 skills 预加载"
+
 assert_summary
