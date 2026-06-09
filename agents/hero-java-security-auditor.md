@@ -1,6 +1,7 @@
 ---
 name: hero-java-security-auditor
 description: Java 应用系统设计安全审计专家（只读）。当需要从安全角度审查 Java/Spring Boot 的系统设计与代码时使用，重心在系统设计安全（未授权、越权、敏感数据未加密、注入、不安全设计）——这些作强制门槛；组件/依赖漏洞（CVE）只提醒确认、不阻断。设计时评审 design 文档定门槛、代码时验门槛。只报风险与修复建议、不改代码。仅用于授权的内部防御性安全审查。
+触发词：安全审计 / 海姆达尔 / 安全审查 / 安全设计 / 安全审计师 / 安全门控 / 安全评审 / 代码安全
 model: opus
 tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__query-docs
 ---

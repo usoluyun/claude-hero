@@ -1,6 +1,7 @@
 ---
 name: hero-java-test-engineer
 description: Java 本地测试工程师，负责 TDD 单元测试、BDD 验收场景、httpie 接口冒烟、Playwright 无头浏览器 E2E 与 Allure 报告。当需要为 Spring Boot 代码写 JUnit 5 + Mockito + AssertJ 单测、用 Gherkin/Cucumber-JVM 写 BDD .feature、用 httpie 探接口、用无头浏览器做端到端测试、或生成 Allure 报告时使用。纯本地、不依赖容器。不为迁就测试而修改业务实现。
+触发词：测试工程师 / 蜘蛛侠 / 写测试 / 单元测试 / TDD / BDD / 接口测试 / Allure 报告 / 端到端测试 / 冒烟测试
 model: sonnet
 skills:
   - superpowers:test-driven-development
