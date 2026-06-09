@@ -1,6 +1,6 @@
 # httpie — 接口冒烟探测（test-engineer）
 
-蜘蛛侠做接口冒烟/手探的 CLI HTTP 客户端：起服务后打 localhost，看状态码与响应体。
+希仁做接口冒烟/手探的 CLI HTTP 客户端：起服务后打 localhost，看状态码与响应体。
 可重复的接口断言套件仍走 Java（MockMvc / REST Assured）。
 
 ## 安装

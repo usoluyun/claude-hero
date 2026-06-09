@@ -1,4 +1,4 @@
-# 设计：海姆达尔 `hero-java-security-auditor` 系统设计安全门控强化
+# 设计：鹏举 `hero-java-security-auditor` 系统设计安全门控强化
 
 > 状态：已 brainstorm 评审通过，待转 implementation plan。
 > 日期：2026-06-07。
@@ -6,9 +6,9 @@
 
 ## 背景与目标
 
-复盘评审门控层时发现：海姆达尔现状把审计重心放在**组件/依赖 CVE**（人肉 `mvn dependency:tree` + WebSearch 比对），而**系统设计安全**（未授权、越权、敏感信息未加密）只是清单里平铺的几条、无强制力。这与"安全门控"的愿景错位——真正该卡死的是系统设计安全问题，组件漏洞反而更适合"提醒+确认"。
+复盘评审门控层时发现：鹏举现状把审计重心放在**组件/依赖 CVE**（人肉 `mvn dependency:tree` + WebSearch 比对），而**系统设计安全**（未授权、越权、敏感信息未加密）只是清单里平铺的几条、无强制力。这与"安全门控"的愿景错位——真正该卡死的是系统设计安全问题，组件漏洞反而更适合"提醒+确认"。
 
-**目标**：重塑海姆达尔为**系统设计安全门控**——
+**目标**：重塑鹏举为**系统设计安全门控**——
 
 1. **重心搬移**：系统设计安全（认证/访问控制/敏感数据/注入/不安全设计）成为主战场。
 2. **两档门槛**：系统设计安全 = 🔴 **强制门槛**（未解决/未显式豁免不得进下一步）；组件/依赖安全 = 🟡 **提醒+确认**（不阻断）。
@@ -27,7 +27,7 @@
 
 ### ① 愿景重塑
 
-海姆达尔 = **系统设计安全门控**（设计时定门槛 + 代码时验门槛的双模闭环）。系统设计安全是主战场且**强制**；组件/依赖安全降为**提醒+确认、不阻断**。model 保持 opus（深度威胁推演）、只读 advisory。
+鹏举 = **系统设计安全门控**（设计时定门槛 + 代码时验门槛的双模闭环）。系统设计安全是主战场且**强制**；组件/依赖安全降为**提醒+确认、不阻断**。model 保持 opus（深度威胁推演）、只读 advisory。
 
 ### ② 两档分类
 
@@ -82,7 +82,7 @@
 - PCI-DSS（持卡人数据加密/访问控制——酒店收信用卡强相关）。
 - 等保 2.0 + 个保法 PIPL（业主/会员 PII：哪些个人信息敏感、必须加密脱敏、必须访问控制）。
 - GDPR（若有海外业务）。
-- 该文档定义"什么算敏感数据 / 什么必须加密 / 什么必须鉴权"，填海姆达尔判定 🔴 的权威依据。
+- 该文档定义"什么算敏感数据 / 什么必须加密 / 什么必须鉴权"，填鹏举判定 🔴 的权威依据。
 
 ### ⑥ CLI 工具（经 Bash 调，收进 `cli/`）
 
@@ -112,8 +112,8 @@
 | 单元 | 职责 | 依赖 | 接口 |
 |---|---|---|---|
 | `agents/hero-java-security-auditor.md` | 双模审计、两档分级、阻断标记 | design 文档、代码、OWASP/合规、semgrep/gitleaks | 输出风险清单（只读） |
-| `docs/security-standards.md` | 合规口径（敏感数据/加密/鉴权定义） | 人工维护 | 海姆达尔 Read |
-| `cli/semgrep.md` / `gitleaks.md` / `codeql.md` | CLI 用法 | 对应工具已装 | 海姆达尔 Bash 参照 |
+| `docs/security-standards.md` | 合规口径（敏感数据/加密/鉴权定义） | 人工维护 | 鹏举 Read |
+| `cli/semgrep.md` / `gitleaks.md` / `codeql.md` | CLI 用法 | 对应工具已装 | 鹏举 Bash 参照 |
 | `refresh-vendor.sh` 安全标准清单 | 把 OWASP 抓进 vendor-docs | context7 | 写 `docs/vendor-docs/owasp-*.md` |
 
 ## 验证（成功标准）
@@ -125,7 +125,7 @@
 5. **知识骨架**：`docs/security-standards.md` 存在且含 PCI/等保/PIPL 框架；OWASP 抓取路径在 refresh-vendor 落地。
 6. **CLI 落地**：`cli/semgrep.md`/`gitleaks.md`/`codeql.md` 存在、`cli/README.md` 收录三行。
 7. **tools 不变**：security-auditor `tools:` 白名单未新增条目（仍 Read/Grep/Glob/Bash + WebSearch/WebFetch + context7）。
-8. **矩阵对齐 + 露出不破**：矩阵 security 行更新；hero 露出行（海姆达尔 token）一字不动，visibility/layers 测试全绿。
+8. **矩阵对齐 + 露出不破**：矩阵 security 行更新；hero 露出行（鹏举 token）一字不动，visibility/layers 测试全绿。
 
 ## 非目标（YAGNI）/ 后续
 
@@ -133,4 +133,4 @@
 - **后续②**：组件 🟡 档自动化 SCA（trivy/grype/dependency-check/osv-scanner）。
 - 不引入飞书 PRD 直读（设计时只读本地 design 文档）。
 - 不改 `tools:` 白名单。
-- 不替海姆达尔产出攻击利用代码（防御性审查边界）。
+- 不替鹏举产出攻击利用代码（防御性审查边界）。

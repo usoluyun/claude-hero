@@ -41,31 +41,31 @@ skills/CLI 与调提示词"（那是后续以本矩阵为底图的独立工作�
 
 ```
 角色 agent（横向干活，跨服务通用）
- ├─ 规划层        Nick Fury 神盾局长    hero-java-tech-lead              (opus)
- ├─ 执行层        Iron Man 钢铁侠       hero-java-backend-developer      (sonnet)
- │                Vision 幻视           hero-java-data-engineer          (sonnet)
- │                Spider-Man 蜘蛛侠     hero-java-test-engineer          (sonnet)
- └─ 评审门控层    Doctor Strange 奇异博士 hero-java-code-reviewer        (opus, 只读)
-                  Heimdall 海姆达尔     hero-java-security-auditor       (opus, 只读)
+ ├─ 规划层        孔明    hero-java-tech-lead              (opus)
+ ├─ 执行层        文远       hero-java-backend-developer      (sonnet)
+ │                子长           hero-java-data-engineer          (sonnet)
+ │                希仁     hero-java-test-engineer          (sonnet)
+ └─ 评审门控层    玄成 hero-java-code-reviewer        (opus, 只读)
+                  鹏举     hero-java-security-auditor       (opus, 只读)
 项目领航 agent（按服务只读带路 = 研究层）
-                  Rocket 火箭浣熊       hero-java-ecrm                   (sonnet, 只读)
-                  Star-Lord 星爵        hero-java-hotel-product-center   (sonnet, 只读)
-                  Falcon 猎鹰           hero-java-owner-biz              (sonnet, 只读)
+                  子文       hero-java-ecrm                   (sonnet, 只读)
+                  郑和        hero-java-hotel-product-center   (sonnet, 只读)
+                  霞客           hero-java-owner-biz              (sonnet, 只读)
 ```
 
 ## 漫威代号映射（按特点取名，纯装饰/记忆点）
 
 | Agent | 漫威代号 | 取名理由（贴特点） |
 |---|---|---|
-| `hero-java-tech-lead` | **Nick Fury 神盾局长** | 组建团队、拆任务派活、最后验收——天生编排者 |
-| `hero-java-backend-developer` | **Iron Man 钢铁侠** | 亲手造装备/写实现，工程师本色 |
-| `hero-java-data-engineer` | **Vision 幻视** | 由数据而生、擅综合；跨 MySQL/SQLServer 方言=多源数据合成 |
-| `hero-java-test-engineer` | **Spider-Man 蜘蛛侠** | 蜘蛛感应提前预警=测试在出事前抓 bug |
-| `hero-java-code-reviewer` | **Doctor Strange 奇异博士** | 推演千万结局找隐患=正确性/质量评审 |
-| `hero-java-security-auditor` | **Heimdall 海姆达尔** | 阿斯加德守门人、洞察一切入侵=安全审计守门 |
-| `hero-java-ecrm` | **Rocket 火箭浣熊** | 把不按常理的怪装备玩明白；ecrm 非 Spring 特殊栈(ActionSoft BPM) |
-| `hero-java-hotel-product-center` | **Star-Lord 星爵** | 带队探索定位；产品中心是定价/映射枢纽 |
-| `hero-java-owner-biz` | **Falcon 猎鹰** | 空中侦察大范围地形=大单体多业务域"摸地图" |
+| `hero-java-tech-lead` | **孔明** | 组建团队、拆任务派活、最后验收——天生编排者 |
+| `hero-java-backend-developer` | **文远** | 亲手造装备/写实现，工程师本色 |
+| `hero-java-data-engineer` | **子长** | 由数据而生、擅综合；跨 MySQL/SQLServer 方言=多源数据合成 |
+| `hero-java-test-engineer` | **希仁** | 蜘蛛感应提前预警=测试在出事前抓 bug |
+| `hero-java-code-reviewer` | **玄成** | 推演千万结局找隐患=正确性/质量评审 |
+| `hero-java-security-auditor` | **鹏举** | 阿斯加德守门人、洞察一切入侵=安全审计守门 |
+| `hero-java-ecrm` | **子文** | 把不按常理的怪装备玩明白；ecrm 非 Spring 特殊栈(ActionSoft BPM) |
+| `hero-java-hotel-product-center` | **郑和** | 带队探索定位；产品中心是定价/映射枢纽 |
+| `hero-java-owner-biz` | **霞客** | 空中侦察大范围地形=大单体多业务域"摸地图" |
 
 ## 露出标记格式（漫威名落到 hero-visibility）
 
@@ -77,7 +77,7 @@ skills/CLI 与调提示词"（那是后续以本矩阵为底图的独立工作�
 
 `🦸 hero ▸ <英雄名>（<agent>）接手 · <职责>`
 
-例：`🦸 hero ▸ 钢铁侠（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first`
+例：`🦸 hero ▸ 文远（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first`
 
 - 前缀 token `🦸 hero ▸` **一字不改**——hero-visibility 既有结构测试（`grep -qF '🦸 hero ▸'`）继续全绿。
 - 英雄名记忆点 + agent 技术名不歧义，排查时一眼知道是哪个 agent。
@@ -146,7 +146,7 @@ skills/CLI 与调提示词"（那是后续以本矩阵为底图的独立工作�
   `docs/hero-agent-layers.md` 漫威代号映射"。token `🦸 hero ▸` 不变。
 - **9 个 `agents/hero-java-*.md` 的 `## hero 露出` 行**：把自报家门那行改成带英雄名格式，
   例如 backend-developer 改为
-  `🦸 hero ▸ 钢铁侠（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first`。
+  `🦸 hero ▸ 文远（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first`。
   **只改这一行**，其余正文不动。
 
 ### 3. 改 `CLAUDE.md`（仓库导航）
@@ -172,8 +172,8 @@ skills/CLI 与调提示词"（那是后续以本矩阵为底图的独立工作�
 3. 四个层名（规划层 / 执行层 / 评审门控层 / 领航研究层）在 doc 中均出现。
 4. `CLAUDE.md` 含指向 `hero-agent-layers.md` 的链接。
 5. `hero-agent-roster.md` 含指向 `hero-agent-layers.md` 的 cross-link。
-6. 9 个漫威代号（钢铁侠 / 幻视 / 蜘蛛侠 / 奇异博士 / 海姆达尔 / 火箭浣熊 / 星爵 / 猎鹰 /
-   神盾局长）在 `hero-agent-layers.md` 中均出现。
+6. 9 个漫威代号（文远 / 子长 / 希仁 / 玄成 / 鹏举 / 子文 / 郑和 / 霞客 /
+   孔明）在 `hero-agent-layers.md` 中均出现。
 7. 9 个 `agents/hero-java-*.md` 各自的露出行含本 agent 的漫威代号（grep 该 agent 对应中文名），
    且仍含 token `🦸 hero ▸` —— 漫威名与 hero 露出都不漏。
 8. `skills/hero-conventions/SKILL.md` 的露出模板含「英雄名（agent）」格式标识（如 `（` 占位

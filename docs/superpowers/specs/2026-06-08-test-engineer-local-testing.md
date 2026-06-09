@@ -1,4 +1,4 @@
-# 设计：蜘蛛侠 `hero-java-test-engineer` 本地测试能力重塑 + C-systemic 试点
+# 设计：希仁 `hero-java-test-engineer` 本地测试能力重塑 + C-systemic 试点
 
 > 状态：已 brainstorm 评审通过，待转 implementation plan。
 > 日期：2026-06-08。
@@ -8,10 +8,10 @@
 
 复盘执行层测试工程师发现两个问题：
 
-1. **skills 够不着**：卡片正文点名要用 `superpowers:test-driven-development` / `gherkin` / `allure` 三个 skill，但 `tools:` 白名单无 `Skill` 工具、也无 `skills:` 字段 → 按已证实机制（见记忆 `subagent-skill-loading-mechanism`），**三个全加载不了**。蜘蛛侠是全队引用 skill 最多、受 C-systemic 影响最重的一例。
+1. **skills 够不着**：卡片正文点名要用 `superpowers:test-driven-development` / `gherkin` / `allure` 三个 skill，但 `tools:` 白名单无 `Skill` 工具、也无 `skills:` 字段 → 按已证实机制（见记忆 `subagent-skill-loading-mechanism`），**三个全加载不了**。希仁是全队引用 skill 最多、受 C-systemic 影响最重的一例。
 2. **测试类型不全 + 容器依赖**：现卡片只有单测/BDD/集成，靠 Testcontainers 起真中间件（需容器运行时）；缺接口测试与 E2E。
 
-**目标**：把蜘蛛侠重塑为**纯本地测试工程师**，四类覆盖 + 报告，并借它**首次落地 `skills:` 预加载字段（C-systemic 试点）**：
+**目标**：把希仁重塑为**纯本地测试工程师**，四类覆盖 + 报告，并借它**首次落地 `skills:` 预加载字段（C-systemic 试点）**：
 
 | 测试类型 | 工具 | 加载机制 |
 |---|---|---|
@@ -33,7 +33,7 @@
 
 ### ① 愿景重塑
 
-蜘蛛侠 = **纯本地测试工程师**。覆盖单元（TDD）/ 验收（BDD）/ 接口冒烟（httpie）/ E2E（Playwright MCP 无头）四类 + Allure 报告。不依赖容器运行时。model 保持 sonnet。仍**不改业务实现**（发现问题报 backend/data 修）。
+希仁 = **纯本地测试工程师**。覆盖单元（TDD）/ 验收（BDD）/ 接口冒烟（httpie）/ E2E（Playwright MCP 无头）四类 + Allure 报告。不依赖容器运行时。model 保持 sonnet。仍**不改业务实现**（发现问题报 backend/data 修）。
 
 ### ② skills 预加载（C-systemic 试点）
 
@@ -83,7 +83,7 @@ tools: Read, Edit, Write, Grep, Glob, Bash, <Playwright MCP 浏览器工具集>
 - 加「接口冒烟」段：先本地起服务（`mvn spring-boot:run` / `java -jar`），再 httpie 打 localhost 探接口。
 - 加「E2E（无头）」段：被测 Web 前端+后端本地起着后，用 Playwright MCP 驱动无头浏览器走端到端流程。
 - 报告段保留 Allure。
-- `## hero 露出` 段（蜘蛛侠 token）**一字不动**。
+- `## hero 露出` 段（希仁 token）**一字不动**。
 
 ### ⑦ 矩阵同步
 
@@ -115,7 +115,7 @@ tools: Read, Edit, Write, Grep, Glob, Bash, <Playwright MCP 浏览器工具集>
 4. **本地起服务工作法**：卡片写明接口/E2E 前先本地起服务打 localhost。
 5. **MCP 模板**：`mcp/servers/playwright.json` 存在（无密钥、`--headless`），README 收录。
 6. **CLI 登记**：`cli/httpie.md`/`cli/allure.md` 存在，`cli/README.md` 收录两行。
-7. **矩阵对齐 + 露出不破**：矩阵 test 行 skills/CLI 更新；蜘蛛侠 hero 露出行一字未动，visibility/layers 测试全绿。
+7. **矩阵对齐 + 露出不破**：矩阵 test 行 skills/CLI 更新；希仁 hero 露出行一字未动，visibility/layers 测试全绿。
 
 ## 非目标（YAGNI）/ 后续
 

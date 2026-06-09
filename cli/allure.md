@@ -1,6 +1,6 @@
 # allure — 测试报告生成与查看（test-engineer）
 
-蜘蛛侠归集用例结果、附失败证据的报告工具。配合 JUnit5/Cucumber 产出的 `allure-results`。
+希仁归集用例结果、附失败证据的报告工具。配合 JUnit5/Cucumber 产出的 `allure-results`。
 
 ## 安装
 `brew install allure`。

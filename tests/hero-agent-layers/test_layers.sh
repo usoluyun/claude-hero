@@ -25,7 +25,7 @@ for layer in 规划层 执行层 评审门控层 领航研究层; do
 done
 
 # 6. 9 个漫威中文代号都在 doc 里
-for hero in 神盾局长 钢铁侠 幻视 蜘蛛侠 奇异博士 海姆达尔 火箭浣熊 星爵 猎鹰; do
+for hero in 孔明 文远 子长 希仁 玄成 鹏举 子文 郑和 霞客; do
   assert_ok "grep -qF '$hero' '$LAYERS'" "marvel name $hero in doc"
 done
 
@@ -36,15 +36,15 @@ check_agent_hero() { # $1=agent file stem, $2=中文漫威名
   assert_ok "grep -qF '$TOKEN' '$f'" "$1 still has hero token"
   assert_ok "grep -qF '$2' '$f'" "$1 露出行 has marvel name $2"
 }
-check_agent_hero hero-java-tech-lead 神盾局长
-check_agent_hero hero-java-backend-developer 钢铁侠
-check_agent_hero hero-java-data-engineer 幻视
-check_agent_hero hero-java-test-engineer 蜘蛛侠
-check_agent_hero hero-java-code-reviewer 奇异博士
-check_agent_hero hero-java-security-auditor 海姆达尔
-check_agent_hero hero-java-ecrm 火箭浣熊
-check_agent_hero hero-java-hotel-product-center 星爵
-check_agent_hero hero-java-owner-biz 猎鹰
+check_agent_hero hero-java-tech-lead 孔明
+check_agent_hero hero-java-backend-developer 文远
+check_agent_hero hero-java-data-engineer 子长
+check_agent_hero hero-java-test-engineer 希仁
+check_agent_hero hero-java-code-reviewer 玄成
+check_agent_hero hero-java-security-auditor 鹏举
+check_agent_hero hero-java-ecrm 子文
+check_agent_hero hero-java-hotel-product-center 郑和
+check_agent_hero hero-java-owner-biz 霞客
 
 # 8. hero-conventions 露出模板含「英雄名（agent）」格式（含全角括号 （ 与 英雄名 字样）
 CONV="$REPO/skills/hero-conventions/SKILL.md"
@@ -106,7 +106,7 @@ assert_ok "grep -qF 'gitleaks' '$LAYERS'" "矩阵含 gitleaks"
 assert_ok "grep -qF '设计时' '$LAYERS'" "矩阵含双模（设计时）"
 assert_ok "grep -qF '强制门槛' '$LAYERS'" "矩阵含强制门槛"
 
-# 14. 合规规范文档（海姆达尔判定敏感/加密/鉴权的权威口径）
+# 14. 合规规范文档（鹏举判定敏感/加密/鉴权的权威口径）
 STD="$REPO/docs/security-standards.md"
 assert_ok "[ -f '$STD' ]" "security-standards.md 存在"
 assert_ok "grep -qF 'PCI-DSS' '$STD'" "含 PCI-DSS"

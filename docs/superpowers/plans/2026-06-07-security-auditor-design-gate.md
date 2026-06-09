@@ -1,8 +1,8 @@
-# 海姆达尔系统设计安全门控强化 Implementation Plan
+# 鹏举系统设计安全门控强化 Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 把 `hero-java-security-auditor`（海姆达尔）从"组件 CVE 审计员"重塑为"系统设计安全门控"：系统设计安全（未授权/越权/敏感数据/注入/不安全设计）= 🔴 强制门槛，组件依赖 CVE = 🟡 提醒确认；双模闭环（设计时定门槛 + 代码时验门槛）。
+**Goal:** 把 `hero-java-security-auditor`（鹏举）从"组件 CVE 审计员"重塑为"系统设计安全门控"：系统设计安全（未授权/越权/敏感数据/注入/不安全设计）= 🔴 强制门槛，组件依赖 CVE = 🟡 提醒确认；双模闭环（设计时定门槛 + 代码时验门槛）。
 
 **Architecture:** 纯文档/配置改造——重写 agent 卡片正文，同步能力矩阵，新增合规规范文档 + 3 个 CLI 用法文档，给 refresh-vendor 加"安全标准常抓清单"。TDD 节奏 = 在 `tests/` 加 grep 断言（先红后绿）。`tools:` 白名单不变（CLI 经 Bash、规范经 Read、CVE 经 WebSearch、OWASP 经 context7），hero 露出行一字不动。
 
@@ -84,7 +84,7 @@ Apollo、Eureka。
 
 接手任务时，先在输出顶部打一行自报家门（遵循 `hero-conventions` 露出规范，token 一字不改）：
 
-`🦸 hero ▸ 海姆达尔（hero-java-security-auditor）接手 · 安全审计`
+`🦸 hero ▸ 鹏举（hero-java-security-auditor）接手 · 安全审计`
 
 ## 🔴 强制门槛 —— 系统设计安全（未解决/未显式豁免，不得进下一步）
 
@@ -138,7 +138,7 @@ Apollo、Eureka。
 - [ ] **Step 4: 跑测试确认变绿**
 
 Run: `bash tests/hero-agent-layers/run.sh && bash tests/hero-visibility/run.sh`
-Expected: 两套都 ALL TESTS PASSED（group 12 全绿；visibility 海姆达尔 token 仍在）。
+Expected: 两套都 ALL TESTS PASSED（group 12 全绿；visibility 鹏举 token 仍在）。
 
 - [ ] **Step 5: Commit**
 
@@ -180,14 +180,14 @@ Expected: group 13 报 ✗（semgrep/gitleaks/设计时/强制门槛 尚不在�
 `给它代码/配置 → 产出安全风险（CVE/注入/越权）与修复建议（只读）`）整行替换为：
 
 ```markdown
-| `hero-java-security-auditor` | 海姆达尔 | opus（只读） | TODO | —（自带审计 checklist + OWASP/合规清单骨架，不依赖外部 skill） | semgrep, gitleaks（🔴 设计安全）；maven/gradle 依赖树 + WebSearch（🟡 CVE） | **设计时**评审 design 文档定 🔴 门槛 + **代码时** semgrep/gitleaks/grep 验门槛。系统设计安全（未授权/越权/敏感数据/注入/不安全设计）= 🔴 强制门槛（⛔阻断）；组件 CVE = 🟡 提醒确认（不阻断） |
+| `hero-java-security-auditor` | 鹏举 | opus（只读） | TODO | —（自带审计 checklist + OWASP/合规清单骨架，不依赖外部 skill） | semgrep, gitleaks（🔴 设计安全）；maven/gradle 依赖树 + WebSearch（🟡 CVE） | **设计时**评审 design 文档定 🔴 门槛 + **代码时** semgrep/gitleaks/grep 验门槛。系统设计安全（未授权/越权/敏感数据/注入/不安全设计）= 🔴 强制门槛（⛔阻断）；组件 CVE = 🟡 提醒确认（不阻断） |
 ```
 
 并把下面这条注脚**追加到能力矩阵末尾的现有注脚块之后**（即以 `> **框架/库文档核实**统一分层…`
 开头那段的紧后面，保持注脚集中）：
 
 ```markdown
-> 海姆达尔（security-auditor）双模：设计时读 `docs/design-*.md` 定 🔴 门槛、代码时验；🔴=系统设计安全（强制），
+> 鹏举（security-auditor）双模：设计时读 `docs/design-*.md` 定 🔴 门槛、代码时验；🔴=系统设计安全（强制），
 > 🟡=组件依赖 CVE（提醒确认）。CLI（semgrep/gitleaks/CodeQL）经 Bash、OWASP 经 context7→`vendor-docs`、
 > 合规口径见 `docs/security-standards.md`——`tools:` 白名单不变。详见 spec `2026-06-07-security-auditor-design-gate.md`。
 ```
@@ -219,7 +219,7 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
 在 `assert_summary` 前插入：
 
 ```bash
-# 14. 合规规范文档（海姆达尔判定敏感/加密/鉴权的权威口径）
+# 14. 合规规范文档（鹏举判定敏感/加密/鉴权的权威口径）
 STD="$REPO/docs/security-standards.md"
 assert_ok "[ -f '$STD' ]" "security-standards.md 存在"
 assert_ok "grep -qF 'PCI-DSS' '$STD'" "含 PCI-DSS"
@@ -235,7 +235,7 @@ Expected: group 14 报 ✗（文件不存在）。
 - [ ] **Step 3: 创建 `docs/security-standards.md`**
 
 ```markdown
-# 安全合规口径（海姆达尔判定基线）
+# 安全合规口径（鹏举判定基线）
 
 > `hero-java-security-auditor` 判定"什么算敏感数据 / 什么必须加密 / 什么必须鉴权"的**权威依据**。
 > 人工沉淀、随合规要求更新；与 OWASP（`docs/vendor-docs/owasp-*.md`）互补——OWASP 给技术做法，本文件给合规口径。
@@ -320,7 +320,7 @@ Expected: group 15 报 ✗（三个 cli 文件不存在）。
 ```markdown
 # semgrep — SAST 静态安全扫描（🔴 设计安全）
 
-海姆达尔代码时验 🔴 门槛的主力：跑规则集找注入/越权/危险模式。开源、本地单命令、可写自定义规则。
+鹏举代码时验 🔴 门槛的主力：跑规则集找注入/越权/危险模式。开源、本地单命令、可写自定义规则。
 
 ## 安装
 `brew install semgrep` 或 `pipx install semgrep`。
@@ -355,7 +355,7 @@ rules:
 ```markdown
 # gitleaks — 密钥/凭据硬编码扫描（🔴 敏感数据）
 
-海姆达尔查 🔴"密钥硬编码"：扫源码与 git 历史里的 token/密钥/口令。
+鹏举查 🔴"密钥硬编码"：扫源码与 git 历史里的 token/密钥/口令。
 
 ## 安装
 `brew install gitleaks`。
@@ -392,7 +392,7 @@ semgrep 之上的可选重档：跨过程污点分析，查越权链、注入污
 在 `| **codegraph** | ... |` 行**之后**插入三行：
 
 ```markdown
-| **semgrep** | SAST：注入/越权/危险模式扫描（🔴 设计安全） | `brew install semgrep` | 海姆达尔代码时验门槛主力，见 `semgrep.md` |
+| **semgrep** | SAST：注入/越权/危险模式扫描（🔴 设计安全） | `brew install semgrep` | 鹏举代码时验门槛主力，见 `semgrep.md` |
 | **gitleaks** | 密钥/凭据硬编码扫描（🔴 敏感数据） | `brew install gitleaks` | 命中即 🔴 强制门槛，见 `gitleaks.md` |
 | **codeql** | 深度污点分析（🔴 可选重档） | 见详情 | 越权/注入污点佐证，见 `codeql.md` |
 ```
@@ -442,7 +442,7 @@ Expected: `test_vendor.sh` 报 ✗（`_security_standard_libs`/`refresh_security
 
 ```bash
 # 安全标准常抓清单：独立于项目技术栈指纹，固定抓 OWASP 进 vendor-docs（全局一次，非按项目）。
-# 供海姆达尔（security-auditor）本地读 docs/vendor-docs/owasp-*.md。
+# 供鹏举（security-auditor）本地读 docs/vendor-docs/owasp-*.md。
 _security_standard_libs() {
   cat <<'EOF'
 OWASP Top 10

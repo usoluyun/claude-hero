@@ -42,7 +42,7 @@ Estimated Schedule Effort: 14.8 months
 Estimated People Required: 5.2
 ```
 
-### 按复杂度找热点文件（神盾局长验收专用）
+### 按复杂度找热点文件（孔明验收专用）
 
 ```bash
 # 按复杂度降序排列的前 20 个文件
@@ -76,7 +76,7 @@ scc . --format json | jq '.'
 scc --diff old-version/ new-version/
 ```
 
-## 钢铁侠/神盾局长实战场景
+## 文远/孔明实战场景
 
 ```bash
 # 1. 接手旧项目前：先看规模

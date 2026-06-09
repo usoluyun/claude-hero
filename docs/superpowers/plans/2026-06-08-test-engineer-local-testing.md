@@ -1,8 +1,8 @@
-# 蜘蛛侠本地测试重塑 + C-systemic 试点 Implementation Plan
+# 希仁本地测试重塑 + C-systemic 试点 Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 把 `hero-java-test-engineer`（蜘蛛侠）重塑为纯本地测试工程师（单元 TDD / BDD / httpie 接口冒烟 / Playwright MCP 无头 E2E / Allure 报告，删 Testcontainers），并首次用 `skills:` 字段预加载 tdd/gherkin/allure（C-systemic 试点）。
+**Goal:** 把 `hero-java-test-engineer`（希仁）重塑为纯本地测试工程师（单元 TDD / BDD / httpie 接口冒烟 / Playwright MCP 无头 E2E / Allure 报告，删 Testcontainers），并首次用 `skills:` 字段预加载 tdd/gherkin/allure（C-systemic 试点）。
 
 **Architecture:** 文档/配置改造 + 一个新 MCP 模板。TDD 节奏 = `tests/hero-agent-layers/test_layers.sh` 加 grep 断言（先红后绿）。`skills:` 预加载是否真生效、Playwright MCP 工具名是否对——这两点 grep 测不到，由末尾**手工验证任务**实跑确认。hero 露出行一字不动。
 
@@ -76,7 +76,7 @@ Cucumber-JVM + Gherkin（BDD）、httpie（接口冒烟）、Playwright MCP（�
 
 接手任务时，先在输出顶部打一行自报家门（遵循 `hero-conventions` 露出规范，token 一字不改）：
 
-`🦸 hero ▸ 蜘蛛侠（hero-java-test-engineer）接手 · 测试编写`
+`🦸 hero ▸ 希仁（hero-java-test-engineer）接手 · 测试编写`
 
 ## 你的职责
 
@@ -111,7 +111,7 @@ Cucumber-JVM + Gherkin（BDD）、httpie（接口冒烟）、Playwright MCP（�
 - [ ] **Step 4: 跑测试确认变绿**
 
 Run: `bash tests/hero-agent-layers/run.sh && bash tests/hero-visibility/run.sh`
-Expected: 两套都 ALL TESTS PASSED（group 15 全绿；visibility 蜘蛛侠 token 仍在）。
+Expected: 两套都 ALL TESTS PASSED（group 15 全绿；visibility 希仁 token 仍在）。
 
 - [ ] **Step 5: Commit**
 
@@ -149,21 +149,21 @@ Expected: group 16 报 ✗。
 把 `docs/hero-agent-layers.md` 执行层表里这一整行：
 
 ```
-| `hero-java-test-engineer` | 蜘蛛侠 | sonnet | TODO | superpowers:test-driven-development, gherkin, allure | maven, gradle | 给它待测代码 → 产出 JUnit5 单测 / Gherkin BDD .feature / 集成测试 |
+| `hero-java-test-engineer` | 希仁 | sonnet | TODO | superpowers:test-driven-development, gherkin, allure | maven, gradle | 给它待测代码 → 产出 JUnit5 单测 / Gherkin BDD .feature / 集成测试 |
 ```
 
 整行替换为：
 
 ```
-| `hero-java-test-engineer` | 蜘蛛侠 | sonnet | TODO | superpowers:test-driven-development, gherkin, allure（经 `skills:` 字段预加载） | maven, gradle, httpie（接口冒烟）, allure（报告）；E2E 用 Playwright MCP | 给它待测代码 → 单元(TDD)/BDD(.feature)/接口冒烟(httpie)/E2E(Playwright 无头)/Allure 报告，纯本地无容器 |
+| `hero-java-test-engineer` | 希仁 | sonnet | TODO | superpowers:test-driven-development, gherkin, allure（经 `skills:` 字段预加载） | maven, gradle, httpie（接口冒烟）, allure（报告）；E2E 用 Playwright MCP | 给它待测代码 → 单元(TDD)/BDD(.feature)/接口冒烟(httpie)/E2E(Playwright 无头)/Allure 报告，纯本地无容器 |
 ```
 
 - [ ] **Step 3b: 加注脚**
 
-把下面这条追加到能力矩阵末尾现有注脚块之后（即以 `> 海姆达尔（security-auditor）双模` 开头那段的紧后面）：
+把下面这条追加到能力矩阵末尾现有注脚块之后（即以 `> 鹏举（security-auditor）双模` 开头那段的紧后面）：
 
 ```
-> 蜘蛛侠（test-engineer）的 skills（tdd/gherkin/allure）经 frontmatter `skills:` 字段**预加载**（本仓首次用该字段，
+> 希仁（test-engineer）的 skills（tdd/gherkin/allure）经 frontmatter `skills:` 字段**预加载**（本仓首次用该字段，
 > C-systemic 试点）；E2E 的 Playwright MCP 经 `tools:` 白名单（`mcp__playwright__*`）+ `mcp/servers/playwright.json` 模板启用。
 > 纯本地测试、不依赖容器。详见 spec `2026-06-08-test-engineer-local-testing.md`。
 ```
@@ -278,7 +278,7 @@ Expected: group 18 报 ✗。
 ```markdown
 # httpie — 接口冒烟探测（test-engineer）
 
-蜘蛛侠做接口冒烟/手探的 CLI HTTP 客户端：起服务后打 localhost，看状态码与响应体。
+希仁做接口冒烟/手探的 CLI HTTP 客户端：起服务后打 localhost，看状态码与响应体。
 可重复的接口断言套件仍走 Java（MockMvc / REST Assured）。
 
 ## 安装
@@ -299,7 +299,7 @@ Expected: group 18 报 ✗。
 ```markdown
 # allure — 测试报告生成与查看（test-engineer）
 
-蜘蛛侠归集用例结果、附失败证据的报告工具。配合 JUnit5/Cucumber 产出的 `allure-results`。
+希仁归集用例结果、附失败证据的报告工具。配合 JUnit5/Cucumber 产出的 `allure-results`。
 
 ## 安装
 `brew install allure`。

@@ -1,6 +1,6 @@
 # gitleaks — 密钥/凭据硬编码扫描（🔴 敏感数据）
 
-海姆达尔查 🔴"密钥硬编码"：扫源码与 git 历史里的 token/密钥/口令。
+鹏举查 🔴"密钥硬编码"：扫源码与 git 历史里的 token/密钥/口令。
 
 ## 安装
 `brew install gitleaks`。

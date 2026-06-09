@@ -58,7 +58,7 @@ pg_glimpse -H localhost -d mydb -U postgres -r 1   # 每秒刷新
 - 复制延迟、检查点统计
 - TPS、WAL 速率、最老事务年龄
 
-## 幻视实战场景
+## 子长实战场景
 
 ```bash
 # 1. 收到慢SQL告警 → 看当前活跃查询

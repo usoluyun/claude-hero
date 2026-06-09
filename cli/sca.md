@@ -3,7 +3,7 @@
 > 选型结论：`osv-scanner`（Google）vs `trivy`（Aqua）vs `grype`（Anchore）vs `dependency-check`（OWASP）。
 > **osv-scanner 胜出原因**：单二进制无需 brew/无本地依赖/无需本地漏洞库下载、在线查 Google OSV 库（结果最新）、支持 `pom.xml` 直接扫描。开销最小、最快上手。
 
-用于替代海姆达尔组件档的**人肉 `mvn dependency:tree` + WebSearch 方案**，属于 🟡 提醒确认档（不阻断，仅 advisory）。
+用于替代鹏举组件档的**人肉 `mvn dependency:tree` + WebSearch 方案**，属于 🟡 提醒确认档（不阻断，仅 advisory）。
 
 ## 安装
 
@@ -56,7 +56,7 @@ osv-scanner scan pom.xml --skip-git --no-config
 | `groups[].max_severity` | CVSS 最高分（0-10） |
 | `vulnerabilities` | 完整漏洞详情（影响范围、修复版本、源链接） |
 
-## 海姆达尔集成建议
+## 鹏举集成建议
 
 security-auditor 的组件扫描步骤：
 

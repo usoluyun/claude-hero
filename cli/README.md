@@ -14,12 +14,12 @@
 | **osv-scanner** | SCA：依赖 CVE 自动化扫描（🟡 组件） | 见 `sca.md` | Google OSV 在线查，单二进制，见 `sca.md` |
 | **scc** | 代码统计 + 复杂度热点 + COCOMO 估人天 | 见 `scc.md` | 摸项目全貌/找热点文件，见 `scc.md` |
 | **ast-grep** | 结构化代码搜索/改写（`sg`），AST 级比 grep 精准 | `pip3 install ast-grep-cli` | 开发时找模式/批量重构，见 `ast-grep.md` |
-| **PMD** | 静态代码分析：死代码/空 catch/复杂度 | 见 `pmd.md` | 奇异博士审代码前批量扫问题，见 `pmd.md` |
-| **SpotBugs** | 字节码级 Bug 检测：NPE/线程安全/资源泄漏 | 见 `spotbugs.md` | 奇异博士深层语义分析，和 PMD 互补，见 `spotbugs.md` |
-| **SlowQL** | SQL 静态分析器：安全/性能/合规，支持 MyBatis mapper | 见 `slowql.md` | 幻视写 Mapper 后查注入/全表扫描，见 `slowql.md` |
-| **pg_glimpse** | PostgreSQL 实时 TUI 监控（锁/查询/缓存） | 见 `pg-glimpse.md` | 幻视 DBA 排障，看锁/死元组/复制延迟，见 `pg-glimpse.md` |
+| **PMD** | 静态代码分析：死代码/空 catch/复杂度 | 见 `pmd.md` | 玄成审代码前批量扫问题，见 `pmd.md` |
+| **SpotBugs** | 字节码级 Bug 检测：NPE/线程安全/资源泄漏 | 见 `spotbugs.md` | 玄成深层语义分析，和 PMD 互补，见 `spotbugs.md` |
+| **SlowQL** | SQL 静态分析器：安全/性能/合规，支持 MyBatis mapper | 见 `slowql.md` | 子长写 Mapper 后查注入/全表扫描，见 `slowql.md` |
+| **pg_glimpse** | PostgreSQL 实时 TUI 监控（锁/查询/缓存） | 见 `pg-glimpse.md` | 子长 DBA 排障，看锁/死元组/复制延迟，见 `pg-glimpse.md` |
 | **jq** | JSON 命令行处理器，API 响应提取/格式化 | `brew install jq` | 接口自测日常必备，见 `jq.md` |
-| semgrep | SAST：注入/越权/危险模式扫描（🔴 设计安全） | `brew install semgrep` | 海姆达尔代码时验门槛主力，见 `semgrep.md` |
+| semgrep | SAST：注入/越权/危险模式扫描（🔴 设计安全） | `brew install semgrep` | 鹏举代码时验门槛主力，见 `semgrep.md` |
 | **gitleaks** | 密钥/凭据硬编码扫描（🔴 敏感数据） | `brew install gitleaks` | 命中即 🔴 强制门槛，见 `gitleaks.md` |
 | **codeql** | 深度污点分析（🔴 可选重档） | 见详情 | 越权/注入污点佐证，见 `codeql.md` |
 | mycli | 查询 **MySQL**（补全/高亮） | `brew install mycli` | 查 MySQL 一律用它，人工执行 |

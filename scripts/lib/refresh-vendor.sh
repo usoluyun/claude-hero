@@ -117,7 +117,7 @@ refresh_vendor_docs() {  # 对一个项目的 agent 跑整套
 }
 
 # 安全标准常抓清单：独立于项目技术栈指纹，固定抓 OWASP 进 vendor-docs（全局一次，非按项目）。
-# 供海姆达尔（security-auditor）本地读 docs/vendor-docs/owasp-*.md。
+# 供鹏举（security-auditor）本地读 docs/vendor-docs/owasp-*.md。
 _security_standard_libs() {
   cat <<'EOF'
 OWASP Top 10

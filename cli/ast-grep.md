@@ -118,7 +118,7 @@ ast-grep scan
 sg -p '@GetMapping($$$)' -l java --debug-query
 ```
 
-## 钢铁侠实战场景
+## 文远实战场景
 
 ```bash
 # 1. 找所有 Controller 的 @RequestMapping 根路径

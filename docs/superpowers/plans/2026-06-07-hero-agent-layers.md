@@ -88,7 +88,7 @@ for layer in 规划层 执行层 评审门控层 领航研究层; do
 done
 
 # 6. 9 个漫威中文代号都在 doc 里
-for hero in 神盾局长 钢铁侠 幻视 蜘蛛侠 奇异博士 海姆达尔 火箭浣熊 星爵 猎鹰; do
+for hero in 孔明 文远 子长 希仁 玄成 鹏举 子文 郑和 霞客; do
   assert_ok "grep -qF '$hero' '$LAYERS'" "marvel name $hero in doc"
 done
 
@@ -117,16 +117,16 @@ Expected: FAIL —— `hero-agent-layers.md exists` 等断言报 ✗（doc 尚�
 
 ```
 角色 agent（横向干活，跨服务通用）
- ├─ 规划层        神盾局长 Nick Fury     hero-java-tech-lead              (opus)
- ├─ 执行层        钢铁侠 Iron Man        hero-java-backend-developer      (sonnet)
- │                幻视 Vision            hero-java-data-engineer          (sonnet)
- │                蜘蛛侠 Spider-Man      hero-java-test-engineer          (sonnet)
- └─ 评审门控层    奇异博士 Doctor Strange hero-java-code-reviewer         (opus, 只读)
-                  海姆达尔 Heimdall      hero-java-security-auditor       (opus, 只读)
+ ├─ 规划层        孔明     hero-java-tech-lead              (opus)
+ ├─ 执行层        文远        hero-java-backend-developer      (sonnet)
+ │                子长            hero-java-data-engineer          (sonnet)
+ │                希仁      hero-java-test-engineer          (sonnet)
+ └─ 评审门控层    玄成 hero-java-code-reviewer         (opus, 只读)
+                  鹏举      hero-java-security-auditor       (opus, 只读)
 项目领航 agent（按服务只读带路 = 领航研究层）
-                  火箭浣熊 Rocket        hero-java-ecrm                   (sonnet, 只读)
-                  星爵 Star-Lord         hero-java-hotel-product-center   (sonnet, 只读)
-                  猎鹰 Falcon            hero-java-owner-biz              (sonnet, 只读)
+                  子文        hero-java-ecrm                   (sonnet, 只读)
+                  郑和         hero-java-hotel-product-center   (sonnet, 只读)
+                  霞客            hero-java-owner-biz              (sonnet, 只读)
 ```
 
 正交性：角色 agent 跨服务通用、横向干活（规划/执行/评审三梯）；项目领航 agent 绑定单个服务、
@@ -147,15 +147,15 @@ Expected: FAIL —— `hero-agent-layers.md exists` 等断言报 ✗（doc 尚�
 
 | Agent | 漫威代号 | 取名理由（贴特点） |
 |---|---|---|
-| `hero-java-tech-lead` | 神盾局长 Nick Fury | 组建团队、拆任务派活、最后验收——天生编排者 |
-| `hero-java-backend-developer` | 钢铁侠 Iron Man | 亲手造装备/写实现，工程师本色 |
-| `hero-java-data-engineer` | 幻视 Vision | 由数据而生、擅综合；跨 MySQL/SQLServer 方言=多源数据合成 |
-| `hero-java-test-engineer` | 蜘蛛侠 Spider-Man | 蜘蛛感应提前预警=测试在出事前抓 bug |
-| `hero-java-code-reviewer` | 奇异博士 Doctor Strange | 推演千万结局找隐患=正确性/质量评审 |
-| `hero-java-security-auditor` | 海姆达尔 Heimdall | 阿斯加德守门人、洞察一切入侵=安全审计守门 |
-| `hero-java-ecrm` | 火箭浣熊 Rocket | 把不按常理的怪装备玩明白；ecrm 非 Spring 特殊栈(ActionSoft BPM) |
-| `hero-java-hotel-product-center` | 星爵 Star-Lord | 带队探索定位；产品中心是定价/映射枢纽 |
-| `hero-java-owner-biz` | 猎鹰 Falcon | 空中侦察大范围地形=大单体多业务域"摸地图" |
+| `hero-java-tech-lead` | 孔明 | 组建团队、拆任务派活、最后验收——天生编排者 |
+| `hero-java-backend-developer` | 文远 | 亲手造装备/写实现，工程师本色 |
+| `hero-java-data-engineer` | 子长 | 由数据而生、擅综合；跨 MySQL/SQLServer 方言=多源数据合成 |
+| `hero-java-test-engineer` | 希仁 | 蜘蛛感应提前预警=测试在出事前抓 bug |
+| `hero-java-code-reviewer` | 玄成 | 推演千万结局找隐患=正确性/质量评审 |
+| `hero-java-security-auditor` | 鹏举 | 阿斯加德守门人、洞察一切入侵=安全审计守门 |
+| `hero-java-ecrm` | 子文 | 把不按常理的怪装备玩明白；ecrm 非 Spring 特殊栈(ActionSoft BPM) |
+| `hero-java-hotel-product-center` | 郑和 | 带队探索定位；产品中心是定价/映射枢纽 |
+| `hero-java-owner-biz` | 霞客 | 空中侦察大范围地形=大单体多业务域"摸地图" |
 
 ## 露出标记格式
 
@@ -163,7 +163,7 @@ Expected: FAIL —— `hero-agent-layers.md exists` 等断言报 ✗（doc 尚�
 
 `🦸 hero ▸ <英雄名>（<agent>）接手 · <职责>`
 
-例：`🦸 hero ▸ 钢铁侠（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first`
+例：`🦸 hero ▸ 文远（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first`
 
 前缀 token `🦸 hero ▸` 一字不改；英雄名作记忆点、agent 技术名供排查时不歧义定位。
 
@@ -177,30 +177,30 @@ Expected: FAIL —— `hero-agent-layers.md exists` 等断言报 ✗（doc 尚�
 
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
-| `hero-java-tech-lead` | 神盾局长 | opus | TODO | superpowers:brainstorming, superpowers:writing-plans, hero-conventions | codegraph | 给它特性/需求 → 产出架构设计+任务分派清单 → 主会话据此分派各专家 → 回它汇总验收 |
+| `hero-java-tech-lead` | 孔明 | opus | TODO | superpowers:brainstorming, superpowers:writing-plans, hero-conventions | codegraph | 给它特性/需求 → 产出架构设计+任务分派清单 → 主会话据此分派各专家 → 回它汇总验收 |
 
 ### 执行层
 
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
-| `hero-java-backend-developer` | 钢铁侠 | sonnet | TODO | hero-conventions, superpowers:test-driven-development | maven, gradle, jdk-multiversion | 给它明确任务 → 实现 Controller/Service/DAO 与中间件接入，TDD-first |
-| `hero-java-data-engineer` | 幻视 | sonnet | TODO | hero-conventions | mycli（MySQL）, SQLServer CLI TODO | 给它 SQL/数据层需求 → 产出 MyBatis mapper/XML、resultMap、慢查询调优 |
-| `hero-java-test-engineer` | 蜘蛛侠 | sonnet | TODO | superpowers:test-driven-development, gherkin, allure | maven, gradle | 给它待测代码 → 产出 JUnit5 单测 / Gherkin BDD .feature / 集成测试 |
+| `hero-java-backend-developer` | 文远 | sonnet | TODO | hero-conventions, superpowers:test-driven-development | maven, gradle, jdk-multiversion | 给它明确任务 → 实现 Controller/Service/DAO 与中间件接入，TDD-first |
+| `hero-java-data-engineer` | 子长 | sonnet | TODO | hero-conventions | mycli（MySQL）, SQLServer CLI TODO | 给它 SQL/数据层需求 → 产出 MyBatis mapper/XML、resultMap、慢查询调优 |
+| `hero-java-test-engineer` | 希仁 | sonnet | TODO | superpowers:test-driven-development, gherkin, allure | maven, gradle | 给它待测代码 → 产出 JUnit5 单测 / Gherkin BDD .feature / 集成测试 |
 
 ### 评审门控层
 
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
-| `hero-java-code-reviewer` | 奇异博士 | opus（只读） | TODO | superpowers:requesting-code-review, hero-conventions | TODO | 给它 diff/SHA → 产出正确性与质量问题清单（不改码） |
-| `hero-java-security-auditor` | 海姆达尔 | opus（只读） | TODO | security-review | TODO | 给它代码/配置 → 产出安全风险（CVE/注入/越权）与修复建议（只读） |
+| `hero-java-code-reviewer` | 玄成 | opus（只读） | TODO | superpowers:requesting-code-review, hero-conventions | TODO | 给它 diff/SHA → 产出正确性与质量问题清单（不改码） |
+| `hero-java-security-auditor` | 鹏举 | opus（只读） | TODO | security-review | TODO | 给它代码/配置 → 产出安全风险（CVE/注入/越权）与修复建议（只读） |
 
 ### 领航研究层（只读带路）
 
 | Agent | 漫威代号 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
-| `hero-java-ecrm` | 火箭浣熊 | sonnet（只读） | ecrm、企业连锁促销审批、申请审批工作流、OpenAPI、BPMN、ActionSoft、AWS BPM、企业协议、连锁申请、促销活动审批 | hero-refresh | codegraph | 给它 ecrm 意图 → 定位代码/讲 BPMN 审批流走向/圈影响面（只读带路） |
-| `hero-java-hotel-product-center` | 星爵 | sonnet（只读） | 房价码、RateCode、产品管理、定价、渠道映射、房型映射、CRS 房价码、市场价、价格模板 | hero-refresh | codegraph | 给它产品中心意图 → 定位代码/讲房价码或产品接口走向/圈影响面（只读带路） |
-| `hero-java-owner-biz` | 猎鹰 | sonnet（只读） | 业主 App、业主 Web 后端、Banner、连锁用户、业主通讯录、合同、供应商评价、GOP 大数据、日报月报、消息推送、摸地图 | hero-refresh | codegraph | 给它业主端意图 → 在多业务域里找入口/看跨域调用/圈影响面（只读带路） |
+| `hero-java-ecrm` | 子文 | sonnet（只读） | ecrm、企业连锁促销审批、申请审批工作流、OpenAPI、BPMN、ActionSoft、AWS BPM、企业协议、连锁申请、促销活动审批 | hero-refresh | codegraph | 给它 ecrm 意图 → 定位代码/讲 BPMN 审批流走向/圈影响面（只读带路） |
+| `hero-java-hotel-product-center` | 郑和 | sonnet（只读） | 房价码、RateCode、产品管理、定价、渠道映射、房型映射、CRS 房价码、市场价、价格模板 | hero-refresh | codegraph | 给它产品中心意图 → 定位代码/讲房价码或产品接口走向/圈影响面（只读带路） |
+| `hero-java-owner-biz` | 霞客 | sonnet（只读） | 业主 App、业主 Web 后端、Banner、连锁用户、业主通讯录、合同、供应商评价、GOP 大数据、日报月报、消息推送、摸地图 | hero-refresh | codegraph | 给它业主端意图 → 在多业务域里找入口/看跨域调用/圈影响面（只读带路） |
 
 > 触发词列：领航 agent 取自 [`hero-agent-roster.md`](./hero-agent-roster.md)「业务关键词/别名」，须与之一致；
 > 角色 agent 暂无显式触发锚点，标 `TODO`，待后续补。
@@ -258,15 +258,15 @@ check_agent_hero() { # $1=agent file stem, $2=中文漫威名
   assert_ok "grep -qF '$TOKEN' '$f'" "$1 still has hero token"
   assert_ok "grep -qF '$2' '$f'" "$1 露出行 has marvel name $2"
 }
-check_agent_hero hero-java-tech-lead 神盾局长
-check_agent_hero hero-java-backend-developer 钢铁侠
-check_agent_hero hero-java-data-engineer 幻视
-check_agent_hero hero-java-test-engineer 蜘蛛侠
-check_agent_hero hero-java-code-reviewer 奇异博士
-check_agent_hero hero-java-security-auditor 海姆达尔
-check_agent_hero hero-java-ecrm 火箭浣熊
-check_agent_hero hero-java-hotel-product-center 星爵
-check_agent_hero hero-java-owner-biz 猎鹰
+check_agent_hero hero-java-tech-lead 孔明
+check_agent_hero hero-java-backend-developer 文远
+check_agent_hero hero-java-data-engineer 子长
+check_agent_hero hero-java-test-engineer 希仁
+check_agent_hero hero-java-code-reviewer 玄成
+check_agent_hero hero-java-security-auditor 鹏举
+check_agent_hero hero-java-ecrm 子文
+check_agent_hero hero-java-hotel-product-center 郑和
+check_agent_hero hero-java-owner-biz 霞客
 
 # 8. hero-conventions 露出模板含「英雄名（agent）」格式（含全角括号 （ 与 英雄名 字样）
 CONV="$REPO/skills/hero-conventions/SKILL.md"
@@ -299,15 +299,15 @@ Expected: FAIL —— `... has marvel name ...` 与 `conventions ... 英雄名 .
 
 | 文件 | 新露出行 |
 |---|---|
-| `agents/hero-java-backend-developer.md` | `` `🦸 hero ▸ 钢铁侠（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first` `` |
-| `agents/hero-java-data-engineer.md` | `` `🦸 hero ▸ 幻视（hero-java-data-engineer）接手 · 复杂 SQL / 数据处理` `` |
-| `agents/hero-java-test-engineer.md` | `` `🦸 hero ▸ 蜘蛛侠（hero-java-test-engineer）接手 · 测试编写` `` |
-| `agents/hero-java-code-reviewer.md` | `` `🦸 hero ▸ 奇异博士（hero-java-code-reviewer）接手 · 代码评审` `` |
-| `agents/hero-java-security-auditor.md` | `` `🦸 hero ▸ 海姆达尔（hero-java-security-auditor）接手 · 安全审计` `` |
-| `agents/hero-java-tech-lead.md` | `` `🦸 hero ▸ 神盾局长（hero-java-tech-lead）接手 · 技术方案 / 任务拆解` `` |
-| `agents/hero-java-ecrm.md` | `` `🦸 hero ▸ 火箭浣熊（hero-java-ecrm）接手 · ecrm 服务领航（只读带路）` `` |
-| `agents/hero-java-hotel-product-center.md` | `` `🦸 hero ▸ 星爵（hero-java-hotel-product-center）接手 · 酒店产品中心领航（只读带路）` `` |
-| `agents/hero-java-owner-biz.md` | `` `🦸 hero ▸ 猎鹰（hero-java-owner-biz）接手 · owner-biz 领航（只读带路）` `` |
+| `agents/hero-java-backend-developer.md` | `` `🦸 hero ▸ 文远（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first` `` |
+| `agents/hero-java-data-engineer.md` | `` `🦸 hero ▸ 子长（hero-java-data-engineer）接手 · 复杂 SQL / 数据处理` `` |
+| `agents/hero-java-test-engineer.md` | `` `🦸 hero ▸ 希仁（hero-java-test-engineer）接手 · 测试编写` `` |
+| `agents/hero-java-code-reviewer.md` | `` `🦸 hero ▸ 玄成（hero-java-code-reviewer）接手 · 代码评审` `` |
+| `agents/hero-java-security-auditor.md` | `` `🦸 hero ▸ 鹏举（hero-java-security-auditor）接手 · 安全审计` `` |
+| `agents/hero-java-tech-lead.md` | `` `🦸 hero ▸ 孔明（hero-java-tech-lead）接手 · 技术方案 / 任务拆解` `` |
+| `agents/hero-java-ecrm.md` | `` `🦸 hero ▸ 子文（hero-java-ecrm）接手 · ecrm 服务领航（只读带路）` `` |
+| `agents/hero-java-hotel-product-center.md` | `` `🦸 hero ▸ 郑和（hero-java-hotel-product-center）接手 · 酒店产品中心领航（只读带路）` `` |
+| `agents/hero-java-owner-biz.md` | `` `🦸 hero ▸ 霞客（hero-java-owner-biz）接手 · owner-biz 领航（只读带路）` `` |
 
 对每个文件，把旧行 `` `🦸 hero ▸ <agent> 接手 · <职责>` `` 用 Edit 精确替换为上表对应新行（旧行原文见各文件，职责短语保持不变，仅在 agent 名前加 `<英雄中文名>（` 、agent 名后加 `）`）。
 
