@@ -1,5 +1,20 @@
 # 贡献指南
 
+## 欢迎参与共建
+
+**这是所有人的仓库。** 不管你是后端、前端、测试、DBA、PM——只要你觉得某件重复的事可以用 Hero 来做，就可以贡献。
+
+参与方式不限于改代码：
+
+| 你能做的 | 怎么做 |
+|---------|--------|
+| 改进一个 Hero 的 prompt | 改 `agents/hero-*.md` 提 PR |
+| 造你的专属 Hero | 在 `agents/` 下新建文件，取个花名，详见 [`docs/maintenance.md`](docs/maintenance.md) |
+| 沉淀一个团队 Skill | 在 `skills/hero-<能力>/` 下写 `SKILL.md` |
+| 推荐一个好用的 CLI 工具 | 在 `cli/` 写文档，更新总表 |
+| 提想法 / 发现 Bug | 提 Issue |
+| 在群里安利你的 Hero | 分享经验，带动大家一起造 |
+
 ## 命名规范（统一 `hero` 前缀）
 
 仓库内所有 agent / skill 一律以 `hero` 开头，便于在 `~/.claude` 里和个人/其它来源的资源区分。

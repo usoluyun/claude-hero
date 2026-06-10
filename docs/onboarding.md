@@ -2,6 +2,14 @@
 
 从零到可用，大约 10 分钟。
 
+## 欢迎来到英雄殿
+
+你加入的不只是一个代码仓库，是一个**团队共同建造的 Hero 殿堂**。这里已经有 9 个 Hero 等你差遣——孔明帮你做技术方案、文远帮你写代码、子长帮你写 SQL、希仁帮你写测试……你越用他们，他们越懂你。
+
+用得顺手了，你也可以给他们提改进建议，甚至造一个你自己的 Hero。
+
+---
+
 ## 1. 前置
 
 - 已安装 Claude Code
@@ -33,7 +41,9 @@ bash install.sh
   `hero-prd-to-java` 等）。
 - 改一下仓库里某个 `SKILL.md`，无需重装即生效（软链）。
 
-## 5. 日常
+## 5. 下一步
 
-- `git pull` 获取团队更新，skills/agents 自动生效。
-- 想贡献？看 [`../CONTRIBUTING.md`](../CONTRIBUTING.md)。
+- 扫一遍 [`../README.md`](../README.md) 了解全貌
+- 看看 [`hero-agent-layers.md`](../docs/hero-agent-layers.md) 认识所有 Hero
+- 想想你日常最烦的事，造一个你的 Hero（[维护手册](maintenance.md)有教程）
+- 想贡献？看 [`../CONTRIBUTING.md`](../CONTRIBUTING.md)
