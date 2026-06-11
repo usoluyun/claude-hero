@@ -170,3 +170,21 @@ sudo 改系统目录、写 LaunchAgent/brew services 这类持久化系统状态
 - `hero-refresh` 联动：代码漂移后自动重生成主页/重部署。
 - 部署根可配置（环境变量覆盖 `/var/www/hero-sites`）。
 - 健康检查 + 自动回滚到上一个 master 备份。
+
+## 修订（2026-06-12）：caddy 探测 + 合并既有部署
+
+落地时按用户要求加两条："caddy 有就用，没有再装" + "对既有 Caddyfile 合并，不影响当前部署"。
+
+- **caddy 二进制探测**（`detect_caddy`）：跑着的 caddy 进程 > PATH 上的 caddy > 都没才 `brew install caddy`。不再硬绑 brew。
+- **合并既有部署**（`capture_extra` + `extract_site_body`）：首次从既有**活动** Caddyfile（运行中实例的
+  `--config`，否则 brew Caddyfile）抽出 `:PORT { … }` 的内层 body，原样存 `extra.caddy`（**只读源不改源**）。
+  master 生成时：hero 路由在前 → `import extra.caddy`（旧路由 + 旧默认页原样保留在后）。靠 Caddy
+  `handle` 源码顺序"先匹配先赢"，旧 catch-all 自然兜底，**既有部署零影响**。
+- **默认页取舍**：若 `extra.caddy` 含顶层 catch-all（`extra_has_default`，depth-0 的无 matcher `handle {`），
+  则即便 registry 里 claude-hero 是 `default` 也**不发** hero 默认页——保留既有默认页优先。
+- **caddy 自启分流**：brew 的 caddy 走 `brew services`（覆盖 brew Caddyfile，先备份）；非 brew 的写
+  `hero-caddy` LaunchAgent，并对运行中实例 `caddy reload --config master`（不停机应用合并配置）。
+
+实测（隔离端口）：预置含 `/old` + 旧默认页的 `extra.caddy`，注册 default(claude-hero) + 新项目 demo，
+生成 master 正确（hero `/demo` 在前、`import extra.caddy` 在后、hero 默认页被跳过），`caddy validate`
+Valid，真实 caddy 探活 `/`→旧默认页、`/old/x`→旧路由、`/demo/`→新路由 均符合预期。

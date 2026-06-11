@@ -33,7 +33,9 @@ description: 把项目的宣传主页 + 后端程序标准化部署到本机，�
 | 其它项目 | 走 `/<name>/*` 路由 |
 | master Caddyfile | `/var/www/hero-sites/Caddyfile`，**由脚本从 registry 生成，勿手改** |
 | 单一真相源 | `/var/www/hero-sites/registry.json` |
-| 自启 | Caddy 走 `brew services`；每个后端走用户级 LaunchAgent |
+| caddy 二进制 | **有就用**：跑着的 caddy > PATH 上的 caddy > 都没才 `brew install caddy` |
+| 合并既有部署 | 首次把既有 `:10086` 块的内层路由原样抽到 `extra.caddy`，master `import` 它——**既有路由 / 默认页零影响**，hero 路由叠加在前 |
+| 自启 | caddy：brew 的走 `brew services`，否则 `hero-caddy` LaunchAgent；每个后端走用户级 LaunchAgent |
 
 ## 每个项目自带 `site/`
 
@@ -80,15 +82,18 @@ description: 把项目的宣传主页 + 后端程序标准化部署到本机，�
 S=skills/hero-site-deploy/scripts/hero-deploy.sh   # 安装后在 ~/.claude/skills/hero-site-deploy/scripts/
 
 bash "$S" init            # 首次：建 /var/www/hero-sites（sudo）+ registry —— STOP sudo
-bash "$S" add <repo>      # 注册项目 + 软链 apps/<name> + 重生成 master（读 <repo>/site/site.json）
-bash "$S" autostart       # 软链 brew Caddyfile + 写后端 LaunchAgent + brew services —— STOP 自启
+bash "$S" add <repo>      # 注册项目 + 软链 apps/<name> + 重生成 master（含合并既有 extra.caddy）
+bash "$S" autostart       # 探测 caddy(有就用) + 应用合并 master + 后端/caddy 自启 —— STOP 自启
 ```
 
 门控顺序：
 1. `init` —— 首次创建 `/var/www` 需 sudo，**STOP** 让用户知悉/确认（仅首次）。
-2. `add <repo>` —— 低风险，只动部署根（软链 + registry + 生成 master），可直接跑。
-3. `autostart` —— 会写 `~/Library/LaunchAgents/*.plist`、覆盖 `$(brew --prefix)/etc/Caddyfile`（先备份
-   `*.bak.<ts>`）、`brew services restart caddy`。**改系统持久化状态，先列出将改动项 STOP 确认再跑。**
+2. `add <repo>` —— 低风险，只动部署根。首次会从既有活动 Caddyfile 抽出 `:10086` 路由保留到
+   `extra.caddy`，master `import` 它（既有部署零影响），再叠加 hero 路由 + 生成 master。
+3. `autostart` —— 探测 caddy（跑着的 > PATH > brew install），`caddy validate` 通过后：写后端
+   `~/Library/LaunchAgents/hero-*.plist`；caddy 自启按二进制来源分流——brew 的覆盖
+   `$(brew --prefix)/etc/Caddyfile`（先备份）+ `brew services restart`，否则写 `hero-caddy` LaunchAgent
+   并对运行中实例 `caddy reload`（不停机保留既有路由）。**改系统持久化状态，先列改动项 STOP 确认。**
 
 ### 阶段 C · 验证
 
@@ -105,16 +110,18 @@ bash "$S" status     # 打印已部署清单 + 访问地址
 |---|---|
 | 视觉风格方向 | 建页前 STOP1 确认 |
 | `sudo mkdir/chown /var/www`（首次） | STOP，仅首次 |
-| 写 LaunchAgent + `brew services`（持久化系统状态） | STOP，列出改动项再 `autostart` |
+| 写 LaunchAgent + `brew services`/`hero-caddy`（持久化系统状态） | STOP，列出改动项再 `autostart` |
 | 覆盖 `brew etc/Caddyfile` | 脚本自动先备份 `*.bak.<ts>` |
-| 切换/重启 caddy | 先 `caddy validate`，失败不执行 |
+| 切换/重启/reload caddy | 先 `caddy validate`，失败不执行 |
+| 合并既有 Caddyfile | 抽 body 存 `extra.caddy`，**只读源不改源**；既有路由 + 默认页保留 |
 
 ## 常见坑
 
 - **Caddyfile 不支持单行 `{…}` 和 `;` 分隔**：每个 `handle`/`reverse_proxy` 块必须多行。脚本已处理，**勿手改生成的 master**。
-- **默认页 handle 必须在最后**（catch-all 无 matcher）。脚本保证默认页永远拼在 site block 末尾，别打乱。
-- **default 全局唯一**：再注册一个 `default:true` 会被脚本拒绝。claude-hero 是默认页。
-- **存在非 brew 的 caddy**（如 `~/.cargo/bin/caddy`）占着 :10086 时**，brew services 起的 caddy 抢不到端口。autostart 前先 `pgrep -fl caddy` 排查，停掉非 brew 实例。
+- **合并保留靠源码顺序**：hero 路由排在 `import extra.caddy` 之前（更具体先匹配），既有的 catch-all 默认页留在最后兜底。所以 **hero 路由别用无 matcher 的 catch-all**，否则会盖掉既有默认页。
+- **extra.caddy 只抽一次**：首次从既有活动配置抽取后就固定，之后 `regen` 复用不再重抽。既有部署若有变化、想重新捕获，删掉 `extra.caddy` 再 `regen`。
+- **extra 已有顶层默认页时，hero 不再发自己的默认页**（即便 registry 里 claude-hero 是 `default`）——这是"不影响既有部署"的刻意取舍。要让 hero 默认页生效，先清掉 extra 里的旧默认。
+- **caddy 有就用**：跑着的非 brew caddy（如 `~/.cargo/bin/caddy`）会被直接复用并 `reload` 到合并配置，不再要求停掉换 brew。
 - **static_root 相对仓库根**，不是相对 `site/`。看板类静态在 `web/static` 要显式写。
 - **后端 `start` 失败**不影响 caddy 起，但 `/<mount>/api` 会 502。看 `/tmp/hero-<name>.err.log`。
 
