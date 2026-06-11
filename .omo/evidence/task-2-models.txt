@@ -1,0 +1,15 @@
+Task 2 - Models Module
+======================
+Date: 2026-06-11
+
+Files created:
+  - src/models.py (63 lines) — AgentView, SessionView dataclasses + Pydantic v2 response models
+  - tests/test_models.py (3 tests) — defaults verification
+
+Verification results:
+  - python3 -c import: {'active': 0, 'idle': 0, 'sleeping': 0, 'error': 0} ✓
+  - pytest test_models.py -v: 3 passed ✓
+
+Pydantic models included:
+  - AgentResponse, SessionResponse, StatusSummary
+  - StatusApiResponse, BlockedResponse, HistoryResponse

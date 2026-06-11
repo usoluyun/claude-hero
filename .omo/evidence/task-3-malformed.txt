@@ -1,0 +1,39 @@
+================================== test session starts ===================================
+platform darwin -- Python 3.14.0, pytest-9.0.3, pluggy-1.6.0 -- /Users/luyun/Documents/poc/claude-hero/hero-tavern/.venv/bin/python3.14
+cachedir: .pytest_cache
+rootdir: /Users/luyun/Documents/poc/claude-hero/hero-tavern
+configfile: pytest.ini
+plugins: cov-7.1.0, anyio-4.13.0
+collecting ... collected 13 items
+
+tests/test_claude_parser.py::TestSessionCount::test_parse_all_returns_correct_count PASSED [  7%]
+tests/test_claude_parser.py::TestSessionCount::test_parse_all_skips_empty_sessions PASSED [ 15%]
+tests/test_claude_parser.py::TestBracketStyles::test_half_width_brackets_detected PASSED [ 23%]
+tests/test_claude_parser.py::TestBracketStyles::test_full_width_brackets_detected PASSED [ 30%]
+tests/test_claude_parser.py::TestBracketStyles::test_fixture_detects_both_bracket_styles PASSED [ 38%]
+tests/test_claude_parser.py::TestProjectShort::test_shorten_project_strips_documents_prefix PASSED [ 46%]
+tests/test_claude_parser.py::TestProjectShort::test_shorten_project_deep_path PASSED [ 53%]
+tests/test_claude_parser.py::TestProjectShort::test_shorten_project_no_documents_fallback PASSED [ 61%]
+tests/test_claude_parser.py::TestProjectShort::test_directory_to_path_conversion PASSED [ 69%]
+tests/test_claude_parser.py::TestProjectShort::test_fixture_session_has_correct_project_short PASSED [ 76%]
+tests/test_claude_parser.py::TestMalformedResilience::test_malformed_line_skipped_gracefully PASSED [ 84%]
+tests/test_claude_parser.py::TestMalformedResilience::test_empty_file_produces_no_session PASSED [ 92%]
+tests/test_claude_parser.py::TestMalformedResilience::test_nonexistent_base_dir_returns_empty PASSED [100%]
+
+===================================== tests coverage =====================================
+____________________ coverage: platform darwin, python 3.14.0-final-0 ____________________
+
+Name                             Stmts   Miss  Cover   Missing
+--------------------------------------------------------------
+src/__init__.py                      0      0   100%
+src/aggregator/__init__.py           2      2     0%   1-3
+src/aggregator/aggregator.py        85     85     0%   1-135
+src/api/__init__.py                  0      0   100%
+src/api/main.py                     20     20     0%   2-45
+src/models.py                       18      0   100%
+src/parsers/__init__.py              0      0   100%
+src/parsers/claude_parser.py       128     21    84%   33, 51, 58-60, 85, 113, 163, 166-167, 181, 203, 208-210, 218-223
+src/parsers/opencode_parser.py      82     82     0%   2-155
+--------------------------------------------------------------
+TOTAL                              335    210    37%
+=================================== 13 passed in 0.04s ===================================

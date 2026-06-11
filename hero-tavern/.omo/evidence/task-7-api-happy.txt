@@ -1,0 +1,37 @@
+572
+{
+  "active": 1,
+  "idle": 82,
+  "sleeping": 497,
+  "error": 0,
+  "total_sessions": 572
+}
+[]
+{
+  "total_messages": 395,
+  "total_tokens_in": 91008147,
+  "total_tokens_out": 0,
+  "active_agents": 395,
+  "blocked_agents": 0
+}
+{
+  "status": "ok"
+}
+[
+  {
+    "agent_id": "opencode::ses_15a63404fffesVHTIKH7Z2wrsO::Sisyphus - ultraworker",
+    "agent_name": "Sisyphus",
+    "content": "Sisyphus sleeping - 1 messages, 24172542 tokens",
+    "timestamp": "2026-06-10T09:22:29.429000",
+    "session_id": "ses_15a63404fffesVHTIKH7Z2wrsO"
+  }
+]
+[
+  {
+    "agent_id": "opencode::ses_15a63404fffesVHTIKH7Z2wrsO::Sisyphus - ultraworker",
+    "agent_name": "Sisyphus",
+    "content": "Sisyphus sleeping - 1 messages, 24172542 tokens",
+    "timestamp": "2026-06-10T09:22:29.429000",
+    "session_id": "ses_15a63404fffesVHTIKH7Z2wrsO"
+  }
+]

@@ -1,0 +1,2 @@
+{"detail":"Session not found: nonexistent-ses-12345"}
+HTTP_CODE:404

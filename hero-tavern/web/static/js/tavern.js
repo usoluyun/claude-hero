@@ -441,22 +441,38 @@ window.getSpriteId = getSpriteId;
 window.SPRITES = SPRITES;
 
 // ═══════════════════════════════════════════════════════════════════
-// Integration Layer — Polling + Rendering
+// Integration Layer — Session-Based Rendering
 // ═══════════════════════════════════════════════════════════════════
 
 const API_BASE = 'http://localhost:8000';
 const POLL_INTERVAL = 5000;
 let pollTimer = null;
 
+const statusLabels = {
+  active: '论剑',
+  idle: '饮酒',
+  sleeping: '打坐',
+  error: '走火入魔'
+};
+
 async function fetchStatus() {
   try {
     const response = await fetch(`${API_BASE}/api/status`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return await response.json();
+    const statusData = await response.json();
+    
+    if (statusData.sessions) {
+      renderSessions(statusData.sessions);
+      updateStatusCounts(statusData.status_summary);
+    } else {
+      console.error('API returned unexpected format — expected sessions array');
+    }
+    
+    updateTimestamp(statusData.last_updated);
+    hideError();
   } catch (error) {
     console.error('Status fetch failed:', error);
     showError('API 连接失败 — 请启动后端服务');
-    return null;
   }
 }
 
@@ -465,7 +481,7 @@ async function fetchMessages() {
     const response = await fetch(`${API_BASE}/api/messages?limit=20`);
     if (!response.ok) return [];
     return await response.json();
-  } catch { return []; }
+  } catch (err) { console.error('Messages fetch failed:', err); return []; }
 }
 
 async function fetchBlocked() {
@@ -473,7 +489,7 @@ async function fetchBlocked() {
     const response = await fetch(`${API_BASE}/api/blocked`);
     if (!response.ok) return [];
     return await response.json();
-  } catch { return []; }
+  } catch (err) { console.error('Blocked fetch failed:', err); return []; }
 }
 
 async function fetchHistory() {
@@ -481,89 +497,280 @@ async function fetchHistory() {
     const response = await fetch(`${API_BASE}/api/history`);
     if (!response.ok) return {};
     return await response.json();
-  } catch { return {}; }
+  } catch (err) { console.error('History fetch failed:', err); return {}; }
 }
 
-function renderAgents(status) {
-  if (!status) return;
-
-  const eastGrid = document.getElementById('east-agents');
-  const westGrid = document.getElementById('west-agents');
-  if (!eastGrid || !westGrid) return;
-
-  eastGrid.innerHTML = '';
-  westGrid.innerHTML = '';
-
-  let counts = { active: 0, idle: 0, sleeping: 0, error: 0 };
-
-  (status.east_wing || []).forEach(agent => {
-    const card = createAgentCard(agent, 'east');
-    eastGrid.appendChild(card);
-    if (counts[agent.status] !== undefined) counts[agent.status]++;
-  });
-
-  (status.west_wing || []).forEach(agent => {
-    const card = createAgentCard(agent, 'west');
-    westGrid.appendChild(card);
-    if (counts[agent.status] !== undefined) counts[agent.status]++;
-  });
-
-  if (eastGrid.children.length === 0) {
-    eastGrid.innerHTML = '<div class="empty-state">暂无英雄活动</div>';
+function renderSessions(sessions) {
+  const heroesContainer = document.getElementById('heroes-container');
+  const deitiesContainer = document.getElementById('deities-container');
+  
+  if (!heroesContainer || !deitiesContainer) {
+    console.error('Session containers not found');
+    return;
   }
-  if (westGrid.children.length === 0) {
-    westGrid.innerHTML = '<div class="empty-state">暂无神祇活动</div>';
+  
+  heroesContainer.innerHTML = '';
+  deitiesContainer.innerHTML = '';
+  
+  // Split into active sessions vs sleeping sessions (all agents = sleeping)
+  const activeSessions = [];
+  const sleepingSessions = [];
+  
+  sessions.forEach(session => {
+    const allSleeping = !session.agents ||
+                        session.agents.length === 0 ||
+                        session.agents.every(a => a.status === 'sleeping');
+    if (allSleeping) {
+      sleepingSessions.push(session);
+    } else {
+      activeSessions.push(session);
+    }
+  });
+  
+  // Render active sessions (backend pre-sorts by activity_score DESC)
+  activeSessions.forEach((session, idx) => {
+    const card = createSessionCard(session, idx);
+    if (session.source === 'claude') {
+      heroesContainer.appendChild(card);
+    } else {
+      deitiesContainer.appendChild(card);
+    }
+  });
+  
+  // Render sleeping counter at bottom of each wing if applicable
+  // Distribute sleeping sessions to the wing their source belongs to
+  const heroesSleeping = sleepingSessions.filter(s => s.source === 'claude');
+  const deitiesSleeping = sleepingSessions.filter(s => s.source !== 'claude');
+  
+  if (heroesSleeping.length > 0) {
+    heroesContainer.appendChild(createSleepingCounter(heroesSleeping));
   }
-
-  updateStats(counts);
-  updateTimestamp(status.last_updated);
-  hideError();
+  if (deitiesSleeping.length > 0) {
+    deitiesContainer.appendChild(createSleepingCounter(deitiesSleeping));
+  }
+  
+  // Empty states (only if no active sessions and no sleeping counter)
+  if (heroesContainer.children.length === 0) {
+    heroesContainer.innerHTML = '<div class="empty-state">暂无英雄活动</div>';
+  }
+  if (deitiesContainer.children.length === 0) {
+    deitiesContainer.innerHTML = '<div class="empty-state">暂无神祇活动</div>';
+  }
 }
 
-function createAgentCard(agent, wing) {
+function createSessionCard(session, index) {
   const card = document.createElement('div');
-  card.className = `agent-card ${wing === 'west' ? 'west' : ''}`;
+  card.className = 'session-card';
+  card.setAttribute('data-session-id', session.session_id);
+  
+  const dominantStatus = calculateDominantStatus(session.agents);
+  card.setAttribute('data-status', dominantStatus);
+  
+  const allSleeping = session.agents.length === 0 || 
+                      session.agents.every(a => a.status === 'sleeping');
+  card.setAttribute('data-sleeping', allSleeping ? 'true' : 'false');
+  
+  const statusCountsText = buildStatusCountsText(session);
+  
+  card.innerHTML = `
+    <div class="session-header">
+      <div class="session-info">
+        <span class="session-project">${escapeHtml(session.project_short || session.session_id.slice(0, 8))}</span>
+        <span class="session-status">${statusLabels[dominantStatus] || dominantStatus}</span>
+        ${statusCountsText ? `<span class="status-counts">${statusCountsText}</span>` : ''}
+      </div>
+      <div class="expand-icon">▸</div>
+    </div>
+    <div class="session-body collapsed">
+      <div class="agents-preview">
+        ${buildAgentsPreview(session)}
+      </div>
+    </div>
+    <div class="session-body expanded hidden">
+      <div class="agents-full-list">
+      </div>
+    </div>
+  `;
+  
+  const header = card.querySelector('.session-header');
+  const bodyCollapsed = card.querySelector('.session-body.collapsed');
+  const bodyExpanded = card.querySelector('.session-body.expanded');
+  const expandIcon = card.querySelector('.expand-icon');
+  
+  header.addEventListener('click', () => {
+    const isExpanded = !bodyExpanded.classList.contains('hidden');
+    
+    if (isExpanded) {
+      bodyCollapsed.classList.remove('hidden');
+      bodyExpanded.classList.add('hidden');
+      expandIcon.textContent = '▸';
+    } else {
+      bodyCollapsed.classList.add('hidden');
+      bodyExpanded.classList.remove('hidden');
+      expandIcon.textContent = '▾';
+    }
+  });
+  
+  // Populate agents-full-list with full agent cards
+  const fullList = card.querySelector('.agents-full-list');
+  if (session.agents && session.agents.length > 0) {
+    session.agents.forEach(agent => {
+      fullList.appendChild(createAgentCard(agent, 'full'));
+    });
+  } else {
+    fullList.innerHTML = '<div class="agent-info"><em>无 agent 数据</em></div>';
+  }
+  
+  return card;
+}
+
+function calculateDominantStatus(agents) {
+  if (agents.length === 0) return 'sleeping';
+  
+  const hasError = agents.some(a => a.status === 'error');
+  const hasActive = agents.some(a => a.status === 'active');
+  const hasIdle = agents.some(a => a.status === 'idle');
+  
+  if (hasError) return 'error';
+  if (hasActive) return 'active';
+  if (hasIdle) return 'idle';
+  return 'sleeping';
+}
+
+function buildStatusCountsText(session) {
+  if (!session.agents || session.agents.length === 0) return '';
+  
+  const counts = { active: 0, idle: 0, sleeping: 0, error: 0 };
+  session.agents.forEach(a => {
+    if (counts.hasOwnProperty(a.status)) counts[a.status]++;
+  });
+  
+  const parts = [];
+  if (counts.active > 0) parts.push(`${counts.active} ${statusLabels.active}`);
+  if (counts.idle > 0) parts.push(`${counts.idle} ${statusLabels.idle}`);
+  if (counts.sleeping > 0) parts.push(`${counts.sleeping} ${statusLabels.sleeping}`);
+  if (counts.error > 0) parts.push(`${counts.error} ${statusLabels.error}`);
+  
+  return parts.join(' · ');
+}
+
+function buildAgentsPreview(session) {
+  if (!session.agents || session.agents.length === 0) return '无 agents';
+  
+  const preview = session.agents.slice(0, 3).map(a => escapeHtml(a.name)).join(', ');
+  const remaining = session.agents.length > 3 ? ` +${session.agents.length - 3}` : '';
+  
+  return preview + remaining;
+}
+
+function createAgentCard(agent, variant = 'full') {
+  const card = document.createElement('div');
+  card.className = variant === 'mini' ? 'agent-mini-card' : 'agent-full-card';
   card.setAttribute('data-status', agent.status);
-  card.setAttribute('data-agent-id', agent.id);
 
-  const spriteId = getSpriteId(agent.name, wing);
-  const sprite = createSprite(spriteId);
-  card.appendChild(sprite);
+  const spriteId = agent.sprite_id ||
+    DEITY_SPRITE_MAP[agent.name] ||
+    HERO_SPRITE_MAP[agent.name] ||
+    agent.name.toLowerCase().replace(/\s+/g, '-') ||
+    'default';
 
-  const name = document.createElement('div');
-  name.className = 'agent-name';
-  name.textContent = agent.name;
-  card.appendChild(name);
+  const spriteImg = document.createElement('img');
+  spriteImg.src = `img/sprites/${spriteId}.png`;
+  spriteImg.alt = agent.name;
+  spriteImg.className = 'agent-sprite';
+  spriteImg.width = 32;
+  spriteImg.height = 32;
+  spriteImg.onerror = () => {
+    spriteImg.style.display = 'none';
+    const fallback = createSprite(spriteId);
+    fallback.classList.add('agent-sprite-fallback');
+    card.insertBefore(fallback, card.firstChild);
+  };
 
-  const statusDiv = document.createElement('div');
-  statusDiv.className = 'agent-status';
-  const dot = document.createElement('span');
-  dot.className = `status-dot ${agent.status}`;
-  statusDiv.appendChild(dot);
-  const statusText = document.createElement('span');
-  const statusLabels = { active: '论剑', idle: '饮酒', sleeping: '打坐', error: '走火入魔' };
-  statusText.textContent = statusLabels[agent.status] || agent.status;
-  statusDiv.appendChild(statusText);
-  card.appendChild(statusDiv);
+  card.appendChild(spriteImg);
 
-  const tooltip = document.createElement('div');
-  tooltip.className = 'tooltip';
-  const lastActive = agent.last_active ? new Date(agent.last_active).toLocaleTimeString() : '未知';
-  tooltip.textContent = `${agent.name} · ${statusLabels[agent.status]} · 最后活动: ${lastActive}`;
-  card.appendChild(tooltip);
+  const info = document.createElement('div');
+  info.className = 'agent-info';
+  info.innerHTML = `
+    <div class="agent-name">${escapeHtml(agent.name)}</div>
+    <div class="agent-status"><span class="status-dot status-dot-${agent.status}"></span>${statusLabels[agent.status] || agent.status}</div>
+  `;
+  card.appendChild(info);
 
-  card.addEventListener('click', () => showAgentModal(agent));
+  if (variant === 'full') {
+    const extra = document.createElement('div');
+    extra.className = 'agent-extra';
+    const lastActive = agent.last_active
+      ? new Date(agent.last_active).toLocaleTimeString()
+      : '—';
+    const tokensTotal = (agent.tokens_in || 0) + (agent.tokens_out || (agent.tokens || 0));
+    extra.innerHTML = `
+      <div class="agent-tokens">T:${tokensTotal}</div>
+      <div class="agent-last-active">${lastActive}</div>
+    `;
+    card.appendChild(extra);
+  }
+
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showAgentModal(agent);
+  });
 
   return card;
 }
 
-function updateStats(counts) {
+function createSleepingCounter(sessions) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'sleeping-counter collapsed';
+
+  const header = document.createElement('div');
+  header.className = 'sleeping-header';
+  header.innerHTML = `
+    <span class="sleeping-icon">💤</span>
+    <span class="sleeping-count">${sessions.length} 个 session 在打坐</span>
+    <span class="expand-icon">▸</span>
+  `;
+  wrapper.appendChild(header);
+
+  const list = document.createElement('div');
+  list.className = 'sleeping-list hidden';
+
+  sessions.forEach((session, idx) => {
+    const card = createSessionCard(session, idx);
+    card.classList.add('sleeping-card');
+    list.appendChild(card);
+  });
+
+  wrapper.appendChild(list);
+
+  header.addEventListener('click', () => {
+    const isExpanded = !list.classList.contains('hidden');
+    if (isExpanded) {
+      list.classList.add('hidden');
+      wrapper.classList.remove('expanded');
+      wrapper.classList.add('collapsed');
+      header.querySelector('.expand-icon').textContent = '▸';
+    } else {
+      list.classList.remove('hidden');
+      wrapper.classList.add('expanded');
+      wrapper.classList.remove('collapsed');
+      header.querySelector('.expand-icon').textContent = '▾';
+    }
+  });
+
+  return wrapper;
+}
+
+function updateStatusCounts(summary) {
+  if (!summary) return;
+  
   const els = {
-    'stat-active': counts.active,
-    'stat-idle': counts.idle,
-    'stat-sleeping': counts.sleeping,
-    'stat-error': counts.error,
+    'count-active': summary.active,
+    'count-idle': summary.idle,
+    'count-sleeping': summary.sleeping,
+    'count-error': summary.error
   };
+  
   for (const [id, val] of Object.entries(els)) {
     const el = document.getElementById(id);
     if (el) el.textContent = val;
@@ -575,6 +782,12 @@ function updateTimestamp(isoString) {
   if (el && isoString) {
     el.textContent = `最后更新: ${new Date(isoString).toLocaleTimeString()}`;
   }
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 function renderMessages(messages) {
@@ -628,7 +841,6 @@ function showAgentModal(agent) {
   const content = document.getElementById('modal-content');
   if (!overlay || !content) return;
 
-  const statusLabels = { active: '论剑', idle: '饮酒', sleeping: '打坐', error: '走火入魔' };
   const lastActive = agent.last_active ? new Date(agent.last_active).toLocaleString() : '未知';
   const messages = (agent.recent_messages || []).map(m => `<div class="modal-row"><span>${m.content || ''}</span></div>`).join('');
 
@@ -681,7 +893,6 @@ async function poll() {
     fetchMessages(),
     fetchBlocked(),
   ]);
-  renderAgents(status);
   renderMessages(messages);
   renderBlocked(blocked);
 }

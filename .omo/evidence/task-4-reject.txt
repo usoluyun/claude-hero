@@ -1,0 +1,1 @@
+Correctly raised ValueError: empty DB, expected > 100KB — OpenCode DB at /Users/luyun/.opencode/opencode.db is only 4096 bytes. Is OPENCODE_DB_PATH correct?

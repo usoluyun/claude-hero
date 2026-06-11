@@ -1,0 +1,36 @@
+Task: API Scaffold for Hero Tavern session-view refactoring
+Date: 2026-06-11
+Status: COMPLETE
+
+Files created:
+  src/__init__.py                          - empty package init
+  src/api/__init__.py                      - empty package init
+  src/api/main.py                          - FastAPI app with 5 stub routes + CORS
+  src/aggregator/__init__.py               - empty package init
+  src/aggregator/aggregator.py             - empty placeholder
+  src/parsers/__init__.py                  - empty package init
+  src/parsers/claude_parser.py             - empty placeholder
+  src/parsers/opencode_parser.py           - empty placeholder
+  src/models.py                            - empty placeholder
+  .env.example                             - env template with IDLE/SLEEP/OPENCODE_DB_PATH
+
+Files updated:
+  requirements.txt                         - added python-dotenv, pydantic>=2.0, pyyaml
+
+Routes implemented:
+  GET /api/health     → {"status":"ok"}        (200)
+  GET /api/status     → {}                     (200)
+  GET /api/messages   → []                     (200) — with limit=20 default, ge=1, le=100
+  GET /api/blocked    → []                     (200)
+  GET /api/history    → {}                     (200)
+
+Verification results (all PASS):
+  python -c "from src.api.main import app; print('OK:', app)"  → OK
+  curl /api/status    → {}
+  curl /api/messages  → []
+  curl /api/blocked   → []
+  curl /api/history   → {}
+  curl /api/health    → {"status":"ok"}
+  curl /api/messages?limit=200  → 422 (rejected, correct)
+  curl /api/messages?limit=0    → 422 (rejected, correct)
+  CORS headers present: access-control-allow-origin: *

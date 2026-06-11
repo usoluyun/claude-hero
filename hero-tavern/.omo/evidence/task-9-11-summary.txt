@@ -1,0 +1,40 @@
+
+=== T9 + T11 实现验证报告 ===
+
+功能 A - Agent Cards:
+  ✓ createAgentCard(agent, variant) 函数已实现
+    - mini 变体：sprite + name + status
+    - full 变体：sprite + name + status + tokens + last_active
+  ✓ createSessionCard() 已填充 agents-full-list
+  ✓ 展开 session card 显示完整 agent cards 列表
+
+功能 B - Sleeping Counter:
+  ✓ renderSessions() 拆分 active/sleeping sessions
+  ✓ createSleepingCounter() 生成"打坐统计"行
+  ✓ 点击展开/折叠功能正常
+
+实时数据统计（574 sessions）:
+  - 活跃 sessions: 72 (12.5%)
+  - 打坐 sessions: 502 (87.5%)
+  - Agent cards: 582
+  - Sleep counters: 2 (heroes 1个, deities 501个)
+
+文件修改:
+  - web/static/js/tavern.js: +195 行 (845→981)
+  - web/static/css/tavern.css: +185 行 (179→390)
+
+功能验证 (Playwright):
+  ✓ Session card 渲染
+  ✓ Click to expand works
+  ✓ Agent cards in expanded view
+  ✓ Sleeping counter display + click toggle
+  ✓ Status text = Chinese only (论剑/饮酒/打坐/走火入魔)
+  ✓ Sprite PNG + fallback mechanism
+
+截图保存:
+  - .omo/evidence/part0-initial.png
+  - .omo/evidence/part1-expanded-session.png
+  - .omo/evidence/part2-sleeping-expanded.png
+
+完成时间: 2026-06-11
+验证方式: Playwright Python + JS evaluate

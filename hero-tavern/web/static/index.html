@@ -7,6 +7,25 @@
   <link rel="stylesheet" href="css/tavern.css">
   <link rel="stylesheet" href="css/characters.css">
   <link rel="stylesheet" href="css/sprites.css">
+  <style>
+    :root {
+      /* Tavern theme colors */
+      --hero-border: #d4a574;
+      --deity-border: #8b7355;
+      --paper-cream: #f5f5dc;
+      --ink-black: #1a1410;
+      --wood-dark: #2d1f14;
+      --wood-mid: #4a3428;
+      --lantern-gold: #ffcc4d;
+      --hero-secondary: #e8c39e;
+      
+      /* Status colors */
+      --status-active: #4ade80;
+      --status-idle: #fbbf24;
+      --status-sleeping: #94a3b8;
+      --status-error: #f87171;
+    }
+  </style>
 </head>
 <body>
   <header class="tavern-header">
@@ -22,15 +41,15 @@
   <main class="tavern-scene">
     <section class="wing east-wing">
       <h2>东 厢 · 英 雄</h2>
-      <div class="agent-grid" id="east-agents"></div>
+      <div class="session-grid" id="heroes-container"></div>
     </section>
     <section class="wing main-hall">
       <h2>中 堂</h2>
       <div class="stats-panel">
-        <div class="stat">活跃<span id="stat-active">0</span></div>
-        <div class="stat">空闲<span id="stat-idle">0</span></div>
-        <div class="stat">休眠<span id="stat-sleeping">0</span></div>
-        <div class="stat">异常<span id="stat-error">0</span></div>
+        <div class="stat">论剑<span id="count-active">0</span></div>
+        <div class="stat">饮酒<span id="count-idle">0</span></div>
+        <div class="stat">打坐<span id="count-sleeping">0</span></div>
+        <div class="stat">走火入魔<span id="count-error">0</span></div>
       </div>
       <div class="message-board">
         <h3>📜 消息流</h3>
@@ -43,7 +62,7 @@
     </section>
     <section class="wing west-wing">
       <h2>西 厢 · 神 祇</h2>
-      <div class="agent-grid" id="west-agents"></div>
+      <div class="session-grid" id="deities-container"></div>
     </section>
   </main>
   <footer class="tavern-floor"></footer>

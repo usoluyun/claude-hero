@@ -1,0 +1,185 @@
+================================== test session starts ===================================
+platform darwin -- Python 3.14.0, pytest-9.0.3, pluggy-1.6.0 -- /Users/luyun/Documents/poc/claude-hero/hero-tavern/.venv/bin/python3.14
+cachedir: .pytest_cache
+rootdir: /Users/luyun/Documents/poc/claude-hero/hero-tavern
+configfile: pytest.ini
+plugins: cov-7.1.0, base-url-2.1.0, playwright-0.8.0, anyio-4.13.0
+collecting ... /Users/luyun/Documents/poc/claude-hero/hero-tavern/.venv/lib/python3.14/site-packages/coverage/control.py:958: CoverageWarning: No data was collected. (no-data-collected); see https://coverage.readthedocs.io/en/7.14.1/messages.html#warning-no-data-collected
+  self._warn("No data was collected.", slug="no-data-collected")
+collected 55 items
+
+<Dir hero-tavern>
+  <Dir tests>
+    <Package e2e>
+      <Module test_api_polling.py>
+        E2E tests: API polling, data refresh, and error states.
+        <Class TestAPIDataRendering>
+          Verify that API data is rendered correctly in the UI.
+          <Function test_agent_cards_appear_after_poll[chromium]>
+            After the first poll, agent cards should appear in both wings.
+          <Function test_stats_panel_shows_correct_numbers[chromium]>
+            Stats panel should reflect agent counts from API.
+          <Function test_messages_are_rendered[chromium]>
+            Message board should display fetched messages.
+          <Function test_blocked_panel_shows_blocked_agent[chromium]>
+            Blocked panel should show Nick Fury as blocked.
+        <Class TestPollingRefresh>
+          Verify that data refreshes on interval.
+          <Function test_poll_updates_timestamp[chromium]>
+            The last-updated element should appear after poll.
+        <Class TestErrorStates>
+          Verify graceful handling of API errors and empty states.
+          <Function test_error_banner_hidden_on_success[chromium]>
+            Error banner should be hidden when API succeeds.
+          <Function test_empty_state_when_no_agents[chromium]>
+            Empty state text should appear when agent grids have no children.
+      <Module test_interactions.py>
+        E2E tests: click interactions, modal dialogs, keyboard shortcuts.
+        <Class TestAgentCardClick>
+          Verify clicking agent cards opens a detail modal.
+          <Function test_click_agent_card_opens_modal[chromium]>
+            Clicking an agent card should show the modal overlay.
+          <Function test_modal_shows_agent_name[chromium]>
+            The modal should display the clicked agent's name.
+          <Function test_modal_shows_status_and_tokens[chromium]>
+            Modal should show status, tokens, and last active time.
+          <Function test_modal_shows_recent_messages[chromium]>
+            Modal should show the agent's recent messages.
+          <Function test_modal_has_close_button[chromium]>
+            Modal should have a close button.
+        <Class TestModalClose>
+          Verify closing the detail modal.
+          <Function test_close_modal_via_button[chromium]>
+            Clicking the close button should hide the modal.
+          <Function test_close_modal_via_escape_key[chromium]>
+            Pressing Escape should hide the modal.
+        <Class TestKeyboardShortcuts>
+          Verify keyboard shortcuts work.
+          <Function test_r_key_triggers_manual_refresh[chromium]>
+            Pressing 'R' should trigger a manual refresh (poll).
+      <Module test_page_load.py>
+        E2E tests: page load, pixel CSS, responsive layout, empty/error states.
+        <Class TestPageLoad>
+          Verify page loads correctly with all key elements.
+          <Function test_page_title_is_hero_tavern[chromium]>
+            Page title should contain 'Hero Tavern'.
+          <Function test_header_is_visible[chromium]>
+            The tavern header with h1 is visible.
+          <Function test_three_wings_are_present[chromium]>
+            Page should have east, main-hall, and west sections.
+          <Function test_east_wing_has_correct_title[chromium]>
+            East wing heading is '东 厢 · 英 雄'.
+          <Function test_west_wing_has_correct_title[chromium]>
+            West wing heading is '西 厢 · 神 祇'.
+        <Class TestPixelCSS>
+          Verify the pixel-art CSS is correctly applied.
+          <Function test_pixelated_image_rendering_is_set[chromium]>
+            Body should have pixelated image-rendering for retro style.
+          <Function test_css_variables_are_defined[chromium]>
+            Custom CSS variables for wood/ink/paper colors should exist.
+          <Function test_custom_font_is_courier_new[chromium]>
+            Page uses Courier New / 宋体 monospace for retro feel.
+          <Function test_lanterns_are_visible[chromium]>
+            The 5 lantern decorations in the header should be visible.
+          <Function test_stats_panel_has_four_stats[chromium]>
+            Stats panel should show 4 stat blocks (active/idle/sleeping/error).
+        <Class TestResponsiveLayout>
+          Verify responsive behavior at mobile width.
+          <Function test_single_column_layout_at_mobile_width[chromium]>
+          <Function test_mobile_viewport_shows_content[chromium]>
+            At 375px (iPhone) all wings should still be visible.
+      <Module test_session_cards.py>
+        E2E tests: Session card rendering, expand/collapse, visual verification.
+        <Class TestSessionCardRendering>
+          Verify session cards render correctly with proper structure and styling.
+          <Function test_session_cards_appear_after_poll[chromium]>
+            After polling, session cards should appear in both containers.
+          <Function test_session_card_has_required_attributes[chromium]>
+            Each session card should have session-id, status, and sleeping attributes.
+          <Function test_session_card_shows_project_name[chromium]>
+            Session card should display the project name with status label.
+          <Function test_session_card_initially_collapsed[chromium]>
+            Session cards should start in collapsed state (preview visible).
+          <Function test_expand_icon_shows_right_arrow_when_collapsed[chromium]>
+            Expand icon should show right-pointing triangle when collapsed.
+        <Class TestSessionCardInteraction>
+          Verify session card click interactions work correctly.
+          <Function test_click_session_header_expands_card[chromium]>
+            Clicking session header should expand to show full session details.
+          <Function test_expand_icon_changes_to_down_arrow[chromium]>
+            After clicking, expand icon should change to down-pointing triangle.
+          <Function test_click_again_collapse_card[chromium]>
+            Clicking expanded session should collapse it back to preview.
+          <Function test_expand_icon_reverts_to_right_arrow[chromium]>
+            After collapsing, expand icon should revert to right-pointing triangle.
+        <Class TestSessionStatusCounts>
+          Verify session status counts display correctly.
+          <Function test_status_counts_appear_in_session_card[chromium]>
+            Session card should display counts like '2 论剑 · 1 饮酒'.
+          <Function test_status_counts_match_agent_statuses[chromium]>
+            Status counts should accurately reflect the agents in the session.
+        <Class TestSessionCardVisual>
+          Verify session card visual appearance and styling.
+          <Function test_session_card_has_proper_styling[chromium]>
+            Session cards should have proper borders, padding, and typography.
+          <Function test_session_header_is_clickable[chromium]>
+            Session header should have hover effect and cursor pointer.
+          <Function test_status_based_border_colors[chromium]>
+            Different states should have different left border colors.
+          <Function test_expand_icon_has_proper_styling[chromium]>
+            Expand icon should be properly sized and positioned.
+        <Class TestSessionCardScreenshot>
+          Capture screenshots for visual verification of session cards.
+          <Function test_session_card_screenshot[chromium]>
+            Capture screenshot showing session cards in collapsed state.
+          <Function test_session_card_expanded_screenshot[chromium]>
+            Capture screenshot showing expanded session card.
+      <Module test_task_8_session_cards.py>
+        Task 8: Session cards rendering and interaction tests.
+        
+        验证 session 卡片组件：
+        - Session cards 正常渲染并显示
+        - 卡片包含 session-project, session-status, status-counts
+        - Status 文本为 "论剑"/"饮酒"/"打坐"/"走火入魔"（无 emoji）
+        - 点击 session-header 展开/折叠交互
+        - Status 统计数字正确
+        <Function test_session_cards_render[chromium]>
+          验证 session cards 正常渲染.
+        <Function test_session_card_has_required_elements[chromium]>
+          验证每个 session card 包含必需的元素.
+        <Function test_session_card_data_attributes[chromium]>
+          验证 session card 包含 data 属性.
+        <Function test_expand_icon_initial_state[chromium]>
+          验证展开图标初始状态为 '▸'.
+        <Function test_session_header_click_expands[chromium]>
+          验证点击 session-header 展开卡片.
+        <Function test_expand_icon_changes_after_click[chromium]>
+          验证点击后展开图标从 '▸' 变为 '▾'.
+        <Function test_session_header_click_collapses[chromium]>
+          验证再次点击 session-header 折叠卡片.
+        <Function test_status_counts_display[chromium]>
+          验证状态统计显示正确（如 '2 论剑 · 1 饮酒'）.
+        <Function test_session_card_sorting[chromium]>
+          验证 session cards 按 activity_score 排序.
+        <Function test_screenshot_collapsed_state[chromium]>
+          截图：折叠状态的 session cards.
+        <Function test_screenshot_expanded_state[chromium]>
+          截图：展开状态的 session card.
+
+===================================== tests coverage =====================================
+____________________ coverage: platform darwin, python 3.14.0-final-0 ____________________
+
+Name                             Stmts   Miss  Cover   Missing
+--------------------------------------------------------------
+src/__init__.py                      0      0   100%
+src/aggregator/__init__.py           2      2     0%   1-3
+src/aggregator/aggregator.py       132    132     0%   1-211
+src/api/__init__.py                  0      0   100%
+src/api/main.py                     52     52     0%   2-83
+src/models.py                       63     63     0%   1-85
+src/parsers/__init__.py              0      0   100%
+src/parsers/claude_parser.py       128    128     0%   3-250
+src/parsers/opencode_parser.py      82     82     0%   2-155
+--------------------------------------------------------------
+TOTAL                              459    459     0%
+============================== 55 tests collected in 0.06s ===============================

@@ -1,0 +1,10 @@
+=== Cache Verification ===
+Same object (cache hit): True
+Total sessions: 497
+Summary: {'active': 11, 'idle': 44, 'sleeping': 450, 'error': 0, 'total_sessions': 497}
+Top 5 by score:
+  ses_15a63404fffe score=  241735.4  counts={'active': 0, 'idle': 0, 'sleeping': 1, 'error': 0}
+  ses_152ebebd0ffe score=  196922.8  counts={'active': 0, 'idle': 0, 'sleeping': 1, 'error': 0}
+  ses_16f13d022ffe score=  187854.5  counts={'active': 0, 'idle': 0, 'sleeping': 1, 'error': 0}
+  ses_16e6677aeffe score=  157885.9  counts={'active': 0, 'idle': 0, 'sleeping': 1, 'error': 0}
+  ses_14d3ecd50ffe score=   99337.6  counts={'active': 0, 'idle': 0, 'sleeping': 1, 'error': 0}

@@ -1,0 +1,67 @@
+heroes:
+  kongming:
+    sprite: kongming.png
+    description: 孔明 - scholar outfit + fan
+    primary_color: "#c0a080"
+  wenyuan:
+    sprite: wenyuan.png
+    description: 文远 - warrior outfit + sword
+    primary_color: "#8080c0"
+  zichang:
+    sprite: zichang.png
+    description: 子长 - scholar + book
+    primary_color: "#60a060"
+  xiren:
+    sprite: xiren.png
+    description: 希仁 - armor + hammer
+    primary_color: "#a06060"
+  xuancheng:
+    sprite: xuancheng.png
+    description: 玄成 - scholar + book
+    primary_color: "#a08060"
+  pengju:
+    sprite: pengju.png
+    description: 鹏举 - warrior + sword
+    primary_color: "#c06060"
+  ziwen:
+    sprite: ziwen.png
+    description: 子文 - scholar + staff
+    primary_color: "#60c0c0"
+  zhenghe:
+    sprite: zhenghe.png
+    description: 郑和 - explorer outfit + scepter
+    primary_color: "#c0c060"
+  xiake:
+    sprite: xiake.png
+    description: 霞客 - hood + staff
+    primary_color: "#8060a0"
+
+deities:
+  prometheus:
+    sprite: prometheus.png
+    description: Fire torch accessory
+    primary_color: "#ff8040"
+  sisyphus:
+    sprite: sisyphus.png
+    description: Pushing boulder (warrior outfit)
+    primary_color: "#808080"
+  atlas:
+    sprite: atlas.png
+    description: Carrying weight (strong body)
+    primary_color: "#6060c0"
+  hephaestus:
+    sprite: hephaestus.png
+    description: Blacksmith hammer + apron
+    primary_color: "#a06040"
+  oracle:
+    sprite: oracle.png
+    description: Hood + staff
+    primary_color: "#c060c0"
+  explore:
+    sprite: explore.png
+    description: Hood + staff
+    primary_color: "#40a0c0"
+  librarian:
+    sprite: librarian.png
+    description: Scholar + book
+    primary_color: "#80a040"

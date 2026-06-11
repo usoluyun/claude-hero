@@ -18,47 +18,93 @@ import pytest
 
 def _make_status():
     return {
-        "east_wing": [
+        "sessions": [
             {
-                "id": "claude-1", "name": "Nick Fury", "wing": "east",
-                "status": "active", "last_active": "2026-06-11T10:00:00+00:00",
-                "tokens_in": 5000, "tokens_out": 3000, "current_task": "Assemble team",
-                "recent_messages": [
-                    {"content": "We need a plan", "timestamp": "2026-06-11T10:00:00+00:00"},
+                "session_id": "east-claude-1",
+                "source": "claude",
+                "project": "/Users/test/ops/hero",
+                "project_short": "ops/hero",
+                "agents": [
+                    {
+                        "name": "Nick Fury",
+                        "agent_id": "claude::east-claude-1::hero-nick",
+                        "status": "active",
+                        "last_active": "2026-06-11T10:00:00+00:00",
+                        "sprite_id": "nick-fury",
+                        "messages_count": 5,
+                        "tokens": 8000,
+                        "role": "",
+                        "recent_messages": [
+                            {"content": "We need a plan", "timestamp": "2026-06-11T10:00:00+00:00"},
+                        ],
+                    },
+                    {
+                        "name": "Iron Man",
+                        "agent_id": "claude::east-claude-1::hero-iron",
+                        "status": "idle",
+                        "last_active": "2026-06-11T09:30:00+00:00",
+                        "sprite_id": "iron-man",
+                        "messages_count": 3,
+                        "tokens": 3500,
+                        "role": "",
+                        "recent_messages": [],
+                    },
                 ],
+                "last_updated": "2026-06-11T10:00:00+00:00",
+                "activity_score": 130.0,
+                "status_counts": {"active": 1, "idle": 1, "sleeping": 0, "error": 0},
             },
             {
-                "id": "claude-2", "name": "Iron Man", "wing": "east",
-                "status": "idle", "last_active": "2026-06-11T09:30:00+00:00",
-                "tokens_in": 2000, "tokens_out": 1500, "current_task": None,
-                "recent_messages": [],
-            },
-        ],
-        "west_wing": [
-            {
-                "id": "omo-1", "name": "Sisyphus", "wing": "west",
-                "status": "active", "last_active": "2026-06-11T10:05:00+00:00",
-                "tokens_in": 8000, "tokens_out": 6000, "current_task": "Building features",
-                "recent_messages": [
-                    {"content": "Executing task 11", "timestamp": "2026-06-11T10:05:00+00:00"},
+                "session_id": "west-opencode-1",
+                "source": "opencode",
+                "project": "/Users/test/ops/deploy",
+                "project_short": "ops/deploy",
+                "agents": [
+                    {
+                        "name": "Sisyphus",
+                        "agent_id": "opencode::west-opencode-1::sisyphus",
+                        "status": "active",
+                        "last_active": "2026-06-11T10:05:00+00:00",
+                        "sprite_id": "default",
+                        "messages_count": 8,
+                        "tokens": 14000,
+                        "role": "",
+                        "recent_messages": [
+                            {"content": "Executing task 11", "timestamp": "2026-06-11T10:05:00+00:00"},
+                        ],
+                    },
+                    {
+                        "name": "Prometheus",
+                        "agent_id": "opencode::west-opencode-1::prometheus",
+                        "status": "sleeping",
+                        "last_active": "2026-06-10T22:00:00+00:00",
+                        "sprite_id": "prometheus",
+                        "messages_count": 1,
+                        "tokens": 150,
+                        "role": "",
+                        "recent_messages": [],
+                    },
+                    {
+                        "name": "Atlas",
+                        "agent_id": "opencode::west-opencode-1::atlas",
+                        "status": "error",
+                        "last_active": "2026-06-11T08:00:00+00:00",
+                        "sprite_id": "atlas",
+                        "messages_count": 2,
+                        "tokens": 400,
+                        "role": "",
+                        "recent_messages": [
+                            {"content": "error: connection refused", "timestamp": "2026-06-11T08:00:00+00:00"},
+                        ],
+                    },
                 ],
-            },
-            {
-                "id": "omo-2", "name": "Prometheus", "wing": "west",
-                "status": "sleeping", "last_active": "2026-06-10T22:00:00+00:00",
-                "tokens_in": 100, "tokens_out": 50, "current_task": None,
-                "recent_messages": [],
-            },
-            {
-                "id": "omo-3", "name": "Atlas", "wing": "west",
-                "status": "error", "last_active": "2026-06-11T08:00:00+00:00",
-                "tokens_in": 300, "tokens_out": 100, "current_task": "Error handling",
-                "recent_messages": [
-                    {"content": "error: connection refused", "timestamp": "2026-06-11T08:00:00+00:00"},
-                ],
+                "last_updated": "2026-06-11T10:05:00+00:00",
+                "activity_score": 200.0,
+                "status_counts": {"active": 1, "idle": 0, "sleeping": 1, "error": 1},
             },
         ],
         "last_updated": datetime.now(timezone.utc).isoformat(),
+        "status_summary": {"active": 2, "idle": 1, "sleeping": 1, "error": 1},
     }
 
 

@@ -1,0 +1,31 @@
+================================== test session starts ===================================
+platform darwin -- Python 3.14.0, pytest-9.0.3, pluggy-1.6.0 -- /Users/luyun/Documents/poc/claude-hero/hero-tavern/.venv/bin/python3.14
+cachedir: .pytest_cache
+rootdir: /Users/luyun/Documents/poc/claude-hero/hero-tavern
+configfile: pytest.ini
+plugins: cov-7.1.0, anyio-4.13.0
+collecting ... collected 5 items
+
+tests/test_aggregator.py::test_status_active_within_5min PASSED                    [ 20%]
+tests/test_aggregator.py::test_status_sleeping_over_1hour PASSED                   [ 40%]
+tests/test_aggregator.py::test_status_error_overrides_time PASSED                  [ 60%]
+tests/test_aggregator.py::test_cache_ttl_returns_same_object PASSED                [ 80%]
+tests/test_aggregator.py::test_sort_by_activity_score_desc PASSED                  [100%]
+
+===================================== tests coverage =====================================
+____________________ coverage: platform darwin, python 3.14.0-final-0 ____________________
+
+Name                             Stmts   Miss  Cover   Missing
+--------------------------------------------------------------
+src/__init__.py                      0      0   100%
+src/aggregator/__init__.py           2      0   100%
+src/aggregator/aggregator.py        85      7    92%   34-36, 40-42, 112
+src/api/__init__.py                  0      0   100%
+src/api/main.py                     20     20     0%   2-45
+src/models.py                       18      0   100%
+src/parsers/__init__.py              0      0   100%
+src/parsers/claude_parser.py       128    128     0%   3-250
+src/parsers/opencode_parser.py      82     82     0%   2-155
+--------------------------------------------------------------
+TOTAL                              335    237    29%
+=================================== 5 passed in 0.04s ====================================

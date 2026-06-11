@@ -1,0 +1,11 @@
+Found 1 sessions
+  session=52a8661c-104.. source=claude short=ops/claude/hero agents=9 last=2026-06-08 04:59:43.157000+00:00
+    钢铁侠 sprite=ironman id=hero-java-backend-developer msgs=3
+    幻视 sprite=vision id=hero-java-data-engineer msgs=1
+    蜘蛛侠 sprite=spiderman id=hero-java-test-engineer msgs=1
+    奇异博士 sprite=strange id=hero-java-code-reviewer msgs=1
+    海姆达尔 sprite=heimdall id=hero-java-security-auditor msgs=1
+    神盾局长 sprite=fury id=hero-java-tech-lead msgs=1
+    火箭浣熊 sprite=rocket id=hero-java-ecrm msgs=1
+    星爵 sprite=starlord id=hero-java-hotel-product-center msgs=1
+    猎鹰 sprite=falcon id=hero-java-owner-biz msgs=1

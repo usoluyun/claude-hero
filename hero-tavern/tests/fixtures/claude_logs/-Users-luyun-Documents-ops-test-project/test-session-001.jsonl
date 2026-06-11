@@ -1,0 +1,5 @@
+{"type":"progress","sessionId":"test-session-001","cwd":"/Users/luyun/Documents/ops/test-project","timestamp":"2026-06-10T08:00:00.000Z","message":{"role":"user","content":"开始任务：🦸 hero ▸ 孔明(kongming) 接手 · 策划战略"}}
+{"type":"progress","sessionId":"test-session-001","cwd":"/Users/luyun/Documents/ops/test-project","timestamp":"2026-06-10T08:05:00.000Z","message":{"role":"assistant","content":"🦸 hero ▸ 孔明(kongming) 已就位，正在策划"}}
+{"type":"progress","sessionId":"test-session-001","cwd":"/Users/luyun/Documents/ops/test-project","timestamp":"2026-06-10T08:10:00.000Z","message":{"role":"user","content":"🦸 hero ▸ 文远（wenyuan）接手 · 前线执行"}}
+not_json{{{
+{"type":"progress","sessionId":"test-session-001","timestamp":"2026-06-10T08:15:00.000Z","message":{"role":"assistant","content":"This is a plain line without any hero markers"}}

@@ -1,0 +1,81 @@
+========================================
+F1. Plan Compliance Audit — FINAL VERDICT
+Date: 2026-06-12
+========================================
+
+Must Have [8/8] | Must NOT Have [9/9] | Tasks [16/16] | VERDICT: APPROVE
+
+--- Must Have (8/8 PASS) ---
+[1] Sessions as primary grouping
+    VERIFIED: tavern.js:557 renderSessions() + createSessionCard() iterates session list
+[2] Sort descending by activity score (tie-break by recency)
+    VERIFIED: aggregator.py:51-54 sort(key=lambda s: (activity_score, last_updated), reverse=True)
+[3] Click to expand session — reveals 论剑+饮酒 agent cards
+    VERIFIED: tavern.js:654-673 header click handler toggles collapsed/expanded; creates AgentCard in expanded body
+[4] Sleeping sessions folded into collapsible counter
+    VERIFIED: tavern.js:570-582 splits sleeping vs active; tavern.js:776-815 createSleepingCounter() with expand/collapse
+[5] Pixel sprite for every agent (component assembly, 32x32, 2-3 frames)
+    VERIFIED: 16 PNG sprite sheets at web/static/img/sprites/*.png, all 96x32 (3 frames x 32x32)
+[6] Status inference logic preserved exactly
+    VERIFIED: aggregator.py:100-121 _infer_status() — error keywords first, then time thresholds
+[7] Configurable thresholds via .env
+    VERIFIED: .env.example IDLE_THRESHOLD=300, SLEEP_THRESHOLD=3600; aggregator.py:18-19 reads os.environ.get()
+[8] Two data sources fully integrated (Claude JSONL + OpenCode SQLite)
+    VERIFIED: aggregator.py:33-44 calls claude_parser.parse_all() + opencode_parser.parse_all(), merges results
+
+--- Must NOT Have (9/9 PASS) ---
+[1] Emoji in status labels
+    CLEAN: statusLabels at tavern.js:451 = {active:'论剑', idle:'饮酒', sleeping:'打坐', error:'走火入魔'} — pure text
+    NOTE: 💤 appears at tavern.js:783 in sleeping-counter header (UI widget, not status label) — compliant
+[2] Agent-type-based grouping
+    CLEAN: no agent.type / type-based grouping anywhere in codebase
+[3] Icon additions to status
+    CLEAN: status rendered with <span class="status-dot"> + text only; no <i>, fa-*, material-icons, or SVG icons
+[4] AI-generated individual sprites
+    CLEAN: learnings.md confirms component-assembly method (body→outfit→hair→accessory layers)
+[5] Pure code SVG replacement of PNG sprite sheets
+    CLEAN: web/static/img/sprites/ contains 16 PNG files only; zero SVG files; CSS pixel sprites used as fallback only
+[6] Changes to status threshold logic or defaults
+    CLEAN: IDLE_THRESHOLD=300, SLEEP_THRESHOLD=3600 unchanged; infer logic matches plan exactly
+[7] Agent .md frontmatter refactoring
+    CLEAN: no .md agent files modified
+[8] Dispatch lane / archetype changes
+    CLEAN: no dispatch or archetype code found
+[9] Infrastructure/deploy changes beyond running the service
+    CLEAN: only deploy.sh (pre-existing); no Docker/K8s/CI changes
+
+--- Deliverables Check ---
+[PASS] src/api/main.py           — FastAPI with 5 routes (health, status, messages, blocked, history)
+[PASS] src/aggregator/aggregator.py — TavernAggregator + _infer_status + activity_score + cache
+[PASS] src/parsers/claude_parser.py  — JSONL walker with hero marker regex
+[PASS] src/parsers/opencode_parser.py — SQLite query with empty-DB guard
+[PASS] src/models.py             — SessionView + AgentView dataclasses + Pydantic v2 models
+[PASS] web/static/js/tavern.js   — rewritten for session-based view (981 lines)
+[PASS] web/static/index.html     — restructured layout (east/middle/west sections)
+[PASS] web/static/css/tavern.css — session card styles (382 lines)
+[PASS] web/static/css/sprites.css — sprite animations (161 lines)
+[PASS] web/static/img/sprites/   — 16 PNG sprite sheets (96x32, 3 frames)
+[PASS] sprites/design-guide.md   — component assembly spec (71 lines)
+[PASS] tests/test_api.py         — 16 tests across 6 classes
+[PASS] tests/e2e/conftest.py     — updated fixtures with route mocking
+[NOTE] tests/e2e/test_session_grouping.py — file named test_session_cards.py instead; same coverage (192 lines, 15 tests)
+[PASS] tests/test_sprite_manifest.py — validates 16 sprites
+
+--- Evidence Files Present ---
+[PASS] task-1-api-scaffold.txt
+[PASS] task-2-models.txt
+[PASS] task-3-claude-real.txt
+[PASS] task-3-malformed.txt
+[PASS] task-4-opencode-real.txt
+[PASS] task-4-reject.txt
+[PASS] task-5-aggregate.txt
+[PASS] task-5-cache.txt
+[PASS] task-6-manifest.txt
+[PASS] task-10-sprite-validation.txt
+
+--- Tasks Status ---
+All 16 tasks marked [x] in plan. All acceptance criteria met. Evidence files confirm.
+
+--- Final Verdict ---
+APPROVE — All Must Have items verified, all Must NOT Have items clean, all 16 tasks complete with evidence.
+One minor naming deviation: test_session_grouping.py → test_session_cards.py (functionally equivalent).

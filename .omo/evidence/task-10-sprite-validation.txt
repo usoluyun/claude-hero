@@ -1,0 +1,28 @@
+=== T10 Sprite Validation Report ===
+Found 16 PNG files in web/static/img/sprites/
+
+Per-file details:
+  atlas.png                 |  96x32 |  5 colors | OK
+  explore.png               |  96x32 |  5 colors | OK
+  hephaestus.png            |  96x32 |  7 colors | OK
+  kongming.png              |  96x32 |  6 colors | OK
+  librarian.png             |  96x32 |  6 colors | OK
+  oracle.png                |  96x32 |  6 colors | OK
+  pengju.png                |  96x32 |  7 colors | OK
+  prometheus.png            |  96x32 |  7 colors | OK
+  sisyphus.png              |  96x32 |  5 colors | OK
+  wenyuan.png               |  96x32 |  7 colors | OK
+  xiake.png                 |  96x32 |  5 colors | OK
+  xiren.png                 |  96x32 |  7 colors | OK
+  xuancheng.png             |  96x32 |  6 colors | OK
+  zhenghe.png               |  96x32 |  7 colors | OK
+  zichang.png               |  96x32 |  6 colors | OK
+  ziwen.png                 |  96x32 |  7 colors | OK
+
+Mapping coverage: 16/16 roles matched
+  Heroes:  9 in mapping
+  Deities: 7 in mapping
+
+ALL CHECKS PASSED!
+
+=== Result: PASS ===

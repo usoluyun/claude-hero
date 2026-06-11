@@ -1,0 +1,79 @@
+{
+  "format_version": "1.0",
+  "tool": "piskel-compatible",
+  "canvas": {
+    "width": 96,
+    "height": 32,
+    "frame_width": 32,
+    "frame_height": 32,
+    "frame_count": 3,
+    "background": "transparent"
+  },
+  "layers": {
+    "layer_0_body": {
+      "name": "body",
+      "description": "Base silhouette + skin tone",
+      "z_index": 0,
+      "visible": true,
+      "opacity": 1.0,
+      "required": true,
+      "notes": "Pick from 5 body types and set skin tone RGB (see design-guide.md)"
+    },
+    "layer_1_outfit": {
+      "name": "outfit",
+      "description": "Clothing over body",
+      "z_index": 1,
+      "visible": true,
+      "opacity": 1.0,
+      "required": true,
+      "notes": "Robe, armor, suit, hood, scholar, warrior (see design-guide.md)"
+    },
+    "layer_2_hair": {
+      "name": "hair",
+      "description": "Hair over body/neck",
+      "z_index": 2,
+      "visible": true,
+      "opacity": 1.0,
+      "required": false,
+      "notes": "black, brown, blonde, red, grey, purple (see design-guide.md)"
+    },
+    "layer_3_accessory": {
+      "name": "accessory",
+      "description": "Weapon, tool, or prop on top",
+      "z_index": 3,
+      "visible": true,
+      "opacity": 1.0,
+      "required": false,
+      "notes": "staff, sword, book, hammer, scepter, fan, or none"
+    }
+  },
+  "frames": {
+    "frame_0": {
+      "name": "idle",
+      "offset_x": 0,
+      "offset_y": 0,
+      "description": "Standing pose, 1-2 pixel vertical bob",
+      "animation_cycle_ms": 2000
+    },
+    "frame_1": {
+      "name": "work",
+      "offset_x": 32,
+      "offset_y": 0,
+      "description": "Active pose: arm up / reaching / strike",
+      "animation_cycle_ms": 1500
+    },
+    "frame_2": {
+      "name": "rest",
+      "offset_x": 64,
+      "offset_y": 0,
+      "description": "Sitting/sleeping pose, head tilt",
+      "animation_cycle_ms": 3000
+    }
+  },
+  "constraints": {
+    "max_colors_per_sprite": 9,
+    "pixel_art_only": true,
+    "no_subpixel_rendering": true,
+    "palette_recommendation": ["Endesga 32", "Sweetie 16"]
+  }
+}
