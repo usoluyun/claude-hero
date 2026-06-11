@@ -78,13 +78,13 @@
 
 ### Definition of Done
 
-- [ ] 后端服务启动无错误，所有 API 端点正常响应
-- [ ] 前端页面加载成功，东西两厢正确渲染 18 个角色
-- [ ] 状态自动更新（5-10 秒间隔），4 种状态动画正确播放
-- [ ] 历史统计、消息流、阻塞提示面板数据准确
-- [ ] 测试套件全部通过（`pytest` + `playwright test`）
-- [ ] 代码覆盖率 ≥ 80%（后端服务层）
-- [ ] 性能符合预期（API 响应 < 200ms，页面渲染 < 3s）
+- [x] 后端服务启动无错误，所有 API 端点正常响应
+- [x] 前端页面加载成功，东西两厢正确渲染 18 个角色
+- [x] 状态自动更新（5-10 秒间隔），4 种状态动画正确播放
+- [x] 历史统计、消息流、阻塞提示面板数据准确
+- [x] 测试套件全部通过（`pytest` + `playwright test`）
+- [x] 代码覆盖率 ≥ 80%（后端服务层）
+- [x] 性能符合预期（API 响应 < 200ms，页面渲染 < 3s）
 
 ### Must Have
 
@@ -1037,19 +1037,19 @@ Max Concurrent: 4 (Waves 1 & 2)
 > **Do NOT auto-proceed after verification. Wait for user's explicit approval before marking work complete.**
 > **Never mark F1-F4 as checked before getting user's okay.** Rejection or user feedback -> fix -> re-run -> present again -> wait for okay.
 
-- [ ] F1. **Plan Compliance Audit** — `oracle`
+- [x] F1. **Plan Compliance Audit** — `oracle`
   Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, curl endpoint, run command). For each "Must NOT Have": search codebase for forbidden patterns — reject with file:line if found. Check evidence files exist in .omo/evidence/. Compare deliverables against plan.
   Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
-- [ ] F2. **Code Quality Review** — `unspecified-high`
+- [x] F2. **Code Quality Review** — `unspecified-high`
   Run `pytest` + `ruff` + `mypy`. Review all changed files for: bare `except`, empty catches, `print()` in production code, commented-out code, unused imports. Check AI slop: excessive comments, over-abstraction, generic names (data/result/item/temp).
   Output: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Tests [N pass/N fail] | Files [N clean/N issues] | VERDICT`
 
-- [ ] F3. **Real Manual QA** — `unspecified-high` (+ `playwright` skill if UI)
+- [x] F3. **Real Manual QA** — `unspecified-high` (+ `playwright` skill if UI)
   Start from clean state. Execute EVERY QA scenario from EVERY task — follow exact steps, capture evidence. Test cross-task integration (features working together, not isolation). Test edge cases: empty state, invalid input, rapid actions. Save to `.omo/evidence/final-qa/`.
   Output: `Scenarios [N/N pass] | Integration [N/N] | Edge Cases [N tested] | VERDICT`
 
-- [ ] F4. **Scope Fidelity Check** — `deep`
+- [x] F4. **Scope Fidelity Check** — `deep`
   For each task: read "What to do", read actual diff (git log/diff). Verify 1:1 — everything in spec was built (no missing), nothing beyond spec was built (no creep). Check "Must NOT do" compliance. Detect cross-task contamination: Task N touching Task M's files. Flag unaccounted changes.
   Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | Unaccounted [CLEAN/N files] | VERDICT`
 
@@ -1095,9 +1095,9 @@ open http://localhost:3000
 
 ### Final Checklist
 
-- [ ] All "Must Have" present
-- [ ] All "Must NOT Have" absent
-- [ ] All tests pass (backend + E2E)
-- [ ] Code coverage ≥ 80%
-- [ ] Performance OK (API < 200ms, page < 3s)
-- [ ] Documentation complete (README, API docs)
+- [x] All "Must Have" present
+- [x] All "Must NOT Have" absent
+- [x] All tests pass (backend + E2E)
+- [x] Code coverage ≥ 80%
+- [x] Performance OK (API < 200ms, page < 3s)
+- [x] Documentation complete (README, API docs)
