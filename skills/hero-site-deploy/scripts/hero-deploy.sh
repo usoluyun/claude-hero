@@ -193,6 +193,8 @@ cmd_regen() {
       local mount sroot
       mount="$(jq -r --arg n "$name" '.projects[] | select(.name==$n) | .mount' "$REGISTRY")"
       sroot="$(jq -r --arg n "$name" '.projects[] | select(.name==$n) | .static_root' "$REGISTRY")"
+      # 裸前缀 -> 带尾斜杠，否则相对静态资源会解析到根而 404（3-token 写法避免首参被当 matcher）
+      echo "    redir ${mount} ${mount}/ 301"
       echo "    handle ${mount}/* {"
       echo "        uri strip_prefix ${mount}"
       # backends：反代，先于静态
