@@ -41,7 +41,7 @@ Claude Code 使用习惯。**安装靠软链**，`git pull` 即全员生效，�
 - **`agents/`** — 共享 subagent（`hero-java-*.md`），按**双轴分层**组织：角色 agent（规划/执行/
   评审门控三梯，横向干活）× 项目领航 agent（按服务只读带路）。完整分层 + 漫威代号 + 能力矩阵见
   [`docs/hero-agent-layers.md`](./docs/hero-agent-layers.md)。
-- **`skills/`** — `hero-dispatch`（意图分诊入口）、`hero-conventions`（团队通用约定）、`hero-prd-to-java`（PRD 工作流）、`hero-refresh`（资产保鲜）。
+- **`skills/`** — `hero-dispatch`（意图分诊入口）、`hero-conventions`（团队通用约定）、`hero-prd-to-java`（PRD 工作流）、`hero-refresh`（资产保鲜）、`hero-site-deploy`（本机项目主页部署：据 README 建宣传页 + 一个 Caddy:10086 统一对外 + 开机自启）。
 - **`scripts/`** — `hero-refresh.sh` 确定性层入口 + `lib/refresh-*.sh`（common/state/evidence/vendor）。
 - **`config/`** — `hooks/`（含 `hero-refresh-check.sh` 的 SessionStart 漂移提醒）、`CLAUDE.md.example`、`settings.json.example`。
 - **`cli/`** — CLI 工具清单与用法（[`README.md`](./cli/README.md) 总表、`jdk-multiversion.md` / `maven.md` / `gradle.md`）。
