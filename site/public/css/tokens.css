@@ -1,0 +1,77 @@
+/* Atour Design System Tokens */
+/* Reference: /atour-frontend-design skill */
+
+:root {
+  /* Brand Colors */
+  --color-primary: #3D3028;        /* 沃野 Wòyě */
+  --color-woye: #3D3028;           /* 沃野 Wòyě - semantic alias */
+  --color-secondary: #EAE4DA;      /* 白岩 Báiyán */
+  --color-baiyan: #EAE4DA;         /* 白岩 Báiyán - semantic alias */
+  --color-accent: #D4AF37;         /* 灯笼金 */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  
+  /* Semantic Colors */
+  --color-success: #4A7C59;
+  --color-error: #C0504D;
+  --color-warning: #E0A458;
+  --color-info: #5B8BA0;
+  
+  /* Neutral Palette */
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #F5F5F5;
+  --color-gray-200: #EEEEEE;
+  --color-gray-300: #E0E0E0;
+  --color-gray-400: #BDBDBD;
+  --color-gray-500: #9E9E9E;
+  --color-gray-600: #757575;
+  --color-gray-700: #616161;
+  --color-gray-800: #424242;
+  --color-gray-900: #212121;
+  
+  /* Typography */
+  --font-heading: "PingFang SC", "Noto Sans CJK SC", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "PingFang SC", "Noto Sans CJK SC", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: Menlo, Monaco, "Courier New", monospace;
+  
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;   /* 4px */
+  --space-sm: 0.5rem;    /* 8px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}

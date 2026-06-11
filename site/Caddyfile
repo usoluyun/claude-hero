@@ -1,0 +1,27 @@
+{
+	email admin@claude-hero.local
+}
+
+:10086 {
+	# Hero Tavern: ASCII pixel art hero tavern
+	handle /tavern/* {
+		uri strip_prefix /tavern
+
+		# API routes (must match first, order matters)
+		handle /api/* {
+			reverse_proxy 127.0.0.1:8000
+		}
+
+		# Static files (fallback)
+		handle {
+			root * /Users/luyun/Documents/poc/claude-hero/hero-tavern/web/static
+			file_server
+		}
+	}
+
+	# Claude Hero homepage
+	handle {
+		root * /Users/luyun/Documents/ops/claude-hero/site/public
+		file_server
+	}
+}
