@@ -3,177 +3,344 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="领航 Hero - Claude 智能助手平台，构建、刷新、导航您的专属 AI 助手团队">
+  <meta name="description" content="领航 Hero — 让 AI 助手如群英汇聚于客栈：领航员带路，角色各执一艺，构建、刷新、导航你的专属智能团队。">
   <meta name="author" content="亚朵集团">
-  <title>领航 Hero - Claude 智能助手</title>
+  <title>领航 Hero · 群英客栈</title>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <header class="hero-header">
-    <div class="hero-container">
-      <h1 class="hero-title">领航 Hero</h1>
-      <p class="hero-subtitle">Claude 智能助手平台</p>
-      <p class="hero-description">构建、刷新、导航您的专属 AI 助手团队</p>
+  <!-- ============ 顶部导航 ============ -->
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a class="topnav-brand" href="/">领航 <span class="topnav-brand-en">HERO</span></a>
+      <div class="topnav-links">
+        <a href="#idea">理念</a>
+        <a href="#how">原理</a>
+        <a href="#skills">能力</a>
+        <a href="#roles">角色</a>
+        <a href="#install">安装</a>
+        <a href="#build-pilot">自建</a>
+        <a href="/tavern/">客栈</a>
+      </div>
     </div>
+  </nav>
+
+  <!-- ============ Hero 封面 ============ -->
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">ATOUR · AI NAVIGATOR</p>
+      <h1 class="hero-title">领航&nbsp;Hero</h1>
+      <p class="hero-tagline">一座客栈，群英汇聚</p>
+      <p class="hero-desc">把 Claude 智能助手当作汇聚于客栈的英雄与神祇——<br>领航员熟知去路，角色各执一艺，构建、刷新、导航你的专属团队。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/tavern/">推门入栈 · 实时看板</a>
+        <a class="btn btn-ghost" href="#idea">了解理念</a>
+      </div>
+    </div>
+    <!-- 山形辅助图形：随深底联动，安静铺底 -->
+    <svg class="hero-mountains" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,240 L0,150 L240,70 L470,170 L640,90 L820,180 L1010,80 L1230,160 L1440,100 L1440,240 Z"/>
+      <path fill="var(--color-woye-deep)" d="M0,240 L0,195 L300,130 L560,205 L760,150 L980,210 L1200,140 L1440,200 L1440,240 Z"/>
+    </svg>
   </header>
 
-  <main class="container">
-    <a href="/tavern/" class="nav-card" aria-label="打开 Hero Tavern 控制台">
-      <div class="nav-card-content">
-        <h2>🎭 Hero Tavern 控制台</h2>
-        <p>实时监控所有 Agent 的运行状态，查看活跃/空闲/休眠情况</p>
-      </div>
-      <span class="cta-arrow" aria-hidden="true">→</span>
-    </a>
-
-    <section class="section" aria-labelledby="skills-title">
-      <h2 class="section-title" id="skills-title">🛠️ 构建与刷新</h2>
-      <div class="skills-grid">
-
-        <div class="skill-card">
-          <h3>🔄 Hero Refresh</h3>
-          <p>刷新所有领航agents的知识库和代码索引，保持与项目的同步更新。</p>
-          <div class="skill-details">
-            <strong>用法：</strong>
-            <code class="skill-command">refresh-hero {项目名称}</code>
-            <p>支持多项目批量刷新，自动检测变更并更新相关agents。</p>
+  <main>
+    <!-- ============ 理念 ============ -->
+    <section id="idea" class="idea">
+      <div class="container idea-inner">
+        <p class="kicker">理念 · ETHOS</p>
+        <blockquote class="idea-quote">
+          每一个智能助手，都是一位远道而来的客人。<br>
+          我们为他们备下一座客栈：让英雄歇脚，让神祇议事，<br>
+          让前路有人领航，让庶务有人执掌。
+        </blockquote>
+        <div class="idea-trio">
+          <div class="idea-item">
+            <span class="idea-num">东厢 · 英雄</span>
+            <p>角色 agents 各执一艺——架构、开发、测试、审查、安全，在领航员调度下落子成局。</p>
+          </div>
+          <div class="idea-item">
+            <span class="idea-num">西厢 · 神祇</span>
+            <p>构建与刷新的底层之力——代码图、索引、知识库保鲜，让一切始终与项目同步。</p>
+          </div>
+          <div class="idea-item">
+            <span class="idea-num">中堂 · 领航</span>
+            <p>领航员熟知每条业务域的去路，理解结构与领域知识，为来客指明方向。</p>
           </div>
         </div>
-
-        <div class="skill-card">
-          <h3>🗺️ 构建代码图</h3>
-          <p>为项目构建完整的代码结构图，帮助领航agents理解项目整体架构。</p>
-          <div class="skill-details">
-            <strong>用法：</strong>
-            <code class="skill-command">build-codegraph {项目名称}</code>
-            <p>生成项目的模块关系、依赖流向、核心接口等结构化信息。</p>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <h3>📚 索引代码库</h3>
-          <p>索引项目的代码库文件，建立快速检索和导航的基础设施。</p>
-          <div class="skill-details">
-            <strong>用法：</strong>
-            <code class="skill-command">index-codebase {项目名称}</code>
-            <p>支持增量索引，自动跟踪文件变更并更新索引库。</p>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <section class="section" aria-labelledby="pilots-title">
-      <h2 class="section-title" id="pilots-title">🧭 领航 Agents</h2>
-      <p class="section-description">按服务和业务域划分的专属导航员，理解项目结构和领域知识。</p>
-      <div class="pilots-grid">
+    <!-- ============ 原理与工作流程 ============ -->
+    <section id="how" class="section">
+      <div class="container">
+        <p class="kicker center">原理 · HOW IT WORKS</p>
+        <h2 class="section-title">说一句意图，剩下交给 Hero</h2>
+        <p class="section-desc">Hero 是有名字、有职责、配齐工具与技能的 AI agent。你用自然语言说出意图，分诊与编排自动完成，每一步都有确认门控——不记命令，自然语言直达。</p>
 
-        <div class="pilot-card">
-          <h3>🐻 子文</h3>
-          <p class="pilot-domain">企业客户关系管理系统</p>
-          <p class="pilot-description">专注于 ActionSoft BPM 工作流，理解审批链路、状态机和业务规则。擅长处理复杂的业务流程编排和异常场景。</p>
-          <div class="pilot-tech">
-            <span class="tech-tag">ActionSoft BPM</span>
-            <span class="tech-tag">Spring Boot</span>
-            <span class="tech-tag">MySQL</span>
-          </div>
+        <ol class="flow">
+          <li class="flow-step"><span class="flow-num">01</span><span class="flow-label">说出意图</span><span class="flow-sub">自然语言，不记命令</span></li>
+          <li class="flow-step"><span class="flow-num">02</span><span class="flow-label">意图分诊</span><span class="flow-sub">归类到 8 条 lane</span></li>
+          <li class="flow-step"><span class="flow-num">03</span><span class="flow-label">补齐输入</span><span class="flow-sub">缺什么问什么</span></li>
+          <li class="flow-step"><span class="flow-num">04</span><span class="flow-label">确认门控</span><span class="flow-sub">你点头才动手</span></li>
+          <li class="flow-step"><span class="flow-num">05</span><span class="flow-label">交接执行</span><span class="flow-sub">对应 Hero / workflow</span></li>
+        </ol>
+
+        <div class="grid grid-3 how-systems">
+          <article class="card">
+            <h3>意图分诊</h3>
+            <p class="card-body">一句意图自动归类到 bugfix / perf / refactor / research / security / prd / refresh / iterate 八条 lane，补齐输入、确认后交接。</p>
+          </article>
+          <article class="card">
+            <h3>PRD 驱动开发</h3>
+            <p class="card-body">给一个飞书 PRD 链接 → 孔明出设计与 Sprint 计划 → 多 Hero 并行开发 → 玄成、鹏举把关 → 合并。全程门控 + worktree 隔离。</p>
+          </article>
+          <article class="card">
+            <h3>资产保鲜</h3>
+            <p class="card-body">代码在变，Hero 的知识不能过时。定期扫描变化 → 刷新领航员认知 → 人工 gate 确认才生效。</p>
+          </article>
         </div>
-
-        <div class="pilot-card">
-          <h3>👨‍🚀 郑和</h3>
-          <p class="pilot-domain">酒店产品与定价系统</p>
-          <p class="pilot-description">管理酒店房型、产品包、价格策略和渠道映射。协调多个下游服务的产品同步和价格一致性。</p>
-          <div class="pilot-tech">
-            <span class="tech-tag">Spring Cloud</span>
-            <span class="tech-tag">MyBatis-Plus</span>
-            <span class="tech-tag">Redis</span>
-          </div>
-        </div>
-
-        <div class="pilot-card">
-          <h3>🦅 霞客</h3>
-          <p class="pilot-domain">业主业务与服务管理</p>
-          <p class="pilot-description">涵盖业主入驻、合同管理、账单结算等完整业务链。理解业主与酒店之间的复杂关系和数据流。</p>
-          <div class="pilot-tech">
-            <span class="tech-tag">Spring Boot</span>
-            <span class="tech-tag">JPA/Hibernate</span>
-            <span class="tech-tag">PostgreSQL</span>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <section class="section" aria-labelledby="roles-title">
-      <h2 class="section-title" id="roles-title">🎭 角色 Agents</h2>
-      <p class="section-description">按职能分工的专业团队，在领航agents的协调下执行具体任务。</p>
-      <div class="roles-grid">
+    <!-- ============ 能力：构建与刷新 ============ -->
+    <section id="skills" class="section section-light">
+      <div class="container">
+        <p class="kicker center">西厢之力 · CAPABILITIES</p>
+        <h2 class="section-title">构建与刷新</h2>
+        <p class="section-desc">为领航员备好知识与索引，让智能团队始终读得懂、跟得上你的项目。</p>
+        <div class="grid grid-3">
 
-        <div class="role-card">
-          <div class="role-avatar" aria-hidden="true">🦸‍♂️</div>
-          <div class="role-content">
-            <h3 class="role-hero">🛡️ 孔明</h3>
-            <p class="role-techid">tech-lead</p>
-            <p class="role-responsibility">制定技术方案、分解任务、协调团队，确保代码质量和项目进度。</p>
+          <article class="card skill">
+            <span class="card-index">01</span>
+            <h3>Hero Refresh</h3>
+            <p class="card-body">刷新所有领航员的知识库与代码索引，自动检测变更，保持与项目同步。</p>
+            <div class="card-foot">
+              <code>refresh-hero {项目}</code>
+              <span class="card-note">支持多项目批量刷新</span>
+            </div>
+          </article>
+
+          <article class="card skill">
+            <span class="card-index">02</span>
+            <h3>构建代码图</h3>
+            <p class="card-body">为项目构建完整的代码结构图，呈现模块关系、依赖流向与核心接口。</p>
+            <div class="card-foot">
+              <code>build-codegraph {项目}</code>
+              <span class="card-note">理解整体架构</span>
+            </div>
+          </article>
+
+          <article class="card skill">
+            <span class="card-index">03</span>
+            <h3>索引代码库</h3>
+            <p class="card-body">索引项目文件，建立快速检索与导航的基础设施，支持增量更新。</p>
+            <div class="card-foot">
+              <code>index-codebase {项目}</code>
+              <span class="card-note">自动跟踪文件变更</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 领航员 ============ -->
+    <section id="pilots" class="section">
+      <div class="container">
+        <p class="kicker center">中堂领航 · PILOTS</p>
+        <h2 class="section-title">领航 Agents</h2>
+        <p class="section-desc">按服务与业务域划分的专属向导，熟知项目结构与领域知识，为来客指路。</p>
+        <div class="grid grid-3">
+
+          <article class="card pilot">
+            <h3 class="pilot-name">子文</h3>
+            <p class="pilot-domain">企业客户关系管理系统</p>
+            <p class="card-body">专注 ActionSoft BPM 工作流，理解审批链路、状态机与业务规则；擅长复杂流程编排与异常场景。</p>
+            <div class="tags">
+              <span class="tag">ActionSoft BPM</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">MySQL</span>
+            </div>
+          </article>
+
+          <article class="card pilot">
+            <h3 class="pilot-name">郑和</h3>
+            <p class="pilot-domain">酒店产品与定价系统</p>
+            <p class="card-body">管理房型、产品包、价格策略与渠道映射，协调多个下游服务的产品同步与价格一致性。</p>
+            <div class="tags">
+              <span class="tag">Spring Cloud</span>
+              <span class="tag">MyBatis-Plus</span>
+              <span class="tag">Redis</span>
+            </div>
+          </article>
+
+          <article class="card pilot">
+            <h3 class="pilot-name">霞客</h3>
+            <p class="pilot-domain">业主业务与服务管理</p>
+            <p class="card-body">涵盖业主入驻、合同管理、账单结算等完整业务链，理解业主与酒店之间的复杂关系与数据流。</p>
+            <div class="tags">
+              <span class="tag">Spring Boot</span>
+              <span class="tag">JPA / Hibernate</span>
+              <span class="tag">PostgreSQL</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 角色 ============ -->
+    <section id="roles" class="section section-light">
+      <div class="container">
+        <p class="kicker center">东厢群英 · ROLES</p>
+        <h2 class="section-title">角色 Agents</h2>
+        <p class="section-desc">按职能分工的专业团队，在领航员的调度下执行具体任务。</p>
+        <div class="grid grid-2">
+
+          <article class="card role">
+            <span class="role-seal">孔</span>
+            <div class="role-body">
+              <h3 class="role-name">孔明 <em>tech-lead</em></h3>
+              <p class="card-body">制定技术方案、分解任务、协调团队，确保代码质量与项目进度。</p>
+            </div>
+          </article>
+
+          <article class="card role">
+            <span class="role-seal">文</span>
+            <div class="role-body">
+              <h3 class="role-name">文远 <em>backend-dev</em></h3>
+              <p class="card-body">实现后端核心逻辑、API 接口、数据库设计，攻克复杂算法问题。</p>
+            </div>
+          </article>
+
+          <article class="card role">
+            <span class="role-seal">子</span>
+            <div class="role-body">
+              <h3 class="role-name">子长 <em>data-engineer</em></h3>
+              <p class="card-body">数据模型设计、ETL 流程、性能优化，确保数据处理高效准确。</p>
+            </div>
+          </article>
+
+          <article class="card role">
+            <span class="role-seal">希</span>
+            <div class="role-body">
+              <h3 class="role-name">希仁 <em>test-engineer</em></h3>
+              <p class="card-body">编写单元、集成、端到端测试，守住代码覆盖率与质量底线。</p>
+            </div>
+          </article>
+
+          <article class="card role">
+            <span class="role-seal">玄</span>
+            <div class="role-body">
+              <h3 class="role-name">玄成 <em>code-reviewer</em></h3>
+              <p class="card-body">审查代码质量、发现潜在问题、提出改进建议。</p>
+            </div>
+          </article>
+
+          <article class="card role">
+            <span class="role-seal">鹏</span>
+            <div class="role-body">
+              <h3 class="role-name">鹏举 <em>security-auditor</em></h3>
+              <p class="card-body">安全审计、漏洞扫描、权限检查，保障系统安全性。</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 安装 ============ -->
+    <section id="install" class="section section-dark">
+      <div class="container">
+        <p class="kicker center">安装 · GET STARTED</p>
+        <h2 class="section-title invert">十分钟接入英雄殿</h2>
+        <p class="section-desc invert">软链安装：HTTPS 克隆仓库后 <code>bash install.sh</code>，把共享 skills / agents / hooks 软链进你的 <code>~/.claude</code>。之后 <code>git pull</code> 即全员生效，无需重装。</p>
+
+        <div class="install-grid">
+          <ol class="step-list">
+            <li class="step">
+              <span class="step-n">1</span>
+              <div><h4>前置</h4><p>已安装 Claude Code、macOS，以及常用 CLI 工具。</p></div>
+            </li>
+            <li class="step">
+              <span class="step-n">2</span>
+              <div><h4>克隆并安装</h4><p>HTTPS 克隆仓库，运行安装脚本——子项逐个软链，已有文件自动备份。</p></div>
+            </li>
+            <li class="step">
+              <span class="step-n">3</span>
+              <div><h4>合并个人化模板</h4><p>按提示合并 <code>CLAUDE.md</code> / <code>settings.json</code> / <code>.mcp.json</code>（含密钥，需手动合并）。</p></div>
+            </li>
+            <li class="step">
+              <span class="step-n">4</span>
+              <div><h4>验证</h4><p>Claude Code 里能看到共享 skill；改任意 <code>SKILL.md</code> 软链即生效，无需重装。</p></div>
+            </li>
+          </ol>
+
+          <div class="code-block" role="img" aria-label="安装命令示例">
+            <div class="code-bar"><span></span><span></span><span></span></div>
+            <pre><code><span class="c-cmt"># 1 · HTTPS 克隆到团队约定路径</span>
+git clone <span class="c-str">https://&lt;your-git-host&gt;/claude-hero.git</span> \
+  ~/Documents/ops/claude-hero
+cd ~/Documents/ops/claude-hero
+
+<span class="c-cmt"># 2 · 一键软链进 ~/.claude</span>
+bash install.sh
+
+<span class="c-cmt"># 3 · 日后保鲜：git pull 即全员生效</span>
+git pull</code></pre>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="role-card">
-          <div class="role-avatar" aria-hidden="true">🦸‍♂️</div>
-          <div class="role-content">
-            <h3 class="role-hero">⚙️ 文远</h3>
-            <p class="role-techid">backend-dev</p>
-            <p class="role-responsibility">实现后端核心逻辑、API接口、数据库设计，解决复杂算法问题。</p>
-          </div>
+    <!-- ============ 制作领航 agent ============ -->
+    <section id="build-pilot" class="section section-light">
+      <div class="container">
+        <p class="kicker center">进阶 · BUILD YOUR PILOT</p>
+        <h2 class="section-title">为你的项目造一位领航员</h2>
+        <p class="section-desc">领航员是某个服务的「只读知识层」——懂业务定位、技术栈、代码地图与对外契约。用 codegraph 六步，从一个项目生成一个 <code>hero-&lt;lang&gt;-&lt;project&gt;</code>。</p>
+
+        <ol class="step-list step-list-2col">
+          <li class="step"><span class="step-n">1</span><div><h4>索引项目</h4><p><code>codegraph init -i .</code> 首次索引；先把 <code>.codegraph/</code> 加进 <code>.git/info/exclude</code> 防污染。</p></div></li>
+          <li class="step"><span class="step-n">2</span><div><h4>探测源码布局</h4><p>别假设 <code>src/main/java</code> 在根——单模块与多模块差别很大，先探出真实包根。</p></div></li>
+          <li class="step"><span class="step-n">3</span><div><h4>识别真实技术栈</h4><p>读 <code>pom.xml</code> / <code>build.gradle</code> 认框架，决定模板——不能默认 Spring，否则会编出不存在的依赖。</p></div></li>
+          <li class="step"><span class="step-n">4</span><div><h4>组装证据包</h4><p>用 codegraph + grep 抓模块结构、入口、Feign 下游、MQ、定时任务、对外契约与语义种子。</p></div></li>
+          <li class="step"><span class="step-n">5</span><div><h4>套模板生成</h4><p>frontmatter <code>name = hero-&lt;lang&gt;-&lt;project&gt;</code>，description 四段式（定位 / 触发词 / 路由 / 边界），正文七部分。</p></div></li>
+          <li class="step"><span class="step-n">6</span><div><h4>反编造验证 + 登记</h4><p>正文引用的每个类都要 grep 命中（零编造），最后在 <code>hero-agent-roster.md</code> 登记一行花名册。</p></div></li>
+        </ol>
+        <p class="build-note">完整手册见仓库 <code>docs/project-agent-cookbook.md</code>；开荒完成后纳入 <code>hero-refresh</code>，即可随代码漂移自动保鲜。</p>
+      </div>
+    </section>
+
+    <!-- ============ 客栈入口 CTA ============ -->
+    <section class="tavern-cta">
+      <div class="container tavern-cta-inner">
+        <div>
+          <p class="kicker">实时看板 · HERO TAVERN</p>
+          <h2 class="tavern-cta-title">推门入栈，一览群英</h2>
+          <p class="tavern-cta-desc">实时监控所有 Agent 的运行状态——东厢英雄与西厢神祇，谁在活跃、谁在歇脚、谁已入眠，一目了然。</p>
         </div>
-
-        <div class="role-card">
-          <div class="role-avatar" aria-hidden="true">🤖</div>
-          <div class="role-content">
-            <h3 class="role-hero">👁️ 子长</h3>
-            <p class="role-techid">data-engineer</p>
-            <p class="role-responsibility">数据模型设计、ETL流程、性能优化，确保数据处理的高效和准确。</p>
-          </div>
-        </div>
-
-        <div class="role-card">
-          <div class="role-avatar" aria-hidden="true">🕷️</div>
-          <div class="role-content">
-            <h3 class="role-hero">🕸️ 希仁</h3>
-            <p class="role-techid">test-engineer</p>
-            <p class="role-responsibility">编写单元测试、集成测试、端到端测试，保证代码覆盖率。</p>
-          </div>
-        </div>
-
-        <div class="role-card">
-          <div class="role-avatar" aria-hidden="true">🧙‍♂️</div>
-          <div class="role-content">
-            <h3 class="role-hero">🔮 玄成</h3>
-            <p class="role-techid">code-reviewer</p>
-            <p class="role-responsibility">审查代码质量、发现潜在问题、提出改进建议。</p>
-          </div>
-        </div>
-
-        <div class="role-card">
-          <div class="role-avatar" aria-hidden="true">⚔️</div>
-          <div class="role-content">
-            <h3 class="role-hero">🛡️ 鹏举</h3>
-            <p class="role-techid">security-auditor</p>
-            <p class="role-responsibility">安全审计、漏洞扫描、权限检查，保障系统安全性。</p>
-          </div>
-        </div>
-
+        <a class="btn btn-light" href="/tavern/">进入客栈 →</a>
       </div>
     </section>
   </main>
 
+  <!-- ============ 页脚 ============ -->
   <footer class="site-footer">
-    <p>&copy; 2024 领航 Hero · Powered by Claude AI</p>
-    <p class="footer-links">
-      <a href="/tavern/">Tavern 控制台</a> ·
-      <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
-    </p>
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="/tavern/">客栈看板</a>
+        <a href="#idea">理念</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2024 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
   </footer>
 </body>
 </html>

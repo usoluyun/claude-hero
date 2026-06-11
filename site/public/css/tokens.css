@@ -1,77 +1,86 @@
 /* Atour Design System Tokens */
 /* Reference: /atour-frontend-design skill */
+/* 核心调性：自然、静谧、温暖、朴实 */
 
 :root {
-  /* Brand Colors */
-  --color-primary: #3D3028;        /* 沃野 Wòyě */
-  --color-woye: #3D3028;           /* 沃野 Wòyě - semantic alias */
-  --color-secondary: #EAE4DA;      /* 白岩 Báiyán */
-  --color-baiyan: #EAE4DA;         /* 白岩 Báiyán - semantic alias */
-  --color-accent: #D4AF37;         /* 灯笼金 */
-  --color-white: #FFFFFF;
-  --color-black: #000000;
-  
-  /* Semantic Colors */
-  --color-success: #4A7C59;
-  --color-error: #C0504D;
-  --color-warning: #E0A458;
-  --color-info: #5B8BA0;
-  
-  /* Neutral Palette */
-  --color-gray-50: #FAFAFA;
-  --color-gray-100: #F5F5F5;
-  --color-gray-200: #EEEEEE;
-  --color-gray-300: #E0E0E0;
-  --color-gray-400: #BDBDBD;
-  --color-gray-500: #9E9E9E;
-  --color-gray-600: #757575;
-  --color-gray-700: #616161;
-  --color-gray-800: #424242;
-  --color-gray-900: #212121;
-  
-  /* Typography */
-  --font-heading: "PingFang SC", "Noto Sans CJK SC", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "PingFang SC", "Noto Sans CJK SC", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: Menlo, Monaco, "Courier New", monospace;
-  
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 1.875rem;
-  --text-3xl: 2.25rem;
-  --text-4xl: 3rem;
-  
+  /* ---- Brand Colors (核心四色) ---- */
+  --color-woye: #3D3028;           /* 沃野 Wòyě — 深色背景/封面/导航 */
+  --color-baiyan: #EAE4DA;         /* 白岩 Báiyán — 浅色模块/卡片底 */
+  --color-white: #FFFFFF;          /* 纯白 — 页面底 */
+  --color-black: #1A1A1A;          /* 纯黑 — 正文/墨稿 */
+  --color-primary: var(--color-woye);   /* 语义别名 */
+  --color-secondary: var(--color-baiyan);
+
+  /* ---- 衍生暖色（同色系，安静） ---- */
+  --color-woye-soft: #4A3B31;      /* 沃野浅一档：山形分层 */
+  --color-woye-deep: #322620;      /* 沃野深一档：footer 山形 */
+  --color-baiyan-deep: #DDD5C7;    /* 白岩深一档：发丝线/底纹 */
+  --color-bronze: #9C7C4E;         /* 暖铜：唯一克制的强调色，替代灯笼金 */
+  --color-bronze-soft: #B89A6E;
+
+  /* ---- 语义色（仅状态用，低饱和） ---- */
+  --color-success: #5E7A5A;
+  --color-error: #A85751;
+  --color-warning: #C49A5A;
+  --color-info: #6C8A99;
+
+  /* ---- 中性灰（暖调） ---- */
+  --color-ink-70: #5C5249;         /* 正文次级（暖灰，非冷灰） */
+  --color-ink-50: #837868;         /* 辅助说明文字 */
+  --color-line: rgba(61, 48, 40, 0.12);  /* 发丝分隔线 */
+  --color-line-light: rgba(234, 228, 218, 0.18); /* 深底上的发丝线 */
+
+  /* ---- Typography ---- */
+  /* 品牌标题：明朝体衬线（亚朵核心气质） */
+  --font-brand: "方正FW筑紫明朝", "FZZhuZiMingChaoS-B", "Source Han Serif SC",
+                "Noto Serif CJK SC", "Songti SC", STSong, "Times New Roman", serif;
+  /* 系统标题/正文：思源黑体 */
+  --font-heading: "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-body: "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "DIN Pro", Menlo, Monaco, "SFMono-Regular", "Courier New", monospace;
+
+  --text-xs: 0.75rem;     /* 12 */
+  --text-sm: 0.875rem;    /* 14 */
+  --text-base: 1rem;      /* 16 */
+  --text-lg: 1.25rem;     /* 20 */
+  --text-xl: 1.5rem;      /* 24 */
+  --text-2xl: 1.875rem;   /* 30 */
+  --text-3xl: 2.25rem;    /* 36 */
+  --text-4xl: 3rem;       /* 48 */
+  --text-5xl: 3.75rem;    /* 60 */
+
   --font-light: 300;
   --font-regular: 400;
   --font-medium: 500;
   --font-semibold: 600;
   --font-bold: 700;
   --font-extrabold: 800;
-  
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.75;
-  
-  /* Spacing */
-  --space-xs: 0.25rem;   /* 4px */
-  --space-sm: 0.5rem;    /* 8px */
-  --space-md: 1rem;      /* 16px */
-  --space-lg: 1.5rem;    /* 24px */
-  --space-xl: 2rem;      /* 32px */
-  --space-2xl: 3rem;     /* 48px */
-  --space-3xl: 4rem;     /* 64px */
-  
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.4;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.9;
+
+  /* ---- Spacing (更大留白，亚朵的静) ---- */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 7rem;
+
+  /* ---- Border Radius (收敛，更克制) ---- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
   --radius-full: 9999px;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* ---- Shadows (极弱，避免 SaaS 浮夸) ---- */
+  --shadow-sm: 0 1px 2px rgba(61, 48, 40, 0.04);
+  --shadow-md: 0 4px 16px rgba(61, 48, 40, 0.06);
+  --shadow-lg: 0 12px 32px rgba(61, 48, 40, 0.08);
+
+  --maxw: 1120px;
 }

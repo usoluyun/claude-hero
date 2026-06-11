@@ -1,20 +1,16 @@
-/* Atour Hero Portal - Main Stylesheet */
-/* Brand: 沃野 (Wòyě) deep brown + 白岩 (Báiyán) warm beige */
+/* 领航 Hero · 群英客栈 — Main Stylesheet */
+/* 亚朵视觉：沃野深棕 + 白岩暖米 · 明朝体衬线 · 山形辅助图形 · 静谧留白 */
 
 @import './tokens.css';
 
 /* ========================================
-   1. Global Reset & Base
+   1. Reset & Base
    ======================================== */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
   font-size: 16px;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -22,775 +18,575 @@ html {
 body {
   font-family: var(--font-body);
   font-weight: var(--font-regular);
-  background: var(--color-baiyan);
-  color: var(--color-primary);
+  background: var(--color-white);
+  color: var(--color-black);
   line-height: var(--leading-normal);
   overflow-x: hidden;
 }
 
-a {
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
+a { color: inherit; text-decoration: none; transition: color 0.25s ease; }
+img, svg { display: block; max-width: 100%; }
 
-a:hover {
-  color: var(--color-woye);
-}
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--space-xl); }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* 通用小标 kicker：明朝体细线小字 */
+.kicker {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-bronze);
+  margin-bottom: var(--space-md);
 }
+.kicker.center { text-align: center; }
 
 /* ========================================
-   1.5 Top Navigation Bar (Subtle, Atour feel)
+   2. 顶部导航
    ======================================== */
-
-.top-nav {
-  background: rgba(61, 48, 40, 0.97);
-  backdrop-filter: blur(8px);
+.topnav {
   position: sticky;
   top: 0;
   z-index: 100;
+  background: rgba(61, 48, 40, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-line-light);
 }
-
-.top-nav-inner {
+.topnav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-xl);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
-.top-nav-brand {
-  font-family: var(--font-heading);
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
-  color: var(--color-baiyan);
-  text-decoration: none;
-  letter-spacing: 0.02em;
-}
-
-.top-nav-links {
-  display: flex;
-  gap: var(--space-lg);
-}
-
-.top-nav-link {
-  font-size: var(--text-sm);
-  font-weight: var(--font-regular);
-  color: var(--color-gray-400);
-  text-decoration: none;
-  transition: color 0.2s ease;
-  padding: var(--space-xs) var(--space-sm);
-  border: 1px solid transparent;
-  border-radius: var(--radius-sm);
-}
-
-.top-nav-link:hover {
-  color: var(--color-baiyan);
-  border-color: var(--color-gray-600);
-}
-
-/* ========================================
-   1.6 Floating Tavern Button (Subtle accent)
-   ======================================== */
-
-.floating-tavern {
-  position: fixed;
-  bottom: var(--space-xl);
-  right: var(--space-xl);
-  background: var(--color-woye);
-  color: var(--color-baiyan);
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-full);
-  text-decoration: none;
-  box-shadow: var(--shadow-md);
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  font-family: var(--font-body);
-  transition: all 0.3s ease;
-  z-index: 99;
-  border: 1px solid var(--color-gray-700);
-}
-
-.floating-tavern:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-  background: var(--color-gray-800);
-}
-
-.floating-tavern-icon {
-  font-size: var(--text-base);
-}
-
-.floating-tavern-text {
-  font-family: var(--font-body);
-  letter-spacing: 0.01em;
-}
-
-/* ========================================
-   2. Layout Containers
-   ======================================== */
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--space-xl);
-}
-
-.section {
-  padding: var(--space-3xl) 0;
-}
-
-.section-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-3xl);
-  font-weight: var(--font-bold);
-  margin-bottom: var(--space-2xl);
-  text-align: center;
-  color: var(--color-primary);
-  line-height: var(--leading-tight);
-}
-
-.section-subtitle {
-  font-family: var(--font-body);
+.topnav-brand {
+  font-family: var(--font-brand);
   font-size: var(--text-lg);
-  font-weight: var(--font-light);
-  text-align: center;
-  color: var(--color-gray-600);
-  margin-top: calc(-1 * var(--space-lg));
-  margin-bottom: var(--space-2xl);
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.section-description {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  font-weight: var(--font-light);
-  text-align: center;
-  color: var(--color-gray-600);
-  margin-top: calc(-1 * var(--space-lg));
-  margin-bottom: var(--space-2xl);
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: var(--leading-relaxed);
-}
-
-/* ========================================
-   3. Hero Header (Full-width deep brown)
-   ======================================== */
-
-.hero-header {
-  background: var(--color-woye);
-  color: var(--color-baiyan);
-  padding: var(--space-3xl) var(--space-xl);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.hero-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-4xl);
-  font-weight: var(--font-extrabold);
-  line-height: var(--leading-tight);
-  margin-bottom: var(--space-md);
-  letter-spacing: -0.02em;
-  color: var(--color-baiyan);
-}
-
-.hero-subtitle {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-semibold);
-  margin-bottom: var(--space-sm);
-  color: var(--color-baiyan);
-}
-
-.hero-description {
-  font-size: var(--text-lg);
-  font-weight: var(--font-light);
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: var(--leading-relaxed);
-  color: var(--color-baiyan);
-}
-
-.hero-header__title {
-  font-family: var(--font-heading);
-  font-size: var(--text-4xl);
-  font-weight: var(--font-extrabold);
-  line-height: var(--leading-tight);
-  margin-bottom: var(--space-md);
-  letter-spacing: -0.02em;
-}
-
-.hero-header__subtitle {
-  font-size: var(--text-lg);
-  font-weight: var(--font-light);
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: var(--leading-relaxed);
-}
-
-/* Divider between header sections */
-.hero-header__divider {
-  width: 60px;
-  height: 2px;
-  background: var(--color-accent);
-  margin: var(--space-xl) auto;
-  border: none;
-}
-
-/* ========================================
-   4. Navigation Card (Large CTA to Tavern)
-   ======================================== */
-
-.nav-card {
-  display: block;
-  background: var(--color-white);
-  border: 2px solid transparent;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: var(--space-2xl);
-  margin: var(--space-2xl) 0;
-  text-decoration: none;
-  color: var(--color-primary);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-}
-
-.nav-card:hover {
-  border-color: var(--color-accent);
-  box-shadow: var(--shadow-xl);
-  transform: translateY(-4px);
-}
-
-.nav-card__icon {
-  font-size: var(--text-3xl);
-  margin-bottom: var(--space-md);
-  display: block;
-}
-
-.nav-card__title {
-  font-family: var(--font-heading);
-  font-size: var(--text-2xl);
   font-weight: var(--font-bold);
-  margin-bottom: var(--space-sm);
-  color: var(--color-primary);
-}
-
-.nav-card__description {
-  font-size: var(--text-base);
-  color: var(--color-gray-600);
-  line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-md);
-}
-
-.nav-card__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-sm);
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.nav-card-content {
-  flex: 1;
-}
-
-.nav-card h2 {
-  font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  font-weight: var(--font-bold);
-  margin-bottom: var(--space-sm);
-  color: var(--color-primary);
-}
-
-.nav-card p {
-  font-size: var(--text-base);
-  color: var(--color-gray-600);
-  line-height: var(--leading-relaxed);
-}
-
-.cta-arrow {
-  font-size: var(--text-3xl);
-  color: var(--color-accent);
-  transition: transform 0.3s ease;
-  display: flex;
-  align-items: center;
-}
-
-.nav-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
-}
-
-.nav-card:hover .cta-arrow {
-  transform: translateX(8px);
-}
-
-/* ========================================
-   5. Skills Grid (3-column, skill cards)
-   ======================================== */
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-xl);
-  padding: var(--space-lg) 0;
-}
-
-.skill-card {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: var(--space-xl);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.skill-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-.skill-card__name {
-  font-family: var(--font-heading);
-  font-size: var(--text-xl);
-  font-weight: var(--font-bold);
-  margin-bottom: var(--space-sm);
-  color: var(--color-primary);
-}
-
-.skill-card__description {
-  font-size: var(--text-sm);
-  color: var(--color-gray-700);
-  line-height: var(--leading-relaxed);
-  flex: 1;
-  margin-bottom: var(--space-md);
-}
-
-.skill-card__tag {
-  display: inline-block;
-  font-size: var(--text-xs);
-  font-weight: var(--font-medium);
-  background: var(--color-baiyan);
-  color: var(--color-woye);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  margin-right: var(--space-xs);
-}
-
-.skill-card h3 {
-  font-family: var(--font-heading);
-  font-size: var(--text-xl);
-  font-weight: var(--font-bold);
-  margin-bottom: var(--space-sm);
-  color: var(--color-primary);
-}
-
-.skill-card > p {
-  font-size: var(--text-sm);
-  color: var(--color-gray-700);
-  line-height: var(--leading-relaxed);
-  flex: 1;
-  margin-bottom: var(--space-md);
-}
-
-.skill-details {
-  font-size: var(--text-sm);
-  color: var(--color-gray-600);
-  line-height: var(--leading-relaxed);
-  margin-top: auto;
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--color-gray-200);
-}
-
-.skill-details strong {
-  display: block;
-  margin-bottom: var(--space-xs);
-  color: var(--color-primary);
-}
-
-.skill-command {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  background: var(--color-gray-100);
-  color: var(--color-woye);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-sm);
-}
-
-/* ========================================
-   6. Pilots Grid (3-column, agent cards)
-   ======================================== */
-
-.pilots-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-xl);
-  padding: var(--space-lg) 0;
-}
-
-.pilot-card {
-  background: var(--color-white);
-  border-left: 4px solid var(--color-accent);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.25s ease;
-}
-
-.pilot-card:hover {
-  box-shadow: var(--shadow-md);
-}
-
-.pilot-card__codename {
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
-  color: var(--color-accent);
-  margin-bottom: var(--space-xs);
-  text-transform: uppercase;
+  color: var(--color-baiyan);
   letter-spacing: 0.04em;
 }
-
-.pilot-card__name {
-  font-size: var(--text-base);
-  font-weight: var(--font-medium);
-  color: var(--color-primary);
-  margin-bottom: var(--space-sm);
-}
-
-.pilot-card__domain {
-  font-size: var(--text-sm);
-  color: var(--color-gray-600);
-  line-height: var(--leading-normal);
-}
-
-.pilot-card__stack {
-  margin-top: var(--space-md);
-  font-size: var(--text-xs);
-  color: var(--color-gray-500);
+.topnav-brand-en {
   font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.18em;
+  opacity: 0.65;
+}
+.topnav-links { display: flex; gap: var(--space-xl); }
+.topnav-links a {
+  font-size: var(--text-sm);
+  color: var(--color-baiyan);
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+.topnav-links a:hover { opacity: 1; color: var(--color-bronze-soft); }
+
+/* ========================================
+   3. Hero 封面
+   ======================================== */
+.hero {
+  position: relative;
+  background: var(--color-woye);
+  color: var(--color-baiyan);
+  padding: var(--space-4xl) var(--space-xl) 0;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  padding-bottom: var(--space-4xl);
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.32em;
+  color: var(--color-bronze-soft);
+  margin-bottom: var(--space-lg);
+}
+.hero-title {
+  font-family: var(--font-brand);
+  font-size: clamp(2.75rem, 8vw, var(--text-5xl));
+  font-weight: var(--font-extrabold);
+  line-height: var(--leading-tight);
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+.hero-tagline {
+  font-family: var(--font-brand);
+  font-size: clamp(1.25rem, 3vw, var(--text-2xl));
+  font-weight: var(--font-regular);
+  letter-spacing: 0.16em;
+  color: var(--color-baiyan);
+  margin-bottom: var(--space-lg);
+}
+.hero-desc {
+  font-size: var(--text-base);
+  font-weight: var(--font-light);
+  line-height: var(--leading-relaxed);
+  opacity: 0.82;
+  max-width: 560px;
+  margin: 0 auto var(--space-2xl);
+}
+.hero-actions { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; }
+.hero-mountains {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: 100%; height: 240px;
+  z-index: 1;
 }
 
-.pilot-card h3 {
-  font-family: var(--font-heading);
+/* ---- 按钮 ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+  padding: 0.85em 1.8em;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+.btn-primary { background: var(--color-bronze); color: var(--color-white); }
+.btn-primary:hover { background: var(--color-bronze-soft); color: var(--color-white); }
+.btn-ghost { border-color: var(--color-line-light); color: var(--color-baiyan); }
+.btn-ghost:hover { border-color: var(--color-bronze-soft); color: var(--color-bronze-soft); }
+.btn-light { background: var(--color-baiyan); color: var(--color-woye); }
+.btn-light:hover { background: var(--color-white); }
+
+/* ========================================
+   4. 理念
+   ======================================== */
+.idea {
+  background: var(--color-baiyan);
+  padding: var(--space-4xl) var(--space-xl);
+}
+.idea-inner { max-width: 880px; margin: 0 auto; text-align: center; }
+.idea-quote {
+  font-family: var(--font-brand);
+  font-size: clamp(1.35rem, 3.2vw, var(--text-2xl));
+  font-weight: var(--font-regular);
+  line-height: var(--leading-relaxed);
+  letter-spacing: 0.06em;
+  color: var(--color-woye);
+  margin-bottom: var(--space-4xl);
+}
+.idea-trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2xl);
+  text-align: left;
+}
+.idea-item { position: relative; padding-top: var(--space-lg); border-top: 1px solid var(--color-line); }
+.idea-num {
+  display: block;
+  font-family: var(--font-brand);
   font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
-  color: var(--color-primary);
+  font-weight: var(--font-bold);
+  color: var(--color-woye);
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.08em;
+}
+.idea-item p {
+  font-size: var(--text-sm);
+  color: var(--color-ink-70);
+  line-height: var(--leading-relaxed);
+}
+
+/* ========================================
+   5. Section 通用
+   ======================================== */
+.section { padding: var(--space-4xl) 0; }
+.section-light { background: var(--color-baiyan); }
+.section-title {
+  font-family: var(--font-brand);
+  font-size: clamp(1.75rem, 4vw, var(--text-3xl));
+  font-weight: var(--font-bold);
+  text-align: center;
+  letter-spacing: 0.06em;
+  color: var(--color-woye);
+  margin-bottom: var(--space-md);
+}
+.section-desc {
+  font-size: var(--text-base);
+  font-weight: var(--font-light);
+  text-align: center;
+  color: var(--color-ink-70);
+  line-height: var(--leading-relaxed);
+  max-width: 600px;
+  margin: 0 auto var(--space-3xl);
+}
+
+/* ---- Grid ---- */
+.grid { display: grid; gap: var(--space-xl); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+/* ---- 卡片基底 ---- */
+.card {
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.section-light .card { background: var(--color-white); }
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: var(--color-baiyan-deep);
+}
+.card h3 {
+  font-family: var(--font-brand);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--color-woye);
+  letter-spacing: 0.04em;
   margin-bottom: var(--space-sm);
 }
+.card-body {
+  font-size: var(--text-sm);
+  color: var(--color-ink-70);
+  line-height: var(--leading-relaxed);
+}
 
+/* ========================================
+   6. 能力卡（skill）
+   ======================================== */
+.skill { padding-top: var(--space-2xl); }
+.card-index {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-xl);
+  font-family: var(--font-brand);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--color-baiyan-deep);
+  line-height: 1;
+}
+.skill .card-body { margin-bottom: var(--space-lg); min-height: 4.2em; }
+.card-foot { padding-top: var(--space-md); border-top: 1px solid var(--color-line); }
+.card-foot code {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-baiyan);
+  color: var(--color-woye);
+  padding: 0.3em 0.7em;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-sm);
+}
+.card-note { display: block; font-size: var(--text-xs); color: var(--color-ink-50); }
+
+/* ========================================
+   7. 领航员卡（pilot）
+   ======================================== */
+.pilot { border-top: 3px solid var(--color-woye); }
+.pilot-name {
+  font-family: var(--font-brand);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--color-woye);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xs);
+}
 .pilot-domain {
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
-  color: var(--color-accent);
-  margin-bottom: var(--space-sm);
-}
-
-.pilot-description {
-  font-size: var(--text-sm);
-  color: var(--color-gray-600);
-  line-height: var(--leading-relaxed);
+  color: var(--color-bronze);
+  letter-spacing: 0.04em;
   margin-bottom: var(--space-md);
 }
-
-.pilot-tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-}
-
-.tech-tag {
-  display: inline-block;
+.pilot .card-body { margin-bottom: var(--space-lg); }
+.tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.tag {
   font-size: var(--text-xs);
   font-weight: var(--font-medium);
   background: var(--color-baiyan);
   color: var(--color-woye);
-  padding: var(--space-xs) var(--space-sm);
+  padding: 0.3em 0.7em;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
+}
+
+/* ========================================
+   8. 角色卡（role）— 明朝体单字印章头像
+   ======================================== */
+.role { display: flex; gap: var(--space-lg); align-items: flex-start; }
+.role-seal {
+  flex-shrink: 0;
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-woye);
+  color: var(--color-baiyan);
+  border-radius: var(--radius-md);
+  font-family: var(--font-brand);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+}
+.role-body { flex: 1; min-width: 0; }
+.role-name {
+  font-family: var(--font-brand);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-woye);
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-xs);
+}
+.role-name em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: var(--text-xs);
+  font-weight: var(--font-regular);
+  color: var(--color-bronze);
+  letter-spacing: 0.06em;
+  margin-left: var(--space-sm);
+}
+
+/* ========================================
+   9. 客栈入口 CTA
+   ======================================== */
+.tavern-cta {
+  background: var(--color-woye);
+  color: var(--color-baiyan);
+  padding: var(--space-4xl) var(--space-xl);
+}
+.tavern-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2xl);
+  flex-wrap: wrap;
+}
+.tavern-cta .kicker { color: var(--color-bronze-soft); }
+.tavern-cta-title {
+  font-family: var(--font-brand);
+  font-size: clamp(1.6rem, 4vw, var(--text-3xl));
+  font-weight: var(--font-bold);
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-md);
+}
+.tavern-cta-desc {
+  font-size: var(--text-base);
+  font-weight: var(--font-light);
+  line-height: var(--leading-relaxed);
+  opacity: 0.82;
+  max-width: 620px;
+}
+
+/* ========================================
+   10. 页脚
+   ======================================== */
+.site-footer {
+  position: relative;
+  background: var(--color-woye-deep);
+  color: var(--color-baiyan);
+  padding-top: 120px;
+}
+.footer-mountains {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  width: 100%; height: 120px;
+}
+.footer-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-xl) var(--space-xl);
+}
+.footer-brand {
+  font-family: var(--font-brand);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-lg);
+}
+.footer-brand span { font-family: var(--font-mono); font-size: var(--text-sm); opacity: 0.6; letter-spacing: 0.18em; }
+.footer-links { display: flex; justify-content: center; gap: var(--space-xl); margin-bottom: var(--space-lg); flex-wrap: wrap; }
+.footer-links a { font-size: var(--text-sm); opacity: 0.75; }
+.footer-links a:hover { opacity: 1; color: var(--color-bronze-soft); }
+.footer-copyright { font-size: var(--text-xs); opacity: 0.5; letter-spacing: 0.04em; }
+
+/* ========================================
+   10.5 原理 / 工作流程
+   ======================================== */
+.flow {
+  display: flex;
+  list-style: none;
+  margin: 0 auto var(--space-3xl);
+  max-width: 920px;
+}
+.flow-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6em;
+  height: 2.6em;
+  font-family: var(--font-brand);
+  font-weight: var(--font-bold);
+  font-size: var(--text-base);
+  color: var(--color-woye);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-full);
+  position: relative;
+  z-index: 2;
+  margin-bottom: var(--space-md);
+}
+.flow-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 1.3em;
+  left: 50%;
+  width: 100%;
+  height: 1px;
+  background: var(--color-line);
+  z-index: 1;
+}
+.flow-label {
+  display: block;
+  font-family: var(--font-brand);
+  font-weight: var(--font-bold);
+  font-size: var(--text-base);
+  color: var(--color-woye);
+  letter-spacing: 0.04em;
+}
+.flow-sub {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--color-ink-50);
+  margin-top: var(--space-xs);
+}
+.how-systems { margin-top: var(--space-xl); }
+
+/* ========================================
+   10.6 安装（深色） / 步骤列表 / 代码块
+   ======================================== */
+.section-dark { background: var(--color-woye); color: var(--color-baiyan); }
+.section-title.invert { color: var(--color-baiyan); }
+.section-desc.invert { color: rgba(234, 228, 218, 0.8); }
+.section-desc.invert code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-bronze-soft);
+  padding: 0.08em 0.4em;
   border-radius: var(--radius-sm);
 }
 
-/* ========================================
-   7. Roles Grid (2-column, role agents)
-   ======================================== */
-
-.roles-grid {
+.install-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: var(--space-lg);
-  padding: var(--space-lg) 0;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
 }
 
-.role-card {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  gap: var(--space-md);
-  transition: box-shadow 0.25s ease;
-}
-
-.role-card:hover {
-  box-shadow: var(--shadow-md);
-}
-
-.role-card__avatar {
+.step-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-lg); }
+.step { display: flex; gap: var(--space-md); align-items: flex-start; }
+.step-n {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  background: var(--color-woye);
-  color: var(--color-baiyan);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--text-lg);
+  width: 2em; height: 2em;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-brand);
   font-weight: var(--font-bold);
-}
-
-.role-card__content {
-  flex: 1;
-  min-width: 0;
-}
-
-.role-card__title {
-  font-family: var(--font-heading);
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
-  color: var(--color-primary);
-  margin-bottom: var(--space-xs);
-}
-
-.role-card__desc {
   font-size: var(--text-sm);
-  color: var(--color-gray-600);
-  line-height: var(--leading-relaxed);
-}
-
-.role-avatar {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  background: var(--color-bronze);
+  color: var(--color-white);
   border-radius: var(--radius-full);
-  background: var(--color-woye);
-  color: var(--color-baiyan);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--text-lg);
-  font-weight: var(--font-bold);
 }
-
-.role-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.role-hero {
-  font-family: var(--font-heading);
+.step h4 {
+  font-family: var(--font-brand);
   font-size: var(--text-base);
-  font-weight: var(--font-semibold);
-  color: var(--color-primary);
+  font-weight: var(--font-bold);
+  color: var(--color-woye);
+  letter-spacing: 0.04em;
   margin-bottom: var(--space-xs);
 }
-
-.role-techid {
+.step p { font-size: var(--text-sm); color: var(--color-ink-70); line-height: var(--leading-relaxed); }
+.step p code, .build-note code {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-accent);
-  margin-bottom: var(--space-xs);
+  font-size: 0.88em;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  color: var(--color-woye);
+  padding: 0.08em 0.4em;
+  border-radius: var(--radius-sm);
 }
-
-.role-responsibility {
-  font-size: var(--text-sm);
-  color: var(--color-gray-600);
-  line-height: var(--leading-relaxed);
-}
-
-/* ========================================
-   8. Footer
-   ======================================== */
-
-.site-footer {
-  background: var(--color-woye);
+.section-dark .step h4 { color: var(--color-baiyan); }
+.section-dark .step p { color: rgba(234, 228, 218, 0.78); }
+.section-dark .step p code {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-line-light);
   color: var(--color-baiyan);
-  padding: var(--space-xl);
+}
+.step-list-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg) var(--space-2xl);
+}
+.build-note {
   text-align: center;
+  margin-top: var(--space-2xl);
   font-size: var(--text-sm);
-  margin-top: var(--space-3xl);
+  color: var(--color-ink-50);
 }
 
-.site-footer__links {
+/* 代码块（终端感） */
+.code-block {
+  background: #241b15;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.code-bar {
   display: flex;
-  justify-content: center;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-md);
-  flex-wrap: wrap;
-  list-style: none;
+  gap: 6px;
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-line-light);
 }
-
-.site-footer__links a {
+.code-bar span { width: 10px; height: 10px; border-radius: 50%; background: rgba(234, 228, 218, 0.22); }
+.code-block pre { padding: var(--space-lg); overflow-x: auto; }
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
   color: var(--color-baiyan);
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
+  white-space: pre;
 }
-
-.site-footer__links a:hover {
-  color: var(--color-white);
-  opacity: 1;
-}
-
-.site-footer__copyright {
-  opacity: 0.6;
-  font-size: var(--text-xs);
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-md);
-  margin-top: var(--space-sm);
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  color: var(--color-baiyan);
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
-}
-
-.footer-links a:hover {
-  color: var(--color-white);
-  opacity: 1;
-}
+.c-cmt { color: var(--color-bronze-soft); }
+.c-str { color: #cdb98c; }
 
 /* ========================================
-   9. Utility Classes
+   11. 响应式
    ======================================== */
-
-.text-center { text-align: center; }
-.text-left   { text-align: left; }
-.text-right  { text-align: right; }
-
-.mb-xs   { margin-bottom: var(--space-xs); }
-.mb-sm   { margin-bottom: var(--space-sm); }
-.mb-md   { margin-bottom: var(--space-md); }
-.mb-lg   { margin-bottom: var(--space-lg); }
-.mb-xl   { margin-bottom: var(--space-xl); }
-.mb-2xl  { margin-bottom: var(--space-2xl); }
-.mb-3xl  { margin-bottom: var(--space-3xl); }
-
-.mt-xs   { margin-top: var(--space-xs); }
-.mt-sm   { margin-top: var(--space-sm); }
-.mt-md   { margin-top: var(--space-md); }
-.mt-lg   { margin-top: var(--space-lg); }
-.mt-xl   { margin-top: var(--space-xl); }
-.mt-2xl  { margin-top: var(--space-2xl); }
-.mt-3xl  { margin-top: var(--space-3xl); }
-
-.text-xs    { font-size: var(--text-xs); }
-.text-sm    { font-size: var(--text-sm); }
-.text-base  { font-size: var(--text-base); }
-.text-lg    { font-size: var(--text-lg); }
-.text-xl    { font-size: var(--text-xl); }
-.text-2xl   { font-size: var(--text-2xl); }
-.text-3xl   { font-size: var(--text-3xl); }
-.text-4xl   { font-size: var(--text-4xl); }
-
-.font-light     { font-weight: var(--font-light); }
-.font-regular   { font-weight: var(--font-regular); }
-.font-medium    { font-weight: var(--font-medium); }
-.font-semibold  { font-weight: var(--font-semibold); }
-.font-bold      { font-weight: var(--font-bold); }
-.font-extrabold { font-weight: var(--font-extrabold); }
-
-.text-primary   { color: var(--color-primary); }
-.text-secondary { color: var(--color-baiyan); }
-.text-accent    { color: var(--color-accent); }
-.text-gray      { color: var(--color-gray-600); }
-.text-white     { color: var(--color-white); }
-
-/* ========================================
-   10. Responsive Breakpoints
-   ======================================== */
-
-@media (max-width: 768px) {
-  .skills-grid,
-  .pilots-grid,
-  .roles-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-header {
-    padding: var(--space-2xl) var(--space-md);
-  }
-
-  .hero-header__title {
-    font-size: var(--text-3xl);
-  }
-
-  .section {
-    padding: var(--space-2xl) 0;
-  }
-
-  .container {
-    padding: 0 var(--space-md);
-  }
-
-  .nav-card {
-    padding: var(--space-xl);
-    margin: var(--space-xl) 0;
-  }
-
-  .section-title {
-    font-size: var(--text-2xl);
-    margin-bottom: var(--space-xl);
-  }
-
-  .site-footer__links {
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
+@media (max-width: 900px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .idea-trio { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .install-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
+  .step-list-2col { grid-template-columns: 1fr; }
 }
+@media (max-width: 680px) {
+  :root { --space-4xl: 4.5rem; }
+  .topnav-links { gap: var(--space-md); }
+  .topnav-links a:not(:last-child) { display: none; }
+  .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .container { padding: 0 var(--space-lg); }
+  .hero { padding-top: var(--space-3xl); }
+  .tavern-cta-inner { flex-direction: column; align-items: flex-start; }
 
-@media (max-width: 480px) {
-  .container {
-    padding: 0 var(--space-sm);
-  }
-
-  .hero-header {
-    padding: var(--space-xl) var(--space-sm);
-  }
-
-  .skill-card,
-  .pilot-card,
-  .role-card {
-    padding: var(--space-md);
-  }
+  .flow { flex-direction: column; gap: var(--space-md); max-width: 360px; }
+  .flow-step { display: flex; align-items: baseline; gap: var(--space-md); text-align: left; }
+  .flow-step::after { display: none; }
+  .flow-num { margin-bottom: 0; }
+  .flow-sub { display: inline; margin-left: var(--space-sm); }
 }
