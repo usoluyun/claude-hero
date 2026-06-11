@@ -1,0 +1,212 @@
+/* ================================================================
+   CHARACTER SPRITES — Pixel Art Style
+   ================================================================ */
+
+.agent-card {
+  border: 2px solid var(--hero-border);
+  padding: 8px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  position: relative;
+}
+
+.agent-card.west {
+  border-color: var(--deity-border);
+}
+
+.agent-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ---- Name Label ---- */
+.agent-name {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 4px 0;
+  color: var(--paper-cream);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Status Indicator ---- */
+.agent-status {
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--paper-cream);
+}
+
+/* ---- Status Dots ---- */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+}
+
+.status-dot.active {
+  background: var(--status-active);
+}
+
+.status-dot.idle {
+  background: var(--status-idle);
+}
+
+.status-dot.sleeping {
+  background: var(--status-sleeping);
+}
+
+.status-dot.error {
+  background: var(--status-error);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ---- Pixel Sprite Container (16x16 grid) ---- */
+.pixel-sprite {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(16, 4px);
+  grid-template-rows: repeat(16, 4px);
+}
+
+.pixel-sprite .px {
+  width: 4px;
+  height: 4px;
+}
+
+/* ---- Tooltip ---- */
+.tooltip {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink-black);
+  border: 2px solid var(--paper-cream);
+  padding: 4px 8px;
+  font-size: 10px;
+  white-space: nowrap;
+  z-index: 100;
+  display: none;
+  color: var(--paper-cream);
+}
+
+.agent-card:hover .tooltip {
+  display: block;
+}
+
+/* ---- Modal ---- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: var(--wood-dark);
+  border: 4px solid var(--lantern-gold);
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  color: var(--paper-cream);
+}
+
+.modal h3 {
+  font-size: 18px;
+  color: var(--lantern-gold);
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--wood-mid);
+  padding-bottom: 8px;
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 12px;
+  border-bottom: 1px solid var(--wood-mid);
+}
+
+.modal-messages {
+  margin-top: 12px;
+  font-size: 11px;
+}
+
+.modal-messages h4 {
+  color: var(--hero-secondary);
+  margin-bottom: 8px;
+}
+
+.modal-close {
+  display: block;
+  margin-top: 16px;
+  padding: 8px;
+  background: var(--ink-black);
+  border: 2px solid var(--paper-cream);
+  color: var(--paper-cream);
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.modal-close:hover {
+  background: var(--wood-mid);
+}
+
+/* ---- Status Animations ---- */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes sleep-blink {
+  0%, 90%, 100% { opacity: 1; }
+  95% { opacity: 0.3; }
+}
+
+@keyframes error-flash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.5) hue-rotate(-30deg); }
+}
+
+.agent-card[data-status="active"] .sprite-container {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.agent-card[data-status="idle"] .sprite-container {
+  animation: sway 3s ease-in-out infinite;
+}
+
+.agent-card[data-status="sleeping"] .sprite-container {
+  animation: sleep-blink 4s ease-in-out infinite;
+  filter: brightness(0.6);
+}
+
+.agent-card[data-status="error"] .sprite-container {
+  animation: error-flash 1s steps(2) infinite;
+}

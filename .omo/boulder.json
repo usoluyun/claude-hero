@@ -1,0 +1,205 @@
+{
+  "schema_version": 2,
+  "active_work_id": "opencode-hero-tavern-5d4b9476",
+  "works": {
+    "opencode-hero-tavern-5d4b9476": {
+      "work_id": "opencode-hero-tavern-5d4b9476",
+      "active_plan": "/Users/luyun/Documents/poc/claude-hero/.omo/plans/opencode-hero-tavern.md",
+      "plan_name": "opencode-hero-tavern",
+      "status": "active",
+      "started_at": "2026-06-11T00:57:33.775Z",
+      "updated_at": "2026-06-11T06:00:30.142Z",
+      "session_ids": [
+        "opencode:ses_14d3ecd50ffe4kAY5bjGjZKGB2",
+        "opencode:ses_14ad0e818ffeCKaBsFDJwXkLaT",
+        "opencode:ses_14ad03a32ffe17RqXfdkCaechp",
+        "opencode:ses_14ad0c36cffeywFUYQYpVpL8KL",
+        "opencode:ses_14ac311aeffdHdzrCZte2HzPgn",
+        "opencode:ses_14ac2bf3fffeInntdKslyRx741"
+      ],
+      "session_origins": {
+        "opencode:ses_14d3ecd50ffe4kAY5bjGjZKGB2": "direct",
+        "opencode:ses_14ad0e818ffeCKaBsFDJwXkLaT": "appended",
+        "opencode:ses_14ad03a32ffe17RqXfdkCaechp": "appended",
+        "opencode:ses_14ad0c36cffeywFUYQYpVpL8KL": "appended",
+        "opencode:ses_14ac311aeffdHdzrCZte2HzPgn": "appended",
+        "opencode:ses_14ac2bf3fffeInntdKslyRx741": "appended"
+      },
+      "agent": "atlas",
+      "task_sessions": {
+        "todo:01": {
+          "task_key": "todo:01",
+          "task_label": "01",
+          "task_title": "Project Scaffolding & Configuration",
+          "session_id": "opencode:ses_14bcf623dffeVHosX5su5AGIdb",
+          "agent": "Sisyphus-Junior",
+          "category": "quick",
+          "updated_at": "2026-06-11T01:00:01.163Z",
+          "started_at": "2026-06-11T01:00:01.163Z",
+          "status": "running"
+        },
+        "todo:03": {
+          "task_key": "todo:03",
+          "task_label": "03",
+          "task_title": "OpenCode SQLite Parser",
+          "session_id": "opencode:ses_14bceea1dffeg0NBmJVJ4smTda",
+          "agent": "Sisyphus-Junior",
+          "category": "deep",
+          "updated_at": "2026-06-11T05:35:15.159Z",
+          "started_at": "2026-06-11T01:10:07.019Z",
+          "status": "completed",
+          "ended_at": "2026-06-11T05:35:15.158Z",
+          "elapsed_ms": 15908139
+        },
+        "todo:05": {
+          "task_key": "todo:05",
+          "task_label": "05",
+          "task_title": "Data Aggregator & Status Inference",
+          "session_id": "opencode:ses_14acd333affe7Hq5XKQl7wb9zg",
+          "agent": "Sisyphus-Junior",
+          "category": "unspecified-high",
+          "started_at": "2026-06-11T05:37:54.376Z",
+          "status": "completed",
+          "updated_at": "2026-06-11T05:50:59.480Z",
+          "ended_at": "2026-06-11T05:50:59.480Z",
+          "elapsed_ms": 785104
+        },
+        "todo:07": {
+          "task_key": "todo:07",
+          "task_label": "07",
+          "task_title": "Pixel Art Tavern Scene (复古仙剑 DOS 风格)",
+          "session_id": "opencode:ses_14ad03a32ffe17RqXfdkCaechp",
+          "agent": "Sisyphus-Junior",
+          "category": "visual-engineering",
+          "updated_at": "2026-06-11T05:46:34.521Z",
+          "ended_at": "2026-06-11T05:46:34.521Z",
+          "status": "completed"
+        },
+        "todo:06": {
+          "task_key": "todo:06",
+          "task_label": "06",
+          "task_title": "RESTful API Endpoints (FastAPI)",
+          "session_id": "opencode:ses_14ac2bf3fffeInntdKslyRx741",
+          "agent": "Sisyphus-Junior",
+          "category": "visual-engineering",
+          "started_at": "2026-06-11T05:52:37.484Z",
+          "status": "completed",
+          "updated_at": "2026-06-11T05:55:10.849Z",
+          "ended_at": "2026-06-11T05:55:10.849Z",
+          "elapsed_ms": 153365
+        },
+        "todo:08": {
+          "task_key": "todo:08",
+          "task_label": "08",
+          "task_title": "Character Sprites & State Animations (像素风)",
+          "session_id": "opencode:ses_14abf59eaffevVNXU3Wg9rjFSm",
+          "agent": "Sisyphus-Junior",
+          "category": "unspecified-high",
+          "updated_at": "2026-06-11T06:00:30.142Z",
+          "started_at": "2026-06-11T05:59:39.409Z",
+          "status": "completed",
+          "ended_at": "2026-06-11T06:00:30.142Z",
+          "elapsed_ms": 50733
+        }
+      }
+    }
+  },
+  "active_plan": "/Users/luyun/Documents/poc/claude-hero/.omo/plans/opencode-hero-tavern.md",
+  "started_at": "2026-06-11T00:57:33.775Z",
+  "status": "active",
+  "updated_at": "2026-06-11T06:00:30.142Z",
+  "session_ids": [
+    "opencode:ses_14d3ecd50ffe4kAY5bjGjZKGB2",
+    "opencode:ses_14ad0e818ffeCKaBsFDJwXkLaT",
+    "opencode:ses_14ad03a32ffe17RqXfdkCaechp",
+    "opencode:ses_14ad0c36cffeywFUYQYpVpL8KL",
+    "opencode:ses_14ac311aeffdHdzrCZte2HzPgn",
+    "opencode:ses_14ac2bf3fffeInntdKslyRx741"
+  ],
+  "session_origins": {
+    "opencode:ses_14d3ecd50ffe4kAY5bjGjZKGB2": "direct",
+    "opencode:ses_14ad0e818ffeCKaBsFDJwXkLaT": "appended",
+    "opencode:ses_14ad03a32ffe17RqXfdkCaechp": "appended",
+    "opencode:ses_14ad0c36cffeywFUYQYpVpL8KL": "appended",
+    "opencode:ses_14ac311aeffdHdzrCZte2HzPgn": "appended",
+    "opencode:ses_14ac2bf3fffeInntdKslyRx741": "appended"
+  },
+  "plan_name": "opencode-hero-tavern",
+  "task_sessions": {
+    "todo:01": {
+      "task_key": "todo:01",
+      "task_label": "01",
+      "task_title": "Project Scaffolding & Configuration",
+      "session_id": "opencode:ses_14bcf623dffeVHosX5su5AGIdb",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-06-11T01:00:01.163Z",
+      "started_at": "2026-06-11T01:00:01.163Z",
+      "status": "running"
+    },
+    "todo:03": {
+      "task_key": "todo:03",
+      "task_label": "03",
+      "task_title": "OpenCode SQLite Parser",
+      "session_id": "opencode:ses_14bceea1dffeg0NBmJVJ4smTda",
+      "agent": "Sisyphus-Junior",
+      "category": "deep",
+      "updated_at": "2026-06-11T05:35:15.159Z",
+      "started_at": "2026-06-11T01:10:07.019Z",
+      "status": "completed",
+      "ended_at": "2026-06-11T05:35:15.158Z",
+      "elapsed_ms": 15908139
+    },
+    "todo:05": {
+      "task_key": "todo:05",
+      "task_label": "05",
+      "task_title": "Data Aggregator & Status Inference",
+      "session_id": "opencode:ses_14acd333affe7Hq5XKQl7wb9zg",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "started_at": "2026-06-11T05:37:54.376Z",
+      "status": "completed",
+      "updated_at": "2026-06-11T05:50:59.480Z",
+      "ended_at": "2026-06-11T05:50:59.480Z",
+      "elapsed_ms": 785104
+    },
+    "todo:07": {
+      "task_key": "todo:07",
+      "task_label": "07",
+      "task_title": "Pixel Art Tavern Scene (复古仙剑 DOS 风格)",
+      "session_id": "opencode:ses_14ad03a32ffe17RqXfdkCaechp",
+      "agent": "Sisyphus-Junior",
+      "category": "visual-engineering",
+      "updated_at": "2026-06-11T05:46:34.521Z",
+      "ended_at": "2026-06-11T05:46:34.521Z",
+      "status": "completed"
+    },
+    "todo:06": {
+      "task_key": "todo:06",
+      "task_label": "06",
+      "task_title": "RESTful API Endpoints (FastAPI)",
+      "session_id": "opencode:ses_14ac2bf3fffeInntdKslyRx741",
+      "agent": "Sisyphus-Junior",
+      "category": "visual-engineering",
+      "started_at": "2026-06-11T05:52:37.484Z",
+      "status": "completed",
+      "updated_at": "2026-06-11T05:55:10.849Z",
+      "ended_at": "2026-06-11T05:55:10.849Z",
+      "elapsed_ms": 153365
+    },
+    "todo:08": {
+      "task_key": "todo:08",
+      "task_label": "08",
+      "task_title": "Character Sprites & State Animations (像素风)",
+      "session_id": "opencode:ses_14abf59eaffevVNXU3Wg9rjFSm",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-06-11T06:00:30.142Z",
+      "started_at": "2026-06-11T05:59:39.409Z",
+      "status": "completed",
+      "ended_at": "2026-06-11T06:00:30.142Z",
+      "elapsed_ms": 50733
+    }
+  },
+  "agent": "atlas"
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🦸 Hero Tavern — Agent 监控看板</title>
+  <link rel="stylesheet" href="css/tavern.css">
+  <link rel="stylesheet" href="css/characters.css">
+  <link rel="stylesheet" href="css/sprites.css">
+</head>
+<body>
+  <header class="tavern-header">
+    <h1>🦸 Hero Tavern</h1>
+    <div class="lanterns">
+      <span class="lantern"></span>
+      <span class="lantern"></span>
+      <span class="lantern"></span>
+      <span class="lantern"></span>
+      <span class="lantern"></span>
+    </div>
+  </header>
+  <main class="tavern-scene">
+    <section class="wing east-wing">
+      <h2>东 厢 · 英 雄</h2>
+      <div class="agent-grid" id="east-agents"></div>
+    </section>
+    <section class="wing main-hall">
+      <h2>中 堂</h2>
+      <div class="stats-panel">
+        <div class="stat">活跃<span id="stat-active">0</span></div>
+        <div class="stat">空闲<span id="stat-idle">0</span></div>
+        <div class="stat">休眠<span id="stat-sleeping">0</span></div>
+        <div class="stat">异常<span id="stat-error">0</span></div>
+      </div>
+      <div class="message-board">
+        <h3>📜 消息流</h3>
+        <ul id="message-list"></ul>
+      </div>
+      <div class="blocked-panel">
+        <h3>⚠️ 阻塞</h3>
+        <ul id="blocked-list"></ul>
+      </div>
+    </section>
+    <section class="wing west-wing">
+      <h2>西 厢 · 神 祇</h2>
+      <div class="agent-grid" id="west-agents"></div>
+    </section>
+  </main>
+  <footer class="tavern-floor"></footer>
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal-content"></div>
+  </div>
+  <script src="js/tavern.js"></script>
+</body>
+</html>
