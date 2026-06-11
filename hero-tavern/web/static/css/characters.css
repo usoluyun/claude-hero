@@ -74,13 +74,23 @@
   height: 64px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(16, 4px);
-  grid-template-rows: repeat(16, 4px);
+  grid-template-columns: repeat(16, var(--pixel, 4px));
+  grid-template-rows: repeat(16, var(--pixel, 4px));
+  grid-auto-flow: row;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 .pixel-sprite .px {
-  width: 4px;
-  height: 4px;
+  width: var(--pixel, 4px);
+  height: var(--pixel, 4px);
+}
+
+.agent-card > div:first-child {
+  position: relative;
+  width: 64px;
+  margin: 0 auto 8px;
 }
 
 /* ---- Tooltip ---- */
@@ -195,18 +205,28 @@
 }
 
 .agent-card[data-status="active"] .sprite-container {
-  animation: breathe 2s ease-in-out infinite;
+  animation: breathe 2s steps(2) infinite;
 }
 
 .agent-card[data-status="idle"] .sprite-container {
-  animation: sway 3s ease-in-out infinite;
+  animation: sway 3s steps(2) infinite;
 }
 
 .agent-card[data-status="sleeping"] .sprite-container {
-  animation: sleep-blink 4s ease-in-out infinite;
+  animation: sleep-blink 4s steps(1) infinite;
   filter: brightness(0.6);
 }
 
 .agent-card[data-status="error"] .sprite-container {
   animation: error-flash 1s steps(2) infinite;
+}
+
+/* ---- Empty State ---- */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 20px;
+  color: var(--paper-cream);
+  opacity: 0.5;
+  font-size: 12px;
 }

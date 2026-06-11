@@ -439,3 +439,277 @@ window.renderScene = renderScene;
 window.createSprite = createSprite;
 window.getSpriteId = getSpriteId;
 window.SPRITES = SPRITES;
+
+// ═══════════════════════════════════════════════════════════════════
+// Integration Layer — Polling + Rendering
+// ═══════════════════════════════════════════════════════════════════
+
+const API_BASE = 'http://localhost:8000';
+const POLL_INTERVAL = 5000;
+let pollTimer = null;
+
+async function fetchStatus() {
+  try {
+    const response = await fetch(`${API_BASE}/api/status`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error('Status fetch failed:', error);
+    showError('API 连接失败 — 请启动后端服务');
+    return null;
+  }
+}
+
+async function fetchMessages() {
+  try {
+    const response = await fetch(`${API_BASE}/api/messages?limit=20`);
+    if (!response.ok) return [];
+    return await response.json();
+  } catch { return []; }
+}
+
+async function fetchBlocked() {
+  try {
+    const response = await fetch(`${API_BASE}/api/blocked`);
+    if (!response.ok) return [];
+    return await response.json();
+  } catch { return []; }
+}
+
+async function fetchHistory() {
+  try {
+    const response = await fetch(`${API_BASE}/api/history`);
+    if (!response.ok) return {};
+    return await response.json();
+  } catch { return {}; }
+}
+
+function renderAgents(status) {
+  if (!status) return;
+
+  const eastGrid = document.getElementById('east-agents');
+  const westGrid = document.getElementById('west-agents');
+  if (!eastGrid || !westGrid) return;
+
+  eastGrid.innerHTML = '';
+  westGrid.innerHTML = '';
+
+  let counts = { active: 0, idle: 0, sleeping: 0, error: 0 };
+
+  (status.east_wing || []).forEach(agent => {
+    const card = createAgentCard(agent, 'east');
+    eastGrid.appendChild(card);
+    if (counts[agent.status] !== undefined) counts[agent.status]++;
+  });
+
+  (status.west_wing || []).forEach(agent => {
+    const card = createAgentCard(agent, 'west');
+    westGrid.appendChild(card);
+    if (counts[agent.status] !== undefined) counts[agent.status]++;
+  });
+
+  if (eastGrid.children.length === 0) {
+    eastGrid.innerHTML = '<div class="empty-state">暂无英雄活动</div>';
+  }
+  if (westGrid.children.length === 0) {
+    westGrid.innerHTML = '<div class="empty-state">暂无神祇活动</div>';
+  }
+
+  updateStats(counts);
+  updateTimestamp(status.last_updated);
+  hideError();
+}
+
+function createAgentCard(agent, wing) {
+  const card = document.createElement('div');
+  card.className = `agent-card ${wing === 'west' ? 'west' : ''}`;
+  card.setAttribute('data-status', agent.status);
+  card.setAttribute('data-agent-id', agent.id);
+
+  const spriteId = getSpriteId(agent.name, wing);
+  const sprite = createSprite(spriteId);
+  card.appendChild(sprite);
+
+  const name = document.createElement('div');
+  name.className = 'agent-name';
+  name.textContent = agent.name;
+  card.appendChild(name);
+
+  const statusDiv = document.createElement('div');
+  statusDiv.className = 'agent-status';
+  const dot = document.createElement('span');
+  dot.className = `status-dot ${agent.status}`;
+  statusDiv.appendChild(dot);
+  const statusText = document.createElement('span');
+  const statusLabels = { active: '论剑', idle: '饮酒', sleeping: '打坐', error: '走火入魔' };
+  statusText.textContent = statusLabels[agent.status] || agent.status;
+  statusDiv.appendChild(statusText);
+  card.appendChild(statusDiv);
+
+  const tooltip = document.createElement('div');
+  tooltip.className = 'tooltip';
+  const lastActive = agent.last_active ? new Date(agent.last_active).toLocaleTimeString() : '未知';
+  tooltip.textContent = `${agent.name} · ${statusLabels[agent.status]} · 最后活动: ${lastActive}`;
+  card.appendChild(tooltip);
+
+  card.addEventListener('click', () => showAgentModal(agent));
+
+  return card;
+}
+
+function updateStats(counts) {
+  const els = {
+    'stat-active': counts.active,
+    'stat-idle': counts.idle,
+    'stat-sleeping': counts.sleeping,
+    'stat-error': counts.error,
+  };
+  for (const [id, val] of Object.entries(els)) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+}
+
+function updateTimestamp(isoString) {
+  const el = document.getElementById('last-updated');
+  if (el && isoString) {
+    el.textContent = `最后更新: ${new Date(isoString).toLocaleTimeString()}`;
+  }
+}
+
+function renderMessages(messages) {
+  const list = document.getElementById('message-list');
+  if (!list) return;
+  list.innerHTML = '';
+  (messages || []).slice(0, 20).forEach(msg => {
+    const li = document.createElement('li');
+    const time = msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString() : '';
+    li.textContent = `[${time}] ${msg.agent_name}: ${msg.content}`.substring(0, 120);
+    list.appendChild(li);
+  });
+  if (list.children.length === 0) {
+    list.innerHTML = '<li class="empty">暂无消息</li>';
+  }
+}
+
+function renderBlocked(blocked) {
+  const list = document.getElementById('blocked-list');
+  if (!list) return;
+  list.innerHTML = '';
+  (blocked || []).forEach(agent => {
+    const li = document.createElement('li');
+    li.textContent = `⚠ ${agent.agent_name} — ${agent.reason}`;
+    list.appendChild(li);
+  });
+  if (list.children.length === 0) {
+    list.innerHTML = '<li class="empty">无阻塞</li>';
+  }
+}
+
+function showError(msg) {
+  let el = document.getElementById('error-banner');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'error-banner';
+    el.style.cssText = 'background:var(--status-error);color:black;padding:8px;text-align:center;font-size:12px;font-weight:bold;';
+    document.body.prepend(el);
+  }
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function hideError() {
+  const el = document.getElementById('error-banner');
+  if (el) el.style.display = 'none';
+}
+
+function showAgentModal(agent) {
+  const overlay = document.getElementById('modal-overlay');
+  const content = document.getElementById('modal-content');
+  if (!overlay || !content) return;
+
+  const statusLabels = { active: '论剑', idle: '饮酒', sleeping: '打坐', error: '走火入魔' };
+  const lastActive = agent.last_active ? new Date(agent.last_active).toLocaleString() : '未知';
+  const messages = (agent.recent_messages || []).map(m => `<div class="modal-row"><span>${m.content || ''}</span></div>`).join('');
+
+  content.innerHTML = `
+    <h3>${agent.name}</h3>
+    <div class="modal-row"><span>状态</span><span>${statusLabels[agent.status] || agent.status}</span></div>
+    <div class="modal-row"><span>最后活动</span><span>${lastActive}</span></div>
+    <div class="modal-row"><span>Token 输入</span><span>${agent.tokens_in || 0}</span></div>
+    <div class="modal-row"><span>Token 输出</span><span>${agent.tokens_out || 0}</span></div>
+    ${agent.current_task ? `<div class="modal-row"><span>当前任务</span><span>${agent.current_task}</span></div>` : ''}
+    <div class="modal-messages"><h4>最近消息</h4>${messages || '<div>暂无</div>'}</div>
+    <button class="modal-close" onclick="closeModal()">关闭 [Esc]</button>
+  `;
+  overlay.classList.add('active');
+}
+
+function closeModal() {
+  const overlay = document.getElementById('modal-overlay');
+  if (overlay) overlay.classList.remove('active');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'r' || e.key === 'R') {
+    if (!e.ctrlKey && !e.metaKey) poll();
+  }
+  if (e.key === '?') {
+    showHelpModal();
+  }
+});
+
+function showHelpModal() {
+  const overlay = document.getElementById('modal-overlay');
+  const content = document.getElementById('modal-content');
+  if (!overlay || !content) return;
+  content.innerHTML = `
+    <h3>⌨️ 快捷键</h3>
+    <div class="modal-row"><span>R</span><span>手动刷新</span></div>
+    <div class="modal-row"><span>?</span><span>显示帮助</span></div>
+    <div class="modal-row"><span>Esc</span><span>关闭弹窗</span></div>
+    <div class="modal-row"><span>点击角色</span><span>查看详情</span></div>
+    <button class="modal-close" onclick="closeModal()">关闭</button>
+  `;
+  overlay.classList.add('active');
+}
+
+async function poll() {
+  const [status, messages, blocked] = await Promise.all([
+    fetchStatus(),
+    fetchMessages(),
+    fetchBlocked(),
+  ]);
+  renderAgents(status);
+  renderMessages(messages);
+  renderBlocked(blocked);
+}
+
+function init() {
+  if (!document.getElementById('last-updated')) {
+    const header = document.querySelector('.tavern-header');
+    if (header) {
+      const el = document.createElement('div');
+      el.id = 'last-updated';
+      el.style.cssText = 'font-size:10px;color:var(--paper-cream);opacity:0.7;margin-top:4px;';
+      header.appendChild(el);
+    }
+  }
+
+  poll();
+
+  if (pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(poll, POLL_INTERVAL);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
+window.init = init;
+window.poll = poll;
+window.closeModal = closeModal;
+window.showAgentModal = showAgentModal;

@@ -720,7 +720,7 @@ Max Concurrent: 4 (Waves 1 & 2)
 
 ---
 
-- [ ] 09. Frontend-Backend Integration (Real-time Updates)
+- [x] 09. Frontend-Backend Integration (Real-time Updates)
 
   **What to do**:
   - Refactor `web/static/js/tavern.js` to fetch data from API endpoints
@@ -792,7 +792,7 @@ Max Concurrent: 4 (Waves 1 & 2)
 
 ---
 
-- [ ] 10. Interactive Features (Click Handlers, Tooltips, Keyboard Shortcuts)
+- [x] 10. Interactive Features (Click Handlers, Tooltips, Keyboard Shortcuts)
 
   **What to do**:
   - Implement click handlers for each character sprite
@@ -951,7 +951,7 @@ Max Concurrent: 4 (Waves 1 & 2)
 
 ---
 
-- [ ] 12. Documentation & Deployment Script
+- [x] 12. Documentation & Deployment Script
 
   **What to do**:
   - Create `README.md` in `hero-tavern/` directory with:

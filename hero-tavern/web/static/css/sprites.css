@@ -1,0 +1,161 @@
+/* ================================================================
+   PIXEL ART SPRITES — 16x16 CSS Grid
+   Pure CSS pixel rendering, no images, no external assets
+   ================================================================ */
+
+/* ===================================================================
+   SHARED COLOR PALETTE
+   Single-char codes used in createSprite RLE patterns
+   =================================================================== */
+.sprite-container .s  { background: #f4c9a0; }   /* skin        */
+.sprite-container .h  { background: #d2691e; }   /* skin-dark   */
+.sprite-container .k  { background: #1a0f08; }   /* black       */
+.sprite-container .w  { background: #ffffff; }   /* white       */
+.sprite-container .r  { background: #c41e3a; }   /* red         */
+.sprite-container .R  { background: #8b0000; }   /* dark-red    */
+.sprite-container .b  { background: #4169e1; }   /* blue        */
+.sprite-container .B  { background: #1c3a6e; }   /* dark-blue   */
+.sprite-container .g  { background: #d4af37; }   /* gold        */
+.sprite-container .q  { background: #ffd700; }   /* bright-gold */
+.sprite-container .n  { background: #8b4513; }   /* brown       */
+.sprite-container .N  { background: #654321; }   /* dark-brown  */
+.sprite-container .y  { background: #ffff00; }   /* yellow      */
+.sprite-container .c  { background: #00ffff; }   /* cyan        */
+.sprite-container .o  { background: #ff8c00; }   /* orange      */
+.sprite-container .O  { background: #ff4500; }   /* red-orange  */
+.sprite-container .G  { background: #228b22; }   /* green       */
+.sprite-container .GD { background: #006400; }   /* dark-green  */
+.sprite-container .p  { background: #9370db; }   /* purple      */
+.sprite-container .P  { background: #6a0dad; }   /* dark-purple */
+.sprite-container .f  { background: #f5f5dc; }   /* beige       */
+.sprite-container .l  { background: #c0c0c0; }   /* silver      */
+.sprite-container .m  { background: #708090; }   /* gun-metal   */
+.sprite-container .x  { background: #a9a9a9; }   /* chain-gray  */
+
+/* ===================================================================
+   CHARACTER-SPECIFIC COLOR OVERRIDES
+   When a shared key is overloaded for a unique hue, scoped under
+   its .sprite-* class
+   =================================================================== */
+
+/* Nick Fury — u = SHIELD uniform black */
+.sprite-nick-fury .u { background: #2c2c2c; }
+
+/* Heimdall — k = Asgardian dark skin */
+.sprite-heimdall .k { background: #8b7355; }
+
+/* Doctor Strange — c = firebrick cloak */
+.sprite-doctor-strange .c { background: #b22222; }
+.sprite-doctor-strange .t { background: #4682b4; }
+
+/* Rocket Raccoon — o = dark-fur shadow */
+.sprite-rocket .o { background: #654321; }
+
+/* Poseidon — b = sea-beard, f = sea-green tunic */
+.sprite-poseidon .b { background: #4682b4; }
+.sprite-poseidon .f { background: #20b2aa; }
+
+/* Apollo — q = lyre gold (distinct from hair) */
+.sprite-apollo .q { background: #daa520; }
+
+/* Hermes — q = winged sandal gold */
+.sprite-hermes .q { background: #ffd700; }
+.sprite-hermes .r { background: #8b4513; }
+
+/* Athena — l = owl feathers */
+.sprite-athena .l { background: #696969; }
+
+/* ===================================================================
+   SPRITE CONTAINER (16x16 CSS Grid)
+   =================================================================== */
+.sprite-container {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  grid-template-columns: repeat(16, var(--pixel, 4px));
+  grid-template-rows: repeat(16, var(--pixel, 4px));
+  grid-auto-flow: row;
+  margin: 0 auto;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.sprite-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 8px;
+}
+
+/* ===================================================================
+   STATE ANIMATIONS — all stepped, no smooth transitions
+   =================================================================== */
+
+/* Active — gentle stepped breathing */
+@keyframes sprite-breathe {
+  0%, 100% { transform: scale(1);    }
+  50%      { transform: scale(1.08); }
+}
+.agent-card[data-status="active"] .sprite-container {
+  animation: sprite-breathe 2s steps(2) infinite;
+}
+
+/* Idle — gentle stepped sway */
+@keyframes sprite-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50%      { transform: rotate(2deg);  }
+}
+.agent-card[data-status="idle"] .sprite-container {
+  animation: sprite-sway 3s steps(2) infinite;
+}
+
+/* Sleeping — stepped blink + brightness dim */
+@keyframes sprite-sleep-blink {
+  0%, 90%, 100% { opacity: 1;   }
+  95%           { opacity: 0.3; }
+}
+.agent-card[data-status="sleeping"] .sprite-container {
+  animation: sprite-sleep-blink 4s steps(1) infinite;
+  filter: brightness(0.6);
+}
+.sprite-container[data-status="sleeping"] {
+  animation: sprite-sleep-blink 4s steps(1) infinite;
+  filter: brightness(0.6);
+}
+
+/* Sleeping — floating Zzz */
+.sprite-wrapper[data-status="sleeping"]::after {
+  content: 'Z';
+  position: absolute;
+  top: -16px;
+  right: -4px;
+  color: #808080;
+  font-size: 10px;
+  font-weight: bold;
+  animation: sprite-zzz-float 4s steps(3) infinite;
+}
+@keyframes sprite-zzz-float {
+  0%, 100% { opacity: 0.8; transform: translateY(0);    }
+  50%      { opacity: 0.3; transform: translateY(-4px); }
+}
+
+/* Error — stepped flash with hue shift */
+@keyframes sprite-error-flash {
+  0%, 100% { filter: brightness(1);                       }
+  50%      { filter: brightness(1.5) hue-rotate(-30deg);  }
+}
+.agent-card[data-status="error"] .sprite-container {
+  animation: sprite-error-flash 1s steps(2) infinite;
+}
+
+/* ===================================================================
+   ACCESSIBILITY: respect prefers-reduced-motion
+   =================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .sprite-container,
+  .agent-card[data-status] .sprite-container,
+  .sprite-wrapper[data-status]::after {
+    animation: none !important;
+  }
+}
