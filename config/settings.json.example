@@ -19,8 +19,11 @@
   },
 
   "env": {
-    "NO_PROXY": "yaduo.com,at-our.com,localhost,127.0.0.1"
+    "NO_PROXY": "yaduo.com,at-our.com,localhost,127.0.0.1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
+
+  "teammateMode": "tmux",
 
   "hooks": {
     "$comment": "可共享的 hook 脚本放在仓库 config/hooks/，安装后软链到 ~/.claude/hooks/。在此引用，如 ~/.claude/hooks/your-hook.sh"

@@ -34,6 +34,49 @@ templates=()   # 待手动合并
 
 log()  { printf '%s\n' "$*"; }
 info() { printf '%s%s%s\n' "$C_INFO" "$*" "$C_RST"; }
+ok()   { printf '%s%s%s\n' "$C_OK"   "$*" "$C_RST"; }
+warn() { printf '%s%s%s\n' "$C_WARN" "$*" "$C_RST"; }
+
+check_tmux() {
+  if command -v tmux &> /dev/null; then
+    local ver; ver="$(tmux -V 2>&1)"
+    ok "✓ tmux 已安装：$ver"
+    return
+  fi
+
+  warn "tmux 未安装（Agent Teams 分屏模式依赖 tmux）"
+
+  if [ "$(uname -s)" = "Darwin" ]; then
+    if command -v brew &> /dev/null; then
+      log "  正在用 Homebrew 安装 tmux ..."
+      if brew install tmux; then
+        ok "✓ tmux 安装成功"
+      else
+        warn "✗ brew install tmux 失败，请手动安装"
+      fi
+    else
+      log "  未找到 Homebrew，请先安装 https://brew.sh 再执行："
+      log "    brew install tmux"
+    fi
+  elif command -v apt-get &> /dev/null; then
+    log "  检测到 apt，尝试 sudo apt-get install tmux ..."
+    if sudo apt-get install -y tmux; then
+      ok "✓ tmux 安装成功"
+    else
+      warn "✗ 安装失败，请手动：apt-get install tmux"
+    fi
+  elif command -v yum &> /dev/null; then
+    log "  检测到 yum，尝试 sudo yum install tmux ..."
+    if sudo yum install -y tmux; then
+      ok "✓ tmux 安装成功"
+    else
+      warn "✗ 安装失败，请手动：yum install tmux"
+    fi
+  else
+    log "  无法自动安装，请手动安装 tmux："
+    log "    https://github.com/tmux/tmux/wiki/Installing"
+  fi
+}
 
 # 解析 manifest.yaml 的 entries，输出 "source<TAB>target<TAB>mode"
 parse_manifest() {
@@ -110,6 +153,10 @@ main() {
   log  "  仓库:   $REPO_DIR"
   log  "  目标:   $CLAUDE_DIR"
   mkdir -p "$CLAUDE_DIR"
+
+  # Agent Teams 依赖 tmux（分屏模式），先检查并尝试安装
+  check_tmux
+  echo
 
   while IFS=$'\t' read -r source target mode; do
     [ -n "$source" ] || continue

@@ -19,9 +19,10 @@
         <a href="#how">原理</a>
         <a href="#skills">能力</a>
         <a href="#roles">角色</a>
+        <a href="#teams">组队</a>
         <a href="#install">安装</a>
         <a href="#build-pilot">自建</a>
-        <a href="/tavern/">客栈</a>
+        <!-- 看板调整中，暂时下线 <a href="/tavern/">客栈</a> -->
       </div>
     </div>
   </nav>
@@ -34,8 +35,8 @@
       <p class="hero-tagline">一座客栈，群英汇聚</p>
       <p class="hero-desc">把 Claude 智能助手当作汇聚于客栈的英雄与神祇——<br>领航员熟知去路，角色各执一艺，构建、刷新、导航你的专属团队。</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="/tavern/">推门入栈 · 实时看板</a>
-        <a class="btn btn-ghost" href="#idea">了解理念</a>
+        <!-- 看板调整中，暂时下线 <a class="btn btn-primary" href="/tavern/">推门入栈 · 实时看板</a> -->
+        <a class="btn btn-primary" href="#idea">了解理念</a>
       </div>
     </div>
     <!-- 山形辅助图形：随深底联动，安静铺底 -->
@@ -259,6 +260,67 @@
       </div>
     </section>
 
+    <!-- ============ Agent Teams 组队 ============ -->
+    <section id="teams" class="section section-light">
+      <div class="container">
+        <p class="kicker center">群英结阵 · AGENT TEAMS</p>
+        <h2 class="section-title">一句指令，多位 Hero 并行作战</h2>
+        <p class="section-desc">复杂任务不再单打独斗——孔明出设计、文远写代码、希仁补测试，三位 Hero <strong>同时</strong>在各自 pane 里推进，互相通信，合力交付。<code>install.sh</code> 已自动安装 tmux 并配好分屏模式，零配置即用。</p>
+
+        <div class="teams-visual">
+          <div class="team-lead">
+            <span class="team-label">你说</span>
+            <code class="team-prompt">"组队完成登录模块"</code>
+          </div>
+          <div class="team-arrow">
+            <svg viewBox="0 0 24 40" width="24" height="40" aria-hidden="true">
+              <path d="M12 0 L12 28 M4 20 L12 28 L20 20" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="team-squad">
+            <div class="team-member">
+              <span class="team-seal">孔</span>
+              <span class="team-name">孔明</span>
+              <span class="team-task">设计 + 拆任务</span>
+              <span class="team-model">opus</span>
+            </div>
+            <div class="team-member">
+              <span class="team-seal">文</span>
+              <span class="team-name">文远</span>
+              <span class="team-task">写代码</span>
+              <span class="team-model">sonnet</span>
+            </div>
+            <div class="team-member">
+              <span class="team-seal">希</span>
+              <span class="team-name">希仁</span>
+              <span class="team-task">写测试</span>
+              <span class="team-model">haiku</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmd-hero">
+          <code class="cmd-hero-text"><span class="c-prompt">$</span> tmux new -s work &amp;&amp; claude</code>
+          <span class="cmd-hero-tip">进入 tmux 会话后告诉 Claude: "Spawn a team of 3 agents"</span>
+        </div>
+
+        <div class="grid grid-3 how-systems">
+          <article class="card">
+            <h3>自动分屏</h3>
+            <p class="card-body">每位 Hero 独占一个 tmux pane，实时查看各自进度。<code>install.sh</code> 自动安装 tmux 并配置 <code>teammateMode: tmux</code>。</p>
+          </article>
+          <article class="card">
+            <h3>智能分配模型</h3>
+            <p class="card-body">复杂决策用 opus，写代码用 sonnet，轻量任务用 haiku——按任务难度分配模型，兼顾质量与成本。</p>
+          </article>
+          <article class="card">
+            <h3>互相通信</h3>
+            <p class="card-body">Hero 之间可以发消息、共享进展、协调冲突。孔明出方案后通知文远实现，文远写完通知希仁补测试。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ 安装 ============ -->
     <section id="install" class="section section-dark">
       <div class="container">
@@ -267,7 +329,7 @@
         <p class="section-desc invert">克隆后跑一次 <code>install.sh</code>，把共享 skills / agents / hooks <strong>软链</strong>进你的 <code>~/.claude</code>——逐项软链、已有文件自动备份，<strong>绝不污染你原有的配置</strong>。之后 <code>git pull</code> 即全员生效，无需重装。</p>
 
         <div class="cmd-hero">
-          <code class="cmd-hero-text"><span class="c-prompt">$</span> git clone <span class="c-str">https://&lt;your-git-host&gt;/claude-hero.git</span> ~/Documents/ops/claude-hero &amp;&amp; cd $_ &amp;&amp; bash install.sh</code>
+          <code class="cmd-hero-text"><span class="c-prompt">$</span> git clone <span class="c-str">git@gitlab.corp.yaduo.com:full-stack-ai/claude-hero.git</span> &amp;&amp; cd claude-hero &amp;&amp; bash install.sh</code>
           <span class="cmd-hero-tip">复制这一行 · 十分钟接入</span>
         </div>
 
@@ -311,6 +373,7 @@
     </section>
 
     <!-- ============ 客栈入口 CTA ============ -->
+    <!-- 看板调整中，暂时下线整块 CTA，调整好再恢复
     <section class="tavern-cta">
       <div class="container tavern-cta-inner">
         <div>
@@ -321,6 +384,7 @@
         <a class="btn btn-light" href="/tavern/">进入客栈 →</a>
       </div>
     </section>
+    -->
   </main>
 
   <!-- ============ 页脚 ============ -->
@@ -331,7 +395,7 @@
     <div class="footer-inner">
       <p class="footer-brand">领航 <span>HERO</span></p>
       <p class="footer-links">
-        <a href="/tavern/">客栈看板</a>
+        <!-- 看板调整中，暂时下线 <a href="/tavern/">客栈看板</a> -->
         <a href="#idea">理念</a>
         <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
       </p>

@@ -615,12 +615,107 @@ img, svg { display: block; max-width: 100%; }
 .c-str { color: #cdb98c; }
 
 /* ========================================
+   9.5 Agent Teams 组队
+   ======================================== */
+.teams-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  margin: 0 auto var(--space-3xl);
+  max-width: 560px;
+}
+.team-lead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.team-label {
+  font-family: var(--font-brand);
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  color: var(--color-woye);
+  letter-spacing: 0.04em;
+}
+.team-prompt {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-woye);
+  color: var(--color-baiyan);
+  padding: 0.4em 0.9em;
+  border-radius: var(--radius-md);
+}
+.team-arrow {
+  color: var(--color-bronze);
+  opacity: 0.6;
+}
+.team-squad {
+  display: flex;
+  gap: var(--space-lg);
+  width: 100%;
+}
+.team-member {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-lg) var(--space-md);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-top: 3px solid var(--color-woye);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.team-member:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+.team-seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  background: var(--color-woye);
+  color: var(--color-baiyan);
+  border-radius: var(--radius-md);
+  font-family: var(--font-brand);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-xs);
+}
+.team-name {
+  font-family: var(--font-brand);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-woye);
+  letter-spacing: 0.06em;
+}
+.team-task {
+  font-size: var(--text-xs);
+  color: var(--color-ink-70);
+  line-height: var(--leading-normal);
+}
+.team-model {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-bronze);
+  background: var(--color-baiyan);
+  padding: 0.15em 0.5em;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
+}
+
+/* ========================================
    11. 响应式
    ======================================== */
 @media (max-width: 900px) {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .idea-trio { grid-template-columns: 1fr; gap: var(--space-xl); }
   .step-list-2col { grid-template-columns: 1fr; }
+  .team-squad { flex-wrap: wrap; justify-content: center; }
+  .team-member { flex: 0 1 200px; }
 }
 @media (max-width: 680px) {
   :root { --space-4xl: 4.5rem; }
@@ -636,4 +731,9 @@ img, svg { display: block; max-width: 100%; }
   .flow-step::after { display: none; }
   .flow-num { margin-bottom: 0; }
   .flow-sub { display: inline; margin-left: var(--space-sm); }
+
+  .team-lead { flex-direction: column; gap: var(--space-xs); text-align: center; }
+  .team-squad { flex-direction: column; align-items: stretch; }
+  .team-member { flex: 1; }
+  .teams-visual { max-width: 100%; }
 }

@@ -56,6 +56,7 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 接入后你可以：
 
 - **用现有的 Hero**——文远帮你写代码，鹏举帮你查安全，希仁帮你写测试
+- **用 Agent Teams 组队**——孔明出设计 + 文远写代码 + 希仁补测试，三位并行推进，自动分屏协作（tmux 已自动安装）
 - **改进现有的 Hero**——文远的 prompt 可以更好？提 PR，大家一起变强
 - **创造你自己的 Hero**——你最懂你日常做什么。造一个，命个花名，解放自己
 - **沉淀团队的 Skill**——团队特有的工作流、规范，写成 Skill 共享出来
@@ -83,6 +84,19 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 ### 🏯 英雄殿看板（hero-tavern）
 
 仙剑客栈风格的像素监控看板，实时展示 hero（Claude Code）和 omo（OpenCode）的 agent 状态：活跃 / 空闲 / 休眠 / 异常，消息流 + 阻塞检测。详见 [`hero-tavern/README.md`](hero-tavern/README.md)。
+
+### 🤝 Agent Teams（团队协作）
+
+多位 Hero 组队协作——孔明明出设计、文远写代码、希仁补测试，三位同时在各自 pane 里并行推进，互相通信，合力完成复杂任务。`install.sh` 已自动检测并安装 `tmux`（分屏模式依赖），无需手动配置。
+
+```bash
+# 进入 tmux 会话
+tmux new -s work
+claude
+
+# 对 Claude 说：
+# "Spawn a team of 3 agents: 孔明（opus）做设计，文远（sonnet）写代码，希仁（haiku）写测试"
+```
 
 ---
 
