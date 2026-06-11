@@ -469,6 +469,83 @@ img, svg { display: block; max-width: 100%; }
 }
 .how-systems { margin-top: var(--space-xl); }
 
+/* hero 开口：调用示例 chips */
+.hero-cmds {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  max-width: 760px;
+  margin: 0 auto var(--space-lg);
+}
+.hero-cmds code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-baiyan);
+  border: 1px solid var(--color-line);
+  color: var(--color-woye);
+  padding: 0.45em 0.95em;
+  border-radius: var(--radius-full);
+}
+.hero-cmds-note {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-ink-70);
+  line-height: var(--leading-relaxed);
+  max-width: 640px;
+  margin: 0 auto var(--space-3xl);
+}
+.hero-cmds-note strong { color: var(--color-bronze); font-weight: var(--font-bold); }
+.hero-cmds-note code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-woye);
+  color: var(--color-baiyan);
+  padding: 0.12em 0.45em;
+  border-radius: var(--radius-sm);
+}
+
+/* 一条命令（主角命令框）+ 详情在后 */
+.cmd-hero {
+  max-width: 780px;
+  margin: 0 auto var(--space-3xl);
+  background: #241b15;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.cmd-hero-text {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  color: var(--color-baiyan);
+  line-height: var(--leading-relaxed);
+  word-break: break-all;
+}
+.c-prompt { color: var(--color-bronze); margin-right: 0.5em; }
+.c-name { color: #cdb98c; }
+.cmd-hero-tip {
+  display: block;
+  margin-top: var(--space-md);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: rgba(234, 228, 218, 0.5);
+  letter-spacing: 0.06em;
+}
+.install-detail { max-width: 920px; margin: 0 auto; }
+.detail-label {
+  text-align: center;
+  font-family: var(--font-brand);
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.12em;
+  color: var(--color-ink-50);
+  margin-bottom: var(--space-xl);
+}
+.section-dark .detail-label { color: rgba(234, 228, 218, 0.55); }
+
 /* ========================================
    10.6 安装（深色） / 步骤列表 / 代码块
    ======================================== */
@@ -482,13 +559,6 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-bronze-soft);
   padding: 0.08em 0.4em;
   border-radius: var(--radius-sm);
-}
-
-.install-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2xl);
-  align-items: start;
 }
 
 .step-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-lg); }
@@ -541,29 +611,7 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-50);
 }
 
-/* 代码块（终端感） */
-.code-block {
-  background: #241b15;
-  border: 1px solid var(--color-line-light);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-.code-bar {
-  display: flex;
-  gap: 6px;
-  padding: var(--space-md);
-  border-bottom: 1px solid var(--color-line-light);
-}
-.code-bar span { width: 10px; height: 10px; border-radius: 50%; background: rgba(234, 228, 218, 0.22); }
-.code-block pre { padding: var(--space-lg); overflow-x: auto; }
-.code-block code {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  line-height: var(--leading-relaxed);
-  color: var(--color-baiyan);
-  white-space: pre;
-}
-.c-cmt { color: var(--color-bronze-soft); }
+/* 命令高亮 token（用于 .cmd-hero） */
 .c-str { color: #cdb98c; }
 
 /* ========================================
@@ -572,7 +620,6 @@ img, svg { display: block; max-width: 100%; }
 @media (max-width: 900px) {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .idea-trio { grid-template-columns: 1fr; gap: var(--space-xl); }
-  .install-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
   .step-list-2col { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {

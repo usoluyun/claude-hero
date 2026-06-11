@@ -79,6 +79,14 @@
         <h2 class="section-title">说一句意图，剩下交给 Hero</h2>
         <p class="section-desc">Hero 是有名字、有职责、配齐工具与技能的 AI agent。你用自然语言说出意图，分诊与编排自动完成，每一步都有确认门控——不记命令，自然语言直达。</p>
 
+        <div class="hero-cmds">
+          <code>hero 修一下登录报错</code>
+          <code>hero 这个接口太慢</code>
+          <code>hero 开发工作流 &lt;飞书 URL&gt;</code>
+          <code>hero 刷新</code>
+        </div>
+        <p class="hero-cmds-note">所有 Hero 都以 <strong>hero</strong> 开口——分诊器判断走哪条线，接管时打上 <code>🦸 hero ▸</code> 标记，让你随时看见是哪位 Hero 在干活。</p>
+
         <ol class="flow">
           <li class="flow-step"><span class="flow-num">01</span><span class="flow-label">说出意图</span><span class="flow-sub">自然语言，不记命令</span></li>
           <li class="flow-step"><span class="flow-num">02</span><span class="flow-label">意图分诊</span><span class="flow-sub">归类到 8 条 lane</span></li>
@@ -151,7 +159,7 @@
       <div class="container">
         <p class="kicker center">中堂领航 · PILOTS</p>
         <h2 class="section-title">领航 Agents</h2>
-        <p class="section-desc">按服务与业务域划分的专属向导，熟知项目结构与领域知识，为来客指路。</p>
+        <p class="section-desc">已接入 3 位领航员——子文 / 郑和 / 霞客，各守一个服务；用 <code>hero-init</code> 可随时为新项目再添一位。</p>
         <div class="grid grid-3">
 
           <article class="card pilot">
@@ -196,7 +204,7 @@
       <div class="container">
         <p class="kicker center">东厢群英 · ROLES</p>
         <h2 class="section-title">角色 Agents</h2>
-        <p class="section-desc">按职能分工的专业团队，在领航员的调度下执行具体任务。</p>
+        <p class="section-desc">6 位角色 Hero 分工协作，全部以 <code>hero &lt;意图&gt;</code> 一句话调用，在领航员调度下落子成局。</p>
         <div class="grid grid-2">
 
           <article class="card role">
@@ -255,42 +263,22 @@
     <section id="install" class="section section-dark">
       <div class="container">
         <p class="kicker center">安装 · GET STARTED</p>
-        <h2 class="section-title invert">十分钟接入英雄殿</h2>
-        <p class="section-desc invert">软链安装：HTTPS 克隆仓库后 <code>bash install.sh</code>，把共享 skills / agents / hooks 软链进你的 <code>~/.claude</code>。之后 <code>git pull</code> 即全员生效，无需重装。</p>
+        <h2 class="section-title invert">一条命令，接入英雄殿</h2>
+        <p class="section-desc invert">克隆后跑一次 <code>install.sh</code>，把共享 skills / agents / hooks <strong>软链</strong>进你的 <code>~/.claude</code>——逐项软链、已有文件自动备份，<strong>绝不污染你原有的配置</strong>。之后 <code>git pull</code> 即全员生效，无需重装。</p>
 
-        <div class="install-grid">
-          <ol class="step-list">
-            <li class="step">
-              <span class="step-n">1</span>
-              <div><h4>前置</h4><p>已安装 Claude Code、macOS，以及常用 CLI 工具。</p></div>
-            </li>
-            <li class="step">
-              <span class="step-n">2</span>
-              <div><h4>克隆并安装</h4><p>HTTPS 克隆仓库，运行安装脚本——子项逐个软链，已有文件自动备份。</p></div>
-            </li>
-            <li class="step">
-              <span class="step-n">3</span>
-              <div><h4>合并个人化模板</h4><p>按提示合并 <code>CLAUDE.md</code> / <code>settings.json</code> / <code>.mcp.json</code>（含密钥，需手动合并）。</p></div>
-            </li>
-            <li class="step">
-              <span class="step-n">4</span>
-              <div><h4>验证</h4><p>Claude Code 里能看到共享 skill；改任意 <code>SKILL.md</code> 软链即生效，无需重装。</p></div>
-            </li>
+        <div class="cmd-hero">
+          <code class="cmd-hero-text"><span class="c-prompt">$</span> git clone <span class="c-str">https://&lt;your-git-host&gt;/claude-hero.git</span> ~/Documents/ops/claude-hero &amp;&amp; cd $_ &amp;&amp; bash install.sh</code>
+          <span class="cmd-hero-tip">复制这一行 · 十分钟接入</span>
+        </div>
+
+        <div class="install-detail">
+          <p class="detail-label">这条命令做了什么</p>
+          <ol class="step-list step-list-2col">
+            <li class="step"><span class="step-n">1</span><div><h4>逐项软链</h4><p>把 skills / agents / hooks 子项逐个软链进 <code>~/.claude</code>，不整目录覆盖。</p></div></li>
+            <li class="step"><span class="step-n">2</span><div><h4>自动备份</h4><p>目标已存在且非本仓库软链时，先备份 <code>*.bak.&lt;时间戳&gt;</code> 再建链。</p></div></li>
+            <li class="step"><span class="step-n">3</span><div><h4>模板手动合并</h4><p><code>CLAUDE.md</code> / <code>settings.json</code> / <code>.mcp.json</code> 含密钥，不自动写入，仅提示按需合并。</p></div></li>
+            <li class="step"><span class="step-n">4</span><div><h4>幂等可重跑</h4><p>已是正确软链则跳过；<code>git pull</code> 后全员生效，改任意 <code>SKILL.md</code> 即时见效。</p></div></li>
           </ol>
-
-          <div class="code-block" role="img" aria-label="安装命令示例">
-            <div class="code-bar"><span></span><span></span><span></span></div>
-            <pre><code><span class="c-cmt"># 1 · HTTPS 克隆到团队约定路径</span>
-git clone <span class="c-str">https://&lt;your-git-host&gt;/claude-hero.git</span> \
-  ~/Documents/ops/claude-hero
-cd ~/Documents/ops/claude-hero
-
-<span class="c-cmt"># 2 · 一键软链进 ~/.claude</span>
-bash install.sh
-
-<span class="c-cmt"># 3 · 日后保鲜：git pull 即全员生效</span>
-git pull</code></pre>
-          </div>
         </div>
       </div>
     </section>
@@ -299,18 +287,26 @@ git pull</code></pre>
     <section id="build-pilot" class="section section-light">
       <div class="container">
         <p class="kicker center">进阶 · BUILD YOUR PILOT</p>
-        <h2 class="section-title">为你的项目造一位领航员</h2>
-        <p class="section-desc">领航员是某个服务的「只读知识层」——懂业务定位、技术栈、代码地图与对外契约。用 codegraph 六步，从一个项目生成一个 <code>hero-&lt;lang&gt;-&lt;project&gt;</code>。</p>
+        <h2 class="section-title">一条命令，为项目造一位领航员</h2>
+        <p class="section-desc">领航员是某个服务的「只读知识层」——懂业务定位、技术栈、代码地图与对外契约。开荒<strong>全自动</strong>：给一个项目路径和一个花名，<code>hero-init</code> 跑完六阶段，直接产出 <code>hero-&lt;lang&gt;-&lt;project&gt;</code> 并提交 Git 分支。</p>
 
-        <ol class="step-list step-list-2col">
-          <li class="step"><span class="step-n">1</span><div><h4>索引项目</h4><p><code>codegraph init -i .</code> 首次索引；先把 <code>.codegraph/</code> 加进 <code>.git/info/exclude</code> 防污染。</p></div></li>
-          <li class="step"><span class="step-n">2</span><div><h4>探测源码布局</h4><p>别假设 <code>src/main/java</code> 在根——单模块与多模块差别很大，先探出真实包根。</p></div></li>
-          <li class="step"><span class="step-n">3</span><div><h4>识别真实技术栈</h4><p>读 <code>pom.xml</code> / <code>build.gradle</code> 认框架，决定模板——不能默认 Spring，否则会编出不存在的依赖。</p></div></li>
-          <li class="step"><span class="step-n">4</span><div><h4>组装证据包</h4><p>用 codegraph + grep 抓模块结构、入口、Feign 下游、MQ、定时任务、对外契约与语义种子。</p></div></li>
-          <li class="step"><span class="step-n">5</span><div><h4>套模板生成</h4><p>frontmatter <code>name = hero-&lt;lang&gt;-&lt;project&gt;</code>，description 四段式（定位 / 触发词 / 路由 / 边界），正文七部分。</p></div></li>
-          <li class="step"><span class="step-n">6</span><div><h4>反编造验证 + 登记</h4><p>正文引用的每个类都要 grep 命中（零编造），最后在 <code>hero-agent-roster.md</code> 登记一行花名册。</p></div></li>
-        </ol>
-        <p class="build-note">完整手册见仓库 <code>docs/project-agent-cookbook.md</code>；开荒完成后纳入 <code>hero-refresh</code>，即可随代码漂移自动保鲜。</p>
+        <div class="cmd-hero">
+          <code class="cmd-hero-text"><span class="c-prompt">$</span> bash scripts/hero-init.sh <span class="c-str">~/Documents/ATLWork/ecrm</span> <span class="c-name">子文</span></code>
+          <span class="cmd-hero-tip">&lt;项目路径&gt; &lt;花名&gt; · 花名取自历史人物字号，不与现有 Hero 冲突</span>
+        </div>
+
+        <div class="install-detail">
+          <p class="detail-label">这条命令背后的六个阶段</p>
+          <ol class="step-list step-list-2col">
+            <li class="step"><span class="step-n">1</span><div><h4>检测项目布局</h4><p>识别构建工具与模块结构——单模块与多模块差别很大，先探出真实包根。</p></div></li>
+            <li class="step"><span class="step-n">2</span><div><h4>检测技术栈</h4><p>读 <code>pom.xml</code> / <code>build.gradle</code> 认框架与中间件，决定模板——不默认 Spring。</p></div></li>
+            <li class="step"><span class="step-n">3</span><div><h4>收集代码证据</h4><p>抓入口点、配置文件、对外契约与语义种子，作为生成素材。</p></div></li>
+            <li class="step"><span class="step-n">4</span><div><h4>填充模板</h4><p>套四段式 description（定位 / 触发词 / 路由 / 边界）写出 <code>agents/{name}.md</code>。</p></div></li>
+            <li class="step"><span class="step-n">5</span><div><h4>反伪造验证</h4><p>校验路径 / 技术栈 / 关键词，正文引用的每个类都要真实命中，零编造。</p></div></li>
+            <li class="step"><span class="step-n">6</span><div><h4>Git 分支 + MR 指引</h4><p>自动建 <code>feat/init-*</code> 分支并提交，输出 MR 指引——不会自动 push。</p></div></li>
+          </ol>
+        </div>
+        <p class="build-note">开荒完成后注册进 <code>.refresh-state.json</code>，即纳入 <code>hero 刷新</code> 保鲜；完整手册见 <code>docs/navigator-lifecycle-handbook.md</code>。</p>
       </div>
     </section>
 
