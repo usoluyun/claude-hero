@@ -76,6 +76,14 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 
 项目代码在变，Hero 的知识不能过时。定期扫描代码变化 → 刷新领航 Hero 的认知 → 有人工 gate 确认才生效。
 
+### 🌱 主动开荒（hero-init）
+
+一个新 Java 服务从无到有接入：`bash scripts/hero-init.sh <项目路径> <花名>` → 自动建 codegraph 索引 + 生成领航 Hero + 登记花名册 + 开好 Git 分支，剩下提 MR 即可。
+
+### 🏯 英雄殿看板（hero-tavern）
+
+仙剑客栈风格的像素监控看板，实时展示 hero（Claude Code）和 omo（OpenCode）的 agent 状态：活跃 / 空闲 / 休眠 / 异常，消息流 + 阻塞检测。详见 [`hero-tavern/README.md`](hero-tavern/README.md)。
+
 ---
 
 ## 仓库结构
@@ -83,11 +91,16 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 | 目录 | 装什么 | 怎么用 |
 |------|--------|--------|
 | `agents/` | 所有 Hero（`hero-*.md`） | 改 prompt / 新建你的 Hero |
-| `skills/` | 能力包（`hero-*/SKILL.md`） | 写自己的工作流 Skill |
+| `skills/` | 能力包：hero 工作流 + 13 个 CLI 工具 skill + 整套 lark 飞书 skill | 写自己的工作流 Skill |
 | `cli/` | 18 个 CLI 工具文档 | 查工具用法 |
 | `config/` | hooks / 模板 | 改 hook / 合并配置 |
 | `mcp/` | MCP server 配置模板 | 配自己的 MCP |
+| `scripts/` | `hero-refresh.sh`（保鲜）/ `hero-init.sh`（开荒）等入口 | 跑保鲜 / 开荒 |
+| `templates/` | 领航 Agent 模板（`navigator-agent.md.tmpl`） | hero-init 生成 Hero 用 |
+| `hero-tavern/` | 英雄殿监控看板（Python + Web） | 看 agent 实时状态 |
+| `site/` | 宣传页（Caddy 静态站） | 对外展示 |
 | `docs/` | 文档手册 | 看 onboarding / 维护手册 |
+| `tests/` | dispatch / refresh / 分层 / 可见性测试 | 改核心子系统前后跑 |
 
 ---
 
@@ -99,6 +112,7 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 |-----------|--------|
 | 改进一个共享 Hero | 改 `agents/hero-*.md` → 提 PR |
 | 创造你的专属 Hero | 在 `agents/` 新建 `hero-<语言>-<名字>.md`，取个花名 |
+| 给新 Java 服务开荒一个领航 Hero | `bash scripts/hero-init.sh <项目路径> <花名>`（自动建索引 + 生成 Hero + 开分支） |
 | 沉淀一个团队 Skill | 在 `skills/hero-<能力>/` 写 `SKILL.md` |
 | 加上你发现好用的 CLI 工具 | 在 `cli/` 写文档，更新总表 |
 | 有想法 / 想讨论 | 提 Issue / 在群里聊 |
