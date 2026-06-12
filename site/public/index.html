@@ -8,6 +8,29 @@
   <title>领航 Hero · 群英客栈</title>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/gitlab.css">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.cmd-tab');
+      const contents = document.querySelectorAll('.cmd-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const cmd = tab.getAttribute('data-cmd');
+
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+
+          tab.classList.add('active');
+          const targetContent = document.querySelector(`.cmd-content[data-cmd="${cmd}"]`);
+          if (targetContent) {
+            targetContent.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
 </head>
 <body>
   <!-- ============ 顶部导航 ============ -->
@@ -20,6 +43,7 @@
         <a href="#skills">能力</a>
         <a href="#roles">角色</a>
         <a href="#teams">组队</a>
+        <a href="mechanism.html">机制</a>
         <a href="#install">安装</a>
         <a href="#build-pilot">自建</a>
         <!-- 看板调整中，暂时下线 <a href="/tavern/">客栈</a> -->
@@ -267,45 +291,312 @@
         <h2 class="section-title">GitLab Issue 任务闭环</h2>
         <p class="section-desc">从主 Issue 到子任务拆解、认领、执行、汇报、关闭——人建主 Issue 开局，人验主 Issue 收盘，中间交给 Hero 自动流转。</p>
 
-        <div class="issue-flow">
-          <div class="issue-flow-step">
-            <span class="issue-flow-num">01</span>
-            <span class="issue-flow-text"><strong>人建主 Issue</strong> &mdash; 打标签 <code>hero::type:epic</code>，描述需求</span>
-          </div>
-          <div class="issue-flow-step">
-            <span class="issue-flow-num">02</span>
-            <span class="issue-flow-text"><strong>tech-lead (孔明) 拆解子任务</strong> &mdash; 自动分析 → 生成子 Issue → 分配角色</span>
-          </div>
-          <div class="issue-flow-step">
-            <span class="issue-flow-num">03</span>
-            <span class="issue-flow-text"><strong>各角色 agent 认领</strong> &mdash; issue claim 标记 assignee，开始执行</span>
-          </div>
-          <div class="issue-flow-step">
-            <span class="issue-flow-num">04</span>
-            <span class="issue-flow-text"><strong>agent 执行 + 建 MR</strong> &mdash; 关联 <code>#Issue</code>，代码审查自动触发</span>
-          </div>
-          <div class="issue-flow-step">
-            <span class="issue-flow-num">05</span>
-            <span class="issue-flow-text"><strong>agent 评论汇报 + 关子 Issue</strong> &mdash; 完成后自动评论进度并关闭子任务</span>
-          </div>
-          <div class="issue-flow-step">
-            <span class="issue-flow-num">06</span>
-            <span class="issue-flow-text"><strong>人验证后手动关主 Issue</strong> &mdash; 确认交付质量，关闭主 Issue</span>
+        <!-- 第 1 层：端到端流程图 -->
+        <div class="issue-layer-head">
+          <span class="issue-layer-num">I</span>
+          <span class="issue-layer-title">端到端流程图</span>
+        </div>
+        <div class="gitlab-flow-diagram">
+          <svg viewBox="0 0 1100 260" class="flow-svg" preserveAspectRatio="xMidYMid meet" aria-label="GitLab Issue 端到端流程图">
+            <!-- 箭头标记 -->
+            <defs>
+              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="var(--color-bronze)"/>
+              </marker>
+              <marker id="arrowhead-muted" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="var(--color-ink-50)" opacity="0.5"/>
+              </marker>
+            </defs>
+
+            <!-- 主流程连线 -->
+            <g class="flow-main">
+              <!-- 节点 1: 人建主 Issue（人 = 沃野深棕） -->
+              <g class="flow-node" data-node="epic">
+                <rect x="30" y="70" width="140" height="60" rx="8" fill="var(--color-woye)"/>
+                <text x="100" y="97"  text-anchor="middle" fill="var(--color-baiyan)" font-size="18">👤 人建主 Issue</text>
+                <text x="100" y="118" text-anchor="middle" fill="var(--color-bronze-soft)" font-size="11">hero::type:epic</text>
+              </g>
+              <path d="M 170 100 L 210 100" stroke="var(--color-bronze)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+              <!-- 节点 2: 孔明拆解 -->
+              <g class="flow-node" data-node="decompose">
+                <rect x="210" y="70" width="140" height="60" rx="8" fill="var(--color-bronze)"/>
+                <text x="280" y="97"  text-anchor="middle" fill="var(--color-baiyan)" font-size="18">🏛️ 孔明拆解</text>
+                <text x="280" y="118" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">tech-lead</text>
+              </g>
+              <path d="M 350 100 L 410 100" stroke="var(--color-bronze)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+              <!-- 节点 3: Agent 并行执行（大节点） -->
+              <g class="flow-node" data-node="parallel">
+                <rect x="410" y="50" width="200" height="100" rx="8" fill="var(--color-info)" opacity="0.88"/>
+                <text x="510" y="82" text-anchor="middle" fill="var(--color-baiyan)" font-size="16">⚡ Agent 并行执行</text>
+                <text x="510" y="108" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="12">文远 · 子长 · 希仁</text>
+                <text x="510" y="130" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="12">玄成 · 鹏举</text>
+              </g>
+              <path d="M 610 100 L 670 100" stroke="var(--color-bronze)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+              <!-- 节点 4: 汇报完成（成功绿） -->
+              <g class="flow-node" data-node="report">
+                <rect x="670" y="70" width="140" height="60" rx="8" fill="var(--color-success)"/>
+                <text x="740" y="97"  text-anchor="middle" fill="var(--color-baiyan)" font-size="18">✅ 汇报完成</text>
+                <text x="740" y="118" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11">评论 + 关子 Issue</text>
+              </g>
+              <path d="M 810 100 L 850 100" stroke="var(--color-bronze)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+              <!-- 节点 5: 人验收关主 Issue -->
+              <g class="flow-node" data-node="close">
+                <rect x="850" y="70" width="200" height="60" rx="8" fill="var(--color-woye)"/>
+                <text x="950" y="97"  text-anchor="middle" fill="var(--color-baiyan)" font-size="18">🎯 人验收关主 Issue</text>
+                <text x="950" y="118" text-anchor="middle" fill="var(--color-bronze-soft)" font-size="11">agent 不可触碰</text>
+              </g>
+            </g>
+
+            <!-- 状态标签层 -->
+            <g class="status-labels" transform="translate(0, 200)">
+              <g>
+                <rect x="30"    y="0" width="120" height="28" rx="4" fill="var(--color-warning)" opacity="0.85"/>
+                <text x="90"    y="18" text-anchor="middle" fill="#fff" font-size="12">pending ⏳</text>
+              </g>
+              <g>
+                <rect x="280"   y="0" width="140" height="28" rx="4" fill="var(--color-info)" opacity="0.85"/>
+                <text x="350"   y="18" text-anchor="middle" fill="#fff" font-size="12">in_progress ⚡</text>
+              </g>
+              <g>
+                <rect x="600"   y="0" width="120" height="28" rx="4" fill="var(--color-success)" opacity="0.9"/>
+                <text x="660"   y="18" text-anchor="middle" fill="#fff" font-size="12">done ✅</text>
+              </g>
+              <g>
+                <rect x="850"   y="0" width="120" height="28" rx="4" fill="var(--color-ink-50)" opacity="0.8"/>
+                <text x="910"   y="18" text-anchor="middle" fill="#fff" font-size="12">closed 🔒</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 第 2 层：Agent 协作时序图 -->
+        <div class="issue-layer-head">
+          <span class="issue-layer-num">II</span>
+          <span class="issue-layer-title">Agent 协作时序</span>
+        </div>
+        <div class="gitlab-collaboration">
+          <div class="collab-grid">
+            <!-- 孔明 · Tech Lead -->
+            <div class="collab-card" data-role="tech-lead">
+              <div class="collab-header">
+                <span class="collab-avatar">🏛️</span>
+                <div class="collab-info">
+                  <h3>孔明</h3>
+                  <p class="collab-role">Tech Lead</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">09:00</span><span class="event-action">接收主 Issue</span></div>
+                <div class="collab-event"><span class="event-time">09:05</span><span class="event-action">拆解为 3 个子任务</span></div>
+                <div class="collab-event"><span class="event-time">09:10</span><span class="event-action">分配给各 Agent</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">hero-prd-to-java</span>
+                <span class="tool-badge">hero-im</span>
+              </div>
+            </div>
+
+            <!-- 文远 · Backend Dev -->
+            <div class="collab-card" data-role="backend-dev">
+              <div class="collab-header">
+                <span class="collab-avatar">⚔️</span>
+                <div class="collab-info">
+                  <h3>文远</h3>
+                  <p class="collab-role">Backend Dev</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">09:15</span><span class="event-action">认领任务 #101</span></div>
+                <div class="collab-event"><span class="event-time">09:20</span><span class="event-action">实现用户认证 Controller</span></div>
+                <div class="collab-event"><span class="event-time">11:30</span><span class="event-action">提交 MR !45</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">git</span>
+                <span class="tool-badge">maven</span>
+              </div>
+            </div>
+
+            <!-- 子长 · Data Engineer -->
+            <div class="collab-card" data-role="data-engineer">
+              <div class="collab-header">
+                <span class="collab-avatar">📊</span>
+                <div class="collab-info">
+                  <h3>子长</h3>
+                  <p class="collab-role">Data Engineer</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">09:15</span><span class="event-action">认领任务 #102</span></div>
+                <div class="collab-event"><span class="event-time">09:25</span><span class="event-action">设计用户表结构</span></div>
+                <div class="collab-event"><span class="event-time">10:00</span><span class="event-action">优化查询索引</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">sql</span>
+                <span class="tool-badge">mybatis</span>
+              </div>
+            </div>
+
+            <!-- 希仁 · Test Engineer -->
+            <div class="collab-card" data-role="test-engineer">
+              <div class="collab-header">
+                <span class="collab-avatar">🧪</span>
+                <div class="collab-info">
+                  <h3>希仁</h3>
+                  <p class="collab-role">Test Engineer</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">09:15</span><span class="event-action">认领任务 #103</span></div>
+                <div class="collab-event"><span class="event-time">11:30</span><span class="event-action">编写认证测试用例</span></div>
+                <div class="collab-event"><span class="event-time">12:00</span><span class="event-action">运行测试套件</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">junit</span>
+                <span class="tool-badge">playwright</span>
+              </div>
+            </div>
+
+            <!-- 玄成 · Code Reviewer -->
+            <div class="collab-card" data-role="code-reviewer">
+              <div class="collab-header">
+                <span class="collab-avatar">🔍</span>
+                <div class="collab-info">
+                  <h3>玄成</h3>
+                  <p class="collab-role">Code Reviewer</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">11:35</span><span class="event-action">审查 MR !45</span></div>
+                <div class="collab-event"><span class="event-time">12:00</span><span class="event-action">提出 3 处改进建议</span></div>
+                <div class="collab-event"><span class="event-time">13:00</span><span class="event-action">批准合并</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">git diff</span>
+                <span class="tool-badge">ast-grep</span>
+              </div>
+            </div>
+
+            <!-- 鹏举 · Security Auditor -->
+            <div class="collab-card" data-role="security-auditor">
+              <div class="collab-header">
+                <span class="collab-avatar">🛡️</span>
+                <div class="collab-info">
+                  <h3>鹏举</h3>
+                  <p class="collab-role">Security Auditor</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">12:30</span><span class="event-action">安全审计 MR !45</span></div>
+                <div class="collab-event"><span class="event-time">13:00</span><span class="event-action">检查认证流程</span></div>
+                <div class="collab-event"><span class="event-time">13:30</span><span class="event-action">审计通过</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">semgrep</span>
+                <span class="tool-badge">gitleaks</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="issue-cmds">
-          <pre><code><span class="c-comment"># 拉取待办 Issue</span>
-issue pull
+        <!-- 第 3 层：命令交互演示 -->
+        <div class="issue-layer-head">
+          <span class="issue-layer-num">III</span>
+          <span class="issue-layer-title">命令交互演示</span>
+        </div>
+        <div class="gitlab-commands-demo">
+          <div class="cmd-tabs" role="tablist">
+            <button class="cmd-tab active" data-cmd="pull" type="button">issue pull</button>
+            <button class="cmd-tab" data-cmd="claim" type="button">issue claim</button>
+            <button class="cmd-tab" data-cmd="done" type="button">issue done</button>
+            <button class="cmd-tab" data-cmd="decompose" type="button">issue decompose</button>
+          </div>
 
-<span class="c-comment"># 认领 #123 给 backend-dev</span>
-issue claim #123
+          <div class="cmd-content active" data-cmd="pull">
+            <div class="cmd-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title">Terminal</span>
+                <span class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></span>
+              </div>
+<pre class="terminal-output"><code><span class="c-prompt">$</span> issue pull
 
-<span class="c-comment"># 拆解 #1 为 3 个子任务</span>
-issue decompose #1
+🦸 hero ▸ 拉取待处理 Issue...
+📋 找到 3 个待处理任务:
 
-<span class="c-comment"># 完成 #123 并评论</span>
-issue done #123 "完成用户认证"</code></pre>
+<span class="c-warn">#101</span> [backend-dev]    实现用户认证 Controller <span class="c-status">⏳ pending</span>
+<span class="c-warn">#102</span> [data-engineer]  设计用户表结构        <span class="c-status">⏳ pending</span>
+<span class="c-warn">#103</span> [test-engineer]  编写认证测试用例      <span class="c-status">⏳ pending</span>
+
+<span class="c-ok">✅ 已拉取 3 个任务，等待认领</span></code></pre>
+            </div>
+          </div>
+
+          <div class="cmd-content" data-cmd="claim">
+            <div class="cmd-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title">Terminal</span>
+                <span class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></span>
+              </div>
+<pre class="terminal-output"><code><span class="c-prompt">$</span> issue claim #101
+
+🦸 hero ▸ 文远认领任务 #101
+📋 任务详情:
+
+标题: 实现用户认证 Controller
+分配: <span class="c-name">backend-dev (文远)</span>
+状态: <span class="c-status">pending → in_progress ⚡</span>
+
+<span class="c-ok">✅ 已认领，开始工作</span></code></pre>
+            </div>
+          </div>
+
+          <div class="cmd-content" data-cmd="done">
+            <div class="cmd-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title">Terminal</span>
+                <span class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></span>
+              </div>
+<pre class="terminal-output"><code><span class="c-prompt">$</span> issue done #101
+
+🦸 hero ▸ 文远完成任务 #101
+📋 工作汇报:
+
+<span class="c-ok">✅ 完成内容:</span>
+  - 实现 UserController 认证接口
+  - 添加 JWT Token 生成逻辑
+  - 集成 Spring Security 配置
+
+📝 评论已添加到 Issue #101
+🔒 状态: <span class="c-status">in_progress → done ✅</span>
+🔗 关联 MR: !45
+
+<span class="c-ok">✅ 任务已完成并关闭</span></code></pre>
+            </div>
+          </div>
+
+          <div class="cmd-content" data-cmd="decompose">
+            <div class="cmd-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title">Terminal</span>
+                <span class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></span>
+              </div>
+<pre class="terminal-output"><code><span class="c-prompt">$</span> issue decompose #100
+
+🦸 hero ▸ 孔明分析主 Issue <span class="c-name">#100</span>
+📋 需求: 实现用户认证模块
+
+🔍 自动拆解为 3 个子任务:
+
+<span class="c-warn">#101</span> [backend-dev]    实现用户认证 Controller
+<span class="c-warn">#102</span> [data-engineer]  设计用户表结构
+<span class="c-warn">#103</span> [test-engineer]  编写认证测试用例
+
+<span class="c-warn">⏸️  确认拆解方案？(y/n)</span></code></pre>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -447,10 +738,12 @@ issue done #123 "完成用户认证"</code></pre>
       <p class="footer-links">
         <!-- 看板调整中，暂时下线 <a href="/tavern/">客栈看板</a> -->
         <a href="#idea">理念</a>
+        <a href="mechanism.html">机制</a>
         <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
       </p>
       <p class="footer-copyright">© 2024 领航 Hero · 亚朵集团 · Powered by Claude</p>
     </div>
   </footer>
+  <script src="js/scroll-animation.js"></script>
 </body>
 </html>

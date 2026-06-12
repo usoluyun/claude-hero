@@ -140,7 +140,7 @@ fi
 # Dry-run 模式
 # ──────────────────────────────────────────────────────────────
 GITLAB_HOST="${GITLAB_HOST:-gitlab.corp.yaduo.com}"
-GLAB_CMD="glab issue list --label \"${LABELS}\" --state opened --limit ${LIMIT}"
+GLAB_CMD="glab issue list --label \"${LABELS}\" --opened --per-page ${LIMIT}"
 
 if [[ "$DRY_RUN" -eq 1 ]]; then
   echo -e "${YELLOW}[DRY RUN]${NC} Would query Issues with labels: ${LABELS}"
@@ -175,7 +175,7 @@ echo -e "${CYAN}   标签: ${LABELS}${NC}" >&2
 # glab issue list 输出格式: IID,Title,Labels,Web URL,Created At
 # 使用 --fields 和 --output json 确保结构化输出
 ISSUES_RAW=""
-if ! ISSUES_RAW="$(glab issue list --label "${LABELS}" --state opened --limit "${LIMIT}" --output json 2>/dev/null)"; then
+if ! ISSUES_RAW="$(glab issue list --label "${LABELS}" --opened --per-page "${LIMIT}" --output json 2>/dev/null)"; then
   log_error "ERROR: glab 查询失败"
   exit 1
 fi

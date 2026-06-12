@@ -1,6 +1,6 @@
 ---
 name: hero-issue-dispatch
-description: GitLab Issue 命令路由。当用户输入 Issue 相关操作（拉取、认领、完成、关闭、分解）时，根据命令类型和 Issue 标签自动路由到对应角色 agent（tech-lead / backend-dev / data-engineer / test-engineer / code-reviewer / security-auditor）。
+description: GitLab Issue 命令路由。当用户输入 Issue 相关操作时，根据命令类型和 Issue 标签自动路由到对应角色 agent。触发关键词包括：issue pull/claim/done/decompose/list/view/status/review/audit、glab、gitlab issue、hero::status、hero::agent、hero::type。支持中文自然语言如「拉取待办 Issue」「认领 #456」「完成 #789」「拆解主 Issue」「审查代码」「代码审计」等。
 ---
 
 # hero-issue-dispatch — GitLab Issue 命令路由
@@ -16,6 +16,8 @@ description: GitLab Issue 命令路由。当用户输入 Issue 相关操作（�
 - `issue list <agent>` — 列出分配给某 agent 的 Issue
 - `issue view <iid>` — 查看 Issue 详情
 - `issue status` — 查看所有 agent 的任务分布概况
+- `issue review <iid>` — 请求代码审查（只读，路由 code-reviewer）
+- `issue audit <iid>` — 请求安全审计（只读，路由 security-auditor）
 
 ## hero 露出
 
@@ -37,6 +39,8 @@ description: GitLab Issue 命令路由。当用户输入 Issue 相关操作（�
 | `issue list <agent>` | 列出 agent 的待办 | 无（直接查询） | 无 |
 | `issue view <iid>` | 查看 Issue 详情 | 无（直接查看） | 无 |
 | `issue status` | 全局任务分布概况 | 无（直接统计） | 无 |
+| `issue review <iid>` | 请求代码审查（玄成，只读） | **code-reviewer（玄成）** | 无（只读不关闭 Issue） |
+| `issue audit <iid>` | 请求安全审计（鹏举，只读） | **security-auditor（鹏举）** | 无（只读不关闭 Issue） |
 
 ---
 
@@ -55,6 +59,11 @@ description: GitLab Issue 命令路由。当用户输入 Issue 相关操作（�
   │
   ├─ pull → 触发 scripts/hero-issue-poller.sh
   │     └─ 脚本逐个拉取 → 每个 Issue 按标签路由到 agent
+  │
+  │
+  ├─ review → 强制路由 code-reviewer（玄成），只读查看 + 评论，不执行 claim/done/close
+  │
+  ├─ audit → 强制路由 security-auditor（鹏举），只读查看 + 评论，不执行 claim/done/close
   │
   └─ list / view / status → 不路由 agent，直接执行查询
 ```
@@ -310,6 +319,28 @@ pending → in_progress → done → (close)
 2. 展示 Issue 标题、描述、标签、评论列表
 ```
 
+### `issue review <iid>`
+
+```
+1. 强制路由到 code-reviewer（玄成）
+2. 玄成执行 glab issue view <iid> 读取 Issue 上下文
+3. 若 Issue 有关联 MR（通过 description 或 labels 找到）：
+   glab mr view <mr-iid> → 分析 code changes
+4. 玄成提供代码审查反馈（在 Issue 下评论）：
+   glab issue note <iid> -m "## 🔍 代码审查摘要 ..."
+5. ⚠️ 玄成不修改 Issue 状态，不执行 claim/done/close
+```
+
+### `issue audit <iid>`
+
+```
+1. 强制路由到 security-auditor（鹏举）
+2. 鹏举执行 glab issue view <iid> 读取 Issue 上下文
+3. 鹏举评估安全风险（在 Issue 下评论）：
+   glab issue note <iid> -m "## 🛡️ 安全审计摘要 ..."
+4. ⚠️ 鹏举不修改 Issue 状态，不执行 claim/done/close
+```
+
 ### `issue status`
 
 ```
@@ -324,6 +355,8 @@ pending → in_progress → done → (close)
 
 - **非 Issue 命令**：本 skill 只处理 `issue *` 命令，其他 hero 命令走 `hero-dispatch` 分诊入口。
 - **无标签 Issue 的 claim/done**：降级路由到 tech-lead（孔明），由孔明判断应分配给谁。
+- **review / audit 命令**：强制路由到只读角色（code-reviewer / security-auditor），仅执行查询和评论，绝不执行状态修改或关闭操作。
+- **中文自然语言触发**：「拉取待办」「认领 #456」「审查代码」等中文表达会通过 `hero-dispatch` 中转，识别后交接本 skill。
 - **关闭 epic 的请求**：任何 agent 都拒绝执行，提示用户「主 Issue 带 `hero::type:epic` 标签，不可由 agent 关闭。请手动确认后关闭。」
 - **重复认领**：如果 Issue 已是 `in_progress` 状态，拒绝认领并提示「该任务已被认领，当前状态：in_progress」。
 - **轮询脚本缺失**：`issue pull` 依赖 `scripts/hero-issue-poller.sh`，如脚本不存在则提示路径并建议手动执行 `glab issue list`。
