@@ -1,0 +1,9 @@
+{
+  "build_tool": "maven",
+  "has_pom": true,
+  "has_gradle": false,
+  "is_multimodule": false,
+  "modules": [],
+  "module_count": 0,
+  "project_name": "atour-life-api"
+}

@@ -1,0 +1,14 @@
+{
+  "framework": "spring-cloud",
+  "is_spring": true,
+  "version": "",
+  "has_spring_cloud_bom": false,
+  "middleware": [
+    "xxl-job"
+  ],
+  "middleware_categories": {
+    "scheduler": [
+      "xxl-job"
+    ]
+  }
+}
