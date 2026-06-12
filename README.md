@@ -100,6 +100,48 @@ claude
 
 ---
 
+### 🎫 GitLab Issue 集成
+
+让 AI 英雄直接通过 GitLab Issues 认领任务、汇报进度：
+
+| 操作 | 命令 | 作用 |
+|------|------|------|
+| 拉取待办 | `issue pull` | 列出所有 `hero::status:pending` Issue |
+| 认领任务 | `issue claim #123` | 改标签为 in_progress，开始工作 |
+| 完成汇报 | `issue done #123 "完成说明"` | 评论 + 关 Issue + 关联 MR |
+| 拆解需求 | `issue decompose #1` | tech-lead 把主 Issue 拆为子任务 |
+| 查看分配 | `issue list tech-lead` | 看某 agent 的待办 Issue |
+
+#### 工作流闭环
+
+```
+1. 人在 GitLab 建主 Issue（标签: hero::type:epic）
+   ↓
+2. tech-lead (孔明) 自动拆解子 Issue（分配给各角色 agent）
+   ↓
+3. 各 agent 认领、执行、建 MR
+   ↓
+4. agent 评论 + 关闭子 Issue
+   ↓
+5. 人验证后手动关闭主 Issue
+```
+
+#### 安全限制
+
+- 主 Issue（`hero::type:epic`）**只能人手动关闭**，agent 不得触碰
+- 所有 Issue 标签必须用 `hero::` 前缀
+- tech-lead 拆解子 Issue 后需 STOP 确认
+- 代码审查 / 安全审计角色只读 Issue 状态，不改标签
+
+#### 相关资源
+
+- Issue 模板：`.gitlab/issue_templates/`
+- Dispatch skill：`skills/hero-issue-dispatch/`
+- glab skill：`skills/hero-glab/`
+- Poller 脚本：`scripts/hero-issue-poller.sh`
+
+---
+
 ## 仓库结构
 
 | 目录 | 装什么 | 怎么用 |

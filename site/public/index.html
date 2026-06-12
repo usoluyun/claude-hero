@@ -260,6 +260,56 @@
       </div>
     </section>
 
+    <!-- ============ GitLab Issue 任务闭环 ============ -->
+    <section id="issue" class="section">
+      <div class="container">
+        <p class="kicker center">任务闭环 · ISSUE WORKFLOW</p>
+        <h2 class="section-title">GitLab Issue 任务闭环</h2>
+        <p class="section-desc">从主 Issue 到子任务拆解、认领、执行、汇报、关闭——人建主 Issue 开局，人验主 Issue 收盘，中间交给 Hero 自动流转。</p>
+
+        <div class="issue-flow">
+          <div class="issue-flow-step">
+            <span class="issue-flow-num">01</span>
+            <span class="issue-flow-text"><strong>人建主 Issue</strong> &mdash; 打标签 <code>hero::type:epic</code>，描述需求</span>
+          </div>
+          <div class="issue-flow-step">
+            <span class="issue-flow-num">02</span>
+            <span class="issue-flow-text"><strong>tech-lead (孔明) 拆解子任务</strong> &mdash; 自动分析 → 生成子 Issue → 分配角色</span>
+          </div>
+          <div class="issue-flow-step">
+            <span class="issue-flow-num">03</span>
+            <span class="issue-flow-text"><strong>各角色 agent 认领</strong> &mdash; issue claim 标记 assignee，开始执行</span>
+          </div>
+          <div class="issue-flow-step">
+            <span class="issue-flow-num">04</span>
+            <span class="issue-flow-text"><strong>agent 执行 + 建 MR</strong> &mdash; 关联 <code>#Issue</code>，代码审查自动触发</span>
+          </div>
+          <div class="issue-flow-step">
+            <span class="issue-flow-num">05</span>
+            <span class="issue-flow-text"><strong>agent 评论汇报 + 关子 Issue</strong> &mdash; 完成后自动评论进度并关闭子任务</span>
+          </div>
+          <div class="issue-flow-step">
+            <span class="issue-flow-num">06</span>
+            <span class="issue-flow-text"><strong>人验证后手动关主 Issue</strong> &mdash; 确认交付质量，关闭主 Issue</span>
+          </div>
+        </div>
+
+        <div class="issue-cmds">
+          <pre><code><span class="c-comment"># 拉取待办 Issue</span>
+issue pull
+
+<span class="c-comment"># 认领 #123 给 backend-dev</span>
+issue claim #123
+
+<span class="c-comment"># 拆解 #1 为 3 个子任务</span>
+issue decompose #1
+
+<span class="c-comment"># 完成 #123 并评论</span>
+issue done #123 "完成用户认证"</code></pre>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ Agent Teams 组队 ============ -->
     <section id="teams" class="section section-light">
       <div class="container">

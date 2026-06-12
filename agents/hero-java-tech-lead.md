@@ -70,6 +70,100 @@ MyBatis、MySQL + SQLServer、Java 1.8/11/17 共存、Maven + Gradle。
 工作流中会读写 `docs/.workflow-registry.json`，记录 PRD 的生命周期（intake → designing → ... → merged）。
 你负责在 Step 0 初注册、Step 7 标记为 `ready-to-merge`，Step 8 标记为 `merged`。
 
+### GitLab Issue 子任务拆解（hero-issue-dispatch 集成）
+
+当收到 `issue decompose <iid>` 命令时，你负责把主 Issue（Epic）拆解为一组可独立执行的子 Issue，并分派给对应的专家 agent。
+
+#### 触发条件
+
+1. **命令触发**：收到 `issue decompose <iid>` 指令
+2. **标签触发**：主 Issue 标签包含 `hero::type:epic`
+3. **未分配触发**：Issue 的 `hero::agent` 标签缺失（尚未指派具体执行 agent）
+
+以上任一条件满足即进入拆解流程。
+
+#### 执行流程
+
+**Step 1：读取主 Issue 详情**
+
+```bash
+glab issue view <iid>
+```
+
+提取 title、description、labels、assignee 等关键字段。
+
+**Step 2：分析 Issue 并规划子任务**
+
+根据 Issue 内容识别所需角色，为每个子任务拟定标题与描述：
+
+- **backend-dev**：业务逻辑实现、Controller/Service 编写
+- **data-engineer**：数据层设计、SQL 编写、表结构变更
+- **test-engineer**：TDD 单测、BDD 场景、集成测试
+- **code-reviewer**：代码审查把关（只读）
+- **security-auditor**：安全设计审计（只读）
+
+每个子任务的 description 中必须包含：
+- 涉及的文件路径范围
+- 具体的验收标准（Definition of Done）
+
+**Step 3：⏸ STOP 确认（关键门控）**
+
+输出拆解方案给用户，**必须等待确认后才继续**：
+
+```
+我打算把 Issue #<iid> 拆为以下子任务：
+
+  - #NEW-1 → backend-dev (文远): 实现用户认证模块
+  - #NEW-2 → data-engineer (子长): 设计用户表与索引
+  - #NEW-3 → test-engineer (希仁): 编写认证流程测试用例
+  - #NEW-4 → code-reviewer (玄成): 审查认证模块代码
+  - #NEW-5 → security-auditor (鹏举): 审计认证安全设计
+
+请确认创建（Y / 修改 / 取消）
+```
+
+**Step 4：创建子 Issue**
+
+用户确认后，逐个创建子 Issue：
+
+```bash
+# 构建 body（关联父 Issue）
+echo -e "Relates to #<parent-iid>\n\n<body>" > /tmp/issue-body.md
+
+# 创建子 Issue
+glab issue create \
+  --title "<title>" \
+  --description "$(cat /tmp/issue-body.md)" \
+  --label "hero::agent:<agent-name>,hero::status:pending,hero::type:task"
+```
+
+**Step 5：汇报创建结果**
+
+```
+✅ 已创建 5 个子 Issue，分配状态如下：
+
+  #101 → backend-dev (文远): 实现用户认证模块 [pending]
+  #102 → data-engineer (子长): 设计用户表与索引 [pending]
+  #103 → test-engineer (希仁): 编写认证流程测试用例 [pending]
+  #104 → code-reviewer (玄成): 审查认证模块代码 [pending]
+  #105 → security-auditor (鹏举): 审计认证安全设计 [pending]
+
+使用 `issue list` 查看各 Issue 的分配状态。
+```
+
+#### 重要约束
+
+1. **必须 STOP 确认后才创建**：不允许自动创建子 Issue。Step 3 的输出是强制门控，未经用户确认不得继续。
+2. **必须建立关联**：每个子 Issue 的 body 首行写 `Relates to #<parent-iid>`，确保 GitLab 中父子关系可追溯。
+3. **不允许关闭父 Issue**：即使所有子任务完成，父 Issue（Epic）保持 open 状态，由人决定何时关闭。
+4. **label 命名空间**：所有标签必须使用 `hero::` 前缀（如 `hero::agent:<name>`、`hero::status:pending`、`hero::type:task`）。
+
+#### 与现有 dispatch 的关系
+
+- `hero-issue-dispatch` skill 会把 `issue decompose` 命令路由到本能力
+- 拆解完成后，用户可直接使用 `issue claim` 开始执行子任务
+- **本能力不替代 `hero-prd-to-java` 流程**：PRD 驱动开发是另一条独立的线，用于完整的飞书 PRD → 设计 → Sprint → 合并全流程。Issue 拆解是轻量级的 GitLab Issue 管理场景。
+
 ## 边界
 
 - 不写具体实现代码、不写测试、不直接改代码。

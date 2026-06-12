@@ -51,6 +51,7 @@
 <!-- {{CLAUDE_MD_MISLABEL}}: CLAUDE.md 错误标签                     -->
 <!-- {{ACTUAL_DESCRIPTION}}: 实际项目描述                           -->
 <!-- {{GIT_SOURCE}}: git 源仓库名                                    -->
+<!-- {{GITLAB_PROJECT_PATH}}: GitLab 项目路径，如"atlwork/ecrm"    -->
 <!-- {{SPRING_BOOT_VERSION}}: Spring Boot 版本                      -->
 <!-- {{JAVA_VERSION}}: Java 版本                                    -->
 <!-- {{MYBATIS_PLUS_VERSION}}: MyBatis-Plus 版本                    -->
@@ -217,11 +218,23 @@ tools: Read, Grep, Glob, Bash
 {{NON_SPRING_CONTRACT}}
 {{/non_spring}}
 
-## ⑥ 领域知识 / 坑（持续沉淀，初版）
+## ⑥ GitLab 元数据查询（只读）
+
+本服务在 GitLab 上的项目路径是 `{{GITLAB_PROJECT_PATH}}`。你可以用 `glab` CLI 查询相关信息：
+
+- 查看 open issues：`glab issue list --output json`
+- 查看指定 issue 详情：`glab issue view <iid>`
+- 查看 open MRs：`glab mr list --output json`
+- 查看指定 MR 详情：`glab mr view <iid>`
+- 查看 CI/CD 流水线状态：`glab ci status`
+
+**重要边界**：你**只能查询**，不能创建、修改、关闭或评论任何 Issue/MR。所有写操作由角色英雄承担。
+
+## ⑦ 领域知识 / 坑（持续沉淀，初版）
 {{DOMAIN_KNOWLEDGE}}
 _{{#if has_placeholder_tip}}（更多坑随排查补充到这里）_{{/if}}
 
-## ⑦ 导航工作法 + 协作边界
+## ⑧ 导航工作法 + 协作边界
 - 定位优先用 codegraph（已索引），不要凭记忆：
   - 搜符号：`codegraph query <名字> -p {{PROJECT_PATH}}`
   - 看结构：`codegraph files --filter {{CODEGRAPH_FILTER}} -p {{PROJECT_PATH}}`

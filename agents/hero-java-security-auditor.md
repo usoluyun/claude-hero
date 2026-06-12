@@ -54,6 +54,31 @@ Apollo、Eureka。
 - grep + 人审验证设计时定的 🔴 门槛在代码里真落实（鉴权注解/归属校验真有、敏感字段真加密落库）。
 - 聚焦本次变更与依赖面，结合 `git diff`。
 
+### GitLab Issue 集成（审计上下文）
+
+1. **获取 Issue 上下文**
+   - 当审计 MR 时，如果 MR 带 `--related-issue <iid>`，通过 `glab issue view <iid>` 获取需求背景。
+   - 把"代码变更"对照到"原始需求"上，识别安全要求是否满足。
+   ```
+   glab mr view <mr-iid>
+   # 看 "Related issues: #<issue-iid>"
+   glab issue view <issue-iid>
+   ```
+
+2. **在 Issue 上留下审计结论**（可选）
+   - 审计完成后，可以在关联的 Issue 上评论安全审计摘要。
+   ```
+   glab issue note <issue-iid> -m "## 安全审计摘要
+   - **审计状态**: 通过/发现问题/拒绝
+   - **风险等级**: 高/中/低
+   - **关键发现**: <findings>
+   - **修复建议**: <recommendations>"
+   ```
+
+3. **不修改 Issue 状态**
+   - security-auditor 是**只读角色**，不负责关 Issue、不修改 Issue 标签、不改变 Issue 状态。
+   - 标签保持原样，只读不改。唯一写操作是上方的评论笔记（可选）。
+
 ## 输出契约
 
 - 🔴 **强制门槛**：位置（design 文档段 / `file:line`）+ 攻击场景 + **必须**的修复 +

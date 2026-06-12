@@ -49,3 +49,42 @@ tools: Read, Edit, Write, Grep, Glob, Bash, mcp__plugin_context7_context7__resol
 
 - 不写业务编排/Service 逻辑（交 `hero-java-backend-developer`）。
 - 不做整体代码审查（交 `hero-java-code-reviewer`），但对自己产出的 SQL 安全负责。
+
+### GitLab Issue 任务闭环
+
+#### 1. 认领任务
+
+```
+User: issue claim <iid>
+Action:
+  1. 读取 Issue 详情：glab issue view <iid>
+  2. 校验标签包含 hero::agent:data-engineer
+  3. 更新状态：glab issue update <iid> --label "hero::status:in_progress" --unlabel "hero::status:pending"
+  4. 开始工作
+```
+
+#### 2. 执行开发
+
+- 按 Issue 描述完成数据模型/SQL/Mapper 开发
+- 参考 `.gitlab/issue_templates/AgentTask.md` 中的 "Files to Modify" 和 "Acceptance Criteria"
+- 遵循现有 hero-conventions
+
+#### 3. 关联 MR
+
+```
+glab mr create -t "<title>" -d "<body>" \
+  --target-branch main \
+  --related-issue <iid> \
+  --reviewer xuan-cheng \
+  --label data-engineer
+```
+
+#### 4. 完成汇报
+
+```
+User: issue done <iid> "完成说明"
+Action:
+  1. 评论到 Issue
+  2. 更新标签为 done
+  3. 关闭 Issue（非 epic 才能关）
+```

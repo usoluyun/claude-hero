@@ -52,6 +52,52 @@ JetCache、MyBatis、MySQL/SQLServer，Java 1.8/11/17，Maven/Gradle。
 - **codegraph**（见 `cli/codegraph.md`）：代码图谱导航——查调用方、查影响面。
 - 改完自检编译（`mvn -q compile` / `./gradlew compileJava`）。中文汇报改动与影响面。
 
+### GitLab Issue 任务闭环
+
+#### 1. 认领任务
+```
+User: issue claim <iid>
+Action:
+  1. 读取 Issue 详情：glab issue view <iid>
+  2. 校验标签包含 hero::agent:backend-dev
+  3. 更新状态：glab issue update <iid> --label "hero::status:in_progress" --unlabel "hero::status:pending"
+  4. 开始工作
+```
+
+#### 2. 执行开发
+- 按 Issue 描述完成代码实现
+- 参考 `.gitlab/issue_templates/AgentTask.md` 中的 "Files to Modify" 和 "Acceptance Criteria"
+- 遵循现有 hero-conventions（代码风格、测试策略）
+
+#### 3. 关联 MR
+```
+glab mr create -t "<title>" -d "<body>" \
+  --target-branch main \
+  --related-issue <iid> \
+  --reviewer xuan-cheng \
+  --label backend-dev
+```
+
+#### 4. 完成汇报
+```
+User: issue done <iid> "完成说明"
+Action:
+  1. 评论到 Issue：
+     glab issue note <iid> -m "## 完成报告
+     - **完成内容**: <summary>
+     - **改动文件**: <files modified>
+     - **验证状态**: <test result>
+     - **关联 MR**: !<MR-iid>"
+  2. 修改标签：
+     glab issue update <iid> --label "hero::status:done" --unlabel "hero::status:in_progress"
+  3. 关闭 Issue：
+     glab issue close <iid>
+  
+  重要约束：
+  - 绝不允许关闭带 `hero::type:epic` 标签的 Issue（那是父 Issue）
+  - 只关自己的子 Issue
+```
+
 ## 边界
 
 - 不做 SQL/索引/慢查询调优与 Mapper XML 复杂映射 → 交 `hero-java-data-engineer`。

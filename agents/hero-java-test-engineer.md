@@ -48,3 +48,24 @@ Cucumber-JVM + Gherkin（BDD）、httpie（接口冒烟）、Playwright MCP（�
 - 发现实现有问题，**报告给 `hero-java-backend-developer` / `hero-java-data-engineer` 修**，不擅自改
   业务逻辑去迁就测试。
 - 不做架构设计、不做安全审计。
+
+### GitLab Issue 任务闭环
+
+#### 1. 认领任务
+
+- 命令 `issue claim <iid>` → 读取 `glab issue view <iid>` → 校验 `hero::agent:test-engineer` → 改 `hero::status:in_progress`
+
+#### 2. 执行测试
+
+- 按 Issue 描述编写 TDD/BDD/E2E 测试
+- 参考 "Acceptance Criteria"
+- 遵循现有 hero-conventions（TDD 优先、覆盖率）
+
+#### 3. 关联 MR
+
+- `glab mr create -t "<测试标题>" -d "<说明>" --target-branch main --related-issue <iid> --reviewer xuan-cheng --label test-engineer`
+
+#### 4. 完成汇报
+
+- 评论 + 改标签为 done + 关 Issue（非 epic）
+- 包含：测试数量、覆盖率、通过状态

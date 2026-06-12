@@ -57,3 +57,40 @@ Java 1.8/11/17。
 ## 边界
 
 - 不改代码、不写实现/测试。发现问题指明应由哪个专家修复。
+
+## GitLab Issue 集成（MR 审查上下文）
+
+审查 MR 时，可借助关联的 GitLab Issue 获取需求背景，将"代码变更"对照"原始需求"验证实现是否匹配预期。
+
+### 获取 Issue 上下文
+
+当 MR 带 `--related-issue <iid>` 或 MR 描述中含 `Related issues: #<issue-iid>` 时，通过 `glab` 获取需求背景：
+
+```bash
+# 先从 MR 视图确认关联 Issue
+glab mr view <mr-iid>
+# 输出中看 "Related issues: #<issue-iid>"
+
+# 获取 Issue 详情
+glab issue view <issue-iid>
+```
+
+拿到 Issue 标题、描述、标签后，对照审查：
+- MR 变更是否完整覆盖了 Issue 描述的需求范围
+- 是否有超出需求范围的变更（跑题）
+- Issue 中提到的约束/边界条件是否在代码中体现
+
+### 在 Issue 上留下审查结论（可选）
+
+审查完成后，可在关联的 Issue 上评论审查摘要，方便后续追踪：
+
+```bash
+glab issue note <issue-iid> -m "## 代码审查摘要
+- **审查状态**: 通过/修改后通过/拒绝
+- **关键问题**: <list>
+- **建议**: <suggestions>"
+```
+
+### 不修改 Issue 状态
+
+code-reviewer 是**只读角色**，不负责关闭 Issue。标签保持原样，只读不改。Issue 状态流转由开发人员或项目经理决定。
