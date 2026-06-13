@@ -23,7 +23,7 @@
 
 | 场景 | 触发方式 | 核心产物 | 何时用 |
 |------|---------|---------|--------|
-| **开荒（Init）** | `bash scripts/hero-init.sh <path> <花名>` | `agents/hero-java-<proj>.md` + Git 分支 + MR 指引 | 新服务首次接入，尚无领航 agent |
+| **开荒（Init）** | `bash scripts/hero-init.sh <path> [花名]` | `agents/hero-java-<proj>.md` + Git 分支 + MR 指引 | 新服务首次接入，尚无领航 agent |
 | **保鲜（Refresh）** | `hero 刷新 [<proj>]` | 重索引 + evidence pack + 漂移草稿（人工 gate） | 已有领航 agent，代码漂移后更新 |
 
 **核心原则**：
@@ -51,7 +51,7 @@ ls <project_path>/src/main/java  # Java 源码目录
 ### 2.2 运行主脚本
 
 ```bash
-bash scripts/hero-init.sh <project_path> <chinese_name>
+bash scripts/hero-init.sh <project_path> [chinese_name]
 ```
 
 **参数说明**：
@@ -59,11 +59,15 @@ bash scripts/hero-init.sh <project_path> <chinese_name>
 | 参数 | 必填 | 说明 | 示例 |
 |------|------|------|------|
 | `project_path` | ✅ | 目标项目**绝对路径** | `~/Documents/ATLWork/owner-biz` |
-| `chinese_name` | ✅ | 花名（历史人物字号，不可与现有 agent 冲突） | `霞客`、`子文`、`郑和` |
+| `chinese_name` | ⚪ 可选 | 花名（历史人物字号，必须唯一不可与现有 agent 冲突）。**留空时由脚本自动从字号池中分配一个未占用的花名** | `霞客`、`子文`、`郑和` |
 
 **完整示例**：
 ```bash
+# 显式指定花名
 bash scripts/hero-init.sh ~/Documents/ATLWork/owner-biz 霞客
+
+# 不指定花名，自动分配
+bash scripts/hero-init.sh ~/Documents/ATLWork/owner-biz
 ```
 
 ### 2.3 六阶段执行过程
@@ -280,7 +284,7 @@ git push -u origin feat/init-some-service-260611
 ```
 新服务（尚无领航 agent）
     ↓
-[开荒] bash scripts/hero-init.sh <path> <花名>
+[开荒] bash scripts/hero-init.sh <path> [花名]
     ↓ Phase 6 产出 agent.md + Git 分支
     ↓ 人工：注册花名册 + 能力矩阵 + push
     ↓
@@ -468,7 +472,7 @@ hero-prd-to-java (消费领航 agent)
 
 | 命令 | 作用 |
 |------|------|
-| `bash scripts/hero-init.sh <path> <花名>` | 开荒新服务 |
+| `bash scripts/hero-init.sh <path> [花名]` | 开荒新服务（花名可选，留空自动分配） |
 | `hero 刷新 [<proj>]` | 保鲜（全量或单项目） |
 | `hero 刷新 评审` | 过漂移草稿（人工 gate） |
 | `hero 刷新 状态` | 查看保鲜状态 |
