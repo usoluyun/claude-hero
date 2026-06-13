@@ -29,6 +29,33 @@
           }
         });
       });
+
+      // 汉堡按钮（导航栏折叠/展开）
+      const navToggle = document.querySelector(".nav-toggle");
+      if (navToggle) {
+        navToggle.addEventListener("click", () => {
+          const nav = navToggle.closest(".topnav");
+          const isOpen = nav.classList.toggle("is-menu-open");
+          navToggle.setAttribute("aria-expanded", isOpen);
+        });
+      }
+
+      // 移动端 dropdown 点击展开（桌面端靠 hover，移动端靠 click）
+      document.querySelectorAll(".dropdown-btn").forEach(btn => {
+        btn.addEventListener("click", e => {
+          if (window.innerWidth > 768) return;
+          e.stopPropagation();
+          document.querySelectorAll(".dropdown.open").forEach(d => {
+            if (d !== btn.closest(".dropdown")) d.classList.remove("open");
+          });
+          btn.closest(".dropdown").classList.toggle("open");
+        });
+      });
+
+      // 点击外部关闭
+      document.addEventListener("click", () => {
+        document.querySelectorAll(".dropdown.open").forEach(d => d.classList.remove("open"));
+      });
     });
   </script>
 </head>
@@ -825,6 +852,33 @@
           if (d !== parent) d.classList.remove('open');
         });
         parent.classList.toggle('open');
+      });
+
+      // 汉堡按钮（导航栏折叠/展开）
+      const navToggle = document.querySelector(".nav-toggle");
+      if (navToggle) {
+        navToggle.addEventListener("click", () => {
+          const nav = navToggle.closest(".topnav");
+          const isOpen = nav.classList.toggle("is-menu-open");
+          navToggle.setAttribute("aria-expanded", isOpen);
+        });
+      }
+
+      // 移动端 dropdown 点击展开（桌面端靠 hover，移动端靠 click）
+      document.querySelectorAll(".dropdown-btn").forEach(btn => {
+        btn.addEventListener("click", e => {
+          if (window.innerWidth > 768) return;
+          e.stopPropagation();
+          document.querySelectorAll(".dropdown.open").forEach(d => {
+            if (d !== btn.closest(".dropdown")) d.classList.remove("open");
+          });
+          btn.closest(".dropdown").classList.toggle("open");
+        });
+      });
+
+      // 点击外部关闭
+      document.addEventListener("click", () => {
+        document.querySelectorAll(".dropdown.open").forEach(d => d.classList.remove("open"));
       });
     });
 

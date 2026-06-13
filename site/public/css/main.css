@@ -82,6 +82,142 @@ img, svg { display: block; max-width: 100%; }
 }
 .topnav-links a:hover { opacity: 1; color: var(--color-bronze-soft); }
 
+
+/* ========================================
+   2.5 下拉菜单系统 (Dropdown)
+   参考 docs.css L13-246 移植
+   ======================================== */
+
+/* -- dropdown container -- */
+.dropdown { position: relative; display: inline-block; }
+
+/* -- dropdown button -- */
+.dropdown-btn {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-baiyan);
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  white-space: nowrap;
+  transition: opacity 200ms ease, background-color 200ms ease;
+}
+.dropdown-btn:hover {
+  opacity: 1;
+  color: var(--color-bronze-soft);
+  background-color: rgba(234, 228, 218, 0.08);
+}
+
+/* -- dropdown arrow -- */
+.dropdown-btn::after {
+  content: " ▾";
+  font-size: 0.75em;
+  display: inline-block;
+  transition: transform 300ms ease;
+}
+.dropdown:hover .dropdown-btn::after,
+.dropdown.open .dropdown-btn::after { transform: rotate(180deg); }
+
+/* -- dropdown content panel -- */
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 250ms ease, visibility 250ms ease, transform 250ms ease;
+  z-index: 1000;
+  padding: var(--space-sm) 0;
+  display: flex;
+  flex-direction: column;
+}
+.dropdown:hover .dropdown-content,
+.dropdown.open .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* -- dropdown menu items -- */
+.dropdown-content a {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-lg);
+  color: var(--color-woye-deep);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  white-space: nowrap;
+  border-left: 3px solid transparent;
+  transition: background-color 150ms ease, color 150ms ease, padding-left 150ms ease;
+}
+.dropdown-content a:hover {
+  background-color: var(--color-baiyan-deep);
+  color: var(--color-woye);
+  padding-left: calc(var(--space-lg) + 4px);
+  border-left-color: var(--color-bronze);
+}
+.dropdown-content a.active {
+  background-color: var(--color-baiyan);
+  color: var(--color-woye);
+  font-weight: 500;
+  border-left-color: var(--color-bronze);
+}
+.dropdown-content hr {
+  margin: var(--space-sm) var(--space-lg);
+  border: none;
+  border-top: 1px solid var(--color-line-light);
+  opacity: 0.5;
+}
+
+/* -- nav icon (SVG sprite) -- */
+.nav-ico {
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
+  margin-right: 0.5em;
+  color: var(--color-bronze);
+  vertical-align: -0.18em;
+}
+
+/* -- hamburger toggle (desktop: hidden) -- */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-baiyan);
+  cursor: pointer;
+  padding: var(--space-sm);
+  line-height: 0;
+}
+.nav-toggle-icon,
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--color-baiyan);
+  border-radius: var(--radius-full);
+  transition: transform 250ms ease, opacity 200ms ease;
+}
+.nav-toggle-icon { position: relative; }
+.nav-toggle-icon::before,
+.nav-toggle-icon::after { content: ""; position: absolute; left: 0; }
+.nav-toggle-icon::before { top: -7px; }
+.nav-toggle-icon::after  { top: 7px; }
+
+.topnav.is-menu-open .nav-toggle-icon { background: transparent; }
+.topnav.is-menu-open .nav-toggle-icon::before { transform: translateY(7px) rotate(45deg); }
+.topnav.is-menu-open .nav-toggle-icon::after  { transform: translateY(-7px) rotate(-45deg); }
+
 /* ========================================
    3. Hero 封面
    ======================================== */
@@ -723,10 +859,64 @@ img, svg { display: block; max-width: 100%; }
   .team-squad { flex-wrap: wrap; justify-content: center; }
   .team-member { flex: 0 1 200px; }
 }
+
+/* ========================================
+   10.75 响应式导航 (Responsive Navigation)
+   768px 及以下的移动端折叠导航
+   ======================================== */
+@media (max-width: 768px) {
+  .topnav-inner { flex-wrap: wrap; }
+
+  .nav-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .topnav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-md) 0;
+    order: 3;
+  }
+  .topnav.is-menu-open .topnav-links { display: flex; }
+
+  .topnav-links a {
+    padding: var(--space-md) var(--space-md);
+    border-radius: 0;
+    width: 100%;
+  }
+
+  /* 移动端下拉菜单静态折叠 */
+  .dropdown { width: 100%; }
+  .dropdown-btn {
+    width: 100%;
+    text-align: left;
+    padding: var(--space-md) var(--space-md);
+  }
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    background-color: rgba(234, 228, 218, 0.05);
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+    width: 100%;
+  }
+  .dropdown.open .dropdown-content { display: flex; }
+
+  .dropdown-content a { padding-left: var(--space-xl); }
+  .dropdown-content a:hover { padding-left: calc(var(--space-xl) + 4px); }
+}
+
 @media (max-width: 680px) {
   :root { --space-4xl: 4.5rem; }
   .topnav-links { gap: var(--space-md); }
-  /* 旧扁平导航残留规则已移除：下拉式导航的窄屏行为由 docs.css 统一处理 */
+  /* 下拉式导航的窄屏行为在本文件 768px media query 中定义 */
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .container { padding: 0 var(--space-lg); }
   .hero { padding-top: var(--space-3xl); }
