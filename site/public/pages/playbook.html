@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="7 个轻量 lane playbook 对比解读：统一 5 段结构、按 archetype 分组、RED 测试语义差异、设计哲学。">
+  <meta name="author" content="亚朵集团">
+  <meta name="keywords" content="claude-hero, playbook, lane, archetype, mutate, readonly, two-phase, TDD">
+  <meta property="og:title" content="Lane Playbook 对比 · 领航 Hero">
+  <meta property="og:description" content="7 个轻量 lane playbook 的统一骨架与差异解读">
+  <meta property="og:type" content="website">
+  <title>Lane Playbook 对比 · 领航 Hero</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/mechanism.css">
+  <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="../" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <div class="dropdown">
+          <button class="dropdown-btn">首页</button>
+          <div class="dropdown-content">
+            <a href="../index.html"><svg class="nav-ico"><use href="../icons/sprite.svg#home"/></svg>首页</a>
+            <a href="../index.html#idea"><svg class="nav-ico"><use href="../icons/sprite.svg#spark"/></svg>理念</a>
+            <a href="../index.html#roles"><svg class="nav-ico"><use href="../icons/sprite.svg#user"/></svg>角色介绍</a>
+            <a href="../index.html#teams"><svg class="nav-ico"><use href="../icons/sprite.svg#collab"/></svg>组队模式</a>
+            <hr>
+            <a href="../index.html#install"><svg class="nav-ico"><use href="../icons/sprite.svg#download"/></svg>10 分钟安装</a>
+            <a href="../index.html#build-pilot"><svg class="nav-ico"><use href="../icons/sprite.svg#tool"/></svg>自建领航员</a>
+            <a href="../index.html#uninstall"><svg class="nav-ico"><use href="../icons/sprite.svg#unlink"/></svg>卸载</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理</button>
+          <div class="dropdown-content">
+            <a href="../mechanism.html#architecture"><svg class="nav-ico"><use href="../icons/sprite.svg#architecture"/></svg>整体架构</a>
+            <a href="../mechanism.html#collaboration"><svg class="nav-ico"><use href="../icons/sprite.svg#collab"/></svg>Agent 协作</a>
+            <a href="../mechanism.html#skill-dispatch"><svg class="nav-ico"><use href="../icons/sprite.svg#dispatch"/></svg>Skill 调度</a>
+            <a href="../mechanism.html#workflow"><svg class="nav-ico"><use href="../icons/sprite.svg#flow"/></svg>工作流执行</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档</button>
+          <div class="dropdown-content">
+            <a href="../docs-index.html"><svg class="nav-ico"><use href="../icons/sprite.svg#book"/></svg>文档中心</a>
+            <hr>
+            <a href="hero-agent-layers.html"><svg class="nav-ico"><use href="../icons/sprite.svg#layers"/></svg>Agent 分层架构</a>
+            <a href="workflow.html"><svg class="nav-ico"><use href="../icons/sprite.svg#workflow"/></svg>工作流程</a>
+            <a href="prd-to-java.html"><svg class="nav-ico"><use href="../icons/sprite.svg#file-code"/></svg>PRD 转 Java</a>
+            <a href="codegraph.html"><svg class="nav-ico"><use href="../icons/sprite.svg#graph"/></svg>CodeGraph</a>
+            <a href="refresh.html"><svg class="nav-ico"><use href="../icons/sprite.svg#refresh"/></svg>刷新机制</a>
+            <a href="onboarding.html"><svg class="nav-ico"><use href="../icons/sprite.svg#compass"/></svg>新人入门</a>
+            <hr>
+            <a href="lane-routing.html"><svg class="nav-ico"><use href="../icons/sprite.svg#route"/></svg>意图分诊</a>
+            <a href="playbook.html" class="active"><svg class="nav-ico"><use href="../icons/sprite.svg#book-check"/></svg>Lane Playbook</a>
+            <a href="hero-markers.html"><svg class="nav-ico"><use href="../icons/sprite.svg#badge"/></svg>hero 露出标记</a>
+            <a href="issue-dispatch.html"><svg class="nav-ico"><use href="../icons/sprite.svg#ticket"/></svg>Issue 触发</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ Hero Section ============ -->
+  <section class="mechanism-hero" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">Lane Playbook 对比</h1>
+      <p class="mechanism-subtitle">7 个轻量 lane 共享一套骨架，差异在「关心什么、怎么停」</p>
+      <div class="mechanism-stats">
+        <div class="stat">
+          <span class="stat-num">7</span>
+          <span class="stat-label">Playbook</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">Archetype</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">5</span>
+          <span class="stat-label">统一段</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1–3</span>
+          <span class="stat-label">STOP 门控</span>
+        </div>
+      </div>
+    </div>
+    <svg class="mechanism-hero-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L240,30 L470,80 L640,40 L820,90 L1010,35 L1230,75 L1440,50 L1440,120 Z"/>
+      <path fill="var(--color-woye-deep)" opacity="0.5" d="M0,120 L0,95 L300,65 L560,100 L760,75 L980,105 L1200,70 L1440,98 L1440,120 Z"/>
+    </svg>
+  </section>
+
+  <!-- ============ 主内容区 ============ -->
+  <main class="docs-layout">
+    <aside class="docs-sidebar" aria-label="本页目录">
+      <h3 class="docs-toc-title">目录</h3>
+      <ul class="docs-toc">
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#coverage">覆盖范围</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#structure">统一结构</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#by-archetype">按 archetype 分组解读</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#compare">对比表</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#examples">每类示例</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#philosophy">设计哲学</a></li>
+      </ul>
+    </aside>
+
+    <div class="docs-content">
+      <article>
+
+        <section id="intro">
+          <blockquote>
+            <p><strong>权威源</strong>：<a href="https://gitlab.corp.yaduo.com/full-stack-ai/claude-hero/-/blob/main/skills/hero-dispatch/lanes"><code>skills/hero-dispatch/lanes/</code></a></p>
+            <p><strong>范围</strong>：本文对比解读 7 个轻量 lane playbook（bugfix/iterate/refactor/research/perf/security/team），不覆盖 prd/refresh 两条重型线。</p>
+          </blockquote>
+
+          <h1>轻量 Lane Playbook 对比解读</h1>
+          <p>7 个轻量 lane playbook 共享同一个设计骨架：<strong>触发画像（archetype）→ 门控骨架 → STOP 决策点 → 角色 agent 分工 → 交接产物</strong>。差异在于「这条 lane 关心什么」和「怎么停、停几次」。</p>
+        </section>
+
+        <section id="coverage">
+          <h2>覆盖范围</h2>
+          <p><a href="lane-routing.html">hero-dispatch 路由表</a>共 9 条 lane，但 <strong>playbook 只覆盖其中 7 条</strong>：</p>
+          <table>
+            <thead>
+              <tr><th scope="col">Lane</th><th scope="col">有 playbook？</th><th scope="col">说明</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>bugfix / iterate / refactor / research / perf / security / team</td><td>✅ 有</td><td>轻量线，加载 <code>lanes/*.md</code> 即走</td></tr>
+              <tr><td>prd / refresh</td><td>❌ 没有</td><td>重型线，委派 <code>hero-prd-to-java</code> / <code>hero-refresh</code> 独立 skill</td></tr>
+            </tbody>
+          </table>
+          <p>所以本文覆盖的 7 条 lane 对应 7 个 playbook 文件（<code>skills/hero-dispatch/lanes/*.md</code>）。</p>
+        </section>
+
+        <section id="structure">
+          <h2>统一结构</h2>
+          <p>每篇 playbook 都有 5 个关键段，字段名和含义完全一致：</p>
+          <table>
+            <thead>
+              <tr><th scope="col">段</th><th scope="col">说明</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>archetype</strong></td><td>走什么流程模板（mutate / readonly / two-phase / setup）</td></tr>
+              <tr><td><strong>intent_keywords</strong></td><td>触发关键词列表，命中即路由到该 lane</td></tr>
+              <tr><td><strong>required_input</strong></td><td>进入 lane 前必须补齐的最小输入</td></tr>
+              <tr><td><strong>hero 露出</strong></td><td><code>🦸 hero ▸</code> 标记的 4 个时机（进入/STOP/收尾/派 agent）</td></tr>
+              <tr><td><strong>门控骨架</strong></td><td>引用 SKILL.md 的 archetype 父类定义 + 本 lane 特例</td></tr>
+            </tbody>
+          </table>
+          <p>门控骨架是 playbook 的核心：它定义了 lane 的执行节奏和用户介入点。露出标记规范详见 <a href="hero-markers.html">hero 露出标记</a>。</p>
+        </section>
+
+        <section id="by-archetype">
+          <h2>按 archetype 分组解读</h2>
+          <p>7 个 playbook 按流程模板（archetype）分 4 组。archetype 回答的是「怎么走流程」，而不是「做什么事」；一个 archetype 可服务多个 lane。</p>
+
+          <h3>1. Mutate（改代码线）— 3 个 lane</h3>
+          <blockquote>
+            <p>完整骨架见 <a href="lane-routing.html#archetypes">Archetype A</a>：<strong>勘察定位 → STOP①（方案确认）→ RED（先写失败测试）→ GREEN（实现到通过）→ REFACTOR（清理）→ STOP②（改动+测试结果确认）</strong>。</p>
+          </blockquote>
+          <table>
+            <thead>
+              <tr><th scope="col">Lane</th><th scope="col">与 mutate 骨架的差异</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>bugfix</strong></td><td>勘察定位前强制 <code>superpowers:systematic-debugging</code>，<strong>复现不出来不得进入 STOP①</strong>。RED 测试内容是「复现 bug 的失败测试」</td></tr>
+              <tr><td><strong>iterate</strong></td><td>无额外特例。RED 测试内容是「覆盖新行为的失败测试」。若改动目标模糊，先调 <code>superpowers:brainstorming</code> 澄清</td></tr>
+              <tr><td><strong>refactor</strong></td><td>关键前提：<strong>重构对象无测试时，STOP① 后必须先补表征测试（characterization test）锁住现有行为</strong>，再进 RED-GREEN-REFACTOR。交接产物含「行为不变证明」</td></tr>
+            </tbody>
+          </table>
+          <p>三个 lane 都走同一条 2-STOP 流程，但 RED 测试的语义完全不同：bugfix 是「让 bug 暴露」，iterate 是「让新行为可验证」，refactor 是「锁住旧行为不被改动破坏」。</p>
+
+          <h3>2. Readonly（只读线）— 1 个 lane</h3>
+          <blockquote>
+            <p>完整骨架见 <a href="lane-routing.html#archetypes">Archetype B</a>：<strong>调查（领航 agent 摸地图 + codegraph，只读）→ 分析（影响面/可行性/风险/工作量）→ STOP（结论 + 选项 + 建议）</strong>。</p>
+          </blockquote>
+          <p><strong>research</strong> 是唯一的 readonly lane。不改代码、不写测试、不产 PR。它的产物是「调研结论文档」，通常作为后续 prd 线或 mutate 线的输入。参与角色全部只读：领航 agent 摸地图 + 孔明（tech-lead）做可行性/风险评估。</p>
+
+          <h3>3. Two-phase（两段式）— 2 个 lane</h3>
+          <blockquote>
+            <p>完整骨架见 <a href="lane-routing.html#archetypes">two-phase</a>：<strong>B 段诊断（只读）→ STOP「清单」→ 用户确认要不要改 → 转 A 段 TDD-first 修复</strong>。</p>
+          </blockquote>
+          <table>
+            <thead>
+              <tr><th scope="col">Lane</th><th scope="col">B 段（诊断）</th><th scope="col">STOP 产物</th><th scope="col">A 段（修复）</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>perf</strong></td><td>诊断热点路径 + 慢查询执行计划</td><td>瓶颈清单 + 优化项建议</td><td>以<strong>基准测试</strong>为 RED，优化到基准达标为 GREEN</td></tr>
+              <tr><td><strong>security</strong></td><td>审计（security-auditor 只读，产风险清单）</td><td>分级风险清单（攻击场景 + 修复建议）</td><td>以<strong>漏洞复现测试</strong>为 RED，修到测试转绿</td></tr>
+            </tbody>
+          </table>
+          <p>两段式的核心价值是<strong>防过度改</strong>：先诊断出「到底有哪些问题」，让用户挑「要不要改、改哪些」，再进入 TDD 修复。perf 诊断用 <code>systematic-debugging</code>，security 审计用 <code>hero-java-security-auditor</code>。</p>
+
+          <h3>4. Setup（启动即退出）— 1 个特殊情况</h3>
+          <p><strong>team</strong> lane 不属于上述三个 archetype，它是独立的 <strong>setup</strong> 原型：环境自检 → STOP 角色确认 → 生成启动指引 → 退场。不改代码、不写测试、不委派子 agent。</p>
+          <p>流程极简：检查 tmux 是否安装、<code>settings.json</code> 是否配置了 Agent Teams → 确认组队角色（默认孔明+文远+希仁）→ 输出 tmux 启动命令清单 → 退出。后续用户在 tmux 里自行启动各 agent。</p>
+        </section>
+
+        <section id="compare">
+          <h2>对比表</h2>
+          <table>
+            <caption>7 个轻量 lane 的 archetype / RED 测试 / STOP / 产物对照</caption>
+            <thead>
+              <tr><th scope="col">Lane</th><th scope="col">Archetype</th><th scope="col">RED 测试内容</th><th scope="col">STOP 数量</th><th scope="col">特殊产物</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>bugfix</td><td>mutate</td><td>复现 bug 的失败测试</td><td>2</td><td>复现/回归测试</td></tr>
+              <tr><td>iterate</td><td>mutate</td><td>覆盖新行为的失败测试</td><td>2</td><td>增量代码+测试</td></tr>
+              <tr><td>refactor</td><td>mutate</td><td><strong>表征测试</strong>（锁现有行为）</td><td>2</td><td>行为不变证明</td></tr>
+              <tr><td>research</td><td>readonly</td><td>无（不写代码）</td><td>1</td><td>调研结论文档</td></tr>
+              <tr><td>perf</td><td>two-phase</td><td>基准测试（响应 ≤ X ms）</td><td>1+2</td><td>基准对比</td></tr>
+              <tr><td>security</td><td>two-phase</td><td>漏洞复现测试</td><td>1+2</td><td>分级风险清单</td></tr>
+              <tr><td>team</td><td>setup</td><td>无（不改代码）</td><td>2（自检+角色确认）</td><td>启动命令清单</td></tr>
+            </tbody>
+          </table>
+          <blockquote>
+            <p>STOP 列中 <code>1+2</code> 表示 B 段诊断 1 个 STOP + A 段修复 2 个 STOP，共 3 个门控点。</p>
+          </blockquote>
+        </section>
+
+        <section id="examples">
+          <h2>每类 archetype 示例</h2>
+
+          <h3>Mutate 示例（bugfix）</h3>
+          <pre><code>hero login 报 NPE
+  → 勘察：领航 agent 摸地图 + systematic-debugging 复现
+  → ⏸ STOP①：缺陷定位 + 修复方案确认
+  → RED：希仁写复现测试（触发 NPE 的失败用例）
+  → GREEN：文远修代码，测试转绿
+  → REFACTOR：清理
+  → ⏸ STOP②：改动 + 测试结果 + 影响面复核报告</code></pre>
+
+          <h3>Readonly 示例（research）</h3>
+          <pre><code>hero 加个缓存行不行
+  → 调查：领航 agent 摸地图 + codegraph 圈调用热点
+  → 分析：孔明评估可行性 / 风险 / 工作量
+  → ⏸ STOP：结论 + 缓存方案选项 + 建议（不改代码）</code></pre>
+
+          <h3>Two-phase 示例（perf）</h3>
+          <pre><code>hero 登录接口 3 秒
+  → B 段诊断：领航 agent 定位热点 + 子长查慢查询执行计划
+  → ⏸ STOP：瓶颈清单（慢 SQL / N+1 / 未索引字段）
+  → 用户挑：只优化索引，不改连接池
+  → A 段：RED（基准测试：响应 ≤ 500ms）→ GREEN 优化 → 基准达标</code></pre>
+
+          <h3>Setup 示例（team）</h3>
+          <pre><code>hero 组队 3 位 Agent
+  → 环境自检：tmux ✓ / settings.json ✓
+  → ⏸ STOP：确认角色（孔明 opus + 文远 sonnet + 希仁 sonnet）
+  → 输出 tmux 启动命令 → 退场</code></pre>
+        </section>
+
+        <section id="philosophy">
+          <h2>设计哲学</h2>
+          <ul>
+            <li><strong>RED 测试语义不同</strong>：每个 mutate/two-phase lane 的 RED 测试都反映该 lane 的关切，不是普通的单元测试。bugfix 的 RED 是「让 bug 可复现」，refactor 的 RED 是「锁住旧行为不被破坏」，perf 的 RED 是「当前性能指标不达标」。</li>
+            <li><strong>领航 agent 标配</strong>：改存量服务时，先调对应 <code>hero-java-&lt;proj&gt;</code> 领航 agent 用 codegraph 摸地图、圈影响面。这是所有 mutate/two-phase lane 的第一步，避免「不知道在哪改、改了影响谁」。</li>
+            <li><strong>不确定就停</strong>：每个 lane 至少一个 STOP 门控，让用户做决策。mutate 线 2 个 STOP（方案确认 + 结果确认），readonly 线 1 个 STOP（结论确认），two-phase 线 3 个 STOP（诊断确认 + 方案确认 + 结果确认）。</li>
+            <li><strong>两段式防过度改</strong>：perf/security 必须先诊断输出清单，用户挑要不要改、改哪些。不假设「每个瓶颈都要优化」或「每个风险都要修」。</li>
+            <li><strong>setup 独立成型</strong>：team lane 不走 mutate/readonly/two-phase 任何一条模板，它是独立的 setup 原型。把组队流程混入业务 lane 会让流程混乱，所以专门一个模板，启动即退场。</li>
+          </ul>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="../index.html">首页</a>
+        <a href="../mechanism.html">机制</a>
+        <a href="../docs-index.html">文档</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2026 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
+  </footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      const nav = document.querySelector('.topnav');
+      nav.classList.toggle('is-menu-open');
+      this.setAttribute('aria-expanded', nav.classList.contains('is-menu-open'));
+    });
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        document.querySelectorAll('.dropdown').forEach(d => { if (d !== parent) d.classList.remove('open'); });
+        parent.classList.toggle('open');
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+</body>
+</html>

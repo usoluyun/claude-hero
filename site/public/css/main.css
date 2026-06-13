@@ -73,7 +73,7 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: 0.18em;
   opacity: 0.65;
 }
-.topnav-links { display: flex; gap: var(--space-xl); }
+.topnav-links { display: flex; align-items: center; gap: var(--space-xl); }
 .topnav-links a {
   font-size: var(--text-sm);
   color: var(--color-baiyan);
@@ -726,7 +726,7 @@ img, svg { display: block; max-width: 100%; }
 @media (max-width: 680px) {
   :root { --space-4xl: 4.5rem; }
   .topnav-links { gap: var(--space-md); }
-  .topnav-links a:not(:last-child) { display: none; }
+  /* 旧扁平导航残留规则已移除：下拉式导航的窄屏行为由 docs.css 统一处理 */
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .container { padding: 0 var(--space-lg); }
   .hero { padding-top: var(--space-3xl); }

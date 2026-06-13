@@ -24,49 +24,46 @@
         <span class="nav-toggle-icon"></span>
       </button>
       <div class="topnav-links">
-        <a href="index.html">首页</a>
-
         <div class="dropdown">
-          <button class="dropdown-btn">原理 ▾</button>
+          <button class="dropdown-btn">首页</button>
           <div class="dropdown-content">
-            <a href="mechanism.html#architecture">整体架构</a>
-            <a href="mechanism.html#collaboration">Agent 协作</a>
-            <a href="mechanism.html#skill-dispatch">Skill 调度</a>
-            <a href="mechanism.html#workflow">工作流执行</a>
+            <a href="index.html"><svg class="nav-ico"><use href="icons/sprite.svg#home"/></svg>首页</a>
+            <a href="index.html#idea"><svg class="nav-ico"><use href="icons/sprite.svg#spark"/></svg>理念</a>
+            <a href="index.html#roles"><svg class="nav-ico"><use href="icons/sprite.svg#user"/></svg>角色介绍</a>
+            <a href="index.html#teams"><svg class="nav-ico"><use href="icons/sprite.svg#collab"/></svg>组队模式</a>
             <hr>
-            <a href="mechanism.html#hidden-features">隐藏特性</a>
+            <a href="index.html#install"><svg class="nav-ico"><use href="icons/sprite.svg#download"/></svg>10 分钟安装</a>
+            <a href="index.html#build-pilot"><svg class="nav-ico"><use href="icons/sprite.svg#tool"/></svg>自建领航员</a>
+            <a href="index.html#uninstall"><svg class="nav-ico"><use href="icons/sprite.svg#unlink"/></svg>卸载</a>
           </div>
         </div>
 
         <div class="dropdown">
-          <button class="dropdown-btn">角色 ▾</button>
+          <button class="dropdown-btn">原理</button>
           <div class="dropdown-content">
-            <a href="index.html#roles">角色介绍</a>
-            <a href="index.html#teams">组队模式</a>
+            <a href="mechanism.html#architecture"><svg class="nav-ico"><use href="icons/sprite.svg#architecture"/></svg>整体架构</a>
+            <a href="mechanism.html#collaboration"><svg class="nav-ico"><use href="icons/sprite.svg#collab"/></svg>Agent 协作</a>
+            <a href="mechanism.html#skill-dispatch"><svg class="nav-ico"><use href="icons/sprite.svg#dispatch"/></svg>Skill 调度</a>
+            <a href="mechanism.html#workflow"><svg class="nav-ico"><use href="icons/sprite.svg#flow"/></svg>工作流执行</a>
           </div>
         </div>
 
         <div class="dropdown">
-          <button class="dropdown-btn">文档 ▾</button>
+          <button class="dropdown-btn">文档</button>
           <div class="dropdown-content">
-            <a href="docs-index.html">📚 文档中心</a>
+            <a href="docs-index.html"><svg class="nav-ico"><use href="icons/sprite.svg#book"/></svg>文档中心</a>
             <hr>
-            <a href="pages/hero-agent-layers.html">🏗️ Agent 分层架构</a>
-            <a href="pages/workflow.html">⚙️ 工作流程</a>
-            <a href="pages/prd-to-java.html">📋 PRD 转 Java</a>
-            <a href="pages/codegraph.html">📊 CodeGraph</a>
-            <a href="pages/refresh.html">🔄 刷新机制</a>
-            <a href="pages/onboarding.html">🚀 新人入门</a>
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <button class="dropdown-btn">安装 ▾</button>
-          <div class="dropdown-content">
-            <a href="index.html#install">10 分钟安装</a>
-            <a href="index.html#build-pilot">自建领航员</a>
+            <a href="pages/hero-agent-layers.html"><svg class="nav-ico"><use href="icons/sprite.svg#layers"/></svg>Agent 分层架构</a>
+            <a href="pages/workflow.html"><svg class="nav-ico"><use href="icons/sprite.svg#workflow"/></svg>工作流程</a>
+            <a href="pages/prd-to-java.html"><svg class="nav-ico"><use href="icons/sprite.svg#file-code"/></svg>PRD 转 Java</a>
+            <a href="pages/codegraph.html"><svg class="nav-ico"><use href="icons/sprite.svg#graph"/></svg>CodeGraph</a>
+            <a href="pages/refresh.html"><svg class="nav-ico"><use href="icons/sprite.svg#refresh"/></svg>刷新机制</a>
+            <a href="pages/onboarding.html"><svg class="nav-ico"><use href="icons/sprite.svg#compass"/></svg>新人入门</a>
             <hr>
-            <a href="index.html#uninstall">卸载</a>
+            <a href="pages/lane-routing.html"><svg class="nav-ico"><use href="icons/sprite.svg#route"/></svg>意图分诊</a>
+            <a href="pages/playbook.html"><svg class="nav-ico"><use href="icons/sprite.svg#book-check"/></svg>Lane Playbook</a>
+            <a href="pages/hero-markers.html"><svg class="nav-ico"><use href="icons/sprite.svg#badge"/></svg>hero 露出标记</a>
+            <a href="pages/issue-dispatch.html"><svg class="nav-ico"><use href="icons/sprite.svg#ticket"/></svg>Issue 触发</a>
           </div>
         </div>
       </div>
@@ -90,75 +87,103 @@
     <!-- ============ 文档卡片网格 ============ -->
     <section class="docs-grid-section">
       <div class="container">
-        <div class="docs-grid">
 
-          <!-- 1. Agent 分层架构 -->
-          <a href="pages/hero-agent-layers.html" class="docs-card" aria-label="阅读 Agent 分层架构文档">
-            <div class="docs-card-icon">🏗️</div>
-            <h3 class="docs-card-title">Agent 分层架构</h3>
-            <p class="docs-card-desc">探索 claude-hero 的多层 Agent 架构，了解各个组件如何协同工作。</p>
-            <div class="docs-card-footer">
-              <span>阅读全文</span>
-              <span class="docs-card-arrow">→</span>
-            </div>
-          </a>
+        <!-- 分组一：核心文档 -->
+        <div class="docs-group">
+          <p class="docs-group-title">核心文档 · CORE DOCS</p>
+          <div class="docs-grid">
 
-          <!-- 2. 工作流程 -->
-          <a href="pages/workflow.html" class="docs-card" aria-label="阅读工作流程文档">
-            <div class="docs-card-icon">⚙️</div>
-            <h3 class="docs-card-title">工作流程</h3>
-            <p class="docs-card-desc">了解项目的工作流程、调度机制和自动化策略。</p>
-            <div class="docs-card-footer">
-              <span>阅读全文</span>
-              <span class="docs-card-arrow">→</span>
-            </div>
-          </a>
+            <!-- Agent 分层架构 -->
+            <a href="pages/hero-agent-layers.html" class="docs-card" aria-label="阅读 Agent 分层架构文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#layers"/></svg></div>
+              <h3 class="docs-card-title">Agent 分层架构</h3>
+              <p class="docs-card-desc">探索 claude-hero 的多层 Agent 架构，了解各个组件如何协同工作。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
 
-          <!-- 3. PRD 转 Java -->
-          <a href="pages/prd-to-java.html" class="docs-card" aria-label="阅读 PRD 转 Java 文档">
-            <div class="docs-card-icon">🔄</div>
-            <h3 class="docs-card-title">PRD 转 Java</h3>
-            <p class="docs-card-desc">从产品需求文档到 Java 代码的自动化转换流程。</p>
-            <div class="docs-card-footer">
-              <span>阅读全文</span>
-              <span class="docs-card-arrow">→</span>
-            </div>
-          </a>
+            <!-- 工作流程 -->
+            <a href="pages/workflow.html" class="docs-card" aria-label="阅读工作流程文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#workflow"/></svg></div>
+              <h3 class="docs-card-title">工作流程</h3>
+              <p class="docs-card-desc">触发、路由、执行、露出、保鲜——hero 系统全链路机制总入口。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
 
-          <!-- 4. CodeGraph -->
-          <a href="pages/codegraph.html" class="docs-card" aria-label="阅读 CodeGraph 文档">
-            <div class="docs-card-icon">📊</div>
-            <h3 class="docs-card-title">CodeGraph</h3>
-            <p class="docs-card-desc">代码图谱的构建、更新和使用方式。</p>
-            <div class="docs-card-footer">
-              <span>阅读全文</span>
-              <span class="docs-card-arrow">→</span>
-            </div>
-          </a>
+            <!-- PRD 转 Java -->
+            <a href="pages/prd-to-java.html" class="docs-card" aria-label="阅读 PRD 转 Java 文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#file-code"/></svg></div>
+              <h3 class="docs-card-title">PRD 转 Java</h3>
+              <p class="docs-card-desc">从飞书 PRD 到 Java 代码的 8 步自动化驱动开发流水线。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
 
-          <!-- 5. 刷新机制 -->
-          <a href="pages/refresh.html" class="docs-card" aria-label="阅读刷新机制文档">
-            <div class="docs-card-icon">🔄</div>
-            <h3 class="docs-card-title">刷新机制</h3>
-            <p class="docs-card-desc">如何保持 Agent 和代码库的同步更新。</p>
-            <div class="docs-card-footer">
-              <span>阅读全文</span>
-              <span class="docs-card-arrow">→</span>
-            </div>
-          </a>
+            <!-- CodeGraph -->
+            <a href="pages/codegraph.html" class="docs-card" aria-label="阅读 CodeGraph 文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#graph"/></svg></div>
+              <h3 class="docs-card-title">CodeGraph</h3>
+              <p class="docs-card-desc">代码图谱的构建、更新和使用方式——领航 agent 的知识底座。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
 
-          <!-- 6. 新人入门 -->
-          <a href="pages/onboarding.html" class="docs-card" aria-label="阅读新人入门文档">
-            <div class="docs-card-icon">🚀</div>
-            <h3 class="docs-card-title">新人入门</h3>
-            <p class="docs-card-desc">从零开始使用 claude-hero 的完整指南。</p>
-            <div class="docs-card-footer">
-              <span>阅读全文</span>
-              <span class="docs-card-arrow">→</span>
-            </div>
-          </a>
+            <!-- 刷新机制 -->
+            <a href="pages/refresh.html" class="docs-card" aria-label="阅读刷新机制文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#refresh"/></svg></div>
+              <h3 class="docs-card-title">刷新机制</h3>
+              <p class="docs-card-desc">两段式保鲜：确定性脚本自动跑 + 领航 agent 漂移人工评审。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
 
+            <!-- 新人入门 -->
+            <a href="pages/onboarding.html" class="docs-card" aria-label="阅读新人入门文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#compass"/></svg></div>
+              <h3 class="docs-card-title">新人入门</h3>
+              <p class="docs-card-desc">从零到可用约 10 分钟，接入 claude-hero 团队共享资产仓库。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
+
+          </div>
         </div>
+
+        <!-- 分组二：工作流机制详解 -->
+        <div class="docs-group">
+          <p class="docs-group-title">工作流机制详解 · MECHANISM</p>
+          <div class="docs-grid">
+
+            <!-- 意图分诊 -->
+            <a href="pages/lane-routing.html" class="docs-card" aria-label="阅读意图分诊与 Lane 路由文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#route"/></svg></div>
+              <h3 class="docs-card-title">意图分诊与 Lane 路由</h3>
+              <p class="docs-card-desc">hero-dispatch 顶层入口：9 条 lane catalog、分诊三段式、三种门控 archetype。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
+
+            <!-- Lane Playbook -->
+            <a href="pages/playbook.html" class="docs-card" aria-label="阅读 Lane Playbook 对比文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#book-check"/></svg></div>
+              <h3 class="docs-card-title">Lane Playbook 对比</h3>
+              <p class="docs-card-desc">7 个轻量 lane 的统一 5 段结构、RED 测试语义差异与设计哲学。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
+
+            <!-- hero 露出标记 -->
+            <a href="pages/hero-markers.html" class="docs-card" aria-label="阅读 hero 露出标记规范文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#badge"/></svg></div>
+              <h3 class="docs-card-title">hero 露出标记规范</h3>
+              <p class="docs-card-desc">🦸 hero ▸ 标记的四个时机、双保险机制与英雄名映射表。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
+
+            <!-- Issue 触发 -->
+            <a href="pages/issue-dispatch.html" class="docs-card" aria-label="阅读 Issue 触发机制文档">
+              <div class="docs-card-icon"><svg><use href="icons/sprite.svg#ticket"/></svg></div>
+              <h3 class="docs-card-title">Issue 触发机制</h3>
+              <p class="docs-card-desc">GitLab Issue 命令的三层触发机制与标签路由到角色 agent。</p>
+              <div class="docs-card-footer"><span>阅读全文</span><span class="docs-card-arrow">→</span></div>
+            </a>
+
+          </div>
+        </div>
+
       </div>
     </section>
   </main>

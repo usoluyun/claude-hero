@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="🦸 hero ▸ 露出规范解读：固定 token、四个时机、双保险机制、英雄名映射表与完整生命周期示例。">
+  <meta name="author" content="亚朵集团">
+  <meta name="keywords" content="claude-hero, hero 标记, 露出规范, 英雄名, 花名映射, 双保险">
+  <meta property="og:title" content="hero 露出标记规范 · 领航 Hero">
+  <meta property="og:description" content="让用户感知 hero 体系接管的 🦸 hero ▸ 标记规范">
+  <meta property="og:type" content="website">
+  <title>hero 露出标记规范 · 领航 Hero</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/mechanism.css">
+  <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="../" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <div class="dropdown">
+          <button class="dropdown-btn">首页</button>
+          <div class="dropdown-content">
+            <a href="../index.html"><svg class="nav-ico"><use href="../icons/sprite.svg#home"/></svg>首页</a>
+            <a href="../index.html#idea"><svg class="nav-ico"><use href="../icons/sprite.svg#spark"/></svg>理念</a>
+            <a href="../index.html#roles"><svg class="nav-ico"><use href="../icons/sprite.svg#user"/></svg>角色介绍</a>
+            <a href="../index.html#teams"><svg class="nav-ico"><use href="../icons/sprite.svg#collab"/></svg>组队模式</a>
+            <hr>
+            <a href="../index.html#install"><svg class="nav-ico"><use href="../icons/sprite.svg#download"/></svg>10 分钟安装</a>
+            <a href="../index.html#build-pilot"><svg class="nav-ico"><use href="../icons/sprite.svg#tool"/></svg>自建领航员</a>
+            <a href="../index.html#uninstall"><svg class="nav-ico"><use href="../icons/sprite.svg#unlink"/></svg>卸载</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理</button>
+          <div class="dropdown-content">
+            <a href="../mechanism.html#architecture"><svg class="nav-ico"><use href="../icons/sprite.svg#architecture"/></svg>整体架构</a>
+            <a href="../mechanism.html#collaboration"><svg class="nav-ico"><use href="../icons/sprite.svg#collab"/></svg>Agent 协作</a>
+            <a href="../mechanism.html#skill-dispatch"><svg class="nav-ico"><use href="../icons/sprite.svg#dispatch"/></svg>Skill 调度</a>
+            <a href="../mechanism.html#workflow"><svg class="nav-ico"><use href="../icons/sprite.svg#flow"/></svg>工作流执行</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档</button>
+          <div class="dropdown-content">
+            <a href="../docs-index.html"><svg class="nav-ico"><use href="../icons/sprite.svg#book"/></svg>文档中心</a>
+            <hr>
+            <a href="hero-agent-layers.html"><svg class="nav-ico"><use href="../icons/sprite.svg#layers"/></svg>Agent 分层架构</a>
+            <a href="workflow.html"><svg class="nav-ico"><use href="../icons/sprite.svg#workflow"/></svg>工作流程</a>
+            <a href="prd-to-java.html"><svg class="nav-ico"><use href="../icons/sprite.svg#file-code"/></svg>PRD 转 Java</a>
+            <a href="codegraph.html"><svg class="nav-ico"><use href="../icons/sprite.svg#graph"/></svg>CodeGraph</a>
+            <a href="refresh.html"><svg class="nav-ico"><use href="../icons/sprite.svg#refresh"/></svg>刷新机制</a>
+            <a href="onboarding.html"><svg class="nav-ico"><use href="../icons/sprite.svg#compass"/></svg>新人入门</a>
+            <hr>
+            <a href="lane-routing.html"><svg class="nav-ico"><use href="../icons/sprite.svg#route"/></svg>意图分诊</a>
+            <a href="playbook.html"><svg class="nav-ico"><use href="../icons/sprite.svg#book-check"/></svg>Lane Playbook</a>
+            <a href="hero-markers.html" class="active"><svg class="nav-ico"><use href="../icons/sprite.svg#badge"/></svg>hero 露出标记</a>
+            <a href="issue-dispatch.html"><svg class="nav-ico"><use href="../icons/sprite.svg#ticket"/></svg>Issue 触发</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ Hero Section ============ -->
+  <section class="mechanism-hero" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">hero 露出标记规范</h1>
+      <p class="mechanism-subtitle">🦸 hero ▸ — 让用户始终看见，是哪位 Hero 在接管</p>
+      <div class="mechanism-stats">
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">露出时机</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">层保险</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">9</span>
+          <span class="stat-label">英雄名</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1</span>
+          <span class="stat-label">固定 token</span>
+        </div>
+      </div>
+    </div>
+    <svg class="mechanism-hero-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L240,30 L470,80 L640,40 L820,90 L1010,35 L1230,75 L1440,50 L1440,120 Z"/>
+      <path fill="var(--color-woye-deep)" opacity="0.5" d="M0,120 L0,95 L300,65 L560,100 L760,75 L980,105 L1200,70 L1440,98 L1440,120 Z"/>
+    </svg>
+  </section>
+
+  <!-- ============ 主内容区 ============ -->
+  <main class="docs-layout">
+    <aside class="docs-sidebar" aria-label="本页目录">
+      <h3 class="docs-toc-title">目录</h3>
+      <ul class="docs-toc">
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#token">固定 token</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#timings">四个时机</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#double-safety">双保险机制</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#name-map">英雄名映射</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#lifecycle">完整生命周期示例</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#philosophy">设计哲学</a></li>
+      </ul>
+    </aside>
+
+    <div class="docs-content">
+      <article>
+
+        <section id="intro">
+          <blockquote>
+            <p><strong>权威源</strong>：<a href="https://gitlab.corp.yaduo.com/full-stack-ai/claude-hero/-/blob/main/skills/hero-conventions/SKILL.md"><code>skills/hero-conventions/SKILL.md</code></a></p>
+            <p><strong>范围</strong>：本文解读 <code>🦸 hero ▸</code> 标记规范的 4 时机 + 双保险机制 + 英雄名映射，不复制 SKILL.md 全文。</p>
+          </blockquote>
+
+          <h1>🦸 hero ▸ 露出规范解读</h1>
+          <p>露出规范的核心目的只有一个：<strong>让用户感知 hero 体系正在接管当前对话</strong>，区别于裸 Claude 或用户自有机制。每一条 <code>🦸 hero ▸</code> 开头的行都是 hero 体系在说：「这段我来负责」。</p>
+        </section>
+
+        <section id="token">
+          <h2>固定 token</h2>
+          <pre><code>🦸 hero ▸</code></pre>
+          <p>这个前缀<strong>一字不改</strong>。它是所有 hero 标记的锚点，便于结构测试用 <code>grep</code> 或 AST 精确卡死，防 token 漂移。后面接一句话，单独成行，不嵌入段落中间。</p>
+        </section>
+
+        <section id="timings">
+          <h2>四个时机</h2>
+          <p>hero 体系在 4 个关键时刻打出标记。每个时机一个模板 + 一个示例，说明它何时出现。</p>
+
+          <h3>1. 技能 / 通道激活</h3>
+          <p>hero dispatch 选定了某条 lane 或加载了某个 skill 时打出。用户看到这一行就知道进入了哪个工作流。</p>
+          <pre><code>🦸 hero ▸ bugfix lane · systematic-debugging 已加载</code></pre>
+
+          <h3>2. Agent 接手</h3>
+          <p>编排方把任务派给某个 agent 时打出。带英雄名（花名）和 agent 技术名，前者是记忆点，后者供排查时不歧义定位。</p>
+          <pre><code>🦸 hero ▸ 文远（hero-java-backend-developer）接手 · 实现代码</code></pre>
+
+          <h3>3. 门控 STOP</h3>
+          <p>需要用户决策的检查点。<code>STOP</code> 后跟编号（多门控线编号，单门控线不编号），然后是门控名称和等什么。</p>
+          <pre><code>🦸 hero ▸ STOP① 方案确认 · 继续 / 改方向 / 止步</code></pre>
+
+          <h3>4. 任务收尾</h3>
+          <p>lane 或 workflow 结束时打出，明确告诉用户 hero 流程结束，回归普通 Claude。</p>
+          <pre><code>🦸 hero ▸ bugfix lane 完成 · 已交付，退出 hero 体系</code></pre>
+        </section>
+
+        <section id="double-safety">
+          <h2>双保险机制</h2>
+          <p>子 agent 的输出对用户主线是<strong>折叠的</strong>。如果在主线只看得到「孔明派文远去修代码了」，展开子 agent 的输出却找不到任何标记，用户就不知道谁在干活。</p>
+          <p>因此设计了两层打出：</p>
+          <ul>
+            <li><strong>编排方</strong>（dispatch 子 agent 的 lane/workflow）在主线打出 <code>🦸 hero ▸ X 接手</code> —— 主路径，用户主线可见。</li>
+            <li><strong>子 agent</strong> 在自己输出顶部也打一行自报家门 —— 兜底，用户展开子 agent 输出时可见。</li>
+          </ul>
+          <pre><code>主线对话
+│
+│  🦸 hero ▸ 文远（hero-java-backend-developer）接手 · 实现代码    ← 编排方打（主线可见）
+│
+├── 文远子 agent 开始干活（输出对主线折叠）
+│   │
+│   │  🦸 hero ▸ 文远（hero-java-backend-developer）我开始实现    ← 子 agent 自己顶部打（兜底）
+│   ...
+│
+└── 文远干完，结果返回主线</code></pre>
+          <p>两层互为补充：主线那行告诉用户谁在干活，子 agent 顶部那行保证展开后不丢上下文。</p>
+        </section>
+
+        <section id="name-map">
+          <h2>英雄名映射</h2>
+          <p>英雄名（花名）取自中国历史人物，纯装饰/记忆点。不做「用英雄名调用」的 API 路由，调用始终走 agent 技术名。花名在露出标记中展示，agent 技术名在排查时供精确定位。</p>
+          <table>
+            <caption>agent 技术名 ↔ 英雄花名映射</caption>
+            <thead>
+              <tr><th scope="col">Agent</th><th scope="col">花名</th><th scope="col">取名理由</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>hero-java-tech-lead</code></td><td>孔明</td><td>组建团队、拆任务派活——天生编排者</td></tr>
+              <tr><td><code>hero-java-backend-developer</code></td><td>文远</td><td>亲手造装备/写实现，工程师本色</td></tr>
+              <tr><td><code>hero-java-data-engineer</code></td><td>子长</td><td>由数据而生、擅综合</td></tr>
+              <tr><td><code>hero-java-test-engineer</code></td><td>希仁</td><td>蜘蛛感应提前预警 = 测试在出事前抓 bug</td></tr>
+              <tr><td><code>hero-java-code-reviewer</code></td><td>玄成</td><td>推演千万结局找隐患</td></tr>
+              <tr><td><code>hero-java-security-auditor</code></td><td>鹏举</td><td>阿斯加德守门人、洞察一切入侵</td></tr>
+              <tr><td><code>hero-java-ecrm</code></td><td>子文</td><td>把不按常理的怪装备玩明白</td></tr>
+              <tr><td><code>hero-java-hotel-product-center</code></td><td>郑和</td><td>带队探索定位；产品中心枢纽</td></tr>
+              <tr><td><code>hero-java-owner-biz</code></td><td>霞客</td><td>空中侦察大范围地形 = 摸地图</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="lifecycle">
+          <h2>完整生命周期示例</h2>
+          <p>以下是一条 bugfix lane 从触发到收尾的完整对话，4 个时机各出现至少一次。</p>
+          <pre><code>用户: hero 修一下登录报错
+
+🦸 hero ▸ dispatch → bugfix                             ← 时机1: lane 激活
+
+🦸 hero ▸ bugfix lane · systematic-debugging 已加载     ← 时机1: skill 加载
+
+🦸 hero ▸ 霞客（hero-java-owner-biz）接手 · 摸地图      ← 时机2: agent 接手
+[...霞客输出...]
+
+⏸ STOP ①   定位方案   确认                               ← 时机3: 门控 STOP
+&gt; 缺陷在 UserService.login() 第 45 行，NPE
+&gt; 影响面：3 个 caller
+
+用户: 继续
+
+🦸 hero ▸ RED · 希仁（hero-java-test-engineer）接手 · 写复现测试
+&gt; 测试 login_returns_400_when_user_inactive ... FAIL ✓
+
+🦸 hero ▸ GREEN · 文远（hero-java-backend-developer）接手 · 修代码
+&gt; 测试 login_returns_400_when_user_inactive ... PASS ✓
+
+🦸 hero ▸ REFACTOR · 文远清理
+
+⏸ STOP ②   改动+测试结果                                 ← 时机3: 门控 STOP
+&gt; 修改了 UserService.java 第 45 行，测试通过
+&gt; 回归测试 8/8 通过
+
+用户: 收
+
+🦸 hero ▸ bugfix lane 完成 · 已交付，退出 hero 体系      ← 时机4: 任务收尾</code></pre>
+        </section>
+
+        <section id="philosophy">
+          <h2>设计哲学</h2>
+          <ul>
+            <li><strong>固定 token 一字不改</strong>：<code>🦸 hero ▸</code> 是所有标记的锚点，结构测试靠它卡死防 token 漂移。</li>
+            <li><strong>只作前缀、单次成行</strong>：标记独占一行，不嵌入段落中间，不污染正常输出内容。</li>
+            <li><strong>英雄名作记忆点，agent 技术名供排查</strong>：花名让用户一眼认出谁在干活，agent 技术名保证日志/排查时不歧义定位。</li>
+            <li><strong>双保险</strong>：子 agent 输出折叠时，主线那行告诉用户谁被派了活；展开子 agent 后顶部自报家门不丢上下文。</li>
+            <li><strong>STOP 编号规则</strong>：多门控线用 <code>STOP①</code>、<code>STOP②</code> 编号让用户知道在第几个检查点；单门控线不编号。</li>
+            <li><strong>「退出 hero 体系」</strong>：收尾标记明确告诉用户 hero 流程结束，后续对话回归普通 Claude，不再有 hero 接管行为。</li>
+          </ul>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="../index.html">首页</a>
+        <a href="../mechanism.html">机制</a>
+        <a href="../docs-index.html">文档</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2026 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
+  </footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      const nav = document.querySelector('.topnav');
+      nav.classList.toggle('is-menu-open');
+      this.setAttribute('aria-expanded', nav.classList.contains('is-menu-open'));
+    });
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        document.querySelectorAll('.dropdown').forEach(d => { if (d !== parent) d.classList.remove('open'); });
+        parent.classList.toggle('open');
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+</body>
+</html>

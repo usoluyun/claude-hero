@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="hero-dispatch 意图分诊与 lane 路由：9 条 lane catalog、分诊三段式、重型 vs 轻量交接、三种门控 archetype 全解读。">
+  <meta name="author" content="亚朵集团">
+  <meta name="keywords" content="claude-hero, hero-dispatch, lane, 意图分诊, 路由, archetype">
+  <meta property="og:title" content="意图分诊与 Lane 路由 · 领航 Hero">
+  <meta property="og:description" content="hero-dispatch 顶层意图分诊入口的路由表与门控骨架">
+  <meta property="og:type" content="website">
+  <title>意图分诊与 Lane 路由 · 领航 Hero</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/mechanism.css">
+  <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="../" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <div class="dropdown">
+          <button class="dropdown-btn">首页</button>
+          <div class="dropdown-content">
+            <a href="../index.html"><svg class="nav-ico"><use href="../icons/sprite.svg#home"/></svg>首页</a>
+            <a href="../index.html#idea"><svg class="nav-ico"><use href="../icons/sprite.svg#spark"/></svg>理念</a>
+            <a href="../index.html#roles"><svg class="nav-ico"><use href="../icons/sprite.svg#user"/></svg>角色介绍</a>
+            <a href="../index.html#teams"><svg class="nav-ico"><use href="../icons/sprite.svg#collab"/></svg>组队模式</a>
+            <hr>
+            <a href="../index.html#install"><svg class="nav-ico"><use href="../icons/sprite.svg#download"/></svg>10 分钟安装</a>
+            <a href="../index.html#build-pilot"><svg class="nav-ico"><use href="../icons/sprite.svg#tool"/></svg>自建领航员</a>
+            <a href="../index.html#uninstall"><svg class="nav-ico"><use href="../icons/sprite.svg#unlink"/></svg>卸载</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理</button>
+          <div class="dropdown-content">
+            <a href="../mechanism.html#architecture"><svg class="nav-ico"><use href="../icons/sprite.svg#architecture"/></svg>整体架构</a>
+            <a href="../mechanism.html#collaboration"><svg class="nav-ico"><use href="../icons/sprite.svg#collab"/></svg>Agent 协作</a>
+            <a href="../mechanism.html#skill-dispatch"><svg class="nav-ico"><use href="../icons/sprite.svg#dispatch"/></svg>Skill 调度</a>
+            <a href="../mechanism.html#workflow"><svg class="nav-ico"><use href="../icons/sprite.svg#flow"/></svg>工作流执行</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档</button>
+          <div class="dropdown-content">
+            <a href="../docs-index.html"><svg class="nav-ico"><use href="../icons/sprite.svg#book"/></svg>文档中心</a>
+            <hr>
+            <a href="hero-agent-layers.html"><svg class="nav-ico"><use href="../icons/sprite.svg#layers"/></svg>Agent 分层架构</a>
+            <a href="workflow.html"><svg class="nav-ico"><use href="../icons/sprite.svg#workflow"/></svg>工作流程</a>
+            <a href="prd-to-java.html"><svg class="nav-ico"><use href="../icons/sprite.svg#file-code"/></svg>PRD 转 Java</a>
+            <a href="codegraph.html"><svg class="nav-ico"><use href="../icons/sprite.svg#graph"/></svg>CodeGraph</a>
+            <a href="refresh.html"><svg class="nav-ico"><use href="../icons/sprite.svg#refresh"/></svg>刷新机制</a>
+            <a href="onboarding.html"><svg class="nav-ico"><use href="../icons/sprite.svg#compass"/></svg>新人入门</a>
+            <hr>
+            <a href="lane-routing.html" class="active"><svg class="nav-ico"><use href="../icons/sprite.svg#route"/></svg>意图分诊</a>
+            <a href="playbook.html"><svg class="nav-ico"><use href="../icons/sprite.svg#book-check"/></svg>Lane Playbook</a>
+            <a href="hero-markers.html"><svg class="nav-ico"><use href="../icons/sprite.svg#badge"/></svg>hero 露出标记</a>
+            <a href="issue-dispatch.html"><svg class="nav-ico"><use href="../icons/sprite.svg#ticket"/></svg>Issue 触发</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ Hero Section ============ -->
+  <section class="mechanism-hero" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">意图分诊与 Lane 路由</h1>
+      <p class="mechanism-subtitle">hero-dispatch — 听一句意图，归到对的 lane，补齐、确认、交接</p>
+      <div class="mechanism-stats">
+        <div class="stat">
+          <span class="stat-num">9</span>
+          <span class="stat-label">条 Lane</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">段分诊</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">种 Archetype</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">条重型线</span>
+        </div>
+      </div>
+    </div>
+    <svg class="mechanism-hero-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L240,30 L470,80 L640,40 L820,90 L1010,35 L1230,75 L1440,50 L1440,120 Z"/>
+      <path fill="var(--color-woye-deep)" opacity="0.5" d="M0,120 L0,95 L300,65 L560,100 L760,75 L980,105 L1200,70 L1440,98 L1440,120 Z"/>
+    </svg>
+  </section>
+
+  <!-- ============ 主内容区 ============ -->
+  <main class="docs-layout">
+    <aside class="docs-sidebar" aria-label="本页目录">
+      <h3 class="docs-toc-title">目录</h3>
+      <ul class="docs-toc">
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#two-dispatch">两个 dispatch 别混淆</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#trigger">触发机制</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#catalog">9 条 Lane Catalog</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#triage">分诊三段式</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#handoff">重型 vs 轻量交接</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#archetypes">门控骨架：三种 archetype</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#examples">示例</a></li>
+      </ul>
+    </aside>
+
+    <div class="docs-content">
+      <article>
+
+        <section id="intro">
+          <blockquote>
+            <p><strong>权威源</strong>：<a href="https://gitlab.corp.yaduo.com/full-stack-ai/claude-hero/-/blob/main/skills/hero-dispatch/SKILL.md"><code>skills/hero-dispatch/SKILL.md</code></a></p>
+            <p><strong>范围</strong>：本文解读 hero-dispatch 的 lane catalog 路由表和分诊三段式，不复制 SKILL.md 全文。</p>
+          </blockquote>
+
+          <h1>hero-dispatch：意图分诊与 lane 路由</h1>
+          <p>hero-dispatch 是 hero 体系的<strong>顶层意图分诊入口</strong>。用户说一句 <code>hero &lt;意图&gt;</code>，分诊器自动判断该走哪条 lane、补齐输入、确认后交接给对应 workflow，自己退场。<strong>只做路由，不做业务。</strong></p>
+        </section>
+
+        <section id="two-dispatch">
+          <h2>两个 dispatch，别混淆</h2>
+          <p>hero 体系有两个以 <code>dispatch</code> 命名的机制，但<strong>完全不同</strong>：</p>
+          <table>
+            <thead>
+              <tr><th scope="col">机制</th><th scope="col">触发方式</th><th scope="col">职责</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>hero-dispatch</strong></td><td><code>hero &lt;意图&gt;</code>（自然语言）</td><td>意图分诊 → 9 条 lane</td></tr>
+              <tr><td><strong>hero-issue-dispatch</strong></td><td><code>issue &lt;命令&gt;</code>（结构化命令）</td><td>GitLab Issue 路由 → agent 认领</td></tr>
+            </tbody>
+          </table>
+          <p>本文只讲 hero-dispatch。issue-dispatch 在 <a href="issue-dispatch.html">Issue 触发机制</a> 中单独说明。</p>
+        </section>
+
+        <section id="trigger">
+          <h2>触发机制</h2>
+          <ol>
+            <li>用户输入 <code>hero &lt;自由意图&gt;</code>，例：<code>hero 修一下登录报错</code>、<code>hero 这个接口太慢</code></li>
+            <li>Claude Code 引擎将意图文本与 skill 的 <code>description</code> 做<strong>语义匹配</strong></li>
+            <li>匹配命中后加载 <code>hero-dispatch/SKILL.md</code>，分诊器接管</li>
+            <li>分诊器读取 lane catalog（路由表），归类意图、补齐输入、确认后交接</li>
+          </ol>
+          <p>老触发词 <code>hero 开发工作流 &lt;URL&gt;</code> / <code>hero 刷新</code> 直达对应 skill，不绕本入口。</p>
+        </section>
+
+        <section id="catalog">
+          <h2>9 条 lane catalog（路由表）</h2>
+          <p>分诊器根据用户意图的关键词匹配 lane。下表是唯一事实源：</p>
+          <table>
+            <caption>hero-dispatch lane 路由表</caption>
+            <thead>
+              <tr><th scope="col">Lane</th><th scope="col">触发关键词（意图信号）</th><th scope="col">必需输入</th><th scope="col">交接目标</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>prd-大需求</strong></td><td>PRD、飞书链接、新功能、大需求、开发工作流</td><td>飞书 URL</td><td>委派 <a href="prd-to-java.html"><code>hero-prd-to-java</code></a></td></tr>
+              <tr><td><strong>refresh-保鲜</strong></td><td>刷新、保鲜、索引漂移、领航过期</td><td>proj（可选）</td><td>委派 <a href="refresh.html"><code>hero-refresh</code></a></td></tr>
+              <tr><td><strong>bugfix</strong></td><td>修bug、报错、异常、复现、修一下、不对/不生效</td><td>现象/复现路径</td><td><code>lanes/bugfix.md</code></td></tr>
+              <tr><td><strong>iterate</strong></td><td>小迭代、加个字段、改个逻辑、小改动、加个开关、微调</td><td>改动目标</td><td><code>lanes/iterate.md</code></td></tr>
+              <tr><td><strong>refactor</strong></td><td>重构、抽方法、改命名、拆类、消除重复、整理代码</td><td>重构对象</td><td><code>lanes/refactor.md</code></td></tr>
+              <tr><td><strong>research</strong></td><td>调研、评估、能不能、影响面、怎么改、要不要</td><td>问题/范围</td><td><code>lanes/research.md</code></td></tr>
+              <tr><td><strong>perf</strong></td><td>慢、性能、瓶颈、优化耗时、压测、超时</td><td>慢的位置/指标</td><td><code>lanes/perf.md</code></td></tr>
+              <tr><td><strong>security</strong></td><td>安全、越权、注入、漏洞、CVE、敏感信息</td><td>审计范围</td><td><code>lanes/security.md</code></td></tr>
+              <tr><td><strong>team-组队</strong></td><td>组队、team、spawn、分屏、并行、多位 Hero</td><td>组队意图（可选）</td><td><code>lanes/team.md</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="triage">
+          <h2>分诊三段式</h2>
+          <p>分诊器判断用户意图走哪个 lane，分三步：</p>
+          <ol>
+            <li><strong>关键词命中</strong>：扫描意图文本中的关键词，单一命中 → 候选该 lane</li>
+            <li><strong>语义兜底</strong>：无命中或多义时，按意图的<strong>语义</strong>归类（不是纯字面匹配）。例如「这个登录好像有点问题」不含「修bug」字眼，但语义上归 bugfix</li>
+            <li><strong>不确定就 STOP 追问</strong>：候选 lane ≥2 且分不清 → 列出最可能的 2-3 条让用户选，<strong>不替用户拍板</strong></li>
+          </ol>
+
+          <h3>边界判定（轻量 vs 重型分流）</h3>
+          <ul>
+            <li>命中「PRD / 飞书 URL / 大需求 / 多服务」→ <strong>prd 重型线</strong></li>
+            <li>其他情况一律先归<strong>轻量线</strong>。「修个 bug」不会被误升级成 8 步流水线</li>
+            <li>用户可在确认 STOP 时手动改判（「这其实是大需求，走 PRD 线」）</li>
+          </ul>
+
+          <h3>必需输入缺失 → 追问</h3>
+          <p>任何 lane 缺关键输入都先 STOP 补齐，不带空输入交接。例如：prd 缺飞书 URL → 追问 URL；bugfix 缺复现信息 → 追问现象/路径。</p>
+
+          <h3>降级（避免过度拦截）</h3>
+          <p>8 条都不沾边（纯闲聊 / 纯问答）→ <strong>不接管</strong>，告知「这不像开发任务，我直接答」，回落普通对话模式。</p>
+        </section>
+
+        <section id="handoff">
+          <h2>分类交接：重型线 vs 轻量线</h2>
+          <p>分诊确认后，交接方式分两种：</p>
+          <table>
+            <thead>
+              <tr><th scope="col">类型</th><th scope="col">包含 lane</th><th scope="col">交接方式</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>重型线</strong></td><td>prd、refresh</td><td>用 <code>Skill</code> 工具<strong>委派完整 skill</strong>（<code>hero-prd-to-java</code> 或 <code>hero-refresh</code>），传已补齐的输入</td></tr>
+              <tr><td><strong>轻量线</strong></td><td>bugfix、iterate、refactor、research、perf、security、team</td><td><strong>加载 <code>lanes/&lt;name&gt;.md</code> playbook</strong>，按其 frontmatter 与门控骨架执行</td></tr>
+            </tbody>
+          </table>
+          <p>重型线因为流程长、步骤多（prd 有 8 步流水线，refresh 有两段式保鲜），所以走独立 skill。轻量线相对简短，共享同一套门控骨架，各自 lane 文件只定义差异部分。详见 <a href="playbook.html">Lane Playbook 对比</a>。</p>
+        </section>
+
+        <section id="archetypes">
+          <h2>门控骨架：三种 archetype</h2>
+          <p>所有轻量 lane 都继承以下三种 archetype（原型）之一。lane 文件只声明自己属于哪种 archetype，不重复定义门控流程。</p>
+
+          <h3>Archetype A：mutate（改代码线）</h3>
+          <p>用于 bugfix、iterate、refactor。流程：</p>
+          <pre><code>勘察定位 → ⏸ STOP ①（确认方案）→ RED（先写失败测试）→ GREEN（实现到通过）→ REFACTOR（测试保护下清理）→ ⏸ STOP ②（报告收/返工）</code></pre>
+          <p>核心原则：<strong>测试先行</strong>，由 <code>superpowers:test-driven-development</code> 强制，不是 test-after。</p>
+
+          <h3>Archetype B：readonly（只读线）</h3>
+          <p>用于 research。流程：</p>
+          <pre><code>调查（只读，不碰代码）→ 分析（影响面/可行性/风险/工作量）→ ⏸ STOP（输出结论+选项+建议）</code></pre>
+          <p>无 RED-GREEN，不产代码。产物常作为后续 prd 线或 mutate 线的输入。</p>
+
+          <h3>two-phase：性能 &amp; 安全（先诊断，再可选改）</h3>
+          <p>用于 perf、security。流程：</p>
+          <pre><code>B 段诊断 → ⏸ STOP「清单」→ 按需转 A 段（TDD-first，基准/复现测试当 RED）</code></pre>
+          <p>两段都复用 A/B 骨架。先只读摸清问题，再决定要不要动手改。</p>
+        </section>
+
+        <section id="examples">
+          <h2>示例</h2>
+
+          <h3>示例 1：<code>hero 修一下登录报错</code></h3>
+          <ol>
+            <li>关键词命中「修一下」→ bugfix lane</li>
+            <li>分诊器追问：「请描述复现路径：什么操作、报什么错、哪个环境」</li>
+            <li>用户补齐后，分诊器确认：<code>🦸 hero ▸ 分诊 → bugfix</code></li>
+            <li>加载 <code>lanes/bugfix.md</code>（mutate archetype），勘察 → STOP ① → RED → GREEN → REFACTOR → STOP ②</li>
+          </ol>
+
+          <h3>示例 2：<code>hero 这个接口太慢了，帮忙看看</code></h3>
+          <ol>
+            <li>关键词命中「慢」→ perf lane</li>
+            <li>分诊器追问：「哪个接口？大概多慢？有没有压测数据」</li>
+            <li>确认后走 two-phase：先 B 段诊断定位瓶颈 → STOP 输出清单 → 用户决定是否转 A 段优化</li>
+          </ol>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="../index.html">首页</a>
+        <a href="../mechanism.html">机制</a>
+        <a href="../docs-index.html">文档</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2026 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
+  </footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      const nav = document.querySelector('.topnav');
+      nav.classList.toggle('is-menu-open');
+      this.setAttribute('aria-expanded', nav.classList.contains('is-menu-open'));
+    });
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        document.querySelectorAll('.dropdown').forEach(d => { if (d !== parent) d.classList.remove('open'); });
+        parent.classList.toggle('open');
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+</body>
+</html>

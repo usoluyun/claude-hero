@@ -118,10 +118,56 @@
   background: none;
   border: none;
   color: var(--color-baiyan);
-  font-size: var(--text-xl);
   cursor: pointer;
   padding: var(--space-sm);
-  line-height: 1;
+  line-height: 0;
+}
+
+/* 汉堡三道横线：用 .nav-toggle-icon + ::before/::after 画出 */
+.nav-toggle-icon,
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--color-baiyan);
+  border-radius: var(--radius-full);
+  transition: transform 250ms ease, opacity 200ms ease;
+}
+.nav-toggle-icon { position: relative; }
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.nav-toggle-icon::before { top: -7px; }
+.nav-toggle-icon::after  { top: 7px; }
+
+/* 展开态：上下线收成 X，中线隐去 */
+.topnav.is-menu-open .nav-toggle-icon { background: transparent; }
+.topnav.is-menu-open .nav-toggle-icon::before { transform: translateY(7px) rotate(45deg); }
+.topnav.is-menu-open .nav-toggle-icon::after  { transform: translateY(-7px) rotate(-45deg); }
+
+/* ========================================
+   导航 / 卡片 / 协作卡 细线图标
+   Line Icons (sprite.svg) — 铜色 currentColor
+   ======================================== */
+
+/* 下拉项内联图标：随文本基线对齐 */
+.nav-ico {
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
+  margin-right: 0.5em;
+  color: var(--color-bronze);
+  vertical-align: -0.18em;
+}
+
+/* 下拉项改 flex 让图标与文字垂直居中 */
+.dropdown-content a {
+  display: flex;
+  align-items: center;
 }
 
 /* ========================================
@@ -619,6 +665,35 @@
   line-height: 1;
 }
 
+/* 卡片细线图标：铜色方块描边 */
+.docs-card-icon svg {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--color-bronze);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.docs-card:hover .docs-card-icon svg {
+  color: var(--color-woye);
+  transform: translateY(-2px);
+}
+
+/* 协作卡头像图标（index.html Agent 协作时序）：铜色线图标 + 白岩圆底 */
+.collab-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-full);
+  background: var(--color-baiyan);
+  border: 1px solid var(--color-line);
+}
+.collab-avatar svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-bronze);
+}
+
 .docs-card-title {
   font-family: var(--font-brand);
   font-size: var(--text-xl);
@@ -795,8 +870,8 @@
 
 .docs-hero {
   position: relative;
-  background: #9C6B3B;
-  color: #FFFFFF;
+  background: var(--color-woye);
+  color: var(--color-baiyan);
   padding: 4rem 1.5rem 5rem;
   text-align: center;
   overflow: hidden;
@@ -831,13 +906,26 @@
 }
 
 .docs-hero-mountains path {
-  fill: var(--color-bg-primary, #FFFFFF);
+  fill: var(--color-white);
 }
 
 .docs-grid-section {
   padding: 4rem 1.5rem;
-  background: var(--color-bg-primary, #FFFFFF);
+  background: var(--color-white);
 }
+
+/* 文档分组小标（核心文档 / 工作流机制详解） */
+.docs-group-title {
+  max-width: 1200px;
+  margin: 0 auto var(--space-xl);
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-bronze);
+}
+.docs-group + .docs-group { margin-top: var(--space-4xl); }
 
 .docs-grid {
   max-width: 1200px;
@@ -853,10 +941,10 @@
   align-items: center;
   margin-top: auto;
   padding-top: 1rem;
-  border-top: 1px solid var(--color-border, #E5E7EB);
+  border-top: 1px solid var(--color-line);
   font-size: 0.875rem;
   font-weight: 500;
-  color: #9C6B3B;
+  color: var(--color-bronze);
   transition: color 0.3s ease;
 }
 
@@ -868,7 +956,7 @@
 }
 
 .docs-card:hover .docs-card-footer {
-  color: var(--color-text-primary, #1F2937);
+  color: var(--color-woye);
 }
 
 .docs-card:hover .docs-card-arrow {
@@ -876,7 +964,7 @@
 }
 
 .topnav-links a.active {
-  color: #9C6B3B;
+  color: var(--color-bronze);
   font-weight: 600;
   position: relative;
 }
@@ -888,7 +976,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: #9C6B3B;
+  background: var(--color-bronze);
 }
 
 .container {

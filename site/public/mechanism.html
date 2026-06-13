@@ -24,49 +24,46 @@
         <span class="nav-toggle-icon"></span>
       </button>
       <div class="topnav-links">
-        <a href="index.html">首页</a>
-
         <div class="dropdown">
-          <button class="dropdown-btn">原理 ▾</button>
+          <button class="dropdown-btn">首页</button>
           <div class="dropdown-content">
-            <a href="#architecture">整体架构</a>
-            <a href="#collaboration">Agent 协作</a>
-            <a href="#skill-dispatch">Skill 调度</a>
-            <a href="#workflow">工作流执行</a>
+            <a href="index.html"><svg class="nav-ico"><use href="icons/sprite.svg#home"/></svg>首页</a>
+            <a href="index.html#idea"><svg class="nav-ico"><use href="icons/sprite.svg#spark"/></svg>理念</a>
+            <a href="index.html#roles"><svg class="nav-ico"><use href="icons/sprite.svg#user"/></svg>角色介绍</a>
+            <a href="index.html#teams"><svg class="nav-ico"><use href="icons/sprite.svg#collab"/></svg>组队模式</a>
             <hr>
-            <a href="#hidden-features">隐藏特性</a>
+            <a href="index.html#install"><svg class="nav-ico"><use href="icons/sprite.svg#download"/></svg>10 分钟安装</a>
+            <a href="index.html#build-pilot"><svg class="nav-ico"><use href="icons/sprite.svg#tool"/></svg>自建领航员</a>
+            <a href="index.html#uninstall"><svg class="nav-ico"><use href="icons/sprite.svg#unlink"/></svg>卸载</a>
           </div>
         </div>
 
         <div class="dropdown">
-          <button class="dropdown-btn">角色 ▾</button>
+          <button class="dropdown-btn">原理</button>
           <div class="dropdown-content">
-            <a href="index.html#roles">角色介绍</a>
-            <a href="index.html#teams">组队模式</a>
+            <a href="mechanism.html#architecture"><svg class="nav-ico"><use href="icons/sprite.svg#architecture"/></svg>整体架构</a>
+            <a href="mechanism.html#collaboration"><svg class="nav-ico"><use href="icons/sprite.svg#collab"/></svg>Agent 协作</a>
+            <a href="mechanism.html#skill-dispatch"><svg class="nav-ico"><use href="icons/sprite.svg#dispatch"/></svg>Skill 调度</a>
+            <a href="mechanism.html#workflow"><svg class="nav-ico"><use href="icons/sprite.svg#flow"/></svg>工作流执行</a>
           </div>
         </div>
 
         <div class="dropdown">
-          <button class="dropdown-btn">文档 ▾</button>
+          <button class="dropdown-btn">文档</button>
           <div class="dropdown-content">
-            <a href="docs-index.html">📚 文档中心</a>
+            <a href="docs-index.html"><svg class="nav-ico"><use href="icons/sprite.svg#book"/></svg>文档中心</a>
             <hr>
-            <a href="pages/hero-agent-layers.html">🏗️ Agent 分层架构</a>
-            <a href="pages/workflow.html">⚙️ 工作流程</a>
-            <a href="pages/prd-to-java.html">📋 PRD 转 Java</a>
-            <a href="pages/codegraph.html">📊 CodeGraph</a>
-            <a href="pages/refresh.html">🔄 刷新机制</a>
-            <a href="pages/onboarding.html">🚀 新人入门</a>
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <button class="dropdown-btn">安装 ▾</button>
-          <div class="dropdown-content">
-            <a href="index.html#install">10 分钟安装</a>
-            <a href="index.html#build-pilot">自建领航员</a>
+            <a href="pages/hero-agent-layers.html"><svg class="nav-ico"><use href="icons/sprite.svg#layers"/></svg>Agent 分层架构</a>
+            <a href="pages/workflow.html"><svg class="nav-ico"><use href="icons/sprite.svg#workflow"/></svg>工作流程</a>
+            <a href="pages/prd-to-java.html"><svg class="nav-ico"><use href="icons/sprite.svg#file-code"/></svg>PRD 转 Java</a>
+            <a href="pages/codegraph.html"><svg class="nav-ico"><use href="icons/sprite.svg#graph"/></svg>CodeGraph</a>
+            <a href="pages/refresh.html"><svg class="nav-ico"><use href="icons/sprite.svg#refresh"/></svg>刷新机制</a>
+            <a href="pages/onboarding.html"><svg class="nav-ico"><use href="icons/sprite.svg#compass"/></svg>新人入门</a>
             <hr>
-            <a href="index.html#uninstall">卸载</a>
+            <a href="pages/lane-routing.html"><svg class="nav-ico"><use href="icons/sprite.svg#route"/></svg>意图分诊</a>
+            <a href="pages/playbook.html"><svg class="nav-ico"><use href="icons/sprite.svg#book-check"/></svg>Lane Playbook</a>
+            <a href="pages/hero-markers.html"><svg class="nav-ico"><use href="icons/sprite.svg#badge"/></svg>hero 露出标记</a>
+            <a href="pages/issue-dispatch.html"><svg class="nav-ico"><use href="icons/sprite.svg#ticket"/></svg>Issue 触发</a>
           </div>
         </div>
       </div>
@@ -115,7 +112,7 @@
           <div class="tier-label">入口层 · Entry Layer</div>
           <div class="arch-cards">
             <article class="arch-card">
-              <div class="arch-icon">🚀</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#terminal"/></svg></div>
               <h3>hero 命令</h3>
               <p>用户意图的统一入口点</p>
               <code>hero &lt;意图&gt;</code>
@@ -129,19 +126,19 @@
           <div class="tier-label">编排层 · Orchestration Layer</div>
           <div class="arch-cards">
             <article class="arch-card">
-              <div class="arch-icon">🎯</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#dispatch"/></svg></div>
               <h3>hero-dispatch</h3>
               <p>意图识别与任务分发</p>
               <code>skills/hero-dispatch</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">📋</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#file-code"/></svg></div>
               <h3>hero-prd-to-java</h3>
               <p>PRD 驱动的开发流水线</p>
               <code>skills/hero-prd-to-java</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">🔄</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#refresh"/></svg></div>
               <h3>hero-refresh</h3>
               <p>知识与技能的保鲜机制</p>
               <code>skills/hero-refresh</code>
@@ -155,38 +152,38 @@
           <div class="tier-label">角色层 · Role Agents</div>
           <div class="arch-cards">
             <article class="arch-card">
-              <div class="arch-icon">🧠</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#hub"/></svg></div>
               <h3>孔明</h3>
               <p>技术负责人 · 需求分析与架构设计</p>
               <code>tech-lead</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">⚔️</div>
-              <h3>张辽</h3>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#code"/></svg></div>
+              <h3>文远</h3>
               <p>后端开发 · API 与业务逻辑实现</p>
               <code>backend-dev</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">🗄️</div>
-              <h3>文聘</h3>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#database"/></svg></div>
+              <h3>子长</h3>
               <p>数据工程师 · SQL 与索引优化</p>
               <code>data-engineer</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">🧪</div>
-              <h3>张苞</h3>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#flask"/></svg></div>
+              <h3>希仁</h3>
               <p>QA 工程师 · 测试计划与验证</p>
-              <code>qa-engineer</code>
+              <code>test-engineer</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">📝</div>
-              <h3>张翼</h3>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#search"/></svg></div>
+              <h3>玄成</h3>
               <p>代码审查员 · 代码质量检查</p>
               <code>code-reviewer</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">🔐</div>
-              <h3>廖化</h3>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#shield"/></svg></div>
+              <h3>鹏举</h3>
               <p>安全审计师 · 安全合规检查</p>
               <code>security-auditor</code>
             </article>
@@ -199,19 +196,19 @@
           <div class="tier-label">领航层 · Navigator Agents</div>
           <div class="arch-cards">
             <article class="arch-card">
-              <div class="arch-icon">🗺️</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#map"/></svg></div>
               <h3>子文</h3>
               <p>企业客户管理系统领航</p>
               <code>hero-java-ecrm</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">🧭</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#compass"/></svg></div>
               <h3>郑和</h3>
               <p>酒店产品管理中心领航</p>
               <code>hero-java-hotel-product</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">⚓</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#anchor"/></svg></div>
               <h3>霞客</h3>
               <p>业主业务系统领航</p>
               <code>hero-java-owner-biz</code>
@@ -225,25 +222,25 @@
           <div class="tier-label">工具层 · Tool Layer</div>
           <div class="arch-cards">
             <article class="arch-card">
-              <div class="arch-icon">🔧</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#tool"/></svg></div>
               <h3>Claude Code</h3>
               <p>代码生成与文件操作</p>
               <code>~/.claude</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">🐙</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#git"/></svg></div>
               <h3>GitLab / Git</h3>
               <p>版本控制与协作</p>
               <code>glab CLI</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">💬</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#chat"/></svg></div>
               <h3>飞书开放平台</h3>
               <p>即时通讯与文档</p>
               <code>lark-cli</code>
             </article>
             <article class="arch-card">
-              <div class="arch-icon">🌐</div>
+              <div class="arch-icon"><svg><use href="icons/sprite.svg#globe"/></svg></div>
               <h3>本地工具链</h3>
               <p>JDK / Maven / Docker</p>
               <code>18+ CLI 工具</code>
@@ -290,7 +287,7 @@
             <div class="timeline-nodes">
               <div class="timeline-node">
                 <span class="agent-badge">ZHANG_LIAO</span>
-                <h5>张辽 · 后端开发</h5>
+                <h5>文远 · 后端开发</h5>
                 <ul>
                   <li>实现业务逻辑与 Service 层</li>
                   <li>编写 Controller 与 API 接口</li>
@@ -300,7 +297,7 @@
               </div>
               <div class="timeline-node">
                 <span class="agent-badge">WEN_PIN</span>
-                <h5>文聘 · 数据工程师</h5>
+                <h5>子长 · 数据工程师</h5>
                 <ul>
                   <li>设计数据库表结构</li>
                   <li>编写 SQL 与索引优化</li>
@@ -310,7 +307,7 @@
               </div>
               <div class="timeline-node">
                 <span class="agent-badge">ZHANG_YI</span>
-                <h5>张翼 · 代码审查员</h5>
+                <h5>玄成 · 代码审查员</h5>
                 <ul>
                   <li>代码质量实时检查</li>
                   <li>最佳实践合规验证</li>
@@ -328,7 +325,7 @@
             <div class="timeline-nodes">
               <div class="timeline-node">
                 <span class="agent-badge">ZHANG_BAO</span>
-                <h5>张苞 · QA 工程师</h5>
+                <h5>希仁 · QA 工程师</h5>
                 <ul>
                   <li>执行测试计划与用例</li>
                   <li>验证功能完整性与边界条件</li>
@@ -338,7 +335,7 @@
               </div>
               <div class="timeline-node">
                 <span class="agent-badge">LIAO_HUA</span>
-                <h5>廖化 · 安全审计师</h5>
+                <h5>鹏举 · 安全审计师</h5>
                 <ul>
                   <li>安全合规检查（OWASP Top 10）</li>
                   <li>依赖漏洞扫描（CVE 数据库）</li>
@@ -443,16 +440,16 @@
     1.4 制定 Sprint 计划（含人力评估）
     1.5 输出设计文档（Markdown）
 
-  Wave 2: 并行实现（张辽 + 文聘 + 张翼）
+  Wave 2: 并行实现（文远 + 子长 + 玄成）
     2.1 创建功能分支（via glab branch）
     2.2 创建空工程骨架（via hero-init）
     2.3 并行开发：
-        - 张辽：业务逻辑实现
-        - 文聘：数据库 SQL
-        - 张翼：代码审查（实时）
+        - 文远：业务逻辑实现
+        - 子长：数据库 SQL
+        - 玄成：代码审查（实时）
     2.4 提交代码到功能分支
 
-  Wave 3: 验证与合并（张苞 + 廖化）
+  Wave 3: 验证与合并（希仁 + 鹏举）
     3.1 运行自动化测试（via playwright）
     3.2 安全扫描与审计（via mcp-gitlab）
     3.3 更新设计文档（含变更记录）
@@ -674,19 +671,19 @@ Sprint 计划：
             <div class="output-panel" data-step="4">
               <pre><span class="terminal-comment">⚔️ Wave 2 并行执行 ▸</span>
 
-<span class="terminal-comment">--- 张辽 (backend-dev) ---</span>
+<span class="terminal-comment">--- 文远 (backend-dev) ---</span>
 ✓ 创建 UserController.java (5 endpoints)
 ✓ 创建 UserService.java (business logic)
 ✓ 创建 AuthFilter.java (JWT validation)
 ✓ 提交 3 commits to feature/user-auth
 
-<span class="terminal-comment">--- 文聘 (data-engineer) ---</span>
+<span class="terminal-comment">--- 子长 (data-engineer) ---</span>
 ✓ 创建 users 表 schema
 ✓ 创建 user_roles 表 schema
 ✓ 添加索引 idx_users_phone
 ✓ 提交 migration script
 
-<span class="terminal-comment">--- 张翼 (code-reviewer) ---</span>
+<span class="terminal-comment">--- 玄成 (code-reviewer) ---</span>
 ✓ 代码质量审查完成
   - Best practices: ✓ pass
   - Security: ✓ pass
@@ -699,13 +696,13 @@ Sprint 计划：
             <div class="output-panel" data-step="5">
               <pre><span class="terminal-comment">🧪 Wave 3 验证与合并 ▸</span>
 
-<span class="terminal-comment">--- 张苞 (qa-engineer) ---</span>
+<span class="terminal-comment">--- 希仁 (test-engineer) ---</span>
 ✓ 运行自动化测试 (42 test cases)
   - 单元测试: ✓ pass (38/38)
   - 集成测试: ✓ pass (4/4)
   - 覆盖率: <span style="color: var(--color-bronze);">87%</span> (达标)
 
-<span class="terminal-comment">--- 廖化 (security-auditor) ---</span>
+<span class="terminal-comment">--- 鹏举 (security-auditor) ---</span>
 ✓ OWASP Top 10 扫描完成
   - SQL 注入: ✓ safe
   - XSS: ✓ safe
@@ -746,72 +743,6 @@ Sprint 计划：
       </div>
     </section>
 
-    <!-- ============ 章节五：隐藏特性 ============ -->
-    <section id="hidden-features" class="hidden-features">
-      <div class="features-container">
-        <p class="kicker center">Hidden Features · 隐藏特性</p>
-        <h2 class="section-title">隐藏的高级特性</h2>
-        <p class="section-intro">深入探索 claude-hero 的智能内核</p>
-
-        <div class="feature-grid">
-          <div class="feature-card animate-on-scroll">
-            <div class="feature-icon">🔍</div>
-            <h3>Metis 需求分析</h3>
-            <p>在动手之前，先帮你把需求想清楚。自动识别模糊点、潜在风险、边界情况。</p>
-            <div class="feature-details">
-              <ul>
-                <li>需求精炼：从模糊描述中提取核心目标</li>
-                <li>边界识别：明确什么是必须做的，什么可以不做</li>
-                <li>风险预警：提前发现技术难点和依赖关系</li>
-                <li>输出结构化需求清单（优先级 + 验收标准）</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="feature-card animate-on-scroll">
-            <div class="feature-icon">🛡️</div>
-            <h3>Momus 高精度审查</h3>
-            <p>代码质量检查的最后一道防线。不只是 style check，而是深度审查业务逻辑与最佳实践。</p>
-            <div class="feature-details">
-              <ul>
-                <li>业务逻辑验证：确保实现符合 PRD 需求</li>
-                <li>最佳实践检查：Java 编码规范、设计模式</li>
-                <li>异常路径审查：边界条件、错误处理完整性</li>
-                <li>可维护性评估：代码复杂度、重复代码检测</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="feature-card animate-on-scroll">
-            <div class="feature-icon">🧠</div>
-            <h3>Oracle 架构优化</h3>
-            <p>架构决策的智能顾问。基于项目上下文提供设计模式、技术选型建议。</p>
-            <div class="feature-details">
-              <ul>
-                <li>设计模式推荐：基于业务场景选择最优模式</li>
-                <li>技术选型建议：框架、中间件、数据库选型参考</li>
-                <li>性能优化建议：识别潜在性能瓶颈</li>
-                <li>可扩展性评估：架构的可维护性与扩展性分析</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="feature-card animate-on-scroll">
-            <div class="feature-icon">⚡</div>
-            <h3>Final Verification 四维验证</h3>
-            <p>Wave 3 的最后一关：QA、安全、性能、可部署性四维并行验证，确保交付物万无一失。</p>
-            <div class="feature-details">
-              <ul>
-                <li>QA 验证：自动化测试 + 手动 smoke test</li>
-                <li>安全验证：OWASP Top 10 + CVE 扫描 + 依赖审计</li>
-                <li>性能验证：基准测试 + 并发压测 + 响应时间分析</li>
-                <li>部署验证：Docker 构建 + 环境配置 + 回滚方案</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- ============ 页脚 ============ -->

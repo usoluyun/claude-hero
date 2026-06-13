@@ -143,6 +143,13 @@
       line-height: 1;
     }
 
+    /* 架构卡细线图标（铜色） */
+    .arch-icon svg {
+      width: 2rem;
+      height: 2rem;
+      color: var(--color-bronze);
+    }
+
     .arch-card h3 {
       font-family: var(--font-brand);
       font-size: var(--text-lg);
@@ -647,6 +654,13 @@
       font-size: var(--text-3xl);
       margin-bottom: var(--space-md);
       line-height: 1;
+    }
+
+    /* 隐藏特性卡细线图标（铜色） */
+    .feature-icon svg {
+      width: 2.25rem;
+      height: 2.25rem;
+      color: var(--color-bronze);
     }
 
     .feature-card h3 {
