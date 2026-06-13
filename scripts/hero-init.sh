@@ -171,11 +171,11 @@ generate_chinese_name() {
     "士衡"  # 陆机
   )
   
-  # 获取已分配花名列表
-  local state_file="$ROOT/docs/.refresh-state.json"
+  # 获取已分配花名列表（数据源: agents/AGENTS.md YAML frontmatter 的 display_name）
+  local agents_file="$ROOT/agents/AGENTS.md"
   local used_names=""
-  if [ -f "$state_file" ]; then
-    used_names=$(jq -r '.aliases // {} | to_entries[] | .value' "$state_file" 2>/dev/null) || used_names=""
+  if [ -f "$agents_file" ]; then
+    used_names=$(sed -n '/^---$/,/^---$/p' "$agents_file" | grep 'display_name:' | sed 's/.*display_name:[[:space:]]*//')
   fi
   
   # 随机选择未被占用的花名
