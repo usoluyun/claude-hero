@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # hero-init.sh — 导航 Agent 自动化构建主脚本
 # 用法:
-#   bash scripts/hero-init.sh <project_path> <chinese_name>
+#   bash scripts/hero-init.sh <project_path> [chinese_name]
 #   bash scripts/hero-init.sh --help
+#
+# 花名可选: 传入历史人物字号（如"子文""玄成""孔明"），或留空自动生成（确保不重复）。
 # 输出:
 #   agents/{agent_name}.md — 最终的导航 Agent 文件
 #   Git 分支 feat/init-{project_key}-{date}
@@ -14,18 +16,19 @@ set -euo pipefail
 # 帮助信息
 # ──────────────────────────────────────────────────────────────
 if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
-  echo "Usage: hero-init.sh <project_path> <chinese_name> [--gitlab-project <group/project>]"
+  echo "Usage: hero-init.sh <project_path> [chinese_name] [--gitlab-project <group/project>]"
   echo ""
   echo "  为 Java 项目自动生成领航 Agent 文件并提交 Git 分支。"
   echo ""
   echo "参数:"
   echo "  project_path      项目绝对路径（必需，需包含 *.java 文件）"
-  echo "  chinese_name      花名/Agent 中文代号（必需，如 子文、郑和）"
-  echo "  --gitlab-project  GitLab project path（可选，如 group/project-name）"
+  echo "  chinese_name      [可选] 花名/Agent 中文代号（如 子文、郑和），留空则自动生成未占用花名"
+  echo "  --gitlab-project  [可选] GitLab project path（如 group/project-name）"
   echo ""
   echo "示例:"
   echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm 子文"
-  echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm 子文 --gitlab-project at-our/ecrm"
+  echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm  # 花名留空，自动分配"
+  echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm  --gitlab-project at-our/ecrm"
   echo ""
   echo "流程:"
   echo "  Phase 1: 检测项目布局（构建工具 / 模块结构）"
@@ -72,10 +75,10 @@ while [ $# -gt 0 ]; do
   esac
 done
 
-if [ -z "$PROJECT_PATH" ] || [ -z "$CHINESE_NAME" ]; then
-  echo "Usage: hero-init.sh <project_path> <chinese_name> [--gitlab-project <group/project>]" >&2
+if [ -z "$PROJECT_PATH" ]; then
+  echo "Usage: hero-init.sh <project_path> [chinese_name] [--gitlab-project <group/project>]" >&2
   echo "  project_path  项目绝对路径（必需）" >&2
-  echo "  chinese_name  花名/中文名（必需）" >&2
+  echo "  chinese_name  花名/中文名（可选，留空自动分配）" >&2
   echo "  --gitlab-project  GitLab project path（可选）" >&2
   echo "" >&2
   echo "使用 --help 查看详细帮助" >&2
@@ -97,6 +100,100 @@ source "$HERE/lib/init-template.sh"
 source "$HERE/lib/init-verify.sh"
 source "$HERE/lib/init-branch.sh"
 source "$HERE/lib/refresh-state.sh"
+
+# ──────────────────────────────────────────────────────────────
+# 花名校验与生成函数
+# ──────────────────────────────────────────────────────────────
+
+check_chinese_name_unique() {
+  # 检查花名是否已被占用
+  # 参数: $1=待检查的花名
+  # 返回: 0=可用, 1=已被占用
+  local target_name="$1"
+  local state_file="$ROOT/docs/.refresh-state.json"
+  
+  # 从 refresh-state.json 获取已使用的花名列表
+  if [ -f "$state_file" ]; then
+    local used_names
+    used_names=$(jq -r '.aliases // {} | to_entries[] | .value' "$state_file" 2>/dev/null) || return 0
+    
+    while IFS= read -r name; do
+      if [ "$name" = "$target_name" ]; then
+        echo "❌ 花名 '$target_name' 已被分配给: $(jq -r --arg n "$target_name" '.aliases // {} | to_entries[] | select(.value == $n) | .key' "$state_file")"
+        return 1
+      fi
+    done <<< "$used_names"
+  fi
+  
+  # 同时检查 agents/ 目录中是否已有同名 agent
+  if [ -f "$ROOT/agents/hero-java-${target_name}.md" ]; then
+    echo "❌ 花名 '$target_name' 对应的 agent 文件已存在: agents/hero-java-${target_name}.md"
+    return 1
+  fi
+  
+  return 0
+}
+
+generate_chinese_name() {
+  # 基于项目特征自动生成花名（历史人物字号）
+  # 参数: $1=项目路径
+  # 输出: 生成的花名（2-3 个汉字）
+  local project_path="$1"
+  local project_name
+  project_name=$(get_project_name "$project_path")
+  
+  # 候选历史人物字号池（避免与现代常用重名）
+  local candidates=(
+    "子房"  # 张良
+    "仲淹"  # 范仲淹
+    "君实"  # 司马光
+    "幼安"  # 辛弃疾
+    "务观"  # 陆游
+    "永叔"  # 欧阳修
+    "子瞻"  # 苏轼
+    "明远"  # 鲍照
+    "元亮"  # 陶渊明
+    "太冲"  # 左思
+    "安仁"  # 潘岳
+    "士衡"  # 陆机
+  )
+  
+  # 获取已分配花名列表
+  local state_file="$ROOT/docs/.refresh-state.json"
+  local used_names=""
+  if [ -f "$state_file" ]; then
+    used_names=$(jq -r '.aliases // {} | to_entries[] | .value' "$state_file" 2>/dev/null) || used_names=""
+  fi
+  
+  # 随机选择未被占用的花名
+  local attempts=0
+  local max_attempts=20
+  while [ $attempts -lt $max_attempts ]; do
+    local random_idx=$(( RANDOM % ${#candidates[@]} ))
+    local candidate="${candidates[$random_idx]}"
+    
+    # 检查是否被占用
+    local is_used=false
+    if [ -n "$used_names" ]; then
+      while IFS= read -r used; do
+        if [ "$used" = "$candidate" ]; then
+          is_used=true
+          break
+        fi
+      done <<< "$used_names"
+    fi
+    
+    if [ "$is_used" = false ]; then
+      echo "$candidate"
+      return 0
+    fi
+    
+    attempts=$((attempts + 1))
+  done
+  
+  # 如果使用项目名称生成（兜底方案）
+  echo "${project_name}安"
+}
 
 # ──────────────────────────────────────────────────────────────
 # Phase 6.5: GitLab project 配置（可选）
@@ -167,6 +264,18 @@ fi
 # 4. 依赖工具检测
 require_codegraph || exit 1
 require_jq || exit 1
+
+# 花名处理：留空则自动生成，提供则检查唯一性
+if [ -z "$CHINESE_NAME" ]; then
+  CHINESE_NAME=$(generate_chinese_name "$PROJECT_PATH")
+  echo "🤖 自动生成花名: ${CHINESE_NAME}"
+else
+  if ! check_chinese_name_unique "$CHINESE_NAME"; then
+    echo "ERROR: 花名 '$CHINESE_NAME' 已被使用，请更换" >&2
+    exit 1
+  fi
+fi
+echo ""
 
 # ──────────────────────────────────────────────────────────────
 # 提取项目信息
