@@ -58,11 +58,11 @@
 - 主 README.md 追加新子目录索引
 
 ### Definition of Done
-- [ ] `docs/hero-workflow/` 子目录存在且包含 8 个 .md 文件
-- [ ] 每篇文档开头都有 `> **权威源**` 和 `> **范围**` 两个声明块
-- [ ] 每篇文档 ≤200 行
-- [ ] 主 README.md 包含对 `docs/hero-workflow/` 的引用
-- [ ] `docs/hero-workflow/README.md` 中 7 个相对链接全部指向真实文件
+- [x] `docs/hero-workflow/` 子目录存在且包含 8 个 .md 文件
+- [x] 每篇文档开头都有 `> **权威源**` 和 `> **范围**` 两个声明块
+- [x] 每篇文档 ≤200 行
+- [x] 主 README.md 包含对 `docs/hero-workflow/` 的引用
+- [x] `docs/hero-workflow/README.md` 中 7 个相对链接全部指向真实文件
 
 ### Must Have
 - 中文说明为主，术语保留英文原名（lane / archetype / STOP / codegraph 等）
@@ -625,18 +625,18 @@ Max Concurrent: 7 (Wave 1)
 
 ## Final Verification Wave
 
-- [ ] F1. **Plan Compliance Audit** — `oracle`
+- [x] F1. **Plan Compliance Audit** — `oracle`
   读完整 plan + 8 个新文档。对照"Must Have"逐项 grep 验证存在；对照"Must NOT Have"搜索违禁模式（mermaid 图 / 第 9 篇文档 / 硬编码日期）。输出：`Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT`
 
-- [ ] F2. **文档质量审查** — `unspecified-high`
+- [x] F2. **文档质量审查** — `unspecified-high`
   对 7 个主题文档逐一：`wc -l` 检查 ≤200 行；`grep "权威源"` 和 `grep "范围"` 检查声明；`grep -oP '\[.*?\]\([\./]+\K[^)]+'` 提取相对链接并 `test -f` 验证存在。主 README 的 hero-workflow 引用必须存在。
   输出：`Lines [N/7 ≤200] | Headers [N/7] | Links [N/N valid] | VERDICT`
 
-- [ ] F3. **内容准确性审查** — `deep`
+- [x] F3. **内容准确性审查** — `deep`
   对照各 SKILL.md 原文，验证每篇文档的关键词、示例、引用路径真实存在（不编造）。检查"中文 + 英文原名"的术语一致性。检查 issue-dispatch vs hero-dispatch 在标题和开头是否清晰区分。
   输出：`Facts [N/N 无编造] | Terminology [PASS/FAIL] | Distinction [PASS/FAIL] | VERDICT`
 
-- [ ] F4. **Scope Fidelity Check** — `deep`
+- [x] F4. **Scope Fidelity Check** — `deep`
   验证没有新增第 9 篇文档、没有新机制设计、没有改动 SKILL.md；README 只追加了 1 行链接，未重写其他内容。
   输出：`Files [8 个 .md, 符合 8 篇封顶] | Scope [CLEAN / N issues] | VERDICT`
 
@@ -688,10 +688,10 @@ grep "hero-workflow" README.md  # Expected: 至少 1 处
 ```
 
 ### Final Checklist
-- [ ] 8 个 docs/hero-workflow/*.md 全部存在
-- [ ] 每篇 ≤200 行
-- [ ] 每篇包含 `> **权威源**` 和 `> **范围**` 声明
-- [ ] README.md 有推荐阅读顺序
-- [ ] 主 README.md 引用新子目录
-- [ ] 未新增第 9 篇文档
-- [ ] 未改动任何现有 SKILL.md / docs/*.md
+- [x] 8 个 docs/hero-workflow/*.md 全部存在
+- [x] 每篇 ≤200 行
+- [x] 每篇包含 `> **权威源**` 和 `> **范围**` 声明
+- [x] README.md 有推荐阅读顺序
+- [x] 主 README.md 引用新子目录
+- [x] 未新增第 9 篇文档
+- [x] 未改动任何现有 SKILL.md / docs/*.md

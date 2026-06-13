@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="claude-hero 文档中心：深入理解 Agent 分层架构、工作流程、PRD 转换、CodeGraph、刷新机制与新人入门。">
+  <meta name="author" content="亚朵集团">
+  <meta name="keywords" content="claude-hero, 文档中心, Agent 架构, 工作流程, PRD, CodeGraph">
+  <meta property="og:title" content="文档中心 · 领航 Hero">
+  <meta property="og:description" content="深入理解 claude-hero 的核心机制">
+  <meta property="og:type" content="website">
+  <title>文档中心 · 领航 Hero</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/mechanism.css">
+  <link rel="stylesheet" href="css/docs.css">
+</head>
+<body>
+  <!-- ============ 顶部导航 ============ -->
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="/" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <a href="index.html">首页</a>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理 ▾</button>
+          <div class="dropdown-content">
+            <a href="mechanism.html#architecture">整体架构</a>
+            <a href="mechanism.html#collaboration">Agent 协作</a>
+            <a href="mechanism.html#skill-dispatch">Skill 调度</a>
+            <a href="mechanism.html#workflow">工作流执行</a>
+            <hr>
+            <a href="mechanism.html#hidden-features">隐藏特性</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">角色 ▾</button>
+          <div class="dropdown-content">
+            <a href="index.html#roles">角色介绍</a>
+            <a href="index.html#teams">组队模式</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档 ▾</button>
+          <div class="dropdown-content">
+            <a href="docs-index.html">📚 文档中心</a>
+            <hr>
+            <a href="pages/hero-agent-layers.html">🏗️ Agent 分层架构</a>
+            <a href="pages/workflow.html">⚙️ 工作流程</a>
+            <a href="pages/prd-to-java.html">📋 PRD 转 Java</a>
+            <a href="pages/codegraph.html">📊 CodeGraph</a>
+            <a href="pages/refresh.html">🔄 刷新机制</a>
+            <a href="pages/onboarding.html">🚀 新人入门</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">安装 ▾</button>
+          <div class="dropdown-content">
+            <a href="index.html#install">10 分钟安装</a>
+            <a href="index.html#build-pilot">自建领航员</a>
+            <hr>
+            <a href="index.html#uninstall">卸载</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============ Hero Section ============ -->
+    <section class="docs-hero">
+      <div class="container">
+        <h1 class="docs-hero-title">文档中心</h1>
+        <p class="docs-hero-subtitle">深入理解 claude-hero 的核心机制</p>
+      </div>
+      <!-- 山形辅助图形 -->
+      <svg class="docs-hero-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L240,30 L470,80 L640,40 L820,90 L1010,35 L1230,75 L1440,50 L1440,120 Z"/>
+        <path fill="var(--color-woye-deep)" opacity="0.5" d="M0,120 L0,95 L300,65 L560,100 L760,75 L980,105 L1200,70 L1440,98 L1440,120 Z"/>
+      </svg>
+    </section>
+
+    <!-- ============ 文档卡片网格 ============ -->
+    <section class="docs-grid-section">
+      <div class="container">
+        <div class="docs-grid">
+
+          <!-- 1. Agent 分层架构 -->
+          <a href="pages/hero-agent-layers.html" class="docs-card" aria-label="阅读 Agent 分层架构文档">
+            <div class="docs-card-icon">🏗️</div>
+            <h3 class="docs-card-title">Agent 分层架构</h3>
+            <p class="docs-card-desc">探索 claude-hero 的多层 Agent 架构，了解各个组件如何协同工作。</p>
+            <div class="docs-card-footer">
+              <span>阅读全文</span>
+              <span class="docs-card-arrow">→</span>
+            </div>
+          </a>
+
+          <!-- 2. 工作流程 -->
+          <a href="pages/workflow.html" class="docs-card" aria-label="阅读工作流程文档">
+            <div class="docs-card-icon">⚙️</div>
+            <h3 class="docs-card-title">工作流程</h3>
+            <p class="docs-card-desc">了解项目的工作流程、调度机制和自动化策略。</p>
+            <div class="docs-card-footer">
+              <span>阅读全文</span>
+              <span class="docs-card-arrow">→</span>
+            </div>
+          </a>
+
+          <!-- 3. PRD 转 Java -->
+          <a href="pages/prd-to-java.html" class="docs-card" aria-label="阅读 PRD 转 Java 文档">
+            <div class="docs-card-icon">🔄</div>
+            <h3 class="docs-card-title">PRD 转 Java</h3>
+            <p class="docs-card-desc">从产品需求文档到 Java 代码的自动化转换流程。</p>
+            <div class="docs-card-footer">
+              <span>阅读全文</span>
+              <span class="docs-card-arrow">→</span>
+            </div>
+          </a>
+
+          <!-- 4. CodeGraph -->
+          <a href="pages/codegraph.html" class="docs-card" aria-label="阅读 CodeGraph 文档">
+            <div class="docs-card-icon">📊</div>
+            <h3 class="docs-card-title">CodeGraph</h3>
+            <p class="docs-card-desc">代码图谱的构建、更新和使用方式。</p>
+            <div class="docs-card-footer">
+              <span>阅读全文</span>
+              <span class="docs-card-arrow">→</span>
+            </div>
+          </a>
+
+          <!-- 5. 刷新机制 -->
+          <a href="pages/refresh.html" class="docs-card" aria-label="阅读刷新机制文档">
+            <div class="docs-card-icon">🔄</div>
+            <h3 class="docs-card-title">刷新机制</h3>
+            <p class="docs-card-desc">如何保持 Agent 和代码库的同步更新。</p>
+            <div class="docs-card-footer">
+              <span>阅读全文</span>
+              <span class="docs-card-arrow">→</span>
+            </div>
+          </a>
+
+          <!-- 6. 新人入门 -->
+          <a href="pages/onboarding.html" class="docs-card" aria-label="阅读新人入门文档">
+            <div class="docs-card-icon">🚀</div>
+            <h3 class="docs-card-title">新人入门</h3>
+            <p class="docs-card-desc">从零开始使用 claude-hero 的完整指南。</p>
+            <div class="docs-card-footer">
+              <span>阅读全文</span>
+              <span class="docs-card-arrow">→</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 页脚 ============ -->
+  <footer class="site-footer">
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="index.html">首页</a>
+        <a href="mechanism.html">机制</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2026 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.topnav').classList.toggle('is-menu-open');
+    });
+
+    // Dropdown toggle (for touch devices and mobile)
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        // Close other dropdowns
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d !== parent) d.classList.remove('open');
+        });
+        parent.classList.toggle('open');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+  <script src="js/scroll-animation.js"></script>
+</body>
+</html>

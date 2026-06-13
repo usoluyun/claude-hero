@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="hero PRD 驱动开发 8 步流水线：从飞书 PRD 读取到多服务并行开发、测试、审查、合并，全流程 AI agent 协作。">
+  <meta name="author" content="亚朵集团">
+  <meta name="keywords" content="claude-hero, PRD, Java, 工作流, 流水线, agent">
+  <meta property="og:title" content="PRD 转 Java · 领航 Hero">
+  <meta property="og:description" content="飞书 PRD 到多服务并行开发的 8 步流水线">
+  <meta property="og:type" content="website">
+  <title>PRD 转 Java · 领航 Hero</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/mechanism.css">
+  <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="../" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <a href="../index.html">首页</a>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理 ▾</button>
+          <div class="dropdown-content">
+            <a href="../mechanism.html#architecture">整体架构</a>
+            <a href="../mechanism.html#collaboration">Agent 协作</a>
+            <a href="../mechanism.html#skill-dispatch">Skill 调度</a>
+            <a href="../mechanism.html#workflow">工作流执行</a>
+            <hr>
+            <a href="../mechanism.html#hidden-features">隐藏特性</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">角色 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#roles">角色介绍</a>
+            <a href="../index.html#teams">组队模式</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档 ▾</button>
+          <div class="dropdown-content">
+            <a href="../docs-index.html">📚 文档中心</a>
+            <hr>
+            <a href="hero-agent-layers.html">🏗️ Agent 分层架构</a>
+            <a href="workflow.html">⚙️ 工作流程</a>
+            <a href="prd-to-java.html" class="active">📋 PRD 转 Java</a>
+            <a href="codegraph.html">📊 CodeGraph</a>
+            <a href="refresh.html">🔄 刷新机制</a>
+            <a href="onboarding.html">🚀 新人入门</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">安装 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#install">10 分钟安装</a>
+            <a href="../index.html#build-pilot">自建领航员</a>
+            <hr>
+            <a href="../index.html#uninstall">卸载</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ Hero Section ============ -->
+  <section class="mechanism-hero" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">PRD 驱动开发</h1>
+      <p class="mechanism-subtitle">飞书 PRD 读取 · 多服务并行开发 · 8 步流水线 · 全流程 AI agent 协作</p>
+      <div class="mechanism-stats">
+        <div class="stat">
+          <span class="stat-num">8</span>
+          <span class="stat-label">流水线步骤</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">9</span>
+          <span class="stat-label">状态流转</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">领航插入点</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">并行 PRD</span>
+        </div>
+      </div>
+    </div>
+    <!-- 山形辅助图形 -->
+    <svg class="mechanism-hero-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L240,30 L470,80 L640,40 L820,90 L1010,35 L1230,75 L1440,50 L1440,120 Z"/>
+      <path fill="var(--color-woye-deep)" opacity="0.5" d="M0,120 L0,95 L300,65 L560,100 L760,75 L980,105 L1200,70 L1440,98 L1440,120 Z"/>
+    </svg>
+  </section>
+
+  <!-- ============ 主内容区 ============ -->
+  <main class="docs-layout">
+    <aside class="docs-sidebar" aria-label="本页目录">
+      <h3 class="docs-toc-title">目录</h3>
+      <ul class="docs-toc">
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#introduction">一句话引言</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#8-steps">8 步全景</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#state-machine">状态机</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#worktree">Worktree 隔离机制</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#subservice">子服务先行 & 委托清单</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#stop-gate">STOP 门控</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#triggers">触发词速查</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#navigator-points">领航 agent 的 4 个插入点</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#faq">常见场景 FAQ</a></li>
+      </ul>
+    </aside>
+
+    <div class="docs-content">
+      <article>
+
+        <!-- 权威源声明 -->
+        <blockquote>
+          <p><strong>权威源</strong>：<a href="../../../skills/hero-prd-to-java/SKILL.md"><code>skills/hero-prd-to-java/SKILL.md</code></a></p>
+          <p><strong>范围</strong>：本文解读 PRD 驱动开发的 8 步流水线机制，不复制 SKILL.md 全文。</p>
+        </blockquote>
+
+        <hr>
+
+        <!-- 引言 -->
+        <section id="introduction">
+          <h2>一句话引言</h2>
+          <p><code>hero 开发工作流 &lt;飞书PRD链接&gt;</code> 一条命令启动完整的 Java 微服务开发流水线，从飞书 PRD 读取到多服务并行开发、测试、审查、合并，全流程由 AI agent 协作完成，人只需在每步末尾回复"继续/返工/止步"。</p>
+        </section>
+
+        <!-- 8 步全景 -->
+        <section id="8-steps">
+          <h2>8 步全景</h2>
+          <table>
+            <caption>PRD 驱动开发 8 步流水线概览</caption>
+            <thead>
+              <tr>
+                <th scope="col">Step</th>
+                <th scope="col">一句话要点</th>
+                <th scope="col">产物</th>
+                <th scope="col">主要 Agent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>PRD 摄入 &amp; Worktree 初始化</td>
+                <td><code>.worktrees/prd-{name}/</code> + registry 注册</td>
+                <td>--</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>技术设计（先勘察存量现状，再增量设计）</td>
+                <td><code>docs/design-*.md</code></td>
+                <td>tech-lead</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Sprint 规划</td>
+                <td><code>docs/sprint-*.md</code></td>
+                <td>tech-lead</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>任务分派（接口委托清单）</td>
+                <td><code>docs/dispatch-*.md</code></td>
+                <td>tech-lead</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>并行开发（子服务先行）</td>
+                <td>业务代码</td>
+                <td>backend-dev + data-engineer</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>测试（TDD + BDD + 集成）</td>
+                <td>测试代码 + <code>.feature</code></td>
+                <td>test-engineer</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>代码审查（并行只读）</td>
+                <td>审查报告</td>
+                <td>code-reviewer + security-auditor</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>汇总验收（更新 registry）</td>
+                <td>feature 分支完整产物</td>
+                <td>tech-lead</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>跨需求验证合并（可选触发）</td>
+                <td>main 合并 + worktree 清理</td>
+                <td>--</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Step 0 到 7 在 <code>feature/prd-{name}</code> 分支上线性推进。Step 8 是可选的最终集成步骤，支持多个 ready-to-merge 的 PRD 一起验证后批量合并到 main。</p>
+        </section>
+
+        <!-- 状态机 -->
+        <section id="state-machine">
+          <h2>状态机</h2>
+          <pre><code>intake (Step 0)
+  ↓
+designing (Step 1)
+  ↓
+planning (Step 2)
+  ↓
+dispatched (Step 3)
+  ↓
+developing (Step 4)
+  ↓
+testing (Step 5)
+  ↓
+reviewing (Step 6)
+  ↓
+ready-to-merge (Step 7)
+  ↓ (可选 Step 8，或多个 ready-to-merge PRD 一起触发)
+merged (Step 8 成功)</code></pre>
+          <p>9 个状态全在 <code>feature/prd-{name}</code> 分支上流转。registry（<code>docs/.workflow-registry.json</code>，main 分支）同步记录每一步的状态变更。跨需求失败不会污染全局状态：PRD-A 与 PRD-B 冲突只影响这两个，PRD-C 保留隔离。</p>
+        </section>
+
+        <!-- Worktree 隔离机制 -->
+        <section id="worktree">
+          <h2>Worktree 隔离机制</h2>
+          <p>每个 PRD 独占一个独立的 worktree，多个 PRD 可同时活跃、互不干扰：</p>
+          <ul>
+            <li>目录命名：<code>.worktrees/prd-{name}-{yyyymmdd}/</code></li>
+            <li>对应分支：<code>feature/prd-{name}</code></li>
+            <li><code>.worktrees/</code> 必须在 <code>.gitignore</code> 中，worktree 本身不提交</li>
+            <li>所有设计/计划/代码/测试产物都落在 worktree 内，隔离于 main 分支</li>
+            <li>Step 8 成功后自动清理：删除 worktree 目录 + 删除 feature 分支</li>
+          </ul>
+          <p>多个 PRD 并行时的目录结构示意：</p>
+          <pre><code>.worktrees/
+  prd-user-auth-20260610/    ← PRD-A 的隔离区
+  prd-order-flow-20260611/   ← PRD-B 的隔离区
+  prd-payment-v2-20260612/   ← PRD-C 的隔离区</code></pre>
+        </section>
+
+        <!-- 子服务先行 & 委托清单驱动 -->
+        <section id="subservice">
+          <h2>子服务先行 &amp; 委托清单驱动</h2>
+          <p>Step 3 产出的"接口委托清单"是主服务与子服务之间的合同。子服务 Tech Lead 按清单完成接口定义（Contract First），主服务 backend-dev 等待子服务接口就绪后才开始实现 Feign 调用。这样做的好处：</p>
+          <ul>
+            <li>子服务只需关心清单里的接口，不需要了解主服务全貌</li>
+            <li>减少跨服务的信息耦合</li>
+            <li>接口契约先行，避免后期联调返工</li>
+          </ul>
+        </section>
+
+        <!-- STOP 门控 -->
+        <section id="stop-gate">
+          <h2>STOP 门控（rigid，不可跳过）</h2>
+          <p>每步末尾都有一个 <code>⏸ STOP</code>，等待用户显式确认。这是 rigid 规则，Claude 不能自行跳过任何 STOP。</p>
+          <p>用户可以回复三种指令：</p>
+          <table>
+            <caption>STOP 门控响应指令</caption>
+            <thead>
+              <tr>
+                <th scope="col">回复</th>
+                <th scope="col">效果</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>继续</strong> / proceed</td>
+                <td>进入下一步</td>
+              </tr>
+              <tr>
+                <td><strong>返工</strong> / 修改</td>
+                <td>回到之前的某个 Step 重做（如"返工 Step 1"）</td>
+              </tr>
+              <tr>
+                <td><strong>止步</strong></td>
+                <td>结束流程，产物保留在 worktree 中</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 触发词速查 -->
+        <section id="triggers">
+          <h2>触发词速查</h2>
+          <table>
+            <caption>PRD 工作流触发词速查表</caption>
+            <thead>
+              <tr>
+                <th scope="col">目的</th>
+                <th scope="col">触发词</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>启动新 PRD</td>
+                <td><code>hero 开发工作流 &lt;URL&gt;</code> 或 <code>/hero-prd-to-java &lt;URL&gt;</code></td>
+              </tr>
+              <tr>
+                <td>查看在飞 PRD</td>
+                <td><code>hero 工作流状态</code></td>
+              </tr>
+              <tr>
+                <td>触发跨需求验证</td>
+                <td><code>hero 合并验证</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 领航 agent 的 4 个插入点 -->
+        <section id="navigator-points">
+          <h2>领航 agent 的 4 个插入点</h2>
+          <p>领航 agent（<code>hero-java-&lt;proj&gt;</code>）是单服务、只读、codegraph 驱动的知识层，在 8 步流水线中有 4 个关键插入点：</p>
+          <table>
+            <caption>领航 agent 在流水线中的插入点</caption>
+            <thead>
+              <tr>
+                <th scope="col">Step</th>
+                <th scope="col">领航 agent 的角色</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td><strong>服务识别</strong>：比对花名册（<code>docs/hero-agent-roster.md</code>），命中存量服务并记下对应领航 agent</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td><strong>现状勘察</strong>：用 codegraph 摸地图，产出勘察报告（现有入口/接口契约/影响面/领域坑），喂给 tech-lead 做增量设计</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><strong>开发导航</strong>：实现 agent 动手前取定位——"在哪改、影响谁"——领航喂定位，角色 agent 写代码</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><strong>影响面复核</strong>：用 <code>codegraph impact</code> 复核全部受影响 caller 是否都被审查与测试覆盖，防漏改老调用方</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>领航 agent 只负责"懂该服务、带路、圈影响面"，不写代码。跨服务的整体拆分、契约对齐、拓扑排序归 tech-lead 统一完成。</p>
+        </section>
+
+        <!-- 常见场景 FAQ -->
+        <section id="faq">
+          <h2>常见场景 FAQ</h2>
+          
+          <h3>Q: Step 4 开发中发现了设计缺陷，能回退吗？</h3>
+          <p>可以。在当前 Step 的 STOP 时回复"返工 Step 1"，工作流会回到设计阶段重新勘察和调整设计文档，已产生的代码保留在 worktree 中作为参考。调整设计后按正常流程推进。</p>
+
+          <h3>Q: 多个 PRD 同时在开发，怎么管理？</h3>
+          <p>每个 PRD 独占一个 worktree（<code>.worktrees/prd-{name}-{yyyymmdd}/</code>），分支隔离、互不干扰。通过 <code>hero 工作流状态</code> 查看 registry 中所有在飞 PRD 的当前步骤。Step 8 合并时，多个 ready-to-merge 的 PRD 可以一起验证，单个冲突不影响其他 PRD。</p>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- ============ 页脚 ============ -->
+  <footer class="site-footer">
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="../index.html">首页</a>
+        <a href="../mechanism.html">机制</a>
+        <a href="../docs-index.html">文档</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2026 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
+  </footer>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.topnav').classList.toggle('is-menu-open');
+    });
+
+    // Dropdown toggle (for touch devices and mobile)
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        // Close other dropdowns
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d !== parent) d.classList.remove('open');
+        });
+        parent.classList.toggle('open');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+</body>
+</html>

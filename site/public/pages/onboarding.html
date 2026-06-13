@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="新成员 Onboarding：10 分钟从零到可用，接入 claude-hero 团队共享资产仓库。">
+  <meta name="author" content="亚朵集团">
+  <meta name="keywords" content="claude-hero, onboarding, 新人入门, 接入, 安装">
+  <meta property="og:title" content="新人入门 · 领航 Hero">
+  <meta property="og:description" content="10 分钟从零到可用，接入 claude-hero">
+  <meta property="og:type" content="website">
+  <title>新人入门 · 领航 Hero</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/mechanism.css">
+  <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+  <!-- ============ 顶部导航 ============ -->
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="../" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <a href="../index.html">首页</a>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理 ▾</button>
+          <div class="dropdown-content">
+            <a href="../mechanism.html#architecture">整体架构</a>
+            <a href="../mechanism.html#collaboration">Agent 协作</a>
+            <a href="../mechanism.html#skill-dispatch">Skill 调度</a>
+            <a href="../mechanism.html#workflow">工作流执行</a>
+            <hr>
+            <a href="../mechanism.html#hidden-features">隐藏特性</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">角色 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#roles">角色介绍</a>
+            <a href="../index.html#teams">组队模式</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档 ▾</button>
+          <div class="dropdown-content">
+            <a href="../docs-index.html">📚 文档中心</a>
+            <hr>
+            <a href="hero-agent-layers.html">🏗️ Agent 分层架构</a>
+            <a href="workflow.html">⚙️ 工作流程</a>
+            <a href="prd-to-java.html">📋 PRD 转 Java</a>
+            <a href="codegraph.html">📊 CodeGraph</a>
+            <a href="refresh.html">🔄 刷新机制</a>
+            <a href="onboarding.html" class="active">🚀 新人入门</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">安装 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#install">10 分钟安装</a>
+            <a href="../index.html#build-pilot">自建领航员</a>
+            <hr>
+            <a href="../index.html#uninstall">卸载</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ Hero Section ============ -->
+  <section class="mechanism-hero" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">新人入门</h1>
+      <p class="mechanism-subtitle">从零到可用，大约 10 分钟</p>
+      <div class="mechanism-stats">
+        <div class="stat">
+          <span class="stat-num">5</span>
+          <span class="stat-label">步骤</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">9</span>
+          <span class="stat-label">可用 Hero</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">10</span>
+          <span class="stat-label">分钟接入</span>
+        </div>
+      </div>
+    </div>
+    <!-- 山形辅助图形 -->
+    <svg class="mechanism-hero-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L240,30 L470,80 L640,40 L820,90 L1010,35 L1230,75 L1440,50 L1440,120 Z"/>
+      <path fill="var(--color-woye-deep)" opacity="0.5" d="M0,120 L0,95 L300,65 L560,100 L760,75 L980,105 L1200,70 L1440,98 L1440,120 Z"/>
+    </svg>
+  </section>
+
+  <!-- ============ 主内容区 ============ -->
+  <main class="docs-layout">
+    <aside class="docs-sidebar" aria-label="本页目录">
+      <h3 class="docs-toc-title">目录</h3>
+      <ul class="docs-toc">
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#welcome">欢迎加入 claude-hero</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#prerequisites">1. 前置</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#setup">2. 接入仓库</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#merge-templates">3. 合并个人化模板</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#verify">4. 验证</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#next-steps">5. 下一步</a></li>
+      </ul>
+    </aside>
+
+    <div class="docs-content">
+      <article>
+
+        <!-- 欢迎 -->
+        <section id="welcome">
+          <h2>欢迎加入 claude-hero</h2>
+          <p>你加入的不只是一个代码仓库，是一支<strong>团队一起带出来的队伍</strong>。这里已经有 9 个 Hero 等你差遣——孔明帮你做技术方案、文远帮你写代码、子长帮你写 SQL、希仁帮你写测试……你越用他们，他们越懂你。</p>
+          <p>用得顺手了，你也可以给他们提改进建议，甚至造一个你自己的 Hero。</p>
+        </section>
+
+        <!-- 1. 前置 -->
+        <section id="prerequisites">
+          <h2>1. 前置</h2>
+          <ul>
+            <li>已安装 Claude Code</li>
+            <li>macOS（脚本基于 bash，已在 zsh/bash 下验证）</li>
+            <li>已安装常用 CLI（见 <a href="../cli/README.html"><code>cli/README.md</code></a>）</li>
+          </ul>
+        </section>
+
+        <!-- 2. 接入仓库 -->
+        <section id="setup">
+          <h2>2. 接入仓库</h2>
+          <pre><code>git clone &lt;repo-url&gt; ~/Documents/ops/claude-hero
+cd ~/Documents/ops/claude-hero
+bash install.sh</code></pre>
+          <p>此时 <code>~/.claude/skills/</code>、<code>~/.claude/agents/</code>、<code>~/.claude/hooks/</code> 已软链到本仓库。</p>
+        </section>
+
+        <!-- 3. 合并个人化模板 -->
+        <section id="merge-templates">
+          <h2>3. 合并个人化模板</h2>
+          <p>安装脚本会列出待合并项：</p>
+          <ul>
+            <li><code>CLAUDE.md</code>：参考 <a href="../config/CLAUDE.md.example.html"><code>config/CLAUDE.md.example</code></a>，把团队基线段落合并进你的 <code>~/.claude/CLAUDE.md</code>，再补你自己的私有段落。</li>
+            <li><code>settings.json</code>：参考 <code>config/settings.json.example</code>。</li>
+            <li><code>.mcp.json</code>：按 <a href="../mcp/README.html"><code>mcp/README.md</code></a> 选需要的 server 合并，换上自己的密钥。</li>
+          </ul>
+        </section>
+
+        <!-- 4. 验证 -->
+        <section id="verify">
+          <h2>4. 验证</h2>
+          <ul>
+            <li>在 Claude Code 里查看 skill 列表，应能看到团队共享的 skill（<code>hero-conventions</code>、<code>hero-prd-to-java</code> 等）。</li>
+            <li>改一下仓库里某个 <code>SKILL.md</code>，无需重装即生效（软链）。</li>
+          </ul>
+        </section>
+
+        <!-- 5. 下一步 -->
+        <section id="next-steps">
+          <h2>5. 下一步</h2>
+          <ul>
+            <li>扫一遍 <a href="../index.html"><code>README.md</code></a> 了解全貌</li>
+            <li>看看 <a href="hero-agent-layers.html">Agent 分层架构</a> 认识所有 Hero</li>
+            <li>想想你日常最烦的事，造一个你的 Hero（维护手册有教程）</li>
+            <li>想贡献？看 <a href="../CONTRIBUTING.html"><code>CONTRIBUTING.md</code></a></li>
+          </ul>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- ============ 页脚 ============ -->
+  <footer class="site-footer">
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="../index.html">首页</a>
+        <a href="../mechanism.html">机制</a>
+        <a href="../docs-index.html">文档</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2026 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
+  </footer>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.topnav').classList.toggle('is-menu-open');
+    });
+
+    // Dropdown toggle (for touch devices and mobile)
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        // Close other dropdowns
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d !== parent) d.classList.remove('open');
+        });
+        parent.classList.toggle('open');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+</body>
+</html>

@@ -12,20 +12,63 @@
   <title>运行机制 · 领航 Hero</title>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/docs.css">
   <link rel="stylesheet" href="css/mechanism.css">
 </head>
 <body>
   <!-- ============ 顶部导航 ============ -->
   <nav class="topnav">
     <div class="topnav-inner">
-      <a class="topnav-brand" href="/">领航 <span class="topnav-brand-en">HERO</span></a>
+      <a href="/" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
       <div class="topnav-links">
-        <a href="/">首页</a>
-        <a href="#architecture">架构</a>
-        <a href="#collaboration">协作</a>
-        <a href="#skill-dispatch">调度</a>
-        <a href="#workflow">工作流</a>
-        <a href="#hidden-features">特性</a>
+        <a href="index.html">首页</a>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理 ▾</button>
+          <div class="dropdown-content">
+            <a href="#architecture">整体架构</a>
+            <a href="#collaboration">Agent 协作</a>
+            <a href="#skill-dispatch">Skill 调度</a>
+            <a href="#workflow">工作流执行</a>
+            <hr>
+            <a href="#hidden-features">隐藏特性</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">角色 ▾</button>
+          <div class="dropdown-content">
+            <a href="index.html#roles">角色介绍</a>
+            <a href="index.html#teams">组队模式</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档 ▾</button>
+          <div class="dropdown-content">
+            <a href="docs-index.html">📚 文档中心</a>
+            <hr>
+            <a href="pages/hero-agent-layers.html">🏗️ Agent 分层架构</a>
+            <a href="pages/workflow.html">⚙️ 工作流程</a>
+            <a href="pages/prd-to-java.html">📋 PRD 转 Java</a>
+            <a href="pages/codegraph.html">📊 CodeGraph</a>
+            <a href="pages/refresh.html">🔄 刷新机制</a>
+            <a href="pages/onboarding.html">🚀 新人入门</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">安装 ▾</button>
+          <div class="dropdown-content">
+            <a href="index.html#install">10 分钟安装</a>
+            <a href="index.html#build-pilot">自建领航员</a>
+            <hr>
+            <a href="index.html#uninstall">卸载</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -789,5 +832,31 @@ Sprint 计划：
   </footer>
 
   <script src="js/scroll-animation.js"></script>
+  <script>
+  // Mobile menu toggle
+  document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.topnav').classList.toggle('is-menu-open');
+  });
+
+  // Dropdown toggle (for touch devices and mobile)
+  document.querySelectorAll('.dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = this.parentElement;
+      // Close other dropdowns
+      document.querySelectorAll('.dropdown').forEach(d => {
+        if (d !== parent) d.classList.remove('open');
+      });
+      parent.classList.toggle('open');
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+    }
+  });
+  </script>
 </body>
 </html>

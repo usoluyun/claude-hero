@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="hero 工作流机制指南：触发词路由、lane playbook、露出标记、PRD 流水线、保鲜机制、codegraph 知识底座全链路解读。">
+  <meta name="author" content="亚朵集团">
+  <meta name="keywords" content="claude-hero, 工作流, hero-dispatch, lane, playbook, PRD, codegraph, 保鲜">
+  <meta property="og:title" content="工作流程 · 领航 Hero">
+  <meta property="og:description" content="hero 系统触发、路由、执行、露出、保鲜全链路机制指南">
+  <meta property="og:type" content="website">
+  <title>工作流程 · 领航 Hero</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/mechanism.css">
+  <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="../" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <a href="../index.html">首页</a>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理 ▾</button>
+          <div class="dropdown-content">
+            <a href="../mechanism.html#architecture">整体架构</a>
+            <a href="../mechanism.html#collaboration">Agent 协作</a>
+            <a href="../mechanism.html#skill-dispatch">Skill 调度</a>
+            <a href="../mechanism.html#workflow">工作流执行</a>
+            <hr>
+            <a href="../mechanism.html#hidden-features">隐藏特性</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">角色 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#roles">角色介绍</a>
+            <a href="../index.html#teams">组队模式</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档 ▾</button>
+          <div class="dropdown-content">
+            <a href="../docs-index.html">📚 文档中心</a>
+            <hr>
+            <a href="hero-agent-layers.html">🏗️ Agent 分层架构</a>
+            <a href="workflow.html" class="active">⚙️ 工作流程</a>
+            <a href="prd-to-java.html">📋 PRD 转 Java</a>
+            <a href="codegraph.html">📊 CodeGraph</a>
+            <a href="refresh.html">🔄 刷新机制</a>
+            <a href="onboarding.html">🚀 新人入门</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">安装 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#install">10 分钟安装</a>
+            <a href="../index.html#build-pilot">自建领航员</a>
+            <hr>
+            <a href="../index.html#uninstall">卸载</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ Hero Section ============ -->
+  <section class="mechanism-hero" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">工作流程</h1>
+      <p class="mechanism-subtitle">触发 · 路由 · 执行 · 露出 · 保鲜 — hero 系统全链路机制指南</p>
+      <div class="mechanism-stats">
+        <div class="stat">
+          <span class="stat-num">7</span>
+          <span class="stat-label">机制文档</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">8</span>
+          <span class="stat-label">Lane 路由</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">7</span>
+          <span class="stat-label">Playbook</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">角色路径</span>
+        </div>
+      </div>
+    </div>
+    <!-- 山形辅助图形 -->
+    <svg class="mechanism-hero-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L240,30 L470,80 L640,40 L820,90 L1010,35 L1230,75 L1440,50 L1440,120 Z"/>
+      <path fill="var(--color-woye-deep)" opacity="0.5" d="M0,120 L0,95 L300,65 L560,100 L760,75 L980,105 L1200,70 L1440,98 L1440,120 Z"/>
+    </svg>
+  </section>
+
+
+  <!-- ============ 主内容区 ============ -->
+  <main class="docs-layout">
+    <aside class="docs-sidebar" aria-label="本页目录">
+      <h3 class="docs-toc-title">目录</h3>
+      <ul class="docs-toc">
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#reading-order">推荐阅读顺序</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#doc-list">文档清单</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#system-overview">系统全景</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#related-docs">与其他文档关系</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#update-policy">更新原则</a></li>
+      </ul>
+    </aside>
+
+    <div class="docs-content">
+      <article>
+
+        <!-- 引言 -->
+        <section id="intro">
+          <blockquote>
+            <p><strong>权威源</strong>：本目录 7 个机制文档的总入口</p>
+            <p><strong>范围</strong>：本文是 hero 工作流机制的导航索引，不含机制细节解读</p>
+          </blockquote>
+
+          <h1>Hero 工作流机制指南</h1>
+          <p>本目录收录 7 个机制文档，覆盖 hero 系统的触发、路由、执行、露出、保鲜全链路。</p>
+        </section>
+
+        <!-- 推荐阅读顺序 -->
+        <section id="reading-order">
+          <h2>推荐阅读顺序</h2>
+          <p>根据你的角色选择路径：</p>
+          <table>
+            <caption>按角色的推荐阅读路径</caption>
+            <thead>
+              <tr><th scope="col">角色</th><th scope="col">阅读路径</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>用户</strong></td>
+                <td><a href="lane-routing.html">lane-routing</a> → <a href="playbook.html">playbook</a> → <a href="hero-markers.html">hero-markers</a></td>
+              </tr>
+              <tr>
+                <td><strong>贡献者</strong></td>
+                <td><a href="lane-routing.html">lane-routing</a> → <a href="playbook.html">playbook</a> → <a href="hero-markers.html">hero-markers</a> → 按需查阅 issue-dispatch / prd-workflow / refresh / codegraph</td>
+              </tr>
+              <tr>
+                <td><strong>架构师</strong></td>
+                <td><a href="lane-routing.html">lane-routing</a> → <a href="codegraph.html">codegraph</a> → <a href="prd-workflow.html">prd-workflow</a> → <a href="refresh.html">refresh</a></td>
+              </tr>
+              <tr>
+                <td><strong>测试工程师</strong></td>
+                <td><a href="playbook.html">playbook</a> → <a href="prd-workflow.html">prd-workflow</a> → <a href="issue-dispatch.html">issue-dispatch</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 文档清单 -->
+        <section id="doc-list">
+          <h2>文档清单</h2>
+          <table>
+            <caption>hero-workflow 目录文档索引</caption>
+            <thead>
+              <tr>
+                <th scope="col">文档</th>
+                <th scope="col">主题</th>
+                <th scope="col">行数</th>
+                <th scope="col">权威源</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="issue-dispatch.html">issue-dispatch.md</a></td>
+                <td>GitLab Issue 触发词机制</td>
+                <td>141</td>
+                <td>skills/hero-issue-dispatch/SKILL.md</td>
+              </tr>
+              <tr>
+                <td><a href="lane-routing.html">lane-routing.md</a></td>
+                <td>hero-dispatch 意图分诊</td>
+                <td>126</td>
+                <td>skills/hero-dispatch/SKILL.md</td>
+              </tr>
+              <tr>
+                <td><a href="playbook.html">playbook.md</a></td>
+                <td>7 个轻量 lane playbook 对比</td>
+                <td>140</td>
+                <td>skills/hero-dispatch/lanes/*.md</td>
+              </tr>
+              <tr>
+                <td><a href="hero-markers.html">hero-markers.md</a></td>
+                <td>🦸 hero ▸ 标记规范 + 英雄名映射</td>
+                <td>138</td>
+                <td>skills/hero-conventions/SKILL.md</td>
+              </tr>
+              <tr>
+                <td><a href="prd-workflow.html">prd-workflow.md</a></td>
+                <td>PRD 驱动开发 8 步流水线</td>
+                <td>118</td>
+                <td>skills/hero-prd-to-java/SKILL.md</td>
+              </tr>
+              <tr>
+                <td><a href="refresh.html">refresh.md</a></td>
+                <td>两段式保鲜（确定性脚本 + 漂移评审）</td>
+                <td>114</td>
+                <td>skills/hero-refresh/SKILL.md</td>
+              </tr>
+              <tr>
+                <td><a href="codegraph.html">codegraph.md</a></td>
+                <td>codegraph 知识底座（领航 agent）</td>
+                <td>126</td>
+                <td>docs/codegraph-agent-plan.md</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 系统全景 -->
+        <section id="system-overview">
+          <h2>系统全景（文字概览）</h2>
+          <pre><code>用户输入
+  │
+  ├─ hero &lt;意图&gt; ──────► hero-dispatch（lane-routing）
+  │                        │
+  │                        ├─ 重型线 ──► skill（hero-prd-to-java / hero-refresh）
+  │                        └─ 轻量线 ──► playbook（bugfix/iterate/refactor/...）
+  │
+  └─ issue &lt;command&gt; ──► hero-issue-dispatch
+                          │
+                          └─ 读取标签 ──► 路由到对应 agent（花名映射）</code></pre>
+          <p>执行时每个 lane 会打 <code>🦸 hero ▸</code> 标记，让用户感知 hero 体系接管。</p>
+        </section>
+
+        <!-- 与其他文档关系 -->
+        <section id="related-docs">
+          <h2>与其他文档关系</h2>
+          <ul>
+            <li><strong>SKILL.md 文件</strong>：本目录 7 篇是对现有 SKILL.md 的<strong>解读和补充</strong>，不替代。每个文档开头有明确权威源声明。</li>
+            <li><strong>现有文档</strong>：<a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/docs/hero-agent-layers.md"><code>docs/hero-agent-layers.md</code></a>、<a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/docs/hero-agent-roster.md"><code>docs/hero-agent-roster.md</code></a>、<a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/docs/codegraph-agent-plan.md"><code>docs/codegraph-agent-plan.md</code></a> 等保持不变，本目录链接引用。</li>
+            <li><strong>可视化页</strong>：<a href="../mechanism.html"><code>site/public/mechanism.html</code></a> 提供机制可视化，本文档提供深度文字解读。</li>
+          </ul>
+        </section>
+
+        <!-- 更新原则 -->
+        <section id="update-policy">
+          <h2>更新原则</h2>
+          <ul>
+            <li>每篇文档有明确的权威源 SKILL.md，修改 SKILL.md 时需同步更新对应文档</li>
+            <li>新增机制 → 新建文档 + 本 README 添加索引</li>
+            <li>删除机制 → 删除文档 + 本 README 移除索引</li>
+          </ul>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- ============ 页脚 ============ -->
+  <footer class="site-footer">
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="../index.html">首页</a>
+        <a href="../mechanism.html">机制</a>
+        <a href="../docs-index.html">文档</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2026 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
+  </footer>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.topnav').classList.toggle('is-menu-open');
+    });
+
+    // Dropdown toggle (for touch devices and mobile)
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        // Close other dropdowns
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d !== parent) d.classList.remove('open');
+        });
+        parent.classList.toggle('open');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+</body>
+</html>

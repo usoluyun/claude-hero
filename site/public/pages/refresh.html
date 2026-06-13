@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="hero-refresh 两段式保鲜机制：4 个触发词、确定性脚本 + 漂移评审 gate、Step A-D 流程、提交分离策略、状态查询详解。">
+  <meta name="author" content="亚朵集团">
+  <meta name="keywords" content="claude-hero, hero-refresh, 保鲜, 漂移评审, codegraph, 领航 agent">
+  <meta property="og:title" content="刷新机制 · 领航 Hero">
+  <meta property="og:description" content="hero-refresh 两段式保鲜：确定性脚本 + 漂移评审 gate">
+  <meta property="og:type" content="website">
+  <title>刷新机制 · 领航 Hero</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/mechanism.css">
+  <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+  <!-- ============ 顶部导航 ============ -->
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="../" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <a href="../index.html">首页</a>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理 ▾</button>
+          <div class="dropdown-content">
+            <a href="../mechanism.html#architecture">整体架构</a>
+            <a href="../mechanism.html#collaboration">Agent 协作</a>
+            <a href="../mechanism.html#skill-dispatch">Skill 调度</a>
+            <a href="../mechanism.html#workflow">工作流执行</a>
+            <hr>
+            <a href="../mechanism.html#hidden-features">隐藏特性</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">角色 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#roles">角色介绍</a>
+            <a href="../index.html#teams">组队模式</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档 ▾</button>
+          <div class="dropdown-content">
+            <a href="../docs-index.html">📚 文档中心</a>
+            <hr>
+            <a href="hero-agent-layers.html">🏗️ Agent 分层架构</a>
+            <a href="workflow.html">⚙️ 工作流程</a>
+            <a href="prd-to-java.html">📋 PRD 转 Java</a>
+            <a href="codegraph.html">📊 CodeGraph</a>
+            <a href="refresh.html" class="active">🔄 刷新机制</a>
+            <a href="onboarding.html">🚀 新人入门</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">安装 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#install">10 分钟安装</a>
+            <a href="../index.html#build-pilot">自建领航员</a>
+            <hr>
+            <a href="../index.html#uninstall">卸载</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ Hero Section ============ -->
+  <section class="mechanism-hero" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">刷新机制</h1>
+      <p class="mechanism-subtitle">hero-refresh 两段式保鲜 · 确定性脚本 · 漂移评审 gate</p>
+      <div class="mechanism-stats">
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">触发词</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">架构阶段</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">Step A-D</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">评审动作</span>
+        </div>
+      </div>
+    </div>
+    <!-- 山形辅助图形 -->
+    <svg class="mechanism-hero-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L240,30 L470,80 L640,40 L820,90 L1010,35 L1230,75 L1440,50 L1440,120 Z"/>
+      <path fill="var(--color-woye-deep)" opacity="0.5" d="M0,120 L0,95 L300,65 L560,100 L760,75 L980,105 L1200,70 L1440,98 L1440,120 Z"/>
+    </svg>
+  </section>
+
+  <!-- ============ 主内容区 ============ -->
+  <main class="docs-layout">
+    <aside class="docs-sidebar" aria-label="本页目录">
+      <h3 class="docs-toc-title">目录</h3>
+      <ul class="docs-toc">
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#intro">一句话引言</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#triggers">4 个触发词</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#two-stages">两段式架构</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#steps-a-d">Step A-D 详解</a>
+          <ul class="docs-toc">
+            <li class="docs-toc-item"><a class="docs-toc-link" data-level="3" href="#step-a">Step A：跑确定性层</a></li>
+            <li class="docs-toc-item"><a class="docs-toc-link" data-level="3" href="#step-b">Step B：确定性产物提交</a></li>
+            <li class="docs-toc-item"><a class="docs-toc-link" data-level="3" href="#step-c">Step C：领航 agent 漂移检测</a></li>
+            <li class="docs-toc-item"><a class="docs-toc-link" data-level="3" href="#step-d">Step D：生成待评审草稿</a></li>
+          </ul>
+        </li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#review-gate">评审 gate（rigid）</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#commit-strategy">提交分离策略</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#no-init">"只保鲜不开荒"原则</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#status">状态查询</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#relations">与其他资产的关系</a></li>
+      </ul>
+    </aside>
+
+    <div class="docs-content">
+      <article>
+
+        <!-- 引言 -->
+        <section id="intro">
+          <h1>hero-refresh：两段式保鲜</h1>
+          <blockquote>
+            <p><strong>权威源</strong>：<a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/skills/hero-refresh/SKILL.md"><code>skills/hero-refresh/SKILL.md</code></a></p>
+            <p><strong>范围</strong>：本文解读 refresh 两段式保鲜机制（确定性脚本 + 漂移评审 gate），不复制 SKILL.md 全文。</p>
+          </blockquote>
+
+          <h2 id="intro-heading">一句话引言</h2>
+          <p>项目代码每天在变，领航 agent 的知识不能过时。<code>hero 刷新</code> 一条命令把三件套保鲜：<strong>codegraph 索引</strong>（代码结构图）、<strong>领航 agent</strong>（项目导航知识）、<strong>vendor docs</strong>（外部库文档缓存）。确定性脏活交脚本，领航 agent 变更交人工判断——机器干活、你只做判断。</p>
+        </section>
+
+        <!-- 4 个触发词 -->
+        <section id="triggers">
+          <h2>4 个触发词</h2>
+          <table>
+            <caption>刷新命令与作用</caption>
+            <thead>
+              <tr><th scope="col">命令</th><th scope="col">作用</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>hero 刷新</code></td><td>刷全部已接入项目</td></tr>
+              <tr><td><code>hero 刷新 &lt;proj&gt;</code></td><td>只刷一个项目</td></tr>
+              <tr><td><code>hero 刷新 评审</code></td><td>逐个过领航 agent 漂移草稿</td></tr>
+              <tr><td><code>hero 刷新 状态</code></td><td>列已接入项目 / 谁有新 commit / 几份草稿待评审</td></tr>
+            </tbody>
+          </table>
+          <p>「已接入」= <code>docs/.refresh-state.json</code> 里登记的项目（有 codegraph 索引 + 领航 agent）。</p>
+        </section>
+
+        <!-- 两段式架构 -->
+        <section id="two-stages">
+          <h2>两段式架构</h2>
+          <p>整个保鲜流程分为两层，各司其职：</p>
+          <ul>
+            <li><strong>确定性层</strong>（脚本自动跑）：重索引 + 导出 evidence + 抓 vendor docs。这一层由 <code>scripts/hero-refresh.sh</code> 完成，结果写入 <code>docs/.refresh-work/&lt;proj&gt;/</code>，回写 <code>docs/.refresh-state.json</code>。<strong>脚本绝不碰线上 agent 文件</strong>，它只产中间 evidence。</li>
+            <li><strong>评审层</strong>（agent 漂移走人工 gate）：skill 读 evidence pack，比对现有领航 agent，判断是否因代码漂移需要更新。若有漂移，生成草稿写入 <code>docs/.refresh-drafts/&lt;proj&gt;.md</code>，与线上 <code>agents/&lt;agent&gt;.md</code> 完全隔离。只有人工评审确认后，skill 才覆盖线上 agent。</li>
+          </ul>
+          <p>两段设计的核心：机器干完确定性的脏活就停手，领航 agent 的改动永远留给人做最终裁定。</p>
+        </section>
+
+        <!-- Step A-D 详解 -->
+        <section id="steps-a-d">
+          <h2>Step A-D 详解</h2>
+
+          <h3 id="step-a">Step A：跑确定性层（脚本）</h3>
+          <p>执行 <code>bash scripts/hero-refresh.sh [&lt;proj&gt;]</code>。脚本对每个目标项目：HEAD 未变则跳过；否则重索引 + 导出 evidence（structure.txt / entrypoints.txt / deps 指纹）+ 抓 vendor docs，并回写状态文件。读脚本输出，记下有变更的项目列表。无变更则到此为止，告知用户「全部新鲜，无需评审」。</p>
+
+          <h3 id="step-b">Step B：确定性产物提交（低风险，无需评审）</h3>
+          <p>把确定性产物作为<strong>一次</strong> commit 提交，与 agent 改动分离：</p>
+          <pre><code>git add docs/.refresh-state.json docs/vendor-docs/
+git commit -m "chore(hero-refresh): 刷新确定性产物（状态 + vendor docs）"</code></pre>
+
+          <h3 id="step-c">Step C：领航 agent 漂移检测（逐个有变更的项目）</h3>
+          <p>对每个有变更的项目，读两样东西做比对：</p>
+          <ol>
+            <li>新 evidence pack：<code>docs/.refresh-work/&lt;proj&gt;/structure.txt</code>、<code>entrypoints.txt</code>、<code>deps-*</code></li>
+            <li>现有领航 agent：<code>agents/&lt;该项目的 agent&gt;.md</code></li>
+          </ol>
+          <p><strong>判定结构性漂移的 4 条规则</strong>——只要出现下列任一，即需出草稿：</p>
+          <ul>
+            <li>evidence 的 entrypoints 出现 agent 关键入口<strong>未记录</strong>的真实 Controller / Feign Client / MQ 消费者 / 定时任务类</li>
+            <li>agent 记录的入口类在 evidence 或代码里<strong>已不存在</strong>（删除或改名）</li>
+            <li>structure 顶层包与 agent 代码地图<strong>明显不一致</strong>（新增或删除顶层业务包）</li>
+            <li>deps 指纹与 agent 技术栈<strong>明显不一致</strong>（换了中间件或框架）</li>
+          </ul>
+          <p>无结构漂移 → 不出草稿（领域知识等语义内容不因结构未变而动），告知该项目「仅索引刷新，agent 无需更新」。</p>
+
+          <h3 id="step-d">Step D：生成待评审草稿（绝不动线上 agent）</h3>
+          <p>对有结构漂移的项目，写一份草稿到 <code>docs/.refresh-drafts/&lt;proj&gt;.md</code>，含两部分：</p>
+          <ol>
+            <li><strong>漂移摘要</strong>（人读）：新增了哪些入口、删了哪些、包结构或技术栈变化，逐条列出</li>
+            <li><strong>拟更新的 agent 全文</strong>：以现有 <code>agents/&lt;agent&gt;.md</code> 为基底，按 evidence 更新代码地图 / 关键入口 / 对外契约 / 技术栈。<strong>只改结构性内容</strong>；定位、领域知识、工作法保持原样，除非 evidence 直接推翻。引用的每个类名必须来自 evidence 或代码，不编造</li>
+          </ol>
+          <p>产出后告知用户：「<code>&lt;proj&gt;</code> 检测到漂移，草稿已写入 <code>docs/.refresh-drafts/&lt;proj&gt;.md</code>，跑 <code>hero 刷新 评审</code> 来过。」<strong>不在此覆盖线上 agent。</strong></p>
+        </section>
+
+        <!-- 评审 gate -->
+        <section id="review-gate">
+          <h2>评审 gate（rigid）</h2>
+          <p><code>hero 刷新 评审</code> 对 <code>docs/.refresh-drafts/</code> 下每个草稿，逐个执行三步：</p>
+          <ol>
+            <li><strong>展示</strong>漂移摘要 + 草稿 agent 与线上 <code>agents/&lt;agent&gt;.md</code> 的 diff</li>
+            <li><strong>反编造验证</strong>（硬门槛，零容忍）：草稿正文引用的每个类或接口名，在对应项目代码里 grep 验证真实存在。任一 MISSING → 修正草稿再验，不得提交。原理很简单：逐类名 grep 查找，找不到就标记 MISSING，全部通过才算过关</li>
+            <li><strong>⏸ STOP 等用户确认</strong>：
+              <ul>
+                <li>用户「<strong>确认/通过</strong>」→ 用草稿覆盖线上 <code>agents/&lt;agent&gt;.md</code>；若草稿 description「触发词：」那行关键词变了，同步更新 <code>docs/hero-agent-roster.md</code> 对应行；删除该草稿；单独 commit</li>
+                <li>用户「<strong>驳回</strong>」→ 删除草稿，不动线上 agent</li>
+                <li>用户「<strong>改</strong>」→ 按反馈调整草稿，回到第 1 步</li>
+              </ul>
+            </li>
+          </ol>
+        </section>
+
+        <!-- 提交分离策略 -->
+        <section id="commit-strategy">
+          <h2>提交分离策略</h2>
+          <ul>
+            <li><strong>确定性产物</strong>（state + vendor docs）：一次 commit
+              <pre><code>chore(hero-refresh): 刷新确定性产物（状态 + vendor docs）</code></pre>
+            </li>
+            <li><strong>每个领航 agent 变更</strong>：各自单独 commit
+              <pre><code>refresh(&lt;proj&gt;): 领航 agent 随代码漂移更新</code></pre>
+            </li>
+          </ul>
+          <p>始终保持人工 gate——这是 rigid 规则，不可跳过自动提交。</p>
+        </section>
+
+        <!-- "只保鲜不开荒"原则 -->
+        <section id="no-init">
+          <h2>"只保鲜不开荒"原则</h2>
+          <p>刷新只处理 <code>docs/.refresh-state.json</code> 里已接入的项目。新服务首次建 codegraph 索引 + 首次生成领航 agent 走 <a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/docs/project-agent-cookbook.md"><code>docs/project-agent-cookbook.md</code></a>，与本流程完全解耦。保鲜的前提是已经有东西可以保鲜——开荒和保鲜是两条独立的入口，各管各的。</p>
+        </section>
+
+        <!-- 状态查询 -->
+        <section id="status">
+          <h2>状态查询</h2>
+          <p><code>hero 刷新 状态</code> 读 <code>docs/.refresh-state.json</code> 与各项目 HEAD，呈现：</p>
+          <pre><code>已接入项目：
+  ecrm                 上次刷新 2026-06-06  ✓ 无新 commit
+  hotel-product-center 上次刷新 2026-06-01  ⚠ 有 3 个新 commit，建议刷新
+  owner-biz            从未刷新            ⚠ 待建立基线
+待评审草稿：docs/.refresh-drafts/ 下 [N] 份</code></pre>
+        </section>
+
+        <!-- 与其他资产的关系 -->
+        <section id="relations">
+          <h2>与其他资产的关系</h2>
+          <ul>
+            <li>L1 hook <code>config/hooks/hero-refresh-check.sh</code> 只做 SessionStart 提醒，真正刷新和评审都在本 skill</li>
+            <li>与 <code>hero-prd-to-java</code> 正交：那个管「PRD → 开发」，这个管「资产保鲜」</li>
+            <li>领域知识不自动刷：agent 第⑥段（坑和状态机）靠人工经验沉淀，刷新只动结构性内容</li>
+          </ul>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- ============ 页脚 ============ -->
+  <footer class="site-footer">
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="../index.html">首页</a>
+        <a href="../mechanism.html">机制</a>
+        <a href="../docs-index.html">文档</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2026 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
+  </footer>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.topnav').classList.toggle('is-menu-open');
+    });
+
+    // Dropdown toggle (for touch devices and mobile)
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        // Close other dropdowns
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d !== parent) d.classList.remove('open');
+        });
+        parent.classList.toggle('open');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+</body>
+</html>

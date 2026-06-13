@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="codegraph 是领航 agent 的知识底座：结构骨架 + 语义补足，让领航 agent 能「懂服务·带路·圈影响面」。">
+  <meta name="author" content="亚朵集团">
+  <meta name="keywords" content="claude-hero, codegraph, 领航 agent, 知识底座, 代码索引">
+  <meta property="og:title" content="CodeGraph · 领航 Hero">
+  <meta property="og:description" content="领航 agent 的知识底座：结构骨架 + 语义补足">
+  <meta property="og:type" content="website">
+  <title>CodeGraph · 领航 Hero</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/mechanism.css">
+  <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+  <!-- ============ 顶部导航 ============ -->
+  <nav class="topnav" aria-label="主导航">
+    <div class="topnav-inner">
+      <a href="../" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <a href="../index.html">首页</a>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理 ▾</button>
+          <div class="dropdown-content">
+            <a href="../mechanism.html#architecture">整体架构</a>
+            <a href="../mechanism.html#collaboration">Agent 协作</a>
+            <a href="../mechanism.html#skill-dispatch">Skill 调度</a>
+            <a href="../mechanism.html#workflow">工作流执行</a>
+            <hr>
+            <a href="../mechanism.html#hidden-features">隐藏特性</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">角色 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#roles">角色介绍</a>
+            <a href="../index.html#teams">组队模式</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档 ▾</button>
+          <div class="dropdown-content">
+            <a href="../docs-index.html">📚 文档中心</a>
+            <hr>
+            <a href="hero-agent-layers.html">🏗️ Agent 分层架构</a>
+            <a href="workflow.html">⚙️ 工作流程</a>
+            <a href="prd-to-java.html">📋 PRD 转 Java</a>
+            <a href="codegraph.html" class="active">📊 CodeGraph</a>
+            <a href="refresh.html">🔄 刷新机制</a>
+            <a href="onboarding.html">🚀 新人入门</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">安装 ▾</button>
+          <div class="dropdown-content">
+            <a href="../index.html#install">10 分钟安装</a>
+            <a href="../index.html#build-pilot">自建领航员</a>
+            <hr>
+            <a href="../index.html#uninstall">卸载</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ Hero Section ============ -->
+  <section class="mechanism-hero" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">CodeGraph</h1>
+      <p class="mechanism-subtitle">领航 agent 的知识底座 · 结构骨架 + 语义补足 · 懂服务 · 带路 · 圈影响面</p>
+      <div class="mechanism-stats">
+        <div class="stat">
+          <span class="stat-num">10</span>
+          <span class="stat-label">核心命令</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">7</span>
+          <span class="stat-label">正文分段</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">5</span>
+          <span class="stat-label">素材来源</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">PRD 插入点</span>
+        </div>
+      </div>
+    </div>
+    <!-- 山形辅助图形 -->
+    <svg class="mechanism-hero-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L240,30 L470,80 L640,40 L820,90 L1010,35 L1230,75 L1440,50 L1440,120 Z"/>
+      <path fill="var(--color-woye-deep)" opacity="0.5" d="M0,120 L0,95 L300,65 L560,100 L760,75 L980,105 L1200,70 L1440,98 L1440,120 Z"/>
+    </svg>
+  </section>
+
+  <!-- ============ 主内容区 ============ -->
+  <main class="docs-layout">
+    <aside class="docs-sidebar" aria-label="本页目录">
+      <h3 class="docs-toc-title">目录</h3>
+      <ul class="docs-toc">
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#intro">一句话引言</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#tool-intro">codegraph 工具简介</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#agent-positioning">领航 agent 的定位</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#seven-parts">正文七部分解剖</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#evidence-pack">Evidence Pack 组装流程</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#dual-axis">双轴正交关系</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#insertion-points">hero-prd-to-java 4 个插入点</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#fallback">降级策略</a></li>
+      </ul>
+    </aside>
+
+    <div class="docs-content">
+      <article>
+
+        <!-- 一句话引言 -->
+        <section id="intro">
+          <h2>一句话引言</h2>
+          <p><strong>codegraph 是领航 agent 的「知识底座」</strong>。它提供两样东西：<strong>结构骨架</strong>（模块/包/符号/调用关系）和 <strong>语义补足</strong>（通过 pom/CLAUDE.md 将骨架翻译成「这服务是干什么的」）。二者合一，让领航 agent 能「懂该服务·带路·圈影响面」。</p>
+          <blockquote>
+            <p><strong>权威源</strong>：<a href="../codegraph-agent-plan.html"><code>docs/codegraph-agent-plan.md</code></a> + <a href="../project-agent-cookbook.html"><code>docs/project-agent-cookbook.md</code></a></p>
+            <p><strong>范围</strong>：本文解读 codegraph 如何作为领航 agent 的知识底座，不复制现有 docs 全文。</p>
+          </blockquote>
+        </section>
+
+        <!-- codegraph 工具简介 -->
+        <section id="tool-intro">
+          <h2>codegraph 工具简介</h2>
+          <table>
+            <caption>codegraph 基本信息</caption>
+            <thead>
+              <tr><th scope="col">项</th><th scope="col">内容</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>版本</td><td>v0.9.7</td></tr>
+              <tr><td>安装路径</td><td><code>~/.codegraph/versions/v0.9.7</code></td></tr>
+              <tr><td>支持语言</td><td>Java（tree-sitter-java）、Kotlin（kotlin.wasm）</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>核心命令</strong>（7+ 个）：</p>
+          <table>
+            <caption>codegraph 命令清单</caption>
+            <thead>
+              <tr><th scope="col">命令</th><th scope="col">作用</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>init</code></td><td>初始化索引配置</td></tr>
+              <tr><td><code>index</code></td><td>构建/重建代码索引</td></tr>
+              <tr><td><code>status</code></td><td>查看符号数、语言分布</td></tr>
+              <tr><td><code>query</code></td><td>按符号名搜索（类/方法/注解）</td></tr>
+              <tr><td><code>files</code></td><td>列出文件与模块结构</td></tr>
+              <tr><td><code>callers</code></td><td>查「谁调了 X」</td></tr>
+              <tr><td><code>callees</code></td><td>查「X 调了谁」</td></tr>
+              <tr><td><code>impact</code></td><td>圈定改动影响面（上游调用链）</td></tr>
+              <tr><td><code>serve --mcp</code></td><td>启动 MCP server，供 agent 实时查询</td></tr>
+              <tr><td><code>install</code></td><td>注册到 Claude Code</td></tr>
+            </tbody>
+          </table>
+
+          <p>日常开发中最常用的三条：<code>query</code> 定位入口 → <code>callers/impact</code> 圈影响面 → <code>files --format grouped</code> 看项目全景。</p>
+        </section>
+
+        <!-- 领航 agent 的定位 -->
+        <section id="agent-positioning">
+          <h2>领航 agent 的定位</h2>
+          <p>领航 agent（<code>hero-java-&lt;proj&gt;</code>）是<strong>单服务、只读、codegraph 驱动</strong>的知识/导航层。核心职责：「懂该服务·带路·圈影响面」，<strong>自己不写代码</strong>。</p>
+          <p>它与 6 个横向角色 agent <strong>正交</strong>（见下文双轴图解）。一句话记住分工：<strong>领航 agent 圈定「在哪改、影响谁」，角色 agent 负责「具体怎么改」</strong>。</p>
+          <p>粒度：默认 1 项目 = 1 个领航 agent。超阈值大项目（&gt;2000 <code>.java</code> 文件 或 &gt;15 顶层业务模块）按业务域拆成 2-3 个 bounded-context agent，命名 <code>hero-java-&lt;proj&gt;-&lt;domain&gt;</code>。</p>
+        </section>
+
+        <!-- 正文七部分解剖 -->
+        <section id="seven-parts">
+          <h2>正文七部分解剖</h2>
+          <p>每个领航 agent 的正文由 7 段组成，来源是 codegraph 结构 + pom/CLAUDE.md 语义：</p>
+          <table>
+            <caption>领航 agent 正文七段组成</caption>
+            <thead>
+              <tr>
+                <th scope="col">段</th>
+                <th scope="col">内容</th>
+                <th scope="col">来源</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>① 服务定位</td>
+                <td>业务域、架构位置、上下游关系</td>
+                <td>CLAUDE.md + 顶层包命名</td>
+              </tr>
+              <tr>
+                <td>② 技术栈指纹</td>
+                <td>框架·中间件·JDK 版本</td>
+                <td><code>pom.xml</code> / <code>build.gradle</code> 关键依赖</td>
+              </tr>
+              <tr>
+                <td>③ 代码地图</td>
+                <td>顶层包/模块 → 职责、分层与命名规律</td>
+                <td><code>codegraph files --format grouped</code></td>
+              </tr>
+              <tr>
+                <td>④ 关键入口</td>
+                <td>Controller / Feign / MQ 消费者 / 定时任务（真实类名）</td>
+                <td><code>codegraph query</code> 按注解/接口名搜索</td>
+              </tr>
+              <tr>
+                <td>⑤ 对外契约与依赖</td>
+                <td>下游服务、暴露接口、MQ topic/group、二方包</td>
+                <td><code>codegraph callers</code> + Feign/MQ 注解扫描</td>
+              </tr>
+              <tr>
+                <td>⑥ 领域知识/坑</td>
+                <td>核心实体·状态机·易错点</td>
+                <td>代码 + 经验沉淀（初版留占位）</td>
+              </tr>
+              <tr>
+                <td>⑦ 导航工作法 + 协作边界</td>
+                <td>先 codegraph MCP 定位再动手；实现/SQL/测试/架构交对应角色 agent</td>
+                <td>codegraph MCP + 团队约定</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>Frontmatter 的 <code>description</code> 字段遵循<strong>四段式命令规范</strong>：</p>
+          <ol>
+            <li>服务一句话定位</li>
+            <li><strong>触发词锚点</strong>（<code>触发词：&lt;proj&gt; / &lt;中文名&gt; / &lt;核心业务名词…&gt; / &lt;别名&gt; / &lt;关联系统&gt;</code>）</li>
+            <li>何时路由到它（触发场景）</li>
+            <li>边界（不做什么、跨服务交谁）</li>
+          </ol>
+          <p>触发词锚点是 orchestrator 稳定路由的关键：词面命中决定 agent 是否被派发。</p>
+        </section>
+
+        <!-- Evidence Pack 组装流程 -->
+        <section id="evidence-pack">
+          <h2>Evidence Pack 组装流程</h2>
+          <p>生成一个领航 agent 之前，先组装 evidence pack（喂给 LLM 的素材包）。5 个来源：</p>
+          <table>
+            <caption>Evidence Pack 5 个素材来源</caption>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">素材</th>
+                <th scope="col">命令/来源</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>模块/包结构 + 符号数</td>
+                <td><code>codegraph files --format grouped --filter src/main/java</code></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>入口符号（Controller/Feign/Service/Mapper/MQ 消费者）</td>
+                <td><code>codegraph query Controller</code> 等按注解搜索</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>技术栈指纹</td>
+                <td><code>pom.xml</code> / <code>build.gradle</code> 关键依赖（spring-boot / eureka / apollo / rocketmq / mybatis / jetcache / xxljob 等中间件）</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>语义种子</td>
+                <td>项目根 CLAUDE.md 中该项目一句话说明 + 架构分组；项目内 README（若有）</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>顶层包树</td>
+                <td><code>com.atour.&lt;svc&gt;...</code> 包结构</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>优先级：<strong>项目内 CLAUDE.md/README &gt; 上级 CLAUDE.md &gt; 包命名推断</strong>。Pilot 中 owner-biz 的 ATLWork/CLAUDE.md 无条目，但项目自带 CLAUDE.md 提供了完整栈/分层/外部依赖，经验是优先吃项目内的。</p>
+        </section>
+
+        <!-- 双轴正交关系 -->
+        <section id="dual-axis">
+          <h2>双轴正交关系</h2>
+          <p>领航 agent 与 6 个角色 agent 是两条正交的轴，不重叠：</p>
+          <pre><code>角色 agent（横向干活，跨服务通用）
+ ├─ 规划层        孔明     hero-java-tech-lead
+ ├─ 执行层        文远     hero-java-backend-developer
+ │                子长     hero-java-data-engineer
+ │                希仁     hero-java-test-engineer
+ └─ 评审门控层    玄成     hero-java-code-reviewer
+                  鹏举     hero-java-security-auditor
+
+项目领航 agent（按服务只读带路 = 领航研究层）
+ ├─ 子文     hero-java-ecrm
+ ├─ 郑和     hero-java-hotel-product-center
+ └─ 霞客     hero-java-owner-biz</code></pre>
+
+          <blockquote>
+            <p>一句话记住分工：领航 agent 圈定「在哪改、影响谁」，角色 agent 负责「具体怎么改」</p>
+          </blockquote>
+
+          <p>为什么不做「每个角色 × 每个服务」的组合？因为 40 服务 × 6 角色 = 240 个 agent，爆炸。正交设计把「知道在哪」和「知道怎么干」解耦：服务越多只加领航 agent，角色 agent 始终 6 个。</p>
+        </section>
+
+        <!-- 在 hero-prd-to-java 中的 4 个插入点 -->
+        <section id="insertion-points">
+          <h2>在 hero-prd-to-java 中的 4 个插入点</h2>
+          <p>领航 agent 在 PRD 驱动开发的 8 步流水线中有 4 个明确的插入点：</p>
+          <table>
+            <caption>领航 agent 在 PRD 流水线中的 4 个插入点</caption>
+            <thead>
+              <tr>
+                <th scope="col">Step</th>
+                <th scope="col">步骤名</th>
+                <th scope="col">领航 agent 的角色</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Step 0</td>
+                <td>服务识别</td>
+                <td>比对花名册（<code>docs/hero-agent-roster.md</code>），命中存量服务</td>
+              </tr>
+              <tr>
+                <td>Step 1</td>
+                <td>现状勘察</td>
+                <td>用 codegraph 摸地图，产出勘察报告喂给设计阶段</td>
+              </tr>
+              <tr>
+                <td>Step 4</td>
+                <td>开发导航</td>
+                <td>实现 agent 动手前取定位：「在哪改、影响谁」</td>
+              </tr>
+              <tr>
+                <td>Step 6</td>
+                <td>影响面复核</td>
+                <td>用 <code>codegraph impact</code> 复核全部受影响 caller 都被覆盖</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><strong>协作边界</strong>：领航只管单服务内「代码长啥样、改了影响谁」；跨服务的整体拆分 / 契约对齐 / 拓扑排序归 <strong>tech-lead</strong>；实现归 backend-developer，SQL 归 data-engineer，测试归 test-engineer。领航产出<strong>喂给</strong> tech-lead / 角色 agent，自己不下场。</p>
+        </section>
+
+        <!-- 降级策略 -->
+        <section id="fallback">
+          <h2>降级策略</h2>
+          <p>不是每个服务都有领航 agent。三种情况，三种策略：</p>
+          <table>
+            <caption>领航 agent 缺失时的三种降级策略</caption>
+            <thead>
+              <tr><th scope="col">情况</th><th scope="col">策略</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>命中服务<strong>有</strong>领航 agent</td>
+                <td>派发它勘察/导航</td>
+              </tr>
+              <tr>
+                <td>命中服务<strong>无</strong>领航 agent</td>
+                <td>回退到现场勘察（<code>codegraph</code> CLI 或 <code>Grep/Glob</code> 直接扫该服务），workflow <strong>不阻塞</strong></td>
+              </tr>
+              <tr>
+                <td><strong>新增</strong>服务</td>
+                <td>无存量可勘察，走绿地设计</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>缺领航 agent 的存量服务可事后用 <code>hero-init</code> 补齐，逐步覆盖 ~40 个服务。新生成的 agent 登记到 <code>docs/hero-agent-roster.md</code> 后即纳入 <code>hero-refresh</code> 保鲜体系。</p>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- ============ 页脚 ============ -->
+  <footer class="site-footer">
+    <svg class="footer-mountains" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="var(--color-woye-soft)" d="M0,120 L0,70 L320,30 L620,85 L860,40 L1120,90 L1440,50 L1440,120 Z"/>
+    </svg>
+    <div class="footer-inner">
+      <p class="footer-brand">领航 <span>HERO</span></p>
+      <p class="footer-links">
+        <a href="../index.html">首页</a>
+        <a href="../mechanism.html">机制</a>
+        <a href="../docs-index.html">文档</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
+      </p>
+      <p class="footer-copyright">© 2026 领航 Hero · 亚朵集团 · Powered by Claude</p>
+    </div>
+  </footer>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.topnav').classList.toggle('is-menu-open');
+    });
+
+    // Dropdown toggle (for touch devices and mobile)
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        // Close other dropdowns
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d !== parent) d.classList.remove('open');
+        });
+        parent.classList.toggle('open');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+</body>
+</html>
