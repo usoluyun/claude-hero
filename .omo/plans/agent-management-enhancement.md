@@ -66,12 +66,12 @@
 
 ### Definition of Done
 - [x] 所有 9 个 agent 包含 5 个必需章节
-- [ ] AGENTS.md 覆盖所有 9 个 agent
-- [ ] .omo/state/ 包含完整 schema 文档
-- [ ] manifest.yaml 正确引用 .omo/state/
-- [ ] 验证脚本全部 PASS
-- [ ] install.sh 在隔离环境 PASS
-- [ ] agent 路由测试通过
+- [x] AGENTS.md 覆盖所有 9 个 agent
+- [x] .omo/state/ 包含完整 schema 文档
+- [x] manifest.yaml 正确引用 .omo/state/
+- [x] 验证脚本全部 PASS
+- [x] install.sh 在隔离环境 PASS
+- [x] agent 路由测试通过
 
 ### Must Have
 - 9 个 agent 全部按 5 章节模板重写（Role / Success Criteria / Constraints / Failure Modes / Final Checklist）
@@ -863,7 +863,7 @@ Max Concurrent: 6 (Wave 2)
 
 ## Wave 4 Tasks (13-16)
 
-- [ ] 13. Update navigator-agent.md.tmpl to 5-Chapter Format [quick]
+- [x] 13. Update navigator-agent.md.tmpl to 5-Chapter Format [quick]
 
   **What to do**:
   - Open `templates/navigator-agent.md.tmpl` (the Mustache template used by `scripts/hero-init.sh` to generate new navigator agents)
@@ -909,7 +909,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 14. Create agents/AGENTS.md Registry File [quick]
+- [x] 14. Create agents/AGENTS.md Registry File [quick]
 
   **What to do**:
   - Create `agents/AGENTS.md` following the schema defined in `docs/agents-md-schema.md` (task 2)
@@ -962,7 +962,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 15. Initialize .omo/state/ Directory with Migrated JSON Files [quick]
+- [x] 15. Initialize .omo/state/ Directory with Migrated JSON Files [quick]
 
   **What to do**:
   - Create the `.omo/state/` directory structure if it doesn't exist
@@ -1040,7 +1040,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 16. Update manifest.yaml with .omo/state/ Link Entry [quick]
+- [x] 16. Update manifest.yaml with .omo/state/ Link Entry [quick]
 
   **What to do**:
   - Open `manifest.yaml` (the installer manifest used by `install.sh`)
@@ -1108,7 +1108,7 @@ Max Concurrent: 6 (Wave 2)
 
 ## Wave 5 Tasks (17-20)
 
-- [ ] 17. Create Chapter Validation Script (validate-chapters.sh) [quick]
+- [x] 17. Create Chapter Validation Script (validate-chapters.sh) [quick]
 
   **What to do**:
   - Create `scripts/validate-chapters.sh` that validates agent files follow the 5-chapter format
@@ -1186,7 +1186,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 18. Create AGENTS.md Validation Script (validate-agents-md.sh) [quick]
+- [x] 18. Create AGENTS.md Validation Script (validate-agents-md.sh) [quick]
 
   **What to do**:
   - Create `scripts/validate-agents-md.sh` that validates the `agents/AGENTS.md` registry file
@@ -1267,7 +1267,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 19. Create State Migration Validation Script (validate-state-migration.sh) [quick]
+- [x] 19. Create State Migration Validation Script (validate-state-migration.sh) [quick]
 
   **What to do**:
   - Create `scripts/validate-state-migration.sh` that validates the state directory migration
@@ -1347,7 +1347,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 20. Create Install Test Script (test-install.sh) [quick]
+- [x] 20. Create Install Test Script (test-install.sh) [quick]
 
   **What to do**:
   - Create `scripts/test-install.sh` that tests the installer in a clean environment
@@ -1439,19 +1439,19 @@ Max Concurrent: 6 (Wave 2)
 
 > 4 review agents run in PARALLEL. ALL must APPROVE. Present consolidated results to user and get explicit "okay" before completing.
 
-- [ ] F1. **Plan Compliance Audit** — `oracle`
+- [x] F1. **Plan Compliance Audit** — `oracle`
   Read the plan end-to-end. For each "Must Have": verify implementation exists. For each "Must NOT Have": search for forbidden patterns. Check evidence files exist.
   Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
-- [ ] F2. **Quality Review** — `unspecified-high`
+- [x] F2. **Quality Review** — `unspecified-high`
   Review all 9 rewritten agents for: chapter completeness, constraint accuracy, frontmatter integrity. Review AGENTS.md for schema compliance. Review .omo/state/ schema. Run validation scripts.
   Output: `Agents [N/9 compliant] | AGENTS.md [PASS/FAIL] | State [PASS/FAIL] | Scripts [N/N pass] | VERDICT`
 
-- [ ] F3. **Full QA Pass** — `unspecified-high`
+- [x] F3. **Full QA Pass** — `unspecified-high`
   Start from clean state. Run all 4 validation scripts. Run install.sh in isolated env. Trigger agent dispatch routes. Save to `.omo/evidence/final-qa/`.
   Output: `Scripts [N/N pass] | Install [PASS/FAIL] | Routes [N/N] | VERDICT`
 
-- [ ] F4. **Scope Fidelity Check** — `deep`
+- [x] F4. **Scope Fidelity Check** — `deep`
   For each task: verify 1:1 spec compliance. Check "Must NOT do" compliance. Detect cross-task contamination.
   Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | VERDICT`
 
