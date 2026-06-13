@@ -1,123 +1,36 @@
 {
   "schema_version": 2,
-  "active_work_id": "agent-management-enhancement-ae01c7a3",
+  "active_work_id": null,
+  "active_plan": null,
+  "status": "idle",
   "works": {
     "hero-tavern-fix-8b37bffc": {
       "work_id": "hero-tavern-fix-8b37bffc",
-      "active_plan": "/Users/luyun/Documents/poc/claude-hero/.omo/plans/hero-tavern-fix.md",
       "plan_name": "hero-tavern-fix",
       "status": "completed",
       "started_at": "2026-06-11T11:48:32.099Z",
-      "updated_at": "2026-06-11T12:31:24.453Z",
-      "session_ids": [
-        "opencode:ses_1498ceb5fffegKD96QK992lAzf"
-      ],
-      "agent": "atlas",
-      "task_sessions": {},
       "ended_at": "2026-06-11T12:31:24.453Z",
       "elapsed_ms": 2572354,
-      "session_origins": {}
+      "agent": "atlas"
     },
     "cli-to-skills-fe6b4e25": {
       "work_id": "cli-to-skills-fe6b4e25",
-      "active_plan": "/Users/luyun/Documents/poc/claude-hero/.omo/plans/cli-to-skills.md",
       "plan_name": "cli-to-skills",
       "status": "completed",
       "started_at": "2026-06-11T14:59:12.019Z",
-      "updated_at": "2026-06-11T15:17:59.722Z",
-      "session_ids": [
-        "opencode:ses_1490e4273ffeEZYd2l8qQieSeC"
-      ],
-      "agent": "atlas",
-      "task_sessions": {},
       "ended_at": "2026-06-11T15:17:59.722Z",
       "elapsed_ms": 1127703,
-      "session_origins": {}
+      "agent": "atlas"
     },
     "agent-management-enhancement-ae01c7a3": {
       "work_id": "agent-management-enhancement-ae01c7a3",
-      "active_plan": "/Users/luyun/Documents/poc/claude-hero/.omo/plans/agent-management-enhancement.md",
       "plan_name": "agent-management-enhancement",
-      "status": "active",
+      "status": "completed",
       "started_at": "2026-06-13T02:48:45.600Z",
-      "updated_at": "2026-06-13T02:57:32.147Z",
-      "session_ids": [
-        "opencode:ses_142139560ffeRAe7QW0NawoPdm",
-        "opencode:ses_141184543ffeJJP2w3BuozIbyb",
-        "opencode:ses_141180ca9ffeHgyIGoadKbmWWI",
-        "opencode:ses_14117d93fffeyzknpgzyXazvIR",
-        "opencode:ses_14117a69dffecFLpdLqV4NVje1",
-        "opencode:ses_141176f3cffezBovX4I7tODCD9",
-        "opencode:ses_14116a18fffeIsB42yl779ywMi",
-        "opencode:ses_141167e04ffeqV7zSTZoyH0TAm",
-        "opencode:ses_141167616ffeKVlT4yMLtuGMFK",
-        "opencode:ses_141163a7fffe0JJJc26nYTZR6E"
-      ],
-      "session_origins": {
-        "opencode:ses_142139560ffeRAe7QW0NawoPdm": "direct",
-        "opencode:ses_141184543ffeJJP2w3BuozIbyb": "appended",
-        "opencode:ses_141180ca9ffeHgyIGoadKbmWWI": "appended",
-        "opencode:ses_14117d93fffeyzknpgzyXazvIR": "appended",
-        "opencode:ses_14117a69dffecFLpdLqV4NVje1": "appended",
-        "opencode:ses_141176f3cffezBovX4I7tODCD9": "appended",
-        "opencode:ses_14116a18fffeIsB42yl779ywMi": "appended",
-        "opencode:ses_141167e04ffeqV7zSTZoyH0TAm": "appended",
-        "opencode:ses_141167616ffeKVlT4yMLtuGMFK": "appended",
-        "opencode:ses_141163a7fffe0JJJc26nYTZR6E": "appended"
-      },
+      "ended_at": "2026-06-13T04:03:40.310Z",
+      "elapsed_ms": 4494710,
       "agent": "atlas",
-      "task_sessions": {
-        "todo:4": {
-          "task_key": "todo:4",
-          "task_label": "4",
-          "task_title": "重写 孔明 (hero-java-tech-lead) 到 5 章节模板",
-          "session_id": "opencode:ses_141163a7fffe0JJJc26nYTZR6E",
-          "agent": "Sisyphus-Junior",
-          "category": "unspecified-high",
-          "updated_at": "2026-06-13T02:57:32.147Z"
-        }
-      }
+      "report": ".omo/reports/agent-management-enhancement.md"
     }
-  },
-  "active_plan": "/Users/luyun/Documents/poc/claude-hero/.omo/plans/agent-management-enhancement.md",
-  "started_at": "2026-06-13T02:48:45.600Z",
-  "status": "active",
-  "updated_at": "2026-06-13T02:57:32.147Z",
-  "session_ids": [
-    "opencode:ses_142139560ffeRAe7QW0NawoPdm",
-    "opencode:ses_141184543ffeJJP2w3BuozIbyb",
-    "opencode:ses_141180ca9ffeHgyIGoadKbmWWI",
-    "opencode:ses_14117d93fffeyzknpgzyXazvIR",
-    "opencode:ses_14117a69dffecFLpdLqV4NVje1",
-    "opencode:ses_141176f3cffezBovX4I7tODCD9",
-    "opencode:ses_14116a18fffeIsB42yl779ywMi",
-    "opencode:ses_141167e04ffeqV7zSTZoyH0TAm",
-    "opencode:ses_141167616ffeKVlT4yMLtuGMFK",
-    "opencode:ses_141163a7fffe0JJJc26nYTZR6E"
-  ],
-  "session_origins": {
-    "opencode:ses_142139560ffeRAe7QW0NawoPdm": "direct",
-    "opencode:ses_141184543ffeJJP2w3BuozIbyb": "appended",
-    "opencode:ses_141180ca9ffeHgyIGoadKbmWWI": "appended",
-    "opencode:ses_14117d93fffeyzknpgzyXazvIR": "appended",
-    "opencode:ses_14117a69dffecFLpdLqV4NVje1": "appended",
-    "opencode:ses_141176f3cffezBovX4I7tODCD9": "appended",
-    "opencode:ses_14116a18fffeIsB42yl779ywMi": "appended",
-    "opencode:ses_141167e04ffeqV7zSTZoyH0TAm": "appended",
-    "opencode:ses_141167616ffeKVlT4yMLtuGMFK": "appended",
-    "opencode:ses_141163a7fffe0JJJc26nYTZR6E": "appended"
-  },
-  "plan_name": "agent-management-enhancement",
-  "task_sessions": {
-    "todo:4": {
-      "task_key": "todo:4",
-      "task_label": "4",
-      "task_title": "重写 孔明 (hero-java-tech-lead) 到 5 章节模板",
-      "session_id": "opencode:ses_141163a7fffe0JJJc26nYTZR6E",
-      "agent": "Sisyphus-Junior",
-      "category": "unspecified-high",
-      "updated_at": "2026-06-13T02:57:32.147Z"
-    }
-  },
-  "agent": "atlas"
+  }
 }
