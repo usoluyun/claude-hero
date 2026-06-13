@@ -14,16 +14,18 @@ set -euo pipefail
 # 帮助信息
 # ──────────────────────────────────────────────────────────────
 if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
-  echo "Usage: hero-init.sh <project_path> <chinese_name>"
+  echo "Usage: hero-init.sh <project_path> <chinese_name> [--gitlab-project <group/project>]"
   echo ""
   echo "  为 Java 项目自动生成领航 Agent 文件并提交 Git 分支。"
   echo ""
   echo "参数:"
-  echo "  project_path  项目绝对路径（必需，需包含 *.java 文件）"
-  echo "  chinese_name  花名/Agent 中文代号（必需，如 子文、郑和）"
+  echo "  project_path      项目绝对路径（必需，需包含 *.java 文件）"
+  echo "  chinese_name      花名/Agent 中文代号（必需，如 子文、郑和）"
+  echo "  --gitlab-project  GitLab project path（可选，如 group/project-name）"
   echo ""
   echo "示例:"
   echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm 子文"
+  echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm 子文 --gitlab-project at-our/ecrm"
   echo ""
   echo "流程:"
   echo "  Phase 1: 检测项目布局（构建工具 / 模块结构）"
@@ -32,6 +34,7 @@ if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
   echo "  Phase 4: 填充模板 → agents/{agent_name}.md"
   echo "  Phase 5: 反伪造验证（路径 / 技术栈 / 关键词）"
   echo "  Phase 6: Git 分支创建 + 提交 + MR 指引输出"
+  echo "  Phase 6.5: GitLab project 配置（可选）"
   echo ""
   echo "注意: 不会自动 push，需手动按指引操作"
   exit 0
@@ -40,13 +43,40 @@ fi
 # ──────────────────────────────────────────────────────────────
 # 参数解析与验证
 # ──────────────────────────────────────────────────────────────
-PROJECT_PATH="${1:-}"
-CHINESE_NAME="${2:-}"
+PROJECT_PATH=""
+CHINESE_NAME=""
+GITLAB_PROJECT=""
+
+# 逐步解析参数，支持 --gitlab-project 选项
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --gitlab-project)
+      if [ -z "${2:-}" ]; then
+        echo "ERROR: --gitlab-project 需要参数 (group/project-name)" >&2
+        exit 1
+      fi
+      GITLAB_PROJECT="$2"
+      shift 2
+      ;;
+    *)
+      if [ -z "$PROJECT_PATH" ]; then
+        PROJECT_PATH="$1"
+      elif [ -z "$CHINESE_NAME" ]; then
+        CHINESE_NAME="$1"
+      else
+        echo "ERROR: 未知参数: $1" >&2
+        exit 1
+      fi
+      shift
+      ;;
+  esac
+done
 
 if [ -z "$PROJECT_PATH" ] || [ -z "$CHINESE_NAME" ]; then
-  echo "Usage: hero-init.sh <project_path> <chinese_name>" >&2
+  echo "Usage: hero-init.sh <project_path> <chinese_name> [--gitlab-project <group/project>]" >&2
   echo "  project_path  项目绝对路径（必需）" >&2
   echo "  chinese_name  花名/中文名（必需）" >&2
+  echo "  --gitlab-project  GitLab project path（可选）" >&2
   echo "" >&2
   echo "使用 --help 查看详细帮助" >&2
   exit 1
@@ -67,6 +97,48 @@ source "$HERE/lib/init-template.sh"
 source "$HERE/lib/init-verify.sh"
 source "$HERE/lib/init-branch.sh"
 source "$HERE/lib/refresh-state.sh"
+
+# ──────────────────────────────────────────────────────────────
+# Phase 6.5: GitLab project 配置（可选）
+# ──────────────────────────────────────────────────────────────
+read_gitlab_project() {
+  echo "输入 GitLab project path (e.g., group/project-name)，留空跳过:"
+  read -r -p "GitLab project: " gitlab_project_path
+  if [ -z "$gitlab_project_path" ]; then
+    echo "⏭️  跳过 GitLab 配置"
+    gitlab_project_path=""
+    return 0
+  fi
+  if ! echo "$gitlab_project_path" | grep -qE '^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$'; then
+    echo "⚠️  无效的 GitLab project path，应为 group/project-name 格式"
+    read_gitlab_project
+  fi
+}
+
+phase_gitlab() {
+  echo "📊 Phase 6.5: GitLab project 配置"
+
+  if [ -n "$GITLAB_PROJECT" ]; then
+    gitlab_project_path="$GITLAB_PROJECT"
+  else
+    read_gitlab_project
+  fi
+
+  if [ -z "$gitlab_project_path" ]; then
+    echo "⏭️  未配置 GitLab project（非 GitLab 项目可忽略）"
+    return 0
+  fi
+
+  # 写入 .refresh-state.json（追加 gitlab_project 字段到项目条目）
+  local state_f
+  state_f="$(state_file)"
+  local tmp
+  tmp="$(mktemp)"
+  jq --arg p "$PROJECT_KEY" --arg gp "$gitlab_project_path" \
+     '.projects[$p].gitlab_project = $gp' "$state_f" > "$tmp" && mv "$tmp" "$state_f"
+
+  echo "✅ GitLab project: $gitlab_project_path"
+}
 
 # ──────────────────────────────────────────────────────────────
 # 输入验证
@@ -112,6 +184,9 @@ fi
 echo "🚀 开始生成导航 Agent: ${AGENT_NAME}"
 echo "项目路径: ${PROJECT_PATH}"
 echo "花名: ${CHINESE_NAME}"
+if [ -n "$GITLAB_PROJECT" ]; then
+  echo "GitLab project: ${GITLAB_PROJECT}"
+fi
 echo ""
 
 # ──────────────────────────────────────────────────────────────
@@ -279,6 +354,12 @@ echo "✅ 分支: $BRANCH_NAME"
 echo ""
 
 # ──────────────────────────────────────────────────────────────
+# Phase 6.5: GitLab project 配置（可选）
+# ──────────────────────────────────────────────────────────────
+phase_gitlab
+echo ""
+
+# ──────────────────────────────────────────────────────────────
 # 输出 MR 指引
 # ──────────────────────────────────────────────────────────────
 print_mr_guidance "$ROOT" "$BRANCH_NAME" "$AGENT_NAME" "$CHINESE_NAME"
@@ -293,6 +374,9 @@ echo "=========================================="
 echo "Agent 文件: agents/${AGENT_NAME}.md"
 echo "验证状态: $PASSED 通过, $FAILED 未通过"
 echo "Git 分支: $BRANCH_NAME"
+if [ -n "${gitlab_project_path:-}" ]; then
+  echo "GitLab project: $gitlab_project_path"
+fi
 echo "中间产物: .init-work/${PROJECT_KEY}/"
 echo ""
 echo "下一步: 按照上述指引创建 MR"

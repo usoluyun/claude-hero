@@ -3,11 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="领航 Hero — 让 AI 助手如群英汇聚于客栈：领航员带路，角色各执一艺，构建、刷新、导航你的专属智能团队。">
+  <meta name="description" content="领航 Hero — 在路上替你背行囊的 AI 团队：领航 Hero 熟路带路，角色 Hero 各执一艺，构建、刷新、导航你的专属智能团队。">
   <meta name="author" content="亚朵集团">
-  <title>领航 Hero · 群英客栈</title>
+  <title>领航 Hero · 在路上的 AI 团队</title>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/gitlab.css">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.cmd-tab');
+      const contents = document.querySelectorAll('.cmd-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const cmd = tab.getAttribute('data-cmd');
+
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+
+          tab.classList.add('active');
+          const targetContent = document.querySelector(`.cmd-content[data-cmd="${cmd}"]`);
+          if (targetContent) {
+            targetContent.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
 </head>
 <body>
   <!-- ============ 顶部导航 ============ -->
@@ -19,9 +42,11 @@
         <a href="#how">原理</a>
         <a href="#skills">能力</a>
         <a href="#roles">角色</a>
+        <a href="#teams">组队</a>
+        <a href="mechanism.html">机制</a>
         <a href="#install">安装</a>
         <a href="#build-pilot">自建</a>
-        <a href="/tavern/">客栈</a>
+        <!-- 监控看板调整中，暂时下线 -->
       </div>
     </div>
   </nav>
@@ -31,11 +56,10 @@
     <div class="hero-inner">
       <p class="hero-eyebrow">ATOUR · AI NAVIGATOR</p>
       <h1 class="hero-title">领航&nbsp;Hero</h1>
-      <p class="hero-tagline">一座客栈，群英汇聚</p>
-      <p class="hero-desc">把 Claude 智能助手当作汇聚于客栈的英雄与神祇——<br>领航员熟知去路，角色各执一艺，构建、刷新、导航你的专属团队。</p>
+      <p class="hero-tagline">在路上，不必独行</p>
+      <p class="hero-desc">让有名字、有职责的 AI 伙伴替你背起繁琐——<br>领航 Hero 熟路带路，角色 Hero 各执一艺，构建、刷新、导航你的专属团队。</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="/tavern/">推门入栈 · 实时看板</a>
-        <a class="btn btn-ghost" href="#idea">了解理念</a>
+        <a class="btn btn-primary" href="#idea">了解理念</a>
       </div>
     </div>
     <!-- 山形辅助图形：随深底联动，安静铺底 -->
@@ -51,22 +75,22 @@
       <div class="container idea-inner">
         <p class="kicker">理念 · ETHOS</p>
         <blockquote class="idea-quote">
-          每一个智能助手，都是一位远道而来的客人。<br>
-          我们为他们备下一座客栈：让英雄歇脚，让神祇议事，<br>
-          让前路有人领航，让庶务有人执掌。
+          每一个 AI 伙伴，都该有名字、有职责、有温度。<br>
+          把繁琐的庶务交给他们，把方向与判断留给人——<br>
+          前路有领航 Hero 带路，实事有角色 Hero 执掌。
         </blockquote>
         <div class="idea-trio">
           <div class="idea-item">
-            <span class="idea-num">东厢 · 英雄</span>
-            <p>角色 agents 各执一艺——架构、开发、测试、审查、安全，在领航员调度下落子成局。</p>
+            <span class="idea-num">角色 Hero</span>
+            <p>各执一艺——架构、开发、测试、审查、安全，跨服务通用，在领航带路下协同推进，负责「具体怎么改」。</p>
           </div>
           <div class="idea-item">
-            <span class="idea-num">西厢 · 神祇</span>
-            <p>构建与刷新的底层之力——代码图、索引、知识库保鲜，让一切始终与项目同步。</p>
+            <span class="idea-num">能力底座</span>
+            <p>构建与刷新的底层支撑——代码图、索引、知识库保鲜，让每位 Hero 始终读得懂、跟得上你的项目。</p>
           </div>
           <div class="idea-item">
-            <span class="idea-num">中堂 · 领航</span>
-            <p>领航员熟知每条业务域的去路，理解结构与领域知识，为来客指明方向。</p>
+            <span class="idea-num">领航 Hero</span>
+            <p>每位绑定一个服务，吃透结构与领域知识，只读带路，圈定「在哪改、影响谁」，为同行指明方向。</p>
           </div>
         </div>
       </div>
@@ -115,7 +139,7 @@
     <!-- ============ 能力：构建与刷新 ============ -->
     <section id="skills" class="section section-light">
       <div class="container">
-        <p class="kicker center">西厢之力 · CAPABILITIES</p>
+        <p class="kicker center">能力底座 · CAPABILITIES</p>
         <h2 class="section-title">构建与刷新</h2>
         <p class="section-desc">为领航员备好知识与索引，让智能团队始终读得懂、跟得上你的项目。</p>
         <div class="grid grid-3">
@@ -157,9 +181,9 @@
     <!-- ============ 领航员 ============ -->
     <section id="pilots" class="section">
       <div class="container">
-        <p class="kicker center">中堂领航 · PILOTS</p>
+        <p class="kicker center">领航 Hero · PILOTS</p>
         <h2 class="section-title">领航 Agents</h2>
-        <p class="section-desc">已接入 3 位领航员——子文 / 郑和 / 霞客，各守一个服务；用 <code>hero-init</code> 可随时为新项目再添一位。</p>
+        <p class="section-desc">已接入 3 位领航 Hero——子文 / 郑和 / 霞客，各守一个服务，只读带路、圈定「在哪改、影响谁」；用 <code>hero-init</code> 可随时为新项目再添一位。</p>
         <div class="grid grid-3">
 
           <article class="card pilot">
@@ -202,9 +226,9 @@
     <!-- ============ 角色 ============ -->
     <section id="roles" class="section section-light">
       <div class="container">
-        <p class="kicker center">东厢群英 · ROLES</p>
+        <p class="kicker center">角色 Hero · ROLES</p>
         <h2 class="section-title">角色 Agents</h2>
-        <p class="section-desc">6 位角色 Hero 分工协作，全部以 <code>hero &lt;意图&gt;</code> 一句话调用，在领航员调度下落子成局。</p>
+        <p class="section-desc">6 位角色 Hero 分工协作，全部以 <code>hero &lt;意图&gt;</code> 一句话调用，在领航带路下协同推进，负责「具体怎么改」。</p>
         <div class="grid grid-2">
 
           <article class="card role">
@@ -259,15 +283,394 @@
       </div>
     </section>
 
+    <!-- ============ GitLab Issue 任务闭环 ============ -->
+    <section id="issue" class="section">
+      <div class="container">
+        <p class="kicker center">任务闭环 · ISSUE WORKFLOW</p>
+        <h2 class="section-title">GitLab Issue 任务闭环</h2>
+        <p class="section-desc">从主 Issue 到子任务拆解、认领、执行、汇报、关闭——人建主 Issue 开局，人验主 Issue 收盘，中间交给 Hero 自动流转。</p>
+
+        <!-- 第 1 层：端到端流程图 -->
+        <div class="issue-layer-head">
+          <span class="issue-layer-num">I</span>
+          <span class="issue-layer-title">端到端流程图</span>
+        </div>
+        <div class="gitlab-flow-diagram">
+          <svg viewBox="0 0 1100 260" class="flow-svg" preserveAspectRatio="xMidYMid meet" aria-label="GitLab Issue 端到端流程图">
+            <!-- 箭头标记 -->
+            <defs>
+              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="var(--color-bronze)"/>
+              </marker>
+              <marker id="arrowhead-muted" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="var(--color-ink-50)" opacity="0.5"/>
+              </marker>
+            </defs>
+
+            <!-- 主流程连线 -->
+            <g class="flow-main">
+              <!-- 节点 1: 人建主 Issue（人 = 沃野深棕） -->
+              <g class="flow-node" data-node="epic">
+                <rect x="30" y="70" width="140" height="60" rx="8" fill="var(--color-woye)"/>
+                <text x="100" y="97"  text-anchor="middle" fill="var(--color-baiyan)" font-size="18">👤 人建主 Issue</text>
+                <text x="100" y="118" text-anchor="middle" fill="var(--color-bronze-soft)" font-size="11">hero::type:epic</text>
+              </g>
+              <path d="M 170 100 L 210 100" stroke="var(--color-bronze)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+              <!-- 节点 2: 孔明拆解 -->
+              <g class="flow-node" data-node="decompose">
+                <rect x="210" y="70" width="140" height="60" rx="8" fill="var(--color-bronze)"/>
+                <text x="280" y="97"  text-anchor="middle" fill="var(--color-baiyan)" font-size="18">🏛️ 孔明拆解</text>
+                <text x="280" y="118" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="11">tech-lead</text>
+              </g>
+              <path d="M 350 100 L 410 100" stroke="var(--color-bronze)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+              <!-- 节点 3: Agent 并行执行（大节点） -->
+              <g class="flow-node" data-node="parallel">
+                <rect x="410" y="50" width="200" height="100" rx="8" fill="var(--color-info)" opacity="0.88"/>
+                <text x="510" y="82" text-anchor="middle" fill="var(--color-baiyan)" font-size="16">⚡ Agent 并行执行</text>
+                <text x="510" y="108" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="12">文远 · 子长 · 希仁</text>
+                <text x="510" y="130" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="12">玄成 · 鹏举</text>
+              </g>
+              <path d="M 610 100 L 670 100" stroke="var(--color-bronze)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+              <!-- 节点 4: 汇报完成（成功绿） -->
+              <g class="flow-node" data-node="report">
+                <rect x="670" y="70" width="140" height="60" rx="8" fill="var(--color-success)"/>
+                <text x="740" y="97"  text-anchor="middle" fill="var(--color-baiyan)" font-size="18">✅ 汇报完成</text>
+                <text x="740" y="118" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11">评论 + 关子 Issue</text>
+              </g>
+              <path d="M 810 100 L 850 100" stroke="var(--color-bronze)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+              <!-- 节点 5: 人验收关主 Issue -->
+              <g class="flow-node" data-node="close">
+                <rect x="850" y="70" width="200" height="60" rx="8" fill="var(--color-woye)"/>
+                <text x="950" y="97"  text-anchor="middle" fill="var(--color-baiyan)" font-size="18">🎯 人验收关主 Issue</text>
+                <text x="950" y="118" text-anchor="middle" fill="var(--color-bronze-soft)" font-size="11">agent 不可触碰</text>
+              </g>
+            </g>
+
+            <!-- 状态标签层 -->
+            <g class="status-labels" transform="translate(0, 200)">
+              <g>
+                <rect x="30"    y="0" width="120" height="28" rx="4" fill="var(--color-warning)" opacity="0.85"/>
+                <text x="90"    y="18" text-anchor="middle" fill="#fff" font-size="12">pending ⏳</text>
+              </g>
+              <g>
+                <rect x="280"   y="0" width="140" height="28" rx="4" fill="var(--color-info)" opacity="0.85"/>
+                <text x="350"   y="18" text-anchor="middle" fill="#fff" font-size="12">in_progress ⚡</text>
+              </g>
+              <g>
+                <rect x="600"   y="0" width="120" height="28" rx="4" fill="var(--color-success)" opacity="0.9"/>
+                <text x="660"   y="18" text-anchor="middle" fill="#fff" font-size="12">done ✅</text>
+              </g>
+              <g>
+                <rect x="850"   y="0" width="120" height="28" rx="4" fill="var(--color-ink-50)" opacity="0.8"/>
+                <text x="910"   y="18" text-anchor="middle" fill="#fff" font-size="12">closed 🔒</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 第 2 层：Agent 协作时序图 -->
+        <div class="issue-layer-head">
+          <span class="issue-layer-num">II</span>
+          <span class="issue-layer-title">Agent 协作时序</span>
+        </div>
+        <div class="gitlab-collaboration">
+          <div class="collab-grid">
+            <!-- 孔明 · Tech Lead -->
+            <div class="collab-card" data-role="tech-lead">
+              <div class="collab-header">
+                <span class="collab-avatar">🏛️</span>
+                <div class="collab-info">
+                  <h3>孔明</h3>
+                  <p class="collab-role">Tech Lead</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">09:00</span><span class="event-action">接收主 Issue</span></div>
+                <div class="collab-event"><span class="event-time">09:05</span><span class="event-action">拆解为 3 个子任务</span></div>
+                <div class="collab-event"><span class="event-time">09:10</span><span class="event-action">分配给各 Agent</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">hero-prd-to-java</span>
+                <span class="tool-badge">hero-im</span>
+              </div>
+            </div>
+
+            <!-- 文远 · Backend Dev -->
+            <div class="collab-card" data-role="backend-dev">
+              <div class="collab-header">
+                <span class="collab-avatar">⚔️</span>
+                <div class="collab-info">
+                  <h3>文远</h3>
+                  <p class="collab-role">Backend Dev</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">09:15</span><span class="event-action">认领任务 #101</span></div>
+                <div class="collab-event"><span class="event-time">09:20</span><span class="event-action">实现用户认证 Controller</span></div>
+                <div class="collab-event"><span class="event-time">11:30</span><span class="event-action">提交 MR !45</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">git</span>
+                <span class="tool-badge">maven</span>
+              </div>
+            </div>
+
+            <!-- 子长 · Data Engineer -->
+            <div class="collab-card" data-role="data-engineer">
+              <div class="collab-header">
+                <span class="collab-avatar">📊</span>
+                <div class="collab-info">
+                  <h3>子长</h3>
+                  <p class="collab-role">Data Engineer</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">09:15</span><span class="event-action">认领任务 #102</span></div>
+                <div class="collab-event"><span class="event-time">09:25</span><span class="event-action">设计用户表结构</span></div>
+                <div class="collab-event"><span class="event-time">10:00</span><span class="event-action">优化查询索引</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">sql</span>
+                <span class="tool-badge">mybatis</span>
+              </div>
+            </div>
+
+            <!-- 希仁 · Test Engineer -->
+            <div class="collab-card" data-role="test-engineer">
+              <div class="collab-header">
+                <span class="collab-avatar">🧪</span>
+                <div class="collab-info">
+                  <h3>希仁</h3>
+                  <p class="collab-role">Test Engineer</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">09:15</span><span class="event-action">认领任务 #103</span></div>
+                <div class="collab-event"><span class="event-time">11:30</span><span class="event-action">编写认证测试用例</span></div>
+                <div class="collab-event"><span class="event-time">12:00</span><span class="event-action">运行测试套件</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">junit</span>
+                <span class="tool-badge">playwright</span>
+              </div>
+            </div>
+
+            <!-- 玄成 · Code Reviewer -->
+            <div class="collab-card" data-role="code-reviewer">
+              <div class="collab-header">
+                <span class="collab-avatar">🔍</span>
+                <div class="collab-info">
+                  <h3>玄成</h3>
+                  <p class="collab-role">Code Reviewer</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">11:35</span><span class="event-action">审查 MR !45</span></div>
+                <div class="collab-event"><span class="event-time">12:00</span><span class="event-action">提出 3 处改进建议</span></div>
+                <div class="collab-event"><span class="event-time">13:00</span><span class="event-action">批准合并</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">git diff</span>
+                <span class="tool-badge">ast-grep</span>
+              </div>
+            </div>
+
+            <!-- 鹏举 · Security Auditor -->
+            <div class="collab-card" data-role="security-auditor">
+              <div class="collab-header">
+                <span class="collab-avatar">🛡️</span>
+                <div class="collab-info">
+                  <h3>鹏举</h3>
+                  <p class="collab-role">Security Auditor</p>
+                </div>
+              </div>
+              <div class="collab-timeline">
+                <div class="collab-event"><span class="event-time">12:30</span><span class="event-action">安全审计 MR !45</span></div>
+                <div class="collab-event"><span class="event-time">13:00</span><span class="event-action">检查认证流程</span></div>
+                <div class="collab-event"><span class="event-time">13:30</span><span class="event-action">审计通过</span></div>
+              </div>
+              <div class="collab-tools">
+                <span class="tool-badge">semgrep</span>
+                <span class="tool-badge">gitleaks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第 3 层：命令交互演示 -->
+        <div class="issue-layer-head">
+          <span class="issue-layer-num">III</span>
+          <span class="issue-layer-title">命令交互演示</span>
+        </div>
+        <div class="gitlab-commands-demo">
+          <div class="cmd-tabs" role="tablist">
+            <button class="cmd-tab active" data-cmd="pull" type="button">issue pull</button>
+            <button class="cmd-tab" data-cmd="claim" type="button">issue claim</button>
+            <button class="cmd-tab" data-cmd="done" type="button">issue done</button>
+            <button class="cmd-tab" data-cmd="decompose" type="button">issue decompose</button>
+          </div>
+
+          <div class="cmd-content active" data-cmd="pull">
+            <div class="cmd-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title">Terminal</span>
+                <span class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></span>
+              </div>
+<pre class="terminal-output"><code><span class="c-prompt">$</span> issue pull
+
+🦸 hero ▸ 拉取待处理 Issue...
+📋 找到 3 个待处理任务:
+
+<span class="c-warn">#101</span> [backend-dev]    实现用户认证 Controller <span class="c-status">⏳ pending</span>
+<span class="c-warn">#102</span> [data-engineer]  设计用户表结构        <span class="c-status">⏳ pending</span>
+<span class="c-warn">#103</span> [test-engineer]  编写认证测试用例      <span class="c-status">⏳ pending</span>
+
+<span class="c-ok">✅ 已拉取 3 个任务，等待认领</span></code></pre>
+            </div>
+          </div>
+
+          <div class="cmd-content" data-cmd="claim">
+            <div class="cmd-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title">Terminal</span>
+                <span class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></span>
+              </div>
+<pre class="terminal-output"><code><span class="c-prompt">$</span> issue claim #101
+
+🦸 hero ▸ 文远认领任务 #101
+📋 任务详情:
+
+标题: 实现用户认证 Controller
+分配: <span class="c-name">backend-dev (文远)</span>
+状态: <span class="c-status">pending → in_progress ⚡</span>
+
+<span class="c-ok">✅ 已认领，开始工作</span></code></pre>
+            </div>
+          </div>
+
+          <div class="cmd-content" data-cmd="done">
+            <div class="cmd-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title">Terminal</span>
+                <span class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></span>
+              </div>
+<pre class="terminal-output"><code><span class="c-prompt">$</span> issue done #101
+
+🦸 hero ▸ 文远完成任务 #101
+📋 工作汇报:
+
+<span class="c-ok">✅ 完成内容:</span>
+  - 实现 UserController 认证接口
+  - 添加 JWT Token 生成逻辑
+  - 集成 Spring Security 配置
+
+📝 评论已添加到 Issue #101
+🔒 状态: <span class="c-status">in_progress → done ✅</span>
+🔗 关联 MR: !45
+
+<span class="c-ok">✅ 任务已完成并关闭</span></code></pre>
+            </div>
+          </div>
+
+          <div class="cmd-content" data-cmd="decompose">
+            <div class="cmd-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title">Terminal</span>
+                <span class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></span>
+              </div>
+<pre class="terminal-output"><code><span class="c-prompt">$</span> issue decompose #100
+
+🦸 hero ▸ 孔明分析主 Issue <span class="c-name">#100</span>
+📋 需求: 实现用户认证模块
+
+🔍 自动拆解为 3 个子任务:
+
+<span class="c-warn">#101</span> [backend-dev]    实现用户认证 Controller
+<span class="c-warn">#102</span> [data-engineer]  设计用户表结构
+<span class="c-warn">#103</span> [test-engineer]  编写认证测试用例
+
+<span class="c-warn">⏸️  确认拆解方案？(y/n)</span></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Agent Teams 组队 ============ -->
+    <section id="teams" class="section section-light">
+      <div class="container">
+        <p class="kicker center">组队协作 · AGENT TEAMS</p>
+        <h2 class="section-title">一句指令，多位 Hero 并行作战</h2>
+        <p class="section-desc">复杂任务不再单打独斗——孔明出设计、文远写代码、希仁补测试，三位 Hero <strong>同时</strong>在各自 pane 里推进，互相通信，合力交付。<code>install.sh</code> 会自动安装 tmux；按提示合并 <code>settings.json</code> 即可启用分屏模式。</p>
+
+        <div class="teams-visual">
+          <div class="team-lead">
+            <span class="team-label">你说</span>
+            <code class="team-prompt">"组队完成登录模块"</code>
+          </div>
+          <div class="team-arrow">
+            <svg viewBox="0 0 24 40" width="24" height="40" aria-hidden="true">
+              <path d="M12 0 L12 28 M4 20 L12 28 L20 20" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="team-squad">
+            <div class="team-member">
+              <span class="team-seal">孔</span>
+              <span class="team-name">孔明</span>
+              <span class="team-task">设计 + 拆任务</span>
+              <span class="team-model">opus</span>
+            </div>
+            <div class="team-member">
+              <span class="team-seal">文</span>
+              <span class="team-name">文远</span>
+              <span class="team-task">写代码</span>
+              <span class="team-model">sonnet</span>
+            </div>
+            <div class="team-member">
+              <span class="team-seal">希</span>
+              <span class="team-name">希仁</span>
+              <span class="team-task">写测试</span>
+              <span class="team-model">haiku</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmd-hero">
+          <code class="cmd-hero-text"><span class="c-prompt">$</span> tmux new -s work</code>
+<code class="cmd-hero-text"><span class="c-prompt">$</span> claude</code>
+          <span class="cmd-hero-tip">进入 tmux 会话后告诉 Claude: "组队 3 位 Agent"</span>
+        </div>
+
+        <div class="grid grid-3 how-systems">
+          <article class="card">
+            <h3>自动分屏</h3>
+            <p class="card-body">每位 Hero 独占一个 tmux pane，实时查看各自进度。<code>install.sh</code> 自动安装 tmux；按提示合并 <code>settings.json</code> 即可启用。</p>
+          </article>
+          <article class="card">
+            <h3>智能分配模型</h3>
+            <p class="card-body">复杂决策用 opus，写代码用 sonnet，轻量任务用 haiku——按任务难度分配模型，兼顾质量与成本。</p>
+          </article>
+          <article class="card">
+            <h3>互相通信</h3>
+            <p class="card-body">Hero 之间可以发消息、共享进展、协调冲突。孔明出方案后通知文远实现，文远写完通知希仁补测试。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ 安装 ============ -->
     <section id="install" class="section section-dark">
       <div class="container">
         <p class="kicker center">安装 · GET STARTED</p>
-        <h2 class="section-title invert">一条命令，接入英雄殿</h2>
+        <h2 class="section-title invert">一条命令，加入队伍</h2>
         <p class="section-desc invert">克隆后跑一次 <code>install.sh</code>，把共享 skills / agents / hooks <strong>软链</strong>进你的 <code>~/.claude</code>——逐项软链、已有文件自动备份，<strong>绝不污染你原有的配置</strong>。之后 <code>git pull</code> 即全员生效，无需重装。</p>
 
         <div class="cmd-hero">
-          <code class="cmd-hero-text"><span class="c-prompt">$</span> git clone <span class="c-str">https://&lt;your-git-host&gt;/claude-hero.git</span> ~/Documents/ops/claude-hero &amp;&amp; cd $_ &amp;&amp; bash install.sh</code>
+          <code class="cmd-hero-text"><span class="c-prompt">$</span> git clone <span class="c-str">git@gitlab.corp.yaduo.com:full-stack-ai/claude-hero.git</span> &amp;&amp; cd claude-hero &amp;&amp; bash install.sh</code>
           <span class="cmd-hero-tip">复制这一行 · 十分钟接入</span>
         </div>
 
@@ -278,6 +681,30 @@
             <li class="step"><span class="step-n">2</span><div><h4>自动备份</h4><p>目标已存在且非本仓库软链时，先备份 <code>*.bak.&lt;时间戳&gt;</code> 再建链。</p></div></li>
             <li class="step"><span class="step-n">3</span><div><h4>模板手动合并</h4><p><code>CLAUDE.md</code> / <code>settings.json</code> / <code>.mcp.json</code> 含密钥，不自动写入，仅提示按需合并。</p></div></li>
             <li class="step"><span class="step-n">4</span><div><h4>幂等可重跑</h4><p>已是正确软链则跳过；<code>git pull</code> 后全员生效，改任意 <code>SKILL.md</code> 即时见效。</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 卸载 ============ -->
+    <section id="uninstall" class="section">
+      <div class="container">
+        <p class="kicker center">卸载 · UNINSTALL</p>
+        <h2 class="section-title">一条命令，安全退出</h2>
+        <p class="section-desc">跑一次 <code>uninstall.sh</code>，安全移除 <strong>本仓库</strong> 的软链——<strong>只删除指向本仓库的链接</strong>，绝不误删你的个人配置与备份。</p>
+
+        <div class="cmd-hero">
+          <code class="cmd-hero-text"><span class="c-prompt">$</span> cd claude-hero &amp;&amp; bash uninstall.sh</code>
+          <span class="cmd-hero-tip">复制这一行 · 一键卸载</span>
+        </div>
+
+        <div class="install-detail">
+          <p class="detail-label">这条命令做了什么</p>
+          <ol class="step-list step-list-2col">
+            <li class="step"><span class="step-n">1</span><div><h4>扫描软链</h4><p>读取 <code>manifest.yaml</code>，遍历 <code>~/.claude</code> 下所有 link 模式条目。</p></div></li>
+            <li class="step"><span class="step-n">2</span><div><h4>只删本仓库</h4><p>逐条检查 symlink 指向——仅删除指向本仓库内部的，其余一律保留。</p></div></li>
+            <li class="step"><span class="step-n">3</span><div><h4>保留个人配置</h4><p><code>CLAUDE.md</code> / <code>settings.json</code> / <code>.mcp.json</code> 是 template 模式，不会被卸载；<code>*.bak.*</code> 备份文件同样安全。</p></div></li>
+            <li class="step"><span class="step-n">4</span><div><h4>可逆可重连</h4><p>仓库代码原封不动，随时 <code>bash install.sh</code> 即可恢复全部 Hero 能力。</p></div></li>
           </ol>
         </div>
       </div>
@@ -310,17 +737,19 @@
       </div>
     </section>
 
-    <!-- ============ 客栈入口 CTA ============ -->
+    <!-- ============ 监控看板入口 CTA（调整中，暂时下线，调整好再恢复）============ -->
+    <!--
     <section class="tavern-cta">
       <div class="container tavern-cta-inner">
         <div>
-          <p class="kicker">实时看板 · HERO TAVERN</p>
-          <h2 class="tavern-cta-title">推门入栈，一览群英</h2>
-          <p class="tavern-cta-desc">实时监控所有 Agent 的运行状态——东厢英雄与西厢神祇，谁在活跃、谁在歇脚、谁已入眠，一目了然。</p>
+          <p class="kicker">实时看板 · HERO MONITOR</p>
+          <h2 class="tavern-cta-title">一览每位 Hero 的状态</h2>
+          <p class="tavern-cta-desc">实时监控所有 Agent 的运行状态——角色 Hero 与领航 Hero，谁在活跃、谁在空闲、谁已休眠，一目了然。</p>
         </div>
-        <a class="btn btn-light" href="/tavern/">进入客栈 →</a>
+        <a class="btn btn-light" href="/monitor/">进入看板 →</a>
       </div>
     </section>
+    -->
   </main>
 
   <!-- ============ 页脚 ============ -->
@@ -331,12 +760,14 @@
     <div class="footer-inner">
       <p class="footer-brand">领航 <span>HERO</span></p>
       <p class="footer-links">
-        <a href="/tavern/">客栈看板</a>
+        <!-- 监控看板调整中，暂时下线 -->
         <a href="#idea">理念</a>
+        <a href="mechanism.html">机制</a>
         <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude 官网</a>
       </p>
       <p class="footer-copyright">© 2024 领航 Hero · 亚朵集团 · Powered by Claude</p>
     </div>
   </footer>
+  <script src="js/scroll-animation.js"></script>
 </body>
 </html>

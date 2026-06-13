@@ -1,0 +1,16 @@
+=== Task 2 Verification ===
+--- Header check ---
+1
+1
+--- Line count ---
+     126 docs/hero-workflow/lane-routing.md
+--- Lane coverage ---
+prd: 6
+refresh: 3
+bugfix: 8
+iterate: 3
+refactor: 3
+research: 3
+perf: 4
+security: 3
+team: 2

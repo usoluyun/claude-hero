@@ -1,0 +1,134 @@
+TEST_HOME=/tmp/test-install-5168
+claude-hero 安装
+  仓库:   /Users/luyun/Documents/poc/claude-hero
+  目标:   /tmp/test-install-5168
+✓ tmux 已安装：tmux 3.6a
+
+✓ glab 已安装：glab 1.86.0 (1ef884a6)
+
+
+==== 安装摘要 ====
+已链接 (64):
+  + /tmp/test-install-5168/skills/agent-lark-table -> /Users/luyun/Documents/poc/claude-hero/skills/agent-lark-table
+  + /tmp/test-install-5168/skills/hero-ast-grep -> /Users/luyun/Documents/poc/claude-hero/skills/hero-ast-grep
+  + /tmp/test-install-5168/skills/hero-codegraph -> /Users/luyun/Documents/poc/claude-hero/skills/hero-codegraph
+  + /tmp/test-install-5168/skills/hero-conventions -> /Users/luyun/Documents/poc/claude-hero/skills/hero-conventions
+  + /tmp/test-install-5168/skills/hero-dispatch -> /Users/luyun/Documents/poc/claude-hero/skills/hero-dispatch
+  + /tmp/test-install-5168/skills/hero-glab -> /Users/luyun/Documents/poc/claude-hero/skills/hero-glab
+  + /tmp/test-install-5168/skills/hero-gradle -> /Users/luyun/Documents/poc/claude-hero/skills/hero-gradle
+  + /tmp/test-install-5168/skills/hero-issue-dispatch -> /Users/luyun/Documents/poc/claude-hero/skills/hero-issue-dispatch
+  + /tmp/test-install-5168/skills/hero-jdk-multiversion -> /Users/luyun/Documents/poc/claude-hero/skills/hero-jdk-multiversion
+  + /tmp/test-install-5168/skills/hero-jq -> /Users/luyun/Documents/poc/claude-hero/skills/hero-jq
+  + /tmp/test-install-5168/skills/hero-maven -> /Users/luyun/Documents/poc/claude-hero/skills/hero-maven
+  + /tmp/test-install-5168/skills/hero-pg-glimpse -> /Users/luyun/Documents/poc/claude-hero/skills/hero-pg-glimpse
+  + /tmp/test-install-5168/skills/hero-pmd -> /Users/luyun/Documents/poc/claude-hero/skills/hero-pmd
+  + /tmp/test-install-5168/skills/hero-prd-to-java -> /Users/luyun/Documents/poc/claude-hero/skills/hero-prd-to-java
+  + /tmp/test-install-5168/skills/hero-refresh -> /Users/luyun/Documents/poc/claude-hero/skills/hero-refresh
+  + /tmp/test-install-5168/skills/hero-sca -> /Users/luyun/Documents/poc/claude-hero/skills/hero-sca
+  + /tmp/test-install-5168/skills/hero-scc -> /Users/luyun/Documents/poc/claude-hero/skills/hero-scc
+  + /tmp/test-install-5168/skills/hero-semgrep -> /Users/luyun/Documents/poc/claude-hero/skills/hero-semgrep
+  + /tmp/test-install-5168/skills/hero-site-deploy -> /Users/luyun/Documents/poc/claude-hero/skills/hero-site-deploy
+  + /tmp/test-install-5168/skills/hero-slowql -> /Users/luyun/Documents/poc/claude-hero/skills/hero-slowql
+  + /tmp/test-install-5168/skills/hero-spotbugs -> /Users/luyun/Documents/poc/claude-hero/skills/hero-spotbugs
+  + /tmp/test-install-5168/skills/lark-approval -> /Users/luyun/Documents/poc/claude-hero/skills/lark-approval
+  + /tmp/test-install-5168/skills/lark-apps -> /Users/luyun/Documents/poc/claude-hero/skills/lark-apps
+  + /tmp/test-install-5168/skills/lark-attendance -> /Users/luyun/Documents/poc/claude-hero/skills/lark-attendance
+  + /tmp/test-install-5168/skills/lark-base -> /Users/luyun/Documents/poc/claude-hero/skills/lark-base
+  + /tmp/test-install-5168/skills/lark-calendar -> /Users/luyun/Documents/poc/claude-hero/skills/lark-calendar
+  + /tmp/test-install-5168/skills/lark-contact -> /Users/luyun/Documents/poc/claude-hero/skills/lark-contact
+  + /tmp/test-install-5168/skills/lark-doc -> /Users/luyun/Documents/poc/claude-hero/skills/lark-doc
+  + /tmp/test-install-5168/skills/lark-drive -> /Users/luyun/Documents/poc/claude-hero/skills/lark-drive
+  + /tmp/test-install-5168/skills/lark-event -> /Users/luyun/Documents/poc/claude-hero/skills/lark-event
+  + /tmp/test-install-5168/skills/lark-im -> /Users/luyun/Documents/poc/claude-hero/skills/lark-im
+  + /tmp/test-install-5168/skills/lark-mail -> /Users/luyun/Documents/poc/claude-hero/skills/lark-mail
+  + /tmp/test-install-5168/skills/lark-markdown -> /Users/luyun/Documents/poc/claude-hero/skills/lark-markdown
+  + /tmp/test-install-5168/skills/lark-minutes -> /Users/luyun/Documents/poc/claude-hero/skills/lark-minutes
+  + /tmp/test-install-5168/skills/lark-okr -> /Users/luyun/Documents/poc/claude-hero/skills/lark-okr
+  + /tmp/test-install-5168/skills/lark-openapi-explorer -> /Users/luyun/Documents/poc/claude-hero/skills/lark-openapi-explorer
+  + /tmp/test-install-5168/skills/lark-shared -> /Users/luyun/Documents/poc/claude-hero/skills/lark-shared
+  + /tmp/test-install-5168/skills/lark-sheets -> /Users/luyun/Documents/poc/claude-hero/skills/lark-sheets
+  + /tmp/test-install-5168/skills/lark-skill-maker -> /Users/luyun/Documents/poc/claude-hero/skills/lark-skill-maker
+  + /tmp/test-install-5168/skills/lark-slides -> /Users/luyun/Documents/poc/claude-hero/skills/lark-slides
+  + /tmp/test-install-5168/skills/lark-task -> /Users/luyun/Documents/poc/claude-hero/skills/lark-task
+  + /tmp/test-install-5168/skills/lark-vc -> /Users/luyun/Documents/poc/claude-hero/skills/lark-vc
+  + /tmp/test-install-5168/skills/lark-vc-agent -> /Users/luyun/Documents/poc/claude-hero/skills/lark-vc-agent
+  + /tmp/test-install-5168/skills/lark-whiteboard -> /Users/luyun/Documents/poc/claude-hero/skills/lark-whiteboard
+  + /tmp/test-install-5168/skills/lark-wiki -> /Users/luyun/Documents/poc/claude-hero/skills/lark-wiki
+  + /tmp/test-install-5168/skills/lark-workflow-meeting-summary -> /Users/luyun/Documents/poc/claude-hero/skills/lark-workflow-meeting-summary
+  + /tmp/test-install-5168/skills/lark-workflow-standup-report -> /Users/luyun/Documents/poc/claude-hero/skills/lark-workflow-standup-report
+  + /tmp/test-install-5168/agents/AGENTS.md -> /Users/luyun/Documents/poc/claude-hero/agents/AGENTS.md
+  + /tmp/test-install-5168/agents/hero-java-atour-life-api.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-atour-life-api.md
+  + /tmp/test-install-5168/agents/hero-java-backend-developer.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-backend-developer.md
+  + /tmp/test-install-5168/agents/hero-java-code-reviewer.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-code-reviewer.md
+  + /tmp/test-install-5168/agents/hero-java-data-engineer.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-data-engineer.md
+  + /tmp/test-install-5168/agents/hero-java-ecrm.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-ecrm.md
+  + /tmp/test-install-5168/agents/hero-java-hotel-product-center.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-hotel-product-center.md
+  + /tmp/test-install-5168/agents/hero-java-owner-biz.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-owner-biz.md
+  + /tmp/test-install-5168/agents/hero-java-security-auditor.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-security-auditor.md
+  + /tmp/test-install-5168/agents/hero-java-tech-lead.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-tech-lead.md
+  + /tmp/test-install-5168/agents/hero-java-test-engineer.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-test-engineer.md
+  + /tmp/test-install-5168/hooks/README.md -> /Users/luyun/Documents/poc/claude-hero/config/hooks/README.md
+  + /tmp/test-install-5168/hooks/hero-refresh-check.sh -> /Users/luyun/Documents/poc/claude-hero/config/hooks/hero-refresh-check.sh
+  + /tmp/test-install-5168/.omo/state/agent-executions.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/agent-executions.json
+  + /tmp/test-install-5168/.omo/state/refresh-state.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/refresh-state.json
+  + /tmp/test-install-5168/.omo/state/session-history.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/session-history.json
+  + /tmp/test-install-5168/.omo/state/workflow-registry.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/workflow-registry.json
+
+以下为模板，需手动合并（含密钥/高度个人化，未自动安装）:
+  ! CLAUDE.md  <=  config/CLAUDE.md.example
+  ! settings.json  <=  config/settings.json.example
+  ! .mcp.json  <=  mcp/servers
+    参考对应 example，按需合并进你的 /tmp/test-install-5168 下文件。
+
+完成。
+install exit: 0
+--- structure ---
+total 0
+drwxr-xr-x@   6 luyun  wheel   192 Jun 13 11:48 .
+drwxrwxrwt  134 root   wheel  4288 Jun 13 11:48 ..
+drwxr-xr-x@   3 luyun  wheel    96 Jun 13 11:48 .omo
+drwxr-xr-x@  13 luyun  wheel   416 Jun 13 11:48 agents
+drwxr-xr-x@   4 luyun  wheel   128 Jun 13 11:48 hooks
+drwxr-xr-x@  49 luyun  wheel  1568 Jun 13 11:48 skills
+--- agents ---
+AGENTS.md
+hero-java-atour-life-api.md
+hero-java-backend-developer.md
+hero-java-code-reviewer.md
+hero-java-data-engineer.md
+hero-java-ecrm.md
+hero-java-hotel-product-center.md
+hero-java-owner-biz.md
+hero-java-security-auditor.md
+hero-java-tech-lead.md
+--- skills ---
+agent-lark-table
+hero-ast-grep
+hero-codegraph
+hero-conventions
+hero-dispatch
+hero-glab
+hero-gradle
+hero-issue-dispatch
+hero-jdk-multiversion
+hero-jq
+--- hooks ---
+README.md
+hero-refresh-check.sh
+--- .omo state dir ---
+total 0
+drwxr-xr-x@ 3 luyun  wheel   96 Jun 13 11:48 .
+drwxr-xr-x@ 6 luyun  wheel  192 Jun 13 11:48 ..
+drwxr-xr-x@ 6 luyun  wheel  192 Jun 13 11:48 state
+total 0
+drwxr-xr-x@ 6 luyun  wheel  192 Jun 13 11:48 .
+drwxr-xr-x@ 3 luyun  wheel   96 Jun 13 11:48 ..
+lrwxr-xr-x@ 1 luyun  wheel   71 Jun 13 11:48 agent-executions.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/agent-executions.json
+lrwxr-xr-x@ 1 luyun  wheel   68 Jun 13 11:48 refresh-state.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/refresh-state.json
+lrwxr-xr-x@ 1 luyun  wheel   70 Jun 13 11:48 session-history.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/session-history.json
+lrwxr-xr-x@ 1 luyun  wheel   72 Jun 13 11:48 workflow-registry.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/workflow-registry.json
+--- repo .omo/state gitignore check ---
+.omo/run-continuation/
+.omo/state/.cache/
+--- git check-ignore on state files ---
+.gitignore:12:.omo/state/.cache/	.omo/state/.cache/foo

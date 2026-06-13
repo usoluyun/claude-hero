@@ -27,6 +27,7 @@
 | redis-cli | JetCache 后端 Redis 排障 | `brew install redis` | 仅排障，缓存读写走 JetCache |
 | mqadmin | RocketMQ 运维（topic/消费进度/死信） | 随 RocketMQ 发行包 | 配合控制台，详见 best-practices.md |
 | podman | 容器构建/运行，连私有仓库 | `brew install podman` | 私服 `zot.chester.monster` |
+| **glab** | GitLab CLI：MR、流水线、Issue、Release 管理 | `brew install glab` 或自动安装 | 团队协作必备，`install.sh` 自动装，详见 `glab.md` |
 | jq | JSON 处理（hero-refresh 状态读写依赖） | `brew install jq` | 脚本依赖，见 scripts/lib/ |
 
 ## 数据库访问约定

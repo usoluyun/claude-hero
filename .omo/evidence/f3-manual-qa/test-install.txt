@@ -1,0 +1,112 @@
+=> 临时目录: /tmp/test-hero-vsZVpj
+=> 仓库目录: /Users/luyun/Documents/poc/claude-hero
+
+=== 验证 manifest.yaml ===
+[32m[PASS][0m manifest.yaml 存在
+[32m[PASS][0m manifest.yaml entries: 7
+
+=== 验证 manifest source 路径 ===
+[32m[PASS][0m 所有 source 路径有效
+
+=== 执行 install.sh ===
+claude-hero 安装
+  仓库:   /Users/luyun/Documents/poc/claude-hero
+  目标:   /tmp/test-hero-vsZVpj
+✓ tmux 已安装：tmux 3.6a
+
+✓ glab 已安装：glab 1.86.0 (1ef884a6)
+
+
+==== 安装摘要 ====
+已链接 (64):
+  + /tmp/test-hero-vsZVpj/skills/agent-lark-table -> /Users/luyun/Documents/poc/claude-hero/skills/agent-lark-table
+  + /tmp/test-hero-vsZVpj/skills/hero-ast-grep -> /Users/luyun/Documents/poc/claude-hero/skills/hero-ast-grep
+  + /tmp/test-hero-vsZVpj/skills/hero-codegraph -> /Users/luyun/Documents/poc/claude-hero/skills/hero-codegraph
+  + /tmp/test-hero-vsZVpj/skills/hero-conventions -> /Users/luyun/Documents/poc/claude-hero/skills/hero-conventions
+  + /tmp/test-hero-vsZVpj/skills/hero-dispatch -> /Users/luyun/Documents/poc/claude-hero/skills/hero-dispatch
+  + /tmp/test-hero-vsZVpj/skills/hero-glab -> /Users/luyun/Documents/poc/claude-hero/skills/hero-glab
+  + /tmp/test-hero-vsZVpj/skills/hero-gradle -> /Users/luyun/Documents/poc/claude-hero/skills/hero-gradle
+  + /tmp/test-hero-vsZVpj/skills/hero-issue-dispatch -> /Users/luyun/Documents/poc/claude-hero/skills/hero-issue-dispatch
+  + /tmp/test-hero-vsZVpj/skills/hero-jdk-multiversion -> /Users/luyun/Documents/poc/claude-hero/skills/hero-jdk-multiversion
+  + /tmp/test-hero-vsZVpj/skills/hero-jq -> /Users/luyun/Documents/poc/claude-hero/skills/hero-jq
+  + /tmp/test-hero-vsZVpj/skills/hero-maven -> /Users/luyun/Documents/poc/claude-hero/skills/hero-maven
+  + /tmp/test-hero-vsZVpj/skills/hero-pg-glimpse -> /Users/luyun/Documents/poc/claude-hero/skills/hero-pg-glimpse
+  + /tmp/test-hero-vsZVpj/skills/hero-pmd -> /Users/luyun/Documents/poc/claude-hero/skills/hero-pmd
+  + /tmp/test-hero-vsZVpj/skills/hero-prd-to-java -> /Users/luyun/Documents/poc/claude-hero/skills/hero-prd-to-java
+  + /tmp/test-hero-vsZVpj/skills/hero-refresh -> /Users/luyun/Documents/poc/claude-hero/skills/hero-refresh
+  + /tmp/test-hero-vsZVpj/skills/hero-sca -> /Users/luyun/Documents/poc/claude-hero/skills/hero-sca
+  + /tmp/test-hero-vsZVpj/skills/hero-scc -> /Users/luyun/Documents/poc/claude-hero/skills/hero-scc
+  + /tmp/test-hero-vsZVpj/skills/hero-semgrep -> /Users/luyun/Documents/poc/claude-hero/skills/hero-semgrep
+  + /tmp/test-hero-vsZVpj/skills/hero-site-deploy -> /Users/luyun/Documents/poc/claude-hero/skills/hero-site-deploy
+  + /tmp/test-hero-vsZVpj/skills/hero-slowql -> /Users/luyun/Documents/poc/claude-hero/skills/hero-slowql
+  + /tmp/test-hero-vsZVpj/skills/hero-spotbugs -> /Users/luyun/Documents/poc/claude-hero/skills/hero-spotbugs
+  + /tmp/test-hero-vsZVpj/skills/lark-approval -> /Users/luyun/Documents/poc/claude-hero/skills/lark-approval
+  + /tmp/test-hero-vsZVpj/skills/lark-apps -> /Users/luyun/Documents/poc/claude-hero/skills/lark-apps
+  + /tmp/test-hero-vsZVpj/skills/lark-attendance -> /Users/luyun/Documents/poc/claude-hero/skills/lark-attendance
+  + /tmp/test-hero-vsZVpj/skills/lark-base -> /Users/luyun/Documents/poc/claude-hero/skills/lark-base
+  + /tmp/test-hero-vsZVpj/skills/lark-calendar -> /Users/luyun/Documents/poc/claude-hero/skills/lark-calendar
+  + /tmp/test-hero-vsZVpj/skills/lark-contact -> /Users/luyun/Documents/poc/claude-hero/skills/lark-contact
+  + /tmp/test-hero-vsZVpj/skills/lark-doc -> /Users/luyun/Documents/poc/claude-hero/skills/lark-doc
+  + /tmp/test-hero-vsZVpj/skills/lark-drive -> /Users/luyun/Documents/poc/claude-hero/skills/lark-drive
+  + /tmp/test-hero-vsZVpj/skills/lark-event -> /Users/luyun/Documents/poc/claude-hero/skills/lark-event
+  + /tmp/test-hero-vsZVpj/skills/lark-im -> /Users/luyun/Documents/poc/claude-hero/skills/lark-im
+  + /tmp/test-hero-vsZVpj/skills/lark-mail -> /Users/luyun/Documents/poc/claude-hero/skills/lark-mail
+  + /tmp/test-hero-vsZVpj/skills/lark-markdown -> /Users/luyun/Documents/poc/claude-hero/skills/lark-markdown
+  + /tmp/test-hero-vsZVpj/skills/lark-minutes -> /Users/luyun/Documents/poc/claude-hero/skills/lark-minutes
+  + /tmp/test-hero-vsZVpj/skills/lark-okr -> /Users/luyun/Documents/poc/claude-hero/skills/lark-okr
+  + /tmp/test-hero-vsZVpj/skills/lark-openapi-explorer -> /Users/luyun/Documents/poc/claude-hero/skills/lark-openapi-explorer
+  + /tmp/test-hero-vsZVpj/skills/lark-shared -> /Users/luyun/Documents/poc/claude-hero/skills/lark-shared
+  + /tmp/test-hero-vsZVpj/skills/lark-sheets -> /Users/luyun/Documents/poc/claude-hero/skills/lark-sheets
+  + /tmp/test-hero-vsZVpj/skills/lark-skill-maker -> /Users/luyun/Documents/poc/claude-hero/skills/lark-skill-maker
+  + /tmp/test-hero-vsZVpj/skills/lark-slides -> /Users/luyun/Documents/poc/claude-hero/skills/lark-slides
+  + /tmp/test-hero-vsZVpj/skills/lark-task -> /Users/luyun/Documents/poc/claude-hero/skills/lark-task
+  + /tmp/test-hero-vsZVpj/skills/lark-vc -> /Users/luyun/Documents/poc/claude-hero/skills/lark-vc
+  + /tmp/test-hero-vsZVpj/skills/lark-vc-agent -> /Users/luyun/Documents/poc/claude-hero/skills/lark-vc-agent
+  + /tmp/test-hero-vsZVpj/skills/lark-whiteboard -> /Users/luyun/Documents/poc/claude-hero/skills/lark-whiteboard
+  + /tmp/test-hero-vsZVpj/skills/lark-wiki -> /Users/luyun/Documents/poc/claude-hero/skills/lark-wiki
+  + /tmp/test-hero-vsZVpj/skills/lark-workflow-meeting-summary -> /Users/luyun/Documents/poc/claude-hero/skills/lark-workflow-meeting-summary
+  + /tmp/test-hero-vsZVpj/skills/lark-workflow-standup-report -> /Users/luyun/Documents/poc/claude-hero/skills/lark-workflow-standup-report
+  + /tmp/test-hero-vsZVpj/agents/AGENTS.md -> /Users/luyun/Documents/poc/claude-hero/agents/AGENTS.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-atour-life-api.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-atour-life-api.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-backend-developer.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-backend-developer.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-code-reviewer.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-code-reviewer.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-data-engineer.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-data-engineer.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-ecrm.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-ecrm.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-hotel-product-center.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-hotel-product-center.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-owner-biz.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-owner-biz.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-security-auditor.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-security-auditor.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-tech-lead.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-tech-lead.md
+  + /tmp/test-hero-vsZVpj/agents/hero-java-test-engineer.md -> /Users/luyun/Documents/poc/claude-hero/agents/hero-java-test-engineer.md
+  + /tmp/test-hero-vsZVpj/hooks/README.md -> /Users/luyun/Documents/poc/claude-hero/config/hooks/README.md
+  + /tmp/test-hero-vsZVpj/hooks/hero-refresh-check.sh -> /Users/luyun/Documents/poc/claude-hero/config/hooks/hero-refresh-check.sh
+  + /tmp/test-hero-vsZVpj/.omo/state/agent-executions.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/agent-executions.json
+  + /tmp/test-hero-vsZVpj/.omo/state/refresh-state.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/refresh-state.json
+  + /tmp/test-hero-vsZVpj/.omo/state/session-history.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/session-history.json
+  + /tmp/test-hero-vsZVpj/.omo/state/workflow-registry.json -> /Users/luyun/Documents/poc/claude-hero/.omo/state/workflow-registry.json
+
+以下为模板，需手动合并（含密钥/高度个人化，未自动安装）:
+  ! CLAUDE.md  <=  config/CLAUDE.md.example
+  ! settings.json  <=  config/settings.json.example
+  ! .mcp.json  <=  mcp/servers
+    参考对应 example，按需合并进你的 /tmp/test-hero-vsZVpj 下文件。
+
+完成。
+[32m[PASS][0m install.sh 执行成功
+
+=== 验证 agents ===
+[32m[PASS][0m agents/ 目录存在
+[32m[PASS][0m hero-java-*.md: 10
+[32m[PASS][0m agents 软链: 11
+
+=== 验证 skills ===
+[32m[PASS][0m skills/ 目录存在
+[32m[PASS][0m skills 数: 47
+
+=== 验证 hooks ===
+[32m[PASS][0m hooks/ 目录存在
+[32m[PASS][0m hooks 数: 2
+[32m[PASS][0m hero-refresh-check.sh 存在
+
+==============================
+结果: 12 通过, 0 失败
+=> 已清理: /tmp/test-hero-vsZVpj

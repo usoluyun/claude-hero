@@ -1,0 +1,5 @@
+{
+  "name": "claude-hero",
+  "default": true,
+  "static_root": "site/public"
+}

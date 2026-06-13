@@ -1,0 +1,55 @@
+{
+  "controllers": [],
+  "services": [],
+  "mappers": [],
+  "listeners": [],
+  "jobs": [],
+  "configs": [
+    {
+      "path": "src/main/resources/application.yml",
+      "exists": false,
+      "content_snippet": ""
+    },
+    {
+      "path": "src/main/resources/application.properties",
+      "exists": false,
+      "content_snippet": ""
+    },
+    {
+      "path": "src/main/resources/bootstrap.yml",
+      "exists": false,
+      "content_snippet": ""
+    },
+    {
+      "path": "src/main/resources/logback.xml",
+      "exists": false,
+      "content_snippet": ""
+    },
+    {
+      "path": "src/main/resources/logback-spring.xml",
+      "exists": false,
+      "content_snippet": ""
+    },
+    {
+      "path": "pom.xml",
+      "exists": true,
+      "content_snippet": "<project xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n\n\n    <modelVersion>4.0.0</modelVersion>\n    <artifactId>atour-life-api</artifactId>\n    <packaging>war</packaging>\n    <version>1.8.11</version>\n\n\n    <parent>\n        <groupId>com.atour</groupId>\n        <artifactId>atour-supom</artifactId>\n        <version>1.0.3</version>\n    </parent>\n\n    <properties>\n        <atour-root.version>1.2.7.1.RELEASE</atour-root.version>\n        <commons-collections.version>3.2.2</commons-collections.version>\n        <commons-beanutils.version>1.9.3</commons-beanutils.version>\n        <commons-lang.version>2.6</commons-lang.version>\n        <commons-io.version>2.4</commons-io.version>\n        <commons-fileupload.version>1.3.1</commons-fileupload.version>\n        <common-codec.version>1.10</common-codec.version>\n\n        <jackson.version>2.13.2</jackson.version>\n        <brave.version>5.4.2</brave.version>\n\n        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>\n"
+    },
+    {
+      "path": "build.gradle",
+      "exists": false,
+      "content_snippet": ""
+    },
+    {
+      "path": "gradle.properties",
+      "exists": false,
+      "content_snippet": ""
+    },
+    {
+      "path": "settings.gradle",
+      "exists": false,
+      "content_snippet": ""
+    }
+  ],
+  "directory_tree": ".claude/\n.idea/\ndoc/\nsrc/\n  main/\n    java/\n    resources/\n    resources.auto/\n    resources.beta/\n    resources.betaa/\n    resources.betab/\n    resources.betad/\n    resources.betae/\n    resources.betaf/\n    resources.betag/\n    resources.dev/\n    resources.local/\n    resources.pre/\n    resources.prod/\n    resources.test/\n    webapp/\n  test/\n    java/\n    resources/\nswagger/\n【柯莱特】CRS组-Java开发-722/\n【柯莱特】CRS组-Java开发-724/"
+}
