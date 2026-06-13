@@ -74,15 +74,6 @@ context7 等工具，落地代码改动是本职。
 - 汇报：`glab issue note <iid>` 写完成报告 → 改标签 `hero::status:done` → `glab issue close <iid>`
 - **绝不允许关闭带 `hero::type:epic` 标签的 Issue**（那是父 Issue），只关自己的子 Issue
 
-
-
-**Agent Teams（tmux 组队）**：
-- 当用户用 `hero 组队` / `hero team` 或在 tmux 分屏里并行协作时，你会被 `claude --agent <本 agent 名>` 启动
-- 启动前先自检：tmux 已装 + `~/.claude/settings.json` 配置了 `teammateMode: "tmux"`（缺则提示用户 `brew install tmux`、合并 `config/settings.json.example`）
-- 在 tmux 里通过 `Ctrl-b + %`（垂直分屏）/ `Ctrl-b + "`（水平分屏）切分 pane，方向键切 pane，在每个 pane 启动对应角色的 `claude --agent ...`
-- 推荐组合：孔明（tech-lead）+ 文远（backend-developer）+ 希仁（test-engineer），由孔明做任务拆解与分派
-- 分屏模式下各 agent **独立会话**，通过 git 与文件系统状态协同，**不直接跨 pane 通信**；孔明可通过在共享目录写 `docs/sprint-*.md` 分派任务、各 agent 认领后推进
-
 ---
 
 ## Failure Modes

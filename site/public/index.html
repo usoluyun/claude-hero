@@ -8,7 +8,6 @@
   <title>领航 Hero · 在路上的 AI 团队</title>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/docs.css">
   <link rel="stylesheet" href="css/gitlab.css">
 
   <script>
@@ -647,7 +646,7 @@
       <div class="container">
         <p class="kicker center">组队协作 · AGENT TEAMS</p>
         <h2 class="section-title">一句指令，多位 Hero 并行作战</h2>
-        <p class="section-desc">复杂任务不再单打独斗——孔明出设计、文远写代码、希仁补测试，三位 Hero <strong>同时</strong>在各自 pane 里推进，互相通信，合力交付。<code>install.sh</code> 会自动安装 tmux；按提示合并 <code>settings.json</code> 即可启用分屏模式。</p>
+        <p class="section-desc">复杂任务不再单打独斗——孔明出设计、文远写代码、希仁补测试，三位 Hero <strong>同时</strong>在各自 pane 里推进，互相通信，合力交付。<code>install.sh</code> 已自动安装 tmux 并配好分屏模式，零配置即用。</p>
 
         <div class="teams-visual">
           <div class="team-lead">
@@ -682,9 +681,8 @@
         </div>
 
         <div class="cmd-hero">
-          <code class="cmd-hero-text"><span class="c-prompt">$</span> tmux new -s work</code>
-<code class="cmd-hero-text"><span class="c-prompt">$</span> claude</code>
-          <span class="cmd-hero-tip">进入 tmux 会话后告诉 Claude: "组队 3 位 Agent"</span>
+          <code class="cmd-hero-text"><span class="c-prompt">$</span> tmux new -s work &amp;&amp; claude</code>
+          <span class="cmd-hero-tip">进入 tmux 会话后告诉 Claude: "Spawn a team of 3 agents"</span>
         </div>
 
         <div class="grid grid-3 how-systems">

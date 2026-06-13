@@ -116,21 +116,17 @@ cd claude-hero && bash uninstall.sh
 一个新 Java 服务从无到有接入：`bash scripts/hero-init.sh <项目路径> [花名]` → 自动建 codegraph 索引 + 生成领航 Hero + 登记花名册 + 开好 Git 分支，剩下提 MR 即可。
 
 > **花名是可选参数**：留空时系统会从历史人物字号里随机挑一个未被占用的花名自动分配；显式传入时必须唯一（不与现有 Hero 重复，脚本会校验）。
-
 ### 🤝 Agent Teams（团队协作）
 
-多位 Hero 组队协作——孔明出设计、文远写代码、希仁补测试，三位同时在各自 pane 里并行推进，互相通信，合力完成复杂任务。`install.sh` 会自动安装 `tmux`（分屏模式依赖）；安装结束后按提示合并 `~/.claude/settings.json`（参考 `config/settings.json.example`）即可启用分屏协作。
+多位 Hero 组队协作——孔明出设计、文远写代码、希仁补测试，三位同时在各自 pane 里并行推进，互相通信，合力完成复杂任务。`install.sh` 已自动检测并安装 `tmux`（分屏模式依赖），无需手动配置。
 
 ```bash
-# 前置：按 config/settings.json.example 提示在 ~/.claude/settings.json 启用 Agent Teams
-# 步骤 1: 创建 tmux 会话
+# 进入 tmux 会话
 tmux new -s work
-
-# 步骤 2: 在 tmux 会话内启动 claude
 claude
 
 # 对 Claude 说：
-# "组队 3 位 Agent：孔明（opus）做设计，文远（sonnet）写代码，希仁（haiku）写测试"
+# "Spawn a team of 3 agents: 孔明（opus）做设计，文远（sonnet）写代码，希仁（haiku）写测试"
 ```
 
 ---
