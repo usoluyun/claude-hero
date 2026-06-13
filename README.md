@@ -61,6 +61,10 @@ Hero 是一个 AI agent——有名字、有花名、有明确的职责边界。
 # 10 分钟接入
 git clone <repo-url> claude-hero && cd claude-hero && bash install.sh
 
+# 给一个新 Java 服务开荒（花名可选，留空自动分配）
+bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm  # 花名可选，自动分配
+bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm 子文  # 也可显式指定
+
 # 然后直接用意图叫 Hero
 hero 修一下登录报错          # → 自动分诊到 bugfix 线
 hero 这个接口太慢            # → perf 线——先诊断后优化
@@ -109,7 +113,9 @@ cd claude-hero && bash uninstall.sh
 
 ### 🌱 主动开荒（hero-init）
 
-一个新 Java 服务从无到有接入：`bash scripts/hero-init.sh <项目路径> <花名>` → 自动建 codegraph 索引 + 生成领航 Hero + 登记花名册 + 开好 Git 分支，剩下提 MR 即可。
+一个新 Java 服务从无到有接入：`bash scripts/hero-init.sh <项目路径> [花名]` → 自动建 codegraph 索引 + 生成领航 Hero + 登记花名册 + 开好 Git 分支，剩下提 MR 即可。
+
+> **花名是可选参数**：留空时系统会从历史人物字号里随机挑一个未被占用的花名自动分配；显式传入时必须唯一（不与现有 Hero 重复，脚本会校验）。
 
 ### 🤝 Agent Teams（团队协作）
 
@@ -204,7 +210,7 @@ claude
 |-----------|--------|
 | 改进一个共享 Hero | 改 `agents/hero-*.md` → 提 PR |
 | 创造你的专属 Hero | 在 `agents/` 新建 `hero-<语言>-<名字>.md`，取个花名 |
-| 给新 Java 服务开荒一个领航 Hero | `bash scripts/hero-init.sh <项目路径> <花名>`（自动建索引 + 生成 Hero + 开分支） |
+| 给新 Java 服务开荒一个领航 Hero | `bash scripts/hero-init.sh <项目路径> [花名]`（自动建索引 + 生成 Hero + 开分支；花名可选，留空自动分配）|
 | 沉淀一个团队 Skill | 在 `skills/hero-<能力>/` 写 `SKILL.md` |
 | 加上你发现好用的 CLI 工具 | 在 `cli/` 写文档，更新总表 |
 | 有想法 / 想讨论 | 提 Issue / 在群里聊 |
