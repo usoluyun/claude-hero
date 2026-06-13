@@ -37,3 +37,8 @@ entries:
   - source: mcp/servers
     target: .mcp.json
     mode: template
+
+  - source: .omo/state
+    target: .omo/state
+    mode: link
+    install: false

@@ -1,0 +1,15 @@
+  SKIP:  hero-java-atour-life-api (out of scope)
+  COVERED: hero-java-backend-developer
+  COVERED: hero-java-code-reviewer
+  COVERED: hero-java-data-engineer
+  COVERED: hero-java-ecrm
+  COVERED: hero-java-hotel-product-center
+  COVERED: hero-java-owner-biz
+  COVERED: hero-java-security-auditor
+  COVERED: hero-java-tech-lead
+  COVERED: hero-java-test-engineer
+
+AGENTS.md entries: 9
+Agent files:      10
+
+✓ All 10 hero-java agents are covered in AGENTS.md

@@ -1,0 +1,444 @@
+/* ==========================================================================
+   GitLab Issue 三层可视化
+   ========================================================================== */
+
+/* 层级标题 */
+.issue-layer-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin: var(--space-2xl) 0 var(--space-lg);
+}
+
+.issue-layer-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5em;
+  height: 2.5em;
+  font-family: var(--font-brand);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-baiyan);
+  background: var(--color-bronze);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.issue-layer-title {
+  font-family: var(--font-brand);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--color-woye);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   第 1 层：端到端流程图
+   ========================================================================== */
+
+.gitlab-flow-diagram {
+  margin: var(--space-2xl) 0;
+  background: var(--color-baiyan);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-md);
+}
+
+.flow-svg {
+  width: 100%;
+  max-width: 1100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 节点交互 */
+.flow-node {
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flow-node:hover {
+  transform: translateY(-3px);
+}
+
+/* 节点文字 */
+.flow-node text {
+  font-family: var(--font-brand);
+  font-weight: var(--font-semibold);
+}
+
+/* 状态标签 */
+.status-labels g {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.status-labels g:hover {
+  transform: translateY(-2px);
+}
+
+.status-labels text {
+  font-family: var(--font-brand);
+  font-weight: var(--font-semibold);
+}
+
+/* ==========================================================================
+   第 2 层：Agent 协作时序图
+   ========================================================================== */
+
+.gitlab-collaboration {
+  margin: var(--space-2xl) 0;
+}
+
+.collab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+}
+
+/* 协作卡片 */
+.collab-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-woye-soft);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.collab-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-bronze);
+  transition: opacity 0.3s ease;
+}
+
+.collab-card:hover::before {
+  opacity: 0.8;
+}
+
+.collab-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-bronze);
+}
+
+/* 卡片头部 */
+.collab-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-woye-soft);
+}
+
+.collab-avatar {
+  font-size: 2.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.collab-info h3 {
+  font-family: var(--font-brand);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-woye);
+  margin: 0 0 0.25em;
+  letter-spacing: 0.04em;
+}
+
+.collab-role {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-bronze);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* 时间线 */
+.collab-timeline {
+  margin-bottom: var(--space-lg);
+}
+
+.collab-event {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  position: relative;
+  font-size: var(--text-sm);
+}
+
+.collab-event:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 3.2em;
+  top: calc(var(--space-sm) + 1.2em);
+  bottom: 0;
+  width: 1px;
+  background: var(--color-woye-soft);
+}
+
+.event-time {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-bronze);
+  font-weight: var(--font-semibold);
+  min-width: 3em;
+  flex-shrink: 0;
+}
+
+.event-action {
+  color: var(--color-woye);
+  font-weight: var(--font-medium);
+  flex: 1;
+}
+
+/* 工具徽章 */
+.collab-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.tool-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-baiyan);
+  background: var(--color-woye);
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.03em;
+}
+
+/* ==========================================================================
+   第 3 层：命令交互演示
+   ========================================================================== */
+
+.gitlab-commands-demo {
+  margin: var(--space-2xl) 0;
+}
+
+/* Tab 切换 */
+.cmd-tabs {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  border-bottom: 2px solid var(--color-woye-soft);
+  padding-bottom: var(--space-sm);
+}
+
+.cmd-tab {
+  font-family: var(--font-brand);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--color-woye);
+  background: none;
+  border: none;
+  padding: var(--space-sm) var(--space-lg);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  letter-spacing: 0.03em;
+}
+
+.cmd-tab::after {
+  content: '';
+  position: absolute;
+  bottom: calc(-1 * var(--space-sm) - 2px);
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-bronze);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+
+.cmd-tab:hover {
+  color: var(--color-bronze);
+}
+
+.cmd-tab.active {
+  color: var(--color-bronze);
+  font-weight: var(--font-bold);
+}
+
+.cmd-tab.active::after {
+  transform: scaleX(1);
+}
+
+/* Tab 内容 */
+.cmd-content {
+  display: none;
+}
+
+.cmd-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 终端窗口 */
+.cmd-terminal {
+  background: var(--color-woye-deep);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-woye);
+  border-bottom: 1px solid var(--color-woye-soft);
+}
+
+.terminal-title {
+  font-family: var(--font-brand);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-baiyan);
+  letter-spacing: 0.04em;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: var(--space-xs);
+  margin-left: auto;
+}
+
+.dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+/* 终端输出 */
+.terminal-output {
+  padding: var(--space-xl);
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-baiyan);
+  overflow-x: auto;
+}
+
+.terminal-output code {
+  font-family: inherit;
+  color: inherit;
+}
+
+/* 终端语法高亮 */
+.c-prompt {
+  color: var(--color-bronze);
+  font-weight: var(--font-bold);
+  margin-right: 0.5em;
+}
+
+.c-ok {
+  color: #67c23a;
+}
+
+.c-warn {
+  color: #e6a23c;
+}
+
+.c-name {
+  color: var(--color-bronze);
+  font-weight: var(--font-semibold);
+}
+
+.c-status {
+  color: var(--color-bronze-soft);
+  font-style: italic;
+}
+
+/*==========================================================================
+   响应式调整
+   ========================================================================== */
+
+/* 平板横屏以下 */
+@media (max-width: 900px) {
+  .flow-svg {
+    font-size: 0.9em;
+  }
+
+  .collab-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .cmd-tab {
+    font-size: var(--text-sm);
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
+/* 手机竖屏 */
+@media (max-width: 680px) {
+  .gitlab-flow-diagram {
+    padding: var(--space-lg);
+  }
+
+  .collab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cmd-tabs {
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .cmd-tab {
+    flex: 1 1 calc(50% - var(--space-xs));
+    text-align: center;
+    padding: var(--space-sm);
+  }
+
+  .cmd-tab::after {
+    bottom: calc(-1 * var(--space-sm) - 1px);
+  }
+
+  .terminal-output {
+    padding: var(--space-lg);
+    font-size: var(--text-xs);
+  }
+
+  .issue-layer-num {
+    width: 2em;
+    height: 2em;
+    font-size: var(--text-base);
+  }
+
+  .issue-layer-title {
+    font-size: var(--text-lg);
+  }
+}

@@ -1,0 +1,14 @@
+=== State Migration Validation ===
+
+  PASS  .omo/state/ directory exists
+  PASS  .omo/state/refresh-state.json exists
+  PASS  .omo/state/workflow-registry.json exists
+  PASS  .omo/state/agent-executions.json exists
+  PASS  .omo/state/session-history.json exists
+  PASS  .omo/state/.cache/.gitignore exists
+  PASS  .omo/state/.cache/.gitignore contains '*.*'
+  PASS  .gitignore contains .omo/state/.cache/
+  PASS  manifest.yaml contains .omo/state with install: false
+
+=== Summary ===
+  All checks PASSED. Migration is valid.

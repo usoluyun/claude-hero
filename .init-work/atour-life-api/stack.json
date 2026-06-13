@@ -1,0 +1,18 @@
+{
+  "framework": "spring-cloud",
+  "is_spring": true,
+  "version": "",
+  "has_spring_cloud_bom": false,
+  "middleware": [
+    "rocketmq",
+    "xxl-job"
+  ],
+  "middleware_categories": {
+    "mq": [
+      "rocketmq"
+    ],
+    "scheduler": [
+      "xxl-job"
+    ]
+  }
+}

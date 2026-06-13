@@ -9,5 +9,6 @@ build/
 .DS_Store
 node_modules/
 .omo/run-continuation/
+.omo/state/.cache/
 docs/.refresh-work/
 docs/.refresh-drafts/

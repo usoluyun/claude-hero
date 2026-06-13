@@ -4,9 +4,11 @@
 <img src="https://img.shields.io/badge/coverage-团队共创-blueviolet" alt="Team">
 <img src="https://img.shields.io/badge/license-MIT-blue" alt="License">
 
-# 🦸 claude-hero · 英雄殿
+# 🦸 claude-hero
 
-**把繁重的工作交给 Hero，把时间留给创造力和温度。**
+> 在路上的开发者，需要一个替你背行囊的伙伴。
+
+**开发的路上不必独行——让 Hero 替你背起繁琐，把创造力和温度，留给只有你能做的事。**
 
 </div>
 
@@ -16,27 +18,40 @@
 
 **每一个人的。**
 
-这不是架构师画完图丢给团队执行的项目。这是一个**团队共同建造的英雄殿堂**——每个人都可以创造属于自己的 Hero，也可以改进别人的 Hero，把你每天的繁琐工作交给 Hero，把你最熟悉的工作流沉淀成 Skill，然后看着整个团队一起变强。
+这不是架构师画完图丢给团队执行的项目。这是一支**团队一起带出来的队伍**——每个人都可以创造属于自己的 Hero，也可以改进别人的 Hero，把你每天的繁琐工作交给 Hero，把你最熟悉的工作流沉淀成 Skill，然后看着整个团队一起变强。
 
 ### Hero 是什么？
 
 Hero 是一个 AI agent——有名字、有花名、有明确的职责边界。它不只是个 prompt 文件，它配有工具、技能（skill）、CLI 工具集，像团队里一个靠谱的队友。
 
-比如已有 9 个共享 Hero：
+团队里的 Hero 分两种，正好对应「具体怎么干」和「在哪儿干」——它们各司其职、彼此搭手。
 
-| 花名 | 本名 | 负责什么 |
-|------|------|---------|
-| **孔明** | hero-java-tech-lead | 技术负责人、拆任务、画架构 |
-| **文远** | hero-java-backend-developer | 写 Controller/Service，接入中间件 |
-| **子长** | hero-java-data-engineer | MyBatis SQL + DBA |
-| **希仁** | hero-java-test-engineer | TDD/BDD/冒烟/端到端测试 |
-| **玄成** | hero-java-code-reviewer | 代码审查（只读） |
-| **鹏举** | hero-java-security-auditor | 安全设计审计（只读） |
-| **子文** | hero-java-ecrm | 企业连锁审批领航 |
-| **郑和** | hero-java-hotel-product-center | 酒店产品中心领航 |
-| **霞客** | hero-java-owner-biz | 业主服务端领航 |
+#### ① 标准 Hero（角色型）——横向干活，跨服务通用
 
-> **花名取自中国历史英雄的字号。** 花名是团队的共同语言，也是文化的印记。你也可以给你创造的 Hero 取花名，就像公司里的伙伴都有自己的花名一样。
+不绑定具体项目，按职责分**规划 / 执行 / 评审**三梯，哪个项目都能上场。它们负责「**具体怎么改**」：
+
+| 花名 | 本名 | 梯队 | 负责什么 |
+|------|------|------|---------|
+| **孔明** | hero-java-tech-lead | 规划 | 技术负责人、拆任务、画架构 |
+| **文远** | hero-java-backend-developer | 执行 | 写 Controller/Service，接入中间件 |
+| **子长** | hero-java-data-engineer | 执行 | MyBatis SQL + DBA |
+| **希仁** | hero-java-test-engineer | 执行 | TDD/BDD/冒烟/端到端测试 |
+| **玄成** | hero-java-code-reviewer | 评审 | 代码审查（只读） |
+| **鹏举** | hero-java-security-auditor | 评审 | 安全设计审计（只读） |
+
+#### ② 领航 Hero（项目型）——按服务只读带路
+
+每个领航 Hero **绑定一个具体的 Java 服务**，靠 codegraph 索引吃透这个项目的代码结构，**只读、不动手**。它的活是「**带路**」：圈定「这次该在哪儿改、会牵连到谁」，再把「具体怎么改」交给标准 Hero。一个新服务可以用 `hero-init` 开荒出属于它的领航 Hero，代码漂移了用 `hero-refresh` 保鲜它的认知。
+
+| 花名 | 本名 | 带路的服务 |
+|------|------|-----------|
+| **子文** | hero-java-ecrm | 企业/连锁/促销 申请审批工作流（特殊栈） |
+| **郑和** | hero-java-hotel-product-center | 酒店产品中心（房价码 / 定价 / 渠道映射） |
+| **霞客** | hero-java-owner-biz | 雅途业主服务端（大单体多业务域） |
+
+> 一句话记住分工：**领航 Hero 圈定「在哪改、影响谁」，标准 Hero 负责「具体怎么改」。** 服务越多，领航 Hero 越多——目标是让每个 Java 服务都有一位熟门熟路的带路人。
+
+> **花名取自中国历史英雄的字号。** 它不是排行榜上的名次，而是身边一个同行伙伴的名字——叫得出名字，才有温度。花名是团队的共同语言，也是文化的印记。你也可以给你创造的 Hero 取花名，就像公司里的伙伴都有自己的花名一样。
 
 ---
 
@@ -53,9 +68,19 @@ hero 开发工作流 https://...   # → PRD 驱动全流程开发
 hero 刷新                    # → 让所有 Hero 的知识保鲜
 ```
 
+### 卸载
+
+```bash
+cd claude-hero && bash uninstall.sh
+```
+
+只删除**指向本仓库**的软链，绝不动 `*.bak.*` 备份、个人 `CLAUDE.md` / `settings.json` / `.mcp.json`。
+卸载后可随时 `bash install.sh` 重新接入。
+
 接入后你可以：
 
 - **用现有的 Hero**——文远帮你写代码，鹏举帮你查安全，希仁帮你写测试
+- **用 Agent Teams 组队**——孔明出设计 + 文远写代码 + 希仁补测试，三位并行推进，自动分屏协作（tmux 已自动安装）
 - **改进现有的 Hero**——文远的 prompt 可以更好？提 PR，大家一起变强
 - **创造你自己的 Hero**——你最懂你日常做什么。造一个，命个花名，解放自己
 - **沉淀团队的 Skill**——团队特有的工作流、规范，写成 Skill 共享出来
@@ -63,6 +88,8 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 ---
 
 ## 核心子系统
+
+> 想看运行机制全景（五层架构 / Wave 工作流 / Skill 调度 / 工作流执行可视化），见项目主页机制页 [`site/public/mechanism.html`](site/public/mechanism.html)。
 
 ### 🎯 意图分诊（hero-dispatch）
 
@@ -72,6 +99,10 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 
 给一个飞书 PRD 链接 → 自动读取 → 孔明出设计文档 + Sprint 计划 → 多 Hero 并行开发 → 玄成和鹏举把关 → 合并。全程确认门控 + worktree 隔离。
 
+### 🧭 代码图与索引（codegraph）
+
+领航 Hero 的**知识底座**。为每个服务构建代码结构图（模块关系、依赖流向、核心接口）并建立可增量更新的索引——开荒（hero-init）时首次构建，保鲜（hero-refresh）时跟随代码漂移更新。领航 Hero 正是靠它才能只读带路、圈定「在哪改、影响谁」。
+
 ### 🔄 资产保鲜（hero-refresh）
 
 项目代码在变，Hero 的知识不能过时。定期扫描代码变化 → 刷新领航 Hero 的认知 → 有人工 gate 确认才生效。
@@ -80,9 +111,63 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 
 一个新 Java 服务从无到有接入：`bash scripts/hero-init.sh <项目路径> <花名>` → 自动建 codegraph 索引 + 生成领航 Hero + 登记花名册 + 开好 Git 分支，剩下提 MR 即可。
 
-### 🏯 英雄殿看板（hero-tavern）
+### 🤝 Agent Teams（团队协作）
 
-仙剑客栈风格的像素监控看板，实时展示 hero（Claude Code）和 omo（OpenCode）的 agent 状态：活跃 / 空闲 / 休眠 / 异常，消息流 + 阻塞检测。详见 [`hero-tavern/README.md`](hero-tavern/README.md)。
+多位 Hero 组队协作——孔明出设计、文远写代码、希仁补测试，三位同时在各自 pane 里并行推进，互相通信，合力完成复杂任务。`install.sh` 会自动安装 `tmux`（分屏模式依赖）；安装结束后按提示合并 `~/.claude/settings.json`（参考 `config/settings.json.example`）即可启用分屏协作。
+
+```bash
+# 前置：按 config/settings.json.example 提示在 ~/.claude/settings.json 启用 Agent Teams
+# 步骤 1: 创建 tmux 会话
+tmux new -s work
+
+# 步骤 2: 在 tmux 会话内启动 claude
+claude
+
+# 对 Claude 说：
+# "组队 3 位 Agent：孔明（opus）做设计，文远（sonnet）写代码，希仁（haiku）写测试"
+```
+
+---
+
+### 🎫 GitLab Issue 集成
+
+让 AI 英雄直接通过 GitLab Issues 认领任务、汇报进度：
+
+| 操作 | 命令 | 作用 |
+|------|------|------|
+| 拉取待办 | `issue pull` | 列出所有 `hero::status:pending` Issue |
+| 认领任务 | `issue claim #123` | 改标签为 in_progress，开始工作 |
+| 完成汇报 | `issue done #123 "完成说明"` | 评论 + 关 Issue + 关联 MR |
+| 拆解需求 | `issue decompose #1` | tech-lead 把主 Issue 拆为子任务 |
+| 查看分配 | `issue list tech-lead` | 看某 agent 的待办 Issue |
+
+#### 工作流闭环
+
+```
+1. 人在 GitLab 建主 Issue（标签: hero::type:epic）
+   ↓
+2. tech-lead (孔明) 自动拆解子 Issue（分配给各角色 agent）
+   ↓
+3. 各 agent 认领、执行、建 MR
+   ↓
+4. agent 评论 + 关闭子 Issue
+   ↓
+5. 人验证后手动关闭主 Issue
+```
+
+#### 安全限制
+
+- 主 Issue（`hero::type:epic`）**只能人手动关闭**，agent 不得触碰
+- 所有 Issue 标签必须用 `hero::` 前缀
+- tech-lead 拆解子 Issue 后需 STOP 确认
+- 代码审查 / 安全审计角色只读 Issue 状态，不改标签
+
+#### 相关资源
+
+- Issue 模板：`.gitlab/issue_templates/`
+- Dispatch skill：`skills/hero-issue-dispatch/`
+- glab skill：`skills/hero-glab/`
+- Poller 脚本：`scripts/hero-issue-poller.sh`
 
 ---
 
@@ -97,10 +182,17 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 | `mcp/` | MCP server 配置模板 | 配自己的 MCP |
 | `scripts/` | `hero-refresh.sh`（保鲜）/ `hero-init.sh`（开荒）等入口 | 跑保鲜 / 开荒 |
 | `templates/` | 领航 Agent 模板（`navigator-agent.md.tmpl`） | hero-init 生成 Hero 用 |
-| `hero-tavern/` | 英雄殿监控看板（Python + Web） | 看 agent 实时状态 |
 | `site/` | 宣传页（Caddy 静态站） | 对外展示 |
 | `docs/` | 文档手册 | 看 onboarding / 维护手册 |
 | `tests/` | dispatch / refresh / 分层 / 可见性测试 | 改核心子系统前后跑 |
+
+---
+
+## 文档索引（docs/）
+
+| 文档 | 内容 | 何时看 |
+|------|------|--------|
+| [`hero-workflow/`](./docs/hero-workflow/) | hero 工作流机制指南（7 篇解读：触发词 / lane 路由 / playbook / 露出规范 / PRD 流水线 / refresh 保鲜 / codegraph） | 想深入理解 hero 机制 |
 
 ---
 
@@ -129,9 +221,9 @@ hero 刷新                    # → 让所有 Hero 的知识保鲜
 - **有温度的互动**——跟业务方聊需求、帮同事过代码、带新人成长
 - **真正的价值**——解决业务问题、推动技术演进、做有影响力的事
 
-而这一切的起点，就是**给自己造一个 Hero**。
+我们想要的，是一种自然、静谧、温暖、朴实的协作——工具退到背景里安静地替你分担，人留在前台做有温度的事。而这一切的起点，就是**给自己造一个 Hero**。
 
-> 像公司里的伙伴都有自己的花名一样，给你的 Hero 取个名字。那些最烦、最重复、最消耗你的事，交给他。你把时间省下来，做只有你能做的事。
+> 像公司里的伙伴都有自己的花名一样，给你的 Hero 取个名字。那些最烦、最重复、最消耗你的事，交给他背着；你把时间省下来，把温度留给只有你能做的事。
 
 ---
 

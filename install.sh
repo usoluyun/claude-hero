@@ -34,6 +34,95 @@ templates=()   # 待手动合并
 
 log()  { printf '%s\n' "$*"; }
 info() { printf '%s%s%s\n' "$C_INFO" "$*" "$C_RST"; }
+ok()   { printf '%s%s%s\n' "$C_OK"   "$*" "$C_RST"; }
+warn() { printf '%s%s%s\n' "$C_WARN" "$*" "$C_RST"; }
+
+check_tmux() {
+  if command -v tmux &> /dev/null; then
+    local ver; ver="$(tmux -V 2>&1)"
+    ok "✓ tmux 已安装：$ver"
+    return
+  fi
+
+  warn "tmux 未安装（Agent Teams 分屏模式依赖 tmux）"
+
+  if [ "$(uname -s)" = "Darwin" ]; then
+    if command -v brew &> /dev/null; then
+      log "  正在用 Homebrew 安装 tmux ..."
+      if brew install tmux; then
+        ok "✓ tmux 安装成功"
+      else
+        warn "✗ brew install tmux 失败，请手动安装"
+      fi
+    else
+      log "  未找到 Homebrew，请先安装 https://brew.sh 再执行："
+      log "    brew install tmux"
+    fi
+  elif command -v apt-get &> /dev/null; then
+    log "  检测到 apt，尝试 sudo apt-get install tmux ..."
+    if sudo apt-get install -y tmux; then
+      ok "✓ tmux 安装成功"
+    else
+      warn "✗ 安装失败，请手动：apt-get install tmux"
+    fi
+  elif command -v yum &> /dev/null; then
+    log "  检测到 yum，尝试 sudo yum install tmux ..."
+    if sudo yum install -y tmux; then
+      ok "✓ tmux 安装成功"
+    else
+      warn "✗ 安装失败，请手动：yum install tmux"
+    fi
+  else
+    log "  无法自动安装，请手动安装 tmux："
+    log "    https://github.com/tmux/tmux/wiki/Installing"
+  fi
+}
+
+check_glab() {
+  if command -v glab &> /dev/null; then
+    local ver; ver="$(glab --version 2>&1)"
+    ok "✓ glab 已安装：$ver"
+    return
+  fi
+
+  warn "glab 未安装（GitLab CLI：终端管理 MR / CI / issue）"
+
+  if [ "$(uname -s)" = "Darwin" ]; then
+    if command -v brew &> /dev/null; then
+      log "  正在用 Homebrew 安装 glab ..."
+      if brew install glab; then
+        ok "✓ glab 安装成功"
+      else
+        warn "✗ brew install glab 失败，请手动安装"
+      fi
+    else
+      log "  未找到 Homebrew，请先安装 https://brew.sh 再执行："
+      log "    brew install glab"
+    fi
+  elif command -v apt-get &> /dev/null; then
+    log "  检测到 apt，尝试通过 GitLab 官方 deb 源安装 glab ..."
+    local install_ok=true
+    curl -fsSL "https://gitlab.com/gitlab-org/cli/-/raw/main/scripts/setup-apt.sh" | sudo bash || install_ok=false
+    sudo apt-get update -qq && sudo apt-get install -y glab || install_ok=false
+    if $install_ok; then
+      ok "✓ glab 安装成功"
+    else
+      log "  官方源安装失败，请手动："
+      log "    https://docs.gitlab.com/cli/install/"
+    fi
+  elif command -v yum &> /dev/null; then
+    log "  检测到 yum，尝试用 rpm 源安装 glab ..."
+    if curl -fsSL "https://gitlab.com/gitlab-org/cli/-/raw/main/scripts/setup-yum.sh" | sudo bash && sudo yum install -y glab; then
+      ok "✓ glab 安装成功"
+    else
+      log "  安装失败，请手动下载："
+      log "    https://gitlab.com/gitlab-org/cli/-/releases"
+    fi
+  else
+    log "  无法自动安装，请手动安装 glab："
+    log "    https://docs.gitlab.com/cli/install/"
+  fi
+}
 
 # 解析 manifest.yaml 的 entries，输出 "source<TAB>target<TAB>mode"
 parse_manifest() {
@@ -110,6 +199,12 @@ main() {
   log  "  仓库:   $REPO_DIR"
   log  "  目标:   $CLAUDE_DIR"
   mkdir -p "$CLAUDE_DIR"
+
+  # Agent Teams 依赖 tmux（分屏模式），先检查并尝试安装
+  check_tmux
+  echo
+  check_glab
+  echo
 
   while IFS=$'\t' read -r source target mode; do
     [ -n "$source" ] || continue

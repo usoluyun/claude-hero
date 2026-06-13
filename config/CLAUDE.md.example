@@ -45,6 +45,15 @@ at-our.com）时，把它们加入 NO_PROXY。
 - **hero 入口**：开发类意图（修 bug / 小迭代 / 重构 / 调研 / 性能 / 安全 / PRD）可直接说
   `hero <意图>`，由 hero-dispatch 分诊到对应工作流；也可继续用各 skill 的原触发词直达。
 
+## Agent Teams（tmux 组队）
+
+让多位 Hero（孔明 + 文远 + 希仁等）在 tmux 分屏里并行协作，共用同一仓库上下文。
+- 启用条件：在 `~/.claude/settings.json` 配置 `teammateMode: "tmux"` 与
+  `env.CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS: "1"`，详见 `config/settings.json.example`
+- 分诊命令：`hero 组队 [孔明+文远+希仁]` 或 `hero team`
+- 启动步骤：先 `tmux new -s work` 建会话，再在目标 pane 执行 `claude --agent <agent 名>`
+- 推荐组合：孔明（tech-lead, 规划）+ 文远（backend-dev, 实现）+ 希仁（test-engineer, 测试）
+
 ## 个人段落（按需自行补充）
 
 <!-- 例如：你的花名、真名、邮箱、个人偏好等。不要把私密信息提交回本仓库。 -->
