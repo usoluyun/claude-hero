@@ -65,7 +65,7 @@
 - scripts/validate-* 验证脚本（4 个）
 
 ### Definition of Done
-- [ ] 所有 9 个 agent 包含 5 个必需章节
+- [x] 所有 9 个 agent 包含 5 个必需章节
 - [ ] AGENTS.md 覆盖所有 9 个 agent
 - [ ] .omo/state/ 包含完整 schema 文档
 - [ ] manifest.yaml 正确引用 .omo/state/
@@ -204,13 +204,15 @@ Max Concurrent: 6 (Wave 2)
 > **FORMAT**: Task labels use bare numbers: `1.`, `2.`, `3.`.
 > Final Verification Wave labels use `F1.`, `F2.`, etc.
 
-- [ ] 1. 定义 5 章节模板规范（Agent Prompt Template Spec）
+- [x] 1. 定义 5 章节模板规范（Agent Prompt Template Spec）
 
   **What to do**:
-  - 在 `.omo/plans/` 或 `docs/` 下新建 `agent-prompt-template-spec.md`，明确定义每个 agent prompt 必须包含的 5 个章节
+  - 在 `docs/` 下新建 `agent-prompt-template-spec.md`，明确定义每个 agent prompt 必须包含的 5 个章节
   - 章节：`## Role` / `## Success Criteria` / `## Constraints` / `## Failure Modes` / `## Final Checklist`
   - 为每个章节写 2-3 行示例说明应包含什么内容
   - 明确角色型 agent（可执行）与领航型 agent（只读）的 Constraints 章节差异
+
+  **Status**: ✅ COMPLETE - `docs/agent-prompt-template-spec.md` exists with all 5 chapters defined
 
   **Must NOT do**:
   - 不引入 XML 标签或任何 Claude Code 不解析的结构
@@ -260,13 +262,15 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 2. 定义 AGENTS.md YAML Schema（Agent Metadata Schema）
+- [x] 2. 定义 AGENTS.md YAML Schema（Agent Metadata Schema）
 
   **What to do**:
   - 在 `docs/` 下新建 `agents-md-schema.md`，定义 `agents/AGENTS.md` 的结构
-  - 格式：每个 agent 用 YAML frontmatter 字段描述，字段包括：name、display_name（花名）、model、role_type（planner/executor/reviewer/navigator）、readonly（bool）、skills、triggers（关键词列表）、tools_count（数字，仅文档用）
-  - 明确 AGENTS.md 与 docs/hero-agent-roster.md 的关系：AGENTS.md 是程序可读（hero-dispatch 解析），roster.md 是人看的花名表
-  - 定义权威性：agent name 字段必须与 frontmatter `name` 字段一致，roster.md 必须与 AGENTS.md 对齐
+  - 格式：每个 agent 用 YAML frontmatter 字段描述，字段包括：name、display_name（花名）、model、role_type、readonly、skills、triggers、tools_count
+  - 明确 AGENTS.md 与 docs/hero-agent-roster.md 的关系
+  - 定义权威性：agent name 字段必须与 frontmatter `name` 字段一致
+
+  **Status**: ✅ COMPLETE - `docs/agents-md-schema.md` exists with full YAML schema definition
 
   **Must NOT do**:
   - 不引入 JSON schema 文件（保持 markdown-first）
@@ -314,17 +318,15 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 3. 定义 .omo/state/ 目录结构 + JSON Schema（State Directory Schema）
+- [x] 3. 定义 .omo/state/ 目录结构 + JSON Schema（State Directory Schema）
 
   **What to do**:
   - 在 `docs/` 下新建 `omo-state-schema.md`，定义 `.omo/state/` 的目录结构和 JSON schema
-  - 目录布局：
-    - `.omo/state/refresh.json` — 从 `docs/.refresh-state.json` 迁移
-    - `.omo/state/workflow-registry.json` — 从 `docs/.workflow-registry.json` 迁移
-    - `.omo/state/agent-executions.json` — agent 执行历史记录（new）
-    - `.omo/state/.cache/` — 个人本地缓存（gitignore）
-  - 定义 JSON schema：每个文件的字段、类型、示例
-  - 明确迁移策略：迁移脚本在 task 15 实现，本任务只定义 schema
+  - 目录布局：refresh-state.json / workflow-registry.json / agent-executions.json / .cache/
+  - 定义每个文件的字段、类型、示例
+  - 明确迁移策略和 Git 追踪策略
+
+  **Status**: ✅ COMPLETE - `docs/omo-state-schema.md` exists with full directory structure and JSON schemas
 
   **Must NOT do**:
   - 不实际迁移文件（task 15 负责）
@@ -373,7 +375,7 @@ Max Concurrent: 6 (Wave 2)
   - Files: `docs/omo-state-schema.md`
   - Pre-commit: `test -f docs/omo-state-schema.md`
 
-- [ ] 4. 重写 孔明 (hero-java-tech-lead) 到 5 章节模板
+- [x] 4. 重写 孔明 (hero-java-tech-lead) 到 5 章节模板
 
   **What to do**:
   - 打开 `agents/hero-java-tech-lead.md`，保留 frontmatter（name/description/model/tools/skills 字段全部不变）
@@ -430,7 +432,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 5. 重写 文远 (hero-java-backend-developer) 到 5 章节模板
+- [x] 5. 重写 文远 (hero-java-backend-developer) 到 5 章节模板
 
   **What to do**: 同 Task 4，操作 `agents/hero-java-backend-developer.md`
 
@@ -469,7 +471,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 6. 重写 子长 (hero-java-data-engineer) 到 5 章节模板
+- [x] 6. 重写 子长 (hero-java-data-engineer) 到 5 章节模板
 
   **What to do**: 同 Task 4，操作 `agents/hero-java-data-engineer.md`
 
@@ -508,7 +510,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 7. 重写 希仁 (hero-java-test-engineer) 到 5 章节模板
+- [x] 7. 重写 希仁 (hero-java-test-engineer) 到 5 章节模板
 
   **What to do**: 同 Task 4，操作 `agents/hero-java-test-engineer.md`
 
@@ -547,7 +549,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 8. 重写 玄成 (hero-java-code-reviewer) 到 5 章节模板
+- [x] 8. 重写 玄成 (hero-java-code-reviewer) 到 5 章节模板
 
   **What to do**:
   - 操作 `agents/hero-java-code-reviewer.md`
@@ -599,7 +601,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 9. 重写 鹏举 (hero-java-security-auditor) 到 5 章节模板
+- [x] 9. 重写 鹏举 (hero-java-security-auditor) 到 5 章节模板
 
   **What to do**:
   - 操作 `agents/hero-java-security-auditor.md`
@@ -664,7 +666,7 @@ Max Concurrent: 6 (Wave 2)
 
 <!-- WAVE 3 TASKS INSERTED BELOW -->
 
-- [ ] 10. Rewrite 子文 (hero-java-ecrm) to 5-Chapter [unspecified-high]
+- [x] 10. Rewrite 子文 (hero-java-ecrm) to 5-Chapter [unspecified-high]
 
   **What to do**:
   - Open `agents/hero-java-ecrm.md` and rewrite the prompt body using the 5-chapter template structure (Role / Success Criteria / Constraints / Failure Modes / Final Checklist)
@@ -729,7 +731,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 11. Rewrite 郑和 (hero-java-hotel-product-center) to 5-Chapter [unspecified-high]
+- [x] 11. Rewrite 郑和 (hero-java-hotel-product-center) to 5-Chapter [unspecified-high]
 
   **What to do**:
   - Open `agents/hero-java-hotel-product-center.md` and rewrite the prompt body using the 5-chapter template structure (Role / Success Criteria / Constraints / Failure Modes / Final Checklist)
@@ -794,7 +796,7 @@ Max Concurrent: 6 (Wave 2)
 
 ---
 
-- [ ] 12. Rewrite 霞客 (hero-java-owner-biz) to 5-Chapter [unspecified-high]
+- [x] 12. Rewrite 霞客 (hero-java-owner-biz) to 5-Chapter [unspecified-high]
 
   **What to do**:
   - Open `agents/hero-java-owner-biz.md` and rewrite the prompt body using the 5-chapter template structure (Role / Success Criteria / Constraints / Failure Modes / Final Checklist)
@@ -923,6 +925,35 @@ Max Concurrent: 6 (Wave 2)
   - Each entry includes: name, file path, role category, read-only status, description
   - File is valid YAML frontmatter format
 
+  **QA Scenarios (MANDATORY)**:
+
+  ```
+  Scenario: Validate AGENTS.md exists
+    Tool: Bash
+    Steps:
+      1. ls -la agents/AGENTS.md && echo "EXISTS" || echo "MISSING"
+    Expected Result: EXISTS
+    Failure Indicator: MISSING
+    Evidence: .omo/evidence/task-14-agents-md-exists.txt
+
+  Scenario: Validate AGENTS.md has 9 agent entries
+    Tool: Bash (grep)
+    Steps:
+      1. grep -E "^## .+" agents/AGENTS.md | wc -l
+      2. grep -E "^## hero-java-" agents/AGENTS.md | wc -l
+    Expected Result: >= 9 (at least 9 agent sections)
+    Failure Indicator: < 9
+    Evidence: .omo/evidence/task-14-agents-md-entries.txt
+
+  Scenario: Validate AGENTS.md has required fields
+    Tool: Bash (yq or grep)
+    Steps:
+      1. grep -E "name:|file_path:|role_category:|read_only:|description:" agents/AGENTS.md | head -20
+    Expected Result: Sample of required fields visible
+    Failure Indicator: 0 matches (no required fields found)
+    Evidence: .omo/evidence/task-14-agents-md-fields.txt
+  ```
+
   **Agent profile**: `quick`
 
   **Dependencies**: Task 2 (schema definition must be complete)
@@ -942,6 +973,11 @@ Max Concurrent: 6 (Wave 2)
   - Update root `.gitignore` to add `.omo/state/.cache/` (if not already present)
   - Delete the original files from `docs/` (`.refresh-state.json` and `.workflow-registry.json`) after successful migration
 
+  **Must NOT do**:
+  - Do not modify the content of migrated JSON files during migration
+  - Do not delete any files other than the original `docs/.refresh-state.json` and `docs/.workflow-registry.json`
+  - Do not alter the `.gitignore` of other directories
+
   **Why it matters**: This consolidates all agent state files into a single `.omo/state/` directory, making it easier to manage, track, and version control agent state. The migration ensures backward compatibility while establishing the new structure.
 
   **Acceptance criteria**:
@@ -952,9 +988,53 @@ Max Concurrent: 6 (Wave 2)
   - Root `.gitignore` contains `.omo/state/.cache/`
   - Original files `docs/.refresh-state.json` and `docs/.workflow-registry.json` are deleted
 
+  **QA Scenarios (MANDATORY)**:
+
+  ```
+  Scenario: Validate state directory structure exists
+    Tool: Bash
+    Steps:
+      1. test -d .omo/state && echo "state dir: OK" || echo "state dir: FAIL"
+      2. test -d .omo/state/.cache && echo "cache dir: OK" || echo "cache dir: FAIL"
+      3. test -f .omo/state/.cache/.gitignore && echo "cache gitignore: OK" || echo "cache gitignore: FAIL"
+    Expected Result: All three lines output OK
+    Failure Indicators: Any line outputs FAIL
+    Evidence: .omo/evidence/task-15-state-structure.txt
+
+  Scenario: Validate migrated JSON files exist
+    Tool: Bash
+    Steps:
+      1. test -f .omo/state/refresh-state.json && jq empty .omo/state/refresh-state.json && echo "refresh: OK" || echo "refresh: FAIL"
+      2. test -f .omo/state/workflow-registry.json && jq empty .omo/state/workflow-registry.json && echo "workflow: OK" || echo "workflow: FAIL"
+      3. test -f .omo/state/agent-executions.json && jq empty .omo/state/agent-executions.json && echo "executions: OK" || echo "executions: FAIL"
+      4. test -f .omo/state/session-history.json && jq empty .omo/state/session-history.json && echo "history: OK" || echo "history: FAIL"
+    Expected Result: All four lines output OK
+    Failure Indicators: Any line outputs FAIL
+    Evidence: .omo/evidence/task-15-migrated-json.txt
+
+  Scenario: Validate original files deleted
+    Tool: Bash
+    Steps:
+      1. test ! -f docs/.refresh-state.json && echo "old refresh deleted: OK" || echo "old refresh still exists: FAIL"
+      2. test ! -f docs/.workflow-registry.json && echo "old workflow deleted: OK" || echo "old workflow still exists: FAIL"
+    Expected Result: Both lines output OK
+    Failure Indicators: Either line outputs FAIL
+    Evidence: .omo/evidence/task-15-old-files-deleted.txt
+
+  Scenario: Validate root gitignore updated
+    Tool: Bash
+    Steps:
+      1. grep -q ".omo/state/.cache" .gitignore && echo "gitignore entry: OK" || echo "gitignore entry: FAIL"
+    Expected Result: Line outputs OK
+    Failure Indicators: Line outputs FAIL
+    Evidence: .omo/evidence/task-15-gitignore-updated.txt
+  ```
+
   **Agent profile**: `quick`
 
-  **Dependencies**: None (Wave 4, can run in parallel with 13, 14, 16)
+  **Blocked By**: None (Wave 4, can run in parallel with 13, 14, 16)
+  
+  **Commit**: YES — commit message: `feat(state): add .omo/state/ and migrate JSON from docs/`
 
   **Output files**: `.omo/state/` directory, `.omo/state/refresh-state.json`, `.omo/state/workflow-registry.json`, `.omo/state/agent-executions.json`, `.omo/state/session-history.json`, `.omo/state/.cache/`, root `.gitignore`
 
@@ -973,6 +1053,11 @@ Max Concurrent: 6 (Wave 2)
   - Ensure the entry follows the same format as other `link` entries in the manifest
   - Update `install.sh` to create `.omo/state/` during installation (if not already handled by the link installer logic)
 
+  **Must NOT do**:
+  - Do not modify existing manifest entries
+  - Do not remove any `install: true` entries or change their values
+  - Do not break YAML syntax
+
   **Why it matters**: This ensures that `.omo/state/` is properly installed when users run `install.sh`, so agent state persistence works immediately after installation.
 
   **Acceptance criteria**:
@@ -981,9 +1066,41 @@ Max Concurrent: 6 (Wave 2)
   - `install.sh` creates `.omo/state/` during installation
   - Running `install.sh` in a clean environment successfully installs `.omo/state/`
 
+  **QA Scenarios (MANDATORY)**:
+
+  ```
+  Scenario: Validate manifest entry exists and is correct
+    Tool: Bash (yq or grep)
+    Steps:
+      1. yq '.link[] | select(.path == ".omo/state/")' manifest.yaml
+      2. Expected output should contain: name: omo-state, path: .omo/state/, description: Agent state persistence directory, install: false
+    Expected Result: Non-empty output from yq with correct name/path/install fields
+    Failure Indicators: Empty output or missing install: false field
+    Evidence: .omo/evidence/task-16-manifest-entry.txt
+
+  Scenario: Validate YAML syntax
+    Tool: Bash (yq)
+    Steps:
+      1. yq '.' manifest.yaml >/dev/null 2>&1 && echo "YAML valid: OK" || echo "YAML invalid: FAIL"
+    Expected Result: Line outputs OK
+    Failure Indicators: Line outputs FAIL
+    Evidence: .omo/evidence/task-16-yaml-syntax.txt
+
+  Scenario: Validate install script runs correctly
+    Tool: Bash
+    Steps:
+      1. INSTALL_DIR=/tmp/test-hero bash install.sh 2>&1 | tail -20
+      2. test -d /tmp/test-hero/.omo/state && echo "state dir installed: OK" || echo "state dir installed: FAIL"
+    Expected Result: Both checks pass
+    Failure Indicators: State directory not created
+    Evidence: .omo/evidence/task-16-install-script.txt
+  ```
+
   **Agent profile**: `quick`
 
-  **Dependencies**: Task 15 (.omo/state/ directory must exist before adding to manifest)
+  **Blocked By**: Task 15 (.omo/state/ directory must exist before adding to manifest)
+  
+  **Commit**: YES — commit message: `feat(manifest): add .omo/state/ as install: false link entry`
 
   **Output files**: `manifest.yaml`, potentially `install.sh`
 
@@ -1004,18 +1121,66 @@ Max Concurrent: 6 (Wave 2)
   - Make the script executable (`chmod +x`)
   - Handle edge cases: files with no headers, files with extra headers, files with missing headers
 
+  **Must NOT do**:
+  - Do not create the script if it already exists and is passing (Wave 5 tasks may run out of order, check first)
+  - Do not validate files outside the specified directory
+  - Do not modify agent files during validation
+
   **Why it matters**: This validation script enforces the 5-chapter format across all agent files, ensuring consistency and making it easy to catch formatting errors during development and CI.
 
-  **Acceptance criteria**:
+  **Acceptance Criteria**:
   - File `scripts/validate-chapters.sh` exists and is executable
   - Script correctly identifies files with missing, extra, or incorrect chapter headers
   - Script exits with code 0 for valid files, 1 for invalid files
   - Script handles edge cases gracefully
-  - Running the script on `agents/` after tasks 4-12 returns exit code 0
+  - Running the script on `agents/` after tasks 10-12 returns exit code 0
+
+  **QA Scenarios (MANDATORY)**:
+
+  ```
+  Scenario: Script exists and is executable
+    Tool: Bash
+    Steps:
+      1. test -x scripts/validate-chapters.sh && echo "executable: OK" || echo "executable: FAIL"
+    Expected Result: Line outputs OK
+    Failure Indicators: Line outputs FAIL
+    Evidence: .omo/evidence/task-17-script-exists.txt
+
+  Scenario: Script validates correctly on valid agent files
+    Tool: Bash
+    Steps:
+      1. Test on a known valid agent file (hero-java-code-reviewer.md is fully 5-chapter compliant in current state)
+      2. scripts/validate-chapters.sh --file agents/hero-java-code-reviewer.md
+    Expected Result: Exit code 0, output indicates "PASS" for that file
+    Failure Indicators: Exit code 1 or output indicates "FAIL"
+    Evidence: .omo/evidence/task-17-script-validates-valid.txt
+
+  Scenario: Script detects missing chapters correctly
+    Tool: Bash
+    Steps:
+      1. Create a temporary test file with only 3 chapters
+      2. echo "## Role\n## Success Criteria\n## Constraints" > /tmp/test-missing.md
+      3. scripts/validate-chapters.sh --file /tmp/test-missing.md (should fail)
+      4. Verify exit code is 1
+    Expected Result: Exit code 1, output shows missing chapters
+    Failure Indicators: Exit code 0 or no mention of missing chapters
+    Evidence: .omo/evidence/task-17-script-detects-missing.txt
+
+  Scenario: Script validates all agents correctly
+    Tool: Bash
+    Steps:
+      1. scripts/validate-chapters.sh agents/
+      2. Count output lines with "PASS:" status
+    Expected Result: Exit code 0, exactly 9 files show PASS (6 role + 3 navigator)
+    Failure Indicators: Exit code 1 or PASS count != 9
+    Evidence: .omo/evidence/task-17-script-validates-all.txt
+  ```
 
   **Agent profile**: `quick`
 
-  **Dependencies**: None (Wave 5, can run in parallel with 18, 19, 20)
+  **Blocked By**: None (Wave 5, can run in parallel with 18, 19, 20)
+  
+  **Commit**: YES — commit message: `chore(scripts): add validate-chapters.sh for 5-chapter format enforcement`
 
   **Output files**: `scripts/validate-chapters.sh`
 
@@ -1035,18 +1200,68 @@ Max Concurrent: 6 (Wave 2)
   - Make the script executable (`chmod +x`)
   - Handle edge cases: missing AGENTS.md, malformed entries, duplicate entries
 
+  **Must NOT do**:
+  - Do not validate content inside agent files (that's validate-chapters.sh's job)
+  - Do not require AGENTS.md entries to be in any particular order
+  - Do not validate fields beyond what's defined in the task 2 schema
+
   **Why it matters**: This validation script ensures the AGENTS.md registry stays in sync with actual agent files, preventing drift between the registry and the codebase.
 
-  **Acceptance criteria**:
+  **Acceptance Criteria**:
   - File `scripts/validate-agents-md.sh` exists and is executable
   - Script correctly identifies missing or invalid registry entries
   - Script exits with code 0 for valid registry, 1 for invalid registry
   - Script handles edge cases gracefully
   - Running the script after task 14 returns exit code 0
 
+  **QA Scenarios (MANDATORY)**:
+
+  ```
+  Scenario: Script exists and is executable
+    Tool: Bash
+    Steps:
+      1. test -x scripts/validate-agents-md.sh && echo "executable: OK" || echo "executable: FAIL"
+    Expected Result: Line outputs OK
+    Failure Indicators: Line outputs FAIL
+    Evidence: .omo/evidence/task-18-script-exists.txt
+
+  Scenario: Script validates valid registry correctly
+    Tool: Bash
+    Steps:
+      1. scripts/validate-agents-md.sh agents/
+    Expected Result: Exit code 0, output shows "PASS" for all 9 agents
+    Failure Indicators: Exit code 1 or any agent shows FAIL
+    Evidence: .omo/evidence/task-18-script-validates-valid.txt
+
+  Scenario: Script detects missing agent in registry
+    Tool: Bash
+    Steps:
+      1. Temporarily rename agents/AGENTS.md to agents/AGENTS.md.bak
+      2. Create minimal agents/AGENTS.md with only 1 entry
+      3. scripts/validate-agents-md.sh agents/
+      4. Verify exit code is 1 and output mentions "8 agents not registered"
+      5. Restore original AGENTS.md
+    Expected Result: Exit code 1 and output mentions missing agents
+    Failure Indicators: Exit code 0 or no mention of missing agents
+    Evidence: .omo/evidence/task-18-script-detects-missing.txt
+
+  Scenario: Script detects orphaned registry entry
+    Tool: Bash
+    Steps:
+      1. Temporarily create test AGENTS.md with entry pointing to non-existent file
+      2. scripts/validate-agents-md.sh agents/
+      3. Verify exit code is 1 and output mentions "orphaned entry"
+      4. Restore original AGENTS.md
+    Expected Result: Exit code 1 and output mentions orphaned entry
+    Failure Indicators: Exit code 0 or no mention of orphan
+    Evidence: .omo/evidence/task-18-script-detects-orphaned.txt
+  ```
+
   **Agent profile**: `quick`
 
-  **Dependencies**: Task 14 (AGENTS.md must exist before validation)
+  **Blocked By**: Task 14 (AGENTS.md must exist before validation)
+  
+  **Commit**: YES — commit message: `chore(scripts): add validate-agents-md.sh for registry-sync validation`
 
   **Output files**: `scripts/validate-agents-md.sh`
 
@@ -1067,17 +1282,66 @@ Max Concurrent: 6 (Wave 2)
     8. Exit with code 1 if any check fails, 0 if all pass
   - Make the script executable (`chmod +x`)
 
+  **Must NOT do**:
+  - Do not validate content inside state files (only existence)
+  - Do not create or modify any state files during validation
+  - Do not require JSON files to have specific content (empty `[]` is valid)
+
   **Why it matters**: This validation script ensures the state migration is complete and correct, preventing issues with state persistence and backward compatibility.
 
-  **Acceptance criteria**:
+  **Acceptance Criteria**:
   - File `scripts/validate-state-migration.sh` exists and is executable
   - Script correctly validates all aspects of the state migration
   - Script exits with code 0 for valid migration, 1 for invalid migration
   - Running the script after task 15 returns exit code 0
 
+  **QA Scenarios (MANDATORY)**:
+
+  ```
+  Scenario: Script exists and is executable
+    Tool: Bash
+    Steps:
+      1. test -x scripts/validate-state-migration.sh && echo "executable: OK" || echo "executable: FAIL"
+    Expected Result: Line outputs OK
+    Failure Indicators: Line outputs FAIL
+    Evidence: .omo/evidence/task-19-script-exists.txt
+
+  Scenario: Script validates correctly on valid state migration
+    Tool: Bash
+    Steps:
+      1. scripts/validate-state-migration.sh
+    Expected Result: Exit code 0, all validation items show "PASS"
+    Failure Indicators: Exit code 1 or any item shows "FAIL"
+    Evidence: .omo/evidence/task-19-script-validates-valid.txt
+
+  Scenario: Script detects missing state file correctly
+    Tool: Bash
+    Steps:
+      1. Temporarily rename .omo/state/agent-executions.json to .omo/state/agent-executions.json.bak
+      2. scripts/validate-state-migration.sh
+      3. Verify exit code is 1 and output mentions "agent-executions.json not found"
+      4. Restore renamed file
+    Expected Result: Exit code 1 and output mentions missing file
+    Failure Indicators: Exit code 0 or no mention of missing file
+    Evidence: .omo/evidence/task-19-script-detects-missing.txt
+
+  Scenario: Script detects orphaned original files correctly
+    Tool: Bash
+    Steps:
+      1. Temporarily create test file docs/.refresh-state.json
+      2. scripts/validate-state-migration.sh
+      3. Verify exit code is 1 and output mentions "original file still exists"
+      4. Remove test file
+    Expected Result: Exit code 1 and output mentions orphaned original
+    Failure Indicators: Exit code 0 or no mention of orphan
+    Evidence: .omo/evidence/task-19-script-detects-orphaned.txt
+  ```
+
   **Agent profile**: `quick`
 
-  **Dependencies**: Task 15 (state migration must be complete before validation)
+  **Blocked By**: Task 15 (state migration must be complete before validation)
+  
+  **Commit**: YES — commit message: `chore(scripts): add validate-state-migration.sh for state-directory validation`
 
   **Output files**: `scripts/validate-state-migration.sh`
 
@@ -1110,6 +1374,58 @@ Max Concurrent: 6 (Wave 2)
   - Script verifies all expected files are installed
   - Script exits with code 0 for successful installation
   - Running the script after task 16 returns exit code 0
+
+  **QA Scenarios (MANDATORY)**:
+
+  ```
+  Scenario: Script exists and is executable
+    Tool: Bash
+    Steps:
+      1. test -x scripts/test-install.sh && echo "executable: OK" || echo "executable: FAIL"
+    Expected Result: Line outputs OK
+    Failure Indicators: Line outputs FAIL
+    Evidence: .omo/evidence/task-20-script-exists.txt
+
+  Scenario: Install test succeeds on valid manifest
+    Tool: Bash
+    Steps:
+      1. scripts/test-install.sh
+      2. Capture exit code and final summary line
+    Expected Result: Exit code 0, output contains "All installations verified successfully"
+    Failure Indicators: Exit code 1 or summary shows failures
+    Evidence: .omo/evidence/task-20-install-test-success.txt
+
+  Scenario: Install test detects missing agent files
+    Tool: Bash
+    Steps:
+      1. Temporarily rename one agent file (e.g., hero-java-ecrm.md.bak)
+      2. scripts/test-install.sh
+      3. Verify exit code is 1 and output mentions "hero-java-ecrm.md not found"
+      4. Restore renamed file
+    Expected Result: Exit code 1 and output mentions missing file
+    Failure Indicators: Exit code 0 or no mention of missing file
+    Evidence: .omo/evidence/task-20-install-test-detects-missing.txt
+
+  Scenario: Install test verifies state directory structure
+    Tool: Bash
+    Steps:
+      1. scripts/test-install.sh
+      2. Verify output mentions ".omo/state/ directory structure: OK"
+      3. Verify output mentions all 4 state files (refresh-state.json, workflow-registry.json, agent-executions.json, session-history.json)
+    Expected Result: Output confirms state directory and all files installed
+    Failure Indicators: Output shows state directory or files missing
+    Evidence: .omo/evidence/task-20-install-test-validates-state.txt
+
+  Scenario: Install test cleans up temporary directory
+    Tool: Bash
+    Steps:
+      1. Run scripts/test-install.sh
+      2. Check that no /tmp/test-install-* directories remain after script completes
+      3. ls -d /tmp/test-hero-* 2>/dev/null | wc -l should equal 0
+    Expected Result: Temporary directories are removed
+    Failure Indicators: Directories still exist
+    Evidence: .omo/evidence/task-20-install-test-cleanup.txt
+  ```
 
   **Agent profile**: `quick`
 
