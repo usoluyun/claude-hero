@@ -12,7 +12,9 @@
   "sentinel",
   "apollo",
   "jetcache",
-  "skywalking"
+  "xxl-job",
+  "skywalking",
+  "quartz"
 ],"matches":[
   "spring-boot",
   "mybatis",
@@ -23,13 +25,15 @@
   "openfeign",
   "ons",
   "apollo",
+  "xxl-job",
   "skywalking"
 ],"mismatches":[
   "mybatis-plus",
   "rocketmq",
   "sentinel",
-  "jetcache"
-],"pass":true},"keyword_check":{"keywords":[
+  "jetcache",
+  "quartz"
+],"pass":false},"keyword_check":{"keywords":[
   "atour-life-api,spring-boot,Spring Boot,Eureka,Feign,OpenFeign,Apollo,RocketMQ,领航,带路,代码结构,导航",
   "当需要理解",
   "定位 atour-life-api 代码时路由到它",
@@ -57,4 +61,4 @@
   "标准团队 Spring 栈",
   "hero-conventions",
   "best-practices 的中间件约定适用"
-],"invalid":[],"pass":true},"overall":{"passed":2,"failed":1,"suspicious":["path_check"],"pass":false}}
+],"invalid":[],"pass":true},"overall":{"passed":1,"failed":2,"suspicious":["path_check","stack_check"],"pass":false}}
