@@ -14,6 +14,58 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/mechanism.css">
   <link rel="stylesheet" href="css/docs.css">
+</head>
+<body>
+  <!-- ============ 顶部导航 ============ -->
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="/" class="topnav-brand">领航 <span class="topnav-brand-en">HERO</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <div class="topnav-links">
+        <div class="dropdown">
+          <button class="dropdown-btn">首页</button>
+          <div class="dropdown-content">
+            <a href="index.html"><svg class="nav-ico"><use href="icons/sprite.svg#home"/></svg>首页</a>
+            <a href="index.html#idea"><svg class="nav-ico"><use href="icons/sprite.svg#spark"/></svg>理念</a>
+            <a href="index.html#roles"><svg class="nav-ico"><use href="icons/sprite.svg#user"/></svg>角色介绍</a>
+            <a href="index.html#teams"><svg class="nav-ico"><use href="icons/sprite.svg#collab"/></svg>组队模式</a>
+            <hr>
+            <a href="index.html#install"><svg class="nav-ico"><use href="icons/sprite.svg#download"/></svg>10 分钟安装</a>
+            <a href="index.html#build-pilot"><svg class="nav-ico"><use href="icons/sprite.svg#tool"/></svg>自建领航员</a>
+            <a href="index.html#uninstall"><svg class="nav-ico"><use href="icons/sprite.svg#unlink"/></svg>卸载</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">原理</button>
+          <div class="dropdown-content">
+            <a href="mechanism.html#architecture"><svg class="nav-ico"><use href="icons/sprite.svg#architecture"/></svg>整体架构</a>
+            <a href="mechanism.html#collaboration"><svg class="nav-ico"><use href="icons/sprite.svg#collab"/></svg>Agent 协作</a>
+            <a href="mechanism.html#skill-dispatch"><svg class="nav-ico"><use href="icons/sprite.svg#dispatch"/></svg>Skill 调度</a>
+            <a href="mechanism.html#workflow"><svg class="nav-ico"><use href="icons/sprite.svg#flow"/></svg>工作流执行</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">文档</button>
+          <div class="dropdown-content">
+            <a href="docs-index.html"><svg class="nav-ico"><use href="icons/sprite.svg#book"/></svg>文档中心</a>
+            <hr>
+            <a href="pages/hero-agent-layers.html"><svg class="nav-ico"><use href="icons/sprite.svg#layers"/></svg>Agent 分层架构</a>
+            <a href="pages/workflow.html"><svg class="nav-ico"><use href="icons/sprite.svg#workflow"/></svg>工作流程</a>
+            <a href="pages/prd-to-java.html"><svg class="nav-ico"><use href="icons/sprite.svg#file-code"/></svg>PRD 转 Java</a>
+            <a href="pages/codegraph.html"><svg class="nav-ico"><use href="icons/sprite.svg#graph"/></svg>CodeGraph</a>
+            <a href="pages/refresh.html"><svg class="nav-ico"><use href="icons/sprite.svg#refresh"/></svg>刷新机制</a>
+            <a href="pages/onboarding.html"><svg class="nav-ico"><use href="icons/sprite.svg#compass"/></svg>新人入门</a>
+            <hr>
+            <a href="pages/lane-routing.html"><svg class="nav-ico"><use href="icons/sprite.svg#route"/></svg>意图分诊</a>
+            <a href="pages/playbook.html"><svg class="nav-ico"><use href="icons/sprite.svg#book-check"/></svg>Lane Playbook</a>
+            <a href="pages/hero-markers.html"><svg class="nav-ico"><use href="icons/sprite.svg#badge"/></svg>hero 露出标记</a>
+            <a href="pages/issue-dispatch.html"><svg class="nav-ico"><use href="icons/sprite.svg#ticket"/></svg>Issue 触发</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -234,7 +286,7 @@
             <h4>Wave 2: 并行实现</h4>
             <div class="timeline-nodes">
               <div class="timeline-node">
-                <span class="agent-badge">ZHANG_LIAO</span>
+                <span class="agent-badge">WENYUAN</span>
                 <h5>文远 · 后端开发</h5>
                 <ul>
                   <li>实现业务逻辑与 Service 层</li>
@@ -244,7 +296,7 @@
                 <code>Skills: hero-im, mcp-gitlab</code>
               </div>
               <div class="timeline-node">
-                <span class="agent-badge">WEN_PIN</span>
+                <span class="agent-badge">ZICHANG</span>
                 <h5>子长 · 数据工程师</h5>
                 <ul>
                   <li>设计数据库表结构</li>
@@ -254,7 +306,7 @@
                 <code>Skills: hero-im, mcp-gitlab</code>
               </div>
               <div class="timeline-node">
-                <span class="agent-badge">ZHANG_YI</span>
+                <span class="agent-badge">XUANCHENG</span>
                 <h5>玄成 · 代码审查员</h5>
                 <ul>
                   <li>代码质量实时检查</li>
@@ -272,7 +324,7 @@
             <h4>Wave 3: 验证与合并</h4>
             <div class="timeline-nodes">
               <div class="timeline-node">
-                <span class="agent-badge">ZHANG_BAO</span>
+                <span class="agent-badge">XIREN</span>
                 <h5>希仁 · QA 工程师</h5>
                 <ul>
                   <li>执行测试计划与用例</li>
@@ -282,7 +334,7 @@
                 <code>Skills: hero-im, playwright</code>
               </div>
               <div class="timeline-node">
-                <span class="agent-badge">LIAO_HUA</span>
+                <span class="agent-badge">PENGJU</span>
                 <h5>鹏举 · 安全审计师</h5>
                 <ul>
                   <li>安全合规检查（OWASP Top 10）</li>
@@ -650,7 +702,7 @@ Sprint 计划：
   - 集成测试: ✓ pass (4/4)
   - 覆盖率: <span style="color: var(--color-bronze);">87%</span> (达标)
 
-<span class="terminal-comment">--- 廖化 (security-auditor) ---</span>
+<span class="terminal-comment">--- 鹏举 (security-auditor) ---</span>
 ✓ OWASP Top 10 扫描完成
   - SQL 注入: ✓ safe
   - XSS: ✓ safe
@@ -691,72 +743,6 @@ Sprint 计划：
       </div>
     </section>
 
-    <!-- ============ 章节五：隐藏特性 ============ -->
-    <section id="hidden-features" class="hidden-features">
-      <div class="features-container">
-        <p class="kicker center">Hidden Features · 隐藏特性</p>
-        <h2 class="section-title">隐藏的高级特性</h2>
-        <p class="section-intro">深入探索 claude-hero 的智能内核</p>
-
-        <div class="feature-grid">
-          <div class="feature-card animate-on-scroll">
-            <div class="feature-icon">🔍</div>
-            <h3>Metis 需求分析</h3>
-            <p>在动手之前，先帮你把需求想清楚。自动识别模糊点、潜在风险、边界情况。</p>
-            <div class="feature-details">
-              <ul>
-                <li>需求精炼：从模糊描述中提取核心目标</li>
-                <li>边界识别：明确什么是必须做的，什么可以不做</li>
-                <li>风险预警：提前发现技术难点和依赖关系</li>
-                <li>输出结构化需求清单（优先级 + 验收标准）</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="feature-card animate-on-scroll">
-            <div class="feature-icon">🛡️</div>
-            <h3>Momus 高精度审查</h3>
-            <p>代码质量检查的最后一道防线。不只是 style check，而是深度审查业务逻辑与最佳实践。</p>
-            <div class="feature-details">
-              <ul>
-                <li>业务逻辑验证：确保实现符合 PRD 需求</li>
-                <li>最佳实践检查：Java 编码规范、设计模式</li>
-                <li>异常路径审查：边界条件、错误处理完整性</li>
-                <li>可维护性评估：代码复杂度、重复代码检测</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="feature-card animate-on-scroll">
-            <div class="feature-icon">🧠</div>
-            <h3>Oracle 架构优化</h3>
-            <p>架构决策的智能顾问。基于项目上下文提供设计模式、技术选型建议。</p>
-            <div class="feature-details">
-              <ul>
-                <li>设计模式推荐：基于业务场景选择最优模式</li>
-                <li>技术选型建议：框架、中间件、数据库选型参考</li>
-                <li>性能优化建议：识别潜在性能瓶颈</li>
-                <li>可扩展性评估：架构的可维护性与扩展性分析</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="feature-card animate-on-scroll">
-            <div class="feature-icon">⚡</div>
-            <h3>Final Verification 四维验证</h3>
-            <p>Wave 3 的最后一关：QA、安全、性能、可部署性四维并行验证，确保交付物万无一失。</p>
-            <div class="feature-details">
-              <ul>
-                <li>QA 验证：自动化测试 + 手动 smoke test</li>
-                <li>安全验证：OWASP Top 10 + CVE 扫描 + 依赖审计</li>
-                <li>性能验证：基准测试 + 并发压测 + 响应时间分析</li>
-                <li>部署验证：Docker 构建 + 环境配置 + 回滚方案</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- ============ 页脚 ============ -->
