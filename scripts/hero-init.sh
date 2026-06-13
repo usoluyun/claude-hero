@@ -106,31 +106,44 @@ source "$HERE/lib/refresh-state.sh"
 # ──────────────────────────────────────────────────────────────
 
 check_chinese_name_unique() {
-  # 检查花名是否已被占用
+  # 检查花名是否已被占用（数据源: agents/AGENTS.md YAML frontmatter 的 display_name）
   # 参数: $1=待检查的花名
   # 返回: 0=可用, 1=已被占用
   local target_name="$1"
-  local state_file="$ROOT/docs/.refresh-state.json"
-  
-  # 从 refresh-state.json 获取已使用的花名列表
-  if [ -f "$state_file" ]; then
+  local agents_file="$ROOT/agents/AGENTS.md"
+
+  if [ -f "$agents_file" ]; then
     local used_names
-    used_names=$(jq -r '.aliases // {} | to_entries[] | .value' "$state_file" 2>/dev/null) || return 0
-    
+    used_names=$(sed -n '/^---$/,/^---$/p' "$agents_file" | grep 'display_name:' | sed 's/.*display_name:[[:space:]]*//')
+
     while IFS= read -r name; do
+      [ -z "$name" ] && continue
       if [ "$name" = "$target_name" ]; then
-        echo "❌ 花名 '$target_name' 已被分配给: $(jq -r --arg n "$target_name" '.aliases // {} | to_entries[] | select(.value == $n) | .key' "$state_file")"
+        local agent_name
+        agent_name=$(sed -n '/^---$/,/^---$/p' "$agents_file" | awk -v target="$target_name" '
+          /^[[:space:]]*-?[[:space:]]*name:/ {
+            gsub(/.*name:[[:space:]]*/, "")
+            current_name = $0
+          }
+          /display_name:/ {
+            gsub(/.*display_name:[[:space:]]*/, "")
+            if ($0 == target && current_name != "") {
+              print current_name
+              exit
+            }
+          }
+        ')
+        echo "❌ 花名 '$target_name' 已被分配给: ${agent_name:-unknown}"
         return 1
       fi
     done <<< "$used_names"
   fi
-  
-  # 同时检查 agents/ 目录中是否已有同名 agent
+
   if [ -f "$ROOT/agents/hero-java-${target_name}.md" ]; then
     echo "❌ 花名 '$target_name' 对应的 agent 文件已存在: agents/hero-java-${target_name}.md"
     return 1
   fi
-  
+
   return 0
 }
 
