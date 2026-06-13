@@ -757,11 +757,11 @@
       <div class="container">
         <p class="kicker center">进阶 · BUILD YOUR PILOT</p>
         <h2 class="section-title">一条命令，为项目造一位领航员</h2>
-        <p class="section-desc">领航员是某个服务的「只读知识层」——懂业务定位、技术栈、代码地图与对外契约。开荒<strong>全自动</strong>：给一个项目路径和一个花名，<code>hero-init</code> 跑完六阶段，直接产出 <code>hero-&lt;lang&gt;-&lt;project&gt;</code> 并提交 Git 分支。</p>
+        <p class="section-desc">领航员是某个服务的「只读知识层」——懂业务定位、技术栈、代码地图与对外契约。开荒<strong>全自动</strong>：给一个项目路径，花名可选（留空自动分配），<code>hero-init</code> 跑完六阶段，直接产出 <code>hero-&lt;lang&gt;-&lt;project&gt;</code> 并提交 Git 分支。</p>
 
         <div class="cmd-hero">
-          <code class="cmd-hero-text"><span class="c-prompt">$</span> bash scripts/hero-init.sh <span class="c-str">~/Documents/ATLWork/ecrm</span> <span class="c-name">子文</span></code>
-          <span class="cmd-hero-tip">&lt;项目路径&gt; &lt;花名&gt; · 花名取自历史人物字号，不与现有 Hero 冲突</span>
+          <code class="cmd-hero-text"><span class="c-prompt">$</span> bash scripts/hero-init.sh <span class="c-str">&lt;项目路径&gt;</span> <span class="c-name">[花名]</span></code>
+          <span class="cmd-hero-tip">&lt;项目路径&gt; [花名] · 花名可选（留空自动分配），取自历史人物字号，不与现有 Hero 冲突</span>
         </div>
 
         <div class="install-detail">
