@@ -1,0 +1,5 @@
+hero-dispatch is a Claude Code skill that requires Claude Code runtime to dispatch via skill router; no standalone CLI 'hero dispatch' binary exists in this repo.
+hero not found
+which hero exit=1
+SKILL.md
+lanes

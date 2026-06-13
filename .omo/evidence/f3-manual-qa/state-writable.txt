@@ -1,0 +1,16 @@
+--- existing state files ---
+total 32
+drwxr-xr-x@ 7 luyun  staff  224 Jun 13 11:21 .
+drwxr-xr-x@ 9 luyun  staff  288 Jun 13 11:21 ..
+drwxr-xr-x@ 3 luyun  staff   96 Jun 13 11:21 .cache
+-rw-r--r--@ 1 luyun  staff    3 Jun 13 11:21 agent-executions.json
+-rw-r--r--@ 1 luyun  staff  545 Jun 13 11:21 refresh-state.json
+-rw-r--r--@ 1 luyun  staff    3 Jun 13 11:21 session-history.json
+-rw-r--r--@ 1 luyun  staff  222 Jun 13 11:21 workflow-registry.json
+--- write test ---
+tmp write OK
+atomic mv OK
+--- git tracking ---
+check-ignore exit=1 (1=NOT ignored=tracked)
+ M .omo/state/agent-executions.json
+restored

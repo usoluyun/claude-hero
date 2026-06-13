@@ -1,0 +1,10 @@
+SKIP: agents/hero-java-atour-life-api.md (out of scope)
+PASS: agents/hero-java-backend-developer.md
+PASS: agents/hero-java-code-reviewer.md
+PASS: agents/hero-java-data-engineer.md
+PASS: agents/hero-java-ecrm.md
+PASS: agents/hero-java-hotel-product-center.md
+PASS: agents/hero-java-owner-biz.md
+PASS: agents/hero-java-security-auditor.md
+PASS: agents/hero-java-tech-lead.md
+PASS: agents/hero-java-test-engineer.md
