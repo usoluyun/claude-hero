@@ -50,18 +50,18 @@ hero 合并验证
 
 **执行**：
 1. 用 `lark-doc` skill 读取飞书文档，提取：
-   - 功能清单 / 用户故事
-   - 非功能需求（性能 / 安全 / 兼容性）
-   - 业务规则与数据约束
-   - **涉及服务识别**：拿功能清单的业务关键词比对**领航 agent 花名册**
-     （`docs/hero-agent-roster.md`，确定性查找表，列了每个 `hero-java-<proj>` 的业务关键词/别名）
-     精准命中**存量服务**，而非凭空编造服务名。命中的服务记下其领航 agent 名，供 Step 1 勘察；
-     未命中领航 agent 的功能域，按功能划归新服务或回退现场 grep（见「关键约定·七」降级策略）。
+    - 功能清单 / 用户故事
+    - 非功能需求（性能 / 安全 / 兼容性）
+    - 业务规则与数据约束
+    - **涉及服务识别**：拿功能清单的业务关键词比对**领航 agent 花名册**
+      （`docs/hero-agent-roster.md`，确定性查找表，列了每个 `hero-java-<proj>` 的业务关键词/别名）
+      精准命中**存量服务**，而非凭空编造服务名。命中的服务记下其领航 agent 名，供 Step 1 勘察；
+      未命中领航 agent 的功能域，按功能划归新服务或回退现场 grep（见「关键约定·七」降级策略）。
 2. 按 `superpowers:using-git-worktrees` 创建隔离工作区：
-   - 检测已有 worktree（避免嵌套）
-   - 创建 `.worktrees/prd-{name}-{yyyymmdd}/` 目录
-   - 创建 `feature/prd-{name}` 分支，检出到 worktree
-   - 确保 `.worktrees/` 在 `.gitignore` 中
+    - 检测已有 worktree（避免嵌套）
+    - 创建 `.worktrees/prd-{name}-{yyyymmdd}/` 目录
+    - 创建 `feature/prd-{name}` 分支，检出到 worktree
+    - 确保 `.worktrees/` 在 `.gitignore` 中
 3. 初始化 `docs/.workflow-registry.json`，注册本 PRD：
    ```json
    {
@@ -78,6 +78,7 @@ hero 合并验证
 **产物**：
 - 隔离 worktree 分支已创建
 - PRD 摘要（功能 + 涉及服务初判）
+- 技能发现上下文已激活（后续步骤可按需匹配 superpowers）
 
 **⏸ STOP**
 
@@ -91,6 +92,7 @@ hero 合并验证
     - [服务B] → 无领航 agent，Step 1 回退现场勘察
 ✓ 新增服务（无对应存量）：[列表 / 无]
 ✓ Registry 已注册：状态 = intake
+✓ Superpowers 技能发现上下文已激活
 
 → 用户确认：继续 / 修改特性名或服务映射重新开始 / 终止
 ```
@@ -119,6 +121,7 @@ hero 合并验证
 **1b. 增量技术设计（hero-java-tech-lead，opus）**
 
 tech-lead 汇总勘察报告 + PRD，产出设计（存量服务为**增量改动**，新服务为绿地设计）：
+- 使用superpowers的brainstorming命令对技术实现模糊、不清晰的地方做出向用户提问，让用户做决策
 - 根据功能清单 + 勘察到的存量现状拆解 / 增量微服务架构
 - 画出服务依赖图（mermaid 图，支持 claude-mermaid 渲染）
 - 设计接口契约（REST /API 路径 + Feign DTO）
@@ -199,13 +202,13 @@ Sprint 2（1 周）：[任务数] 任务，重点：主服务实现 + 子服务�
 
 **执行**：hero-java-tech-lead 生成分派说明文档（写入 worktree，可独立保存或追加进 sprint doc）：
 - **主服务 Tech Lead 的职责**：
-  - 全局接口协调（确保子服务接口对齐）
-  - 等待子服务接口定义就绪（Step 1 接口委托清单）后才开始主服务 Feign 调用实现
-  - 监控集成测试通过情况
+    - 全局接口协调（确保子服务接口对齐）
+    - 等待子服务接口定义就绪（Step 1 接口委托清单）后才开始主服务 Feign 调用实现
+    - 监控集成测试通过情况
 - **各子服务 Tech Lead 的职责**：
-  - 接收委托接口清单
-  - 完成接口定义（Contract First）
-  - 驱动子服务业务实现
+    - 接收委托接口清单
+    - 完成接口定义（Contract First）
+    - 驱动子服务业务实现
 
 **产物**：`docs/dispatch-{name}-{yyyymmdd}.md`（可选，也可追加到 sprint doc 末尾）
 
@@ -397,8 +400,8 @@ Git 产物：
 2. 创建临时验证分支 `validate/batch-{timestamp}`，将所有 ready PRD merge 进去
 3. 在临时分支上跑**全量集成测试**（所有服务+跨服务调用）
 4. 根据结果：
-   - **✓ 成功**：按 started_at 时间顺序逐个 merge 到 main，删除 worktree，更新 registry 为 `merged`
-   - **✗ 失败**：报告冲突，指明是哪两个 PRD 冲突，建议返工给对应 worktree（保留隔离，不影响其他）
+    - **✓ 成功**：按 started_at 时间顺序逐个 merge 到 main，删除 worktree，更新 registry 为 `merged`
+    - **✗ 失败**：报告冲突，指明是哪两个 PRD 冲突，建议返工给对应 worktree（保留隔离，不影响其他）
 
 **产物**：
 - 成功：所有 ready PRD 已合并到 main，worktree 清理
@@ -498,11 +501,11 @@ Registry 已更新：所有 PRD 状态 = merged
   排序归 **tech-lead**；实现归 backend-developer，SQL 归 data-engineer，测试归 test-engineer。
   领航产出**喂给** tech-lead / 角色 agent，自己不下场。
 - **降级策略（有则用，无则回退）**：
-  - 命中服务**有领航 agent** → 派发它勘察 / 导航。
-  - 命中服务**无领航 agent** → tech-lead / 实现 agent 回退到现场勘察（`codegraph` CLI 或 `Grep/Glob`
-    直接扫该服务），workflow **不阻塞**。
-  - **新增服务** → 无存量可勘察，走绿地设计。
-  - 缺领航 agent 的存量服务，可事后用 codegraph 手册补齐其领航 agent，逐步覆盖 ~40 个服务。
+    - 命中服务**有领航 agent** → 派发它勘察 / 导航。
+    - 命中服务**无领航 agent** → tech-lead / 实现 agent 回退到现场勘察（`codegraph` CLI 或 `Grep/Glob`
+      直接扫该服务），workflow **不阻塞**。
+    - **新增服务** → 无存量可勘察，走绿地设计。
+    - 缺领航 agent 的存量服务，可事后用 codegraph 手册补齐其领航 agent，逐步覆盖 ~40 个服务。
 
 ---
 
