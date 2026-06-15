@@ -63,4 +63,4 @@ state file 迁移校验：`bash scripts/validate-state-migration.sh`
 - `CLAUDE.md`：仓库内工作时的权威导航（三大子系统 + 目录速查 + 维护约定）
 - `CONTRIBUTING.md`：命名规范详情 + 新增 skill / agent / hook / MCP / CLI 的落位规则
 - `docs/maintenance.md`：从用到改到造到养的 4 层级共创手册
-- `docs/hero-agent-layers.md`：agent 分层总图 + 能力矩阵 + 漫威代号
+- `docs/hero-agent-layers.md`：agent 分层总图 + 能力矩阵 + 先驱花名

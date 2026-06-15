@@ -4,7 +4,7 @@
 #   bash scripts/hero-init.sh <project_path> [chinese_name]
 #   bash scripts/hero-init.sh --help
 #
-# 花名可选: 传入历史人物字号（如"子文""玄成""孔明"），或留空自动生成（确保不重复）。
+# 花名可选: 传入先驱花名（如 John Schulman、Chris Olah、Demis Hassabis），或留空自动生成（确保不重复）。
 # 输出:
 #   agents/{agent_name}.md — 最终的导航 Agent 文件
 #   Git 分支 feat/init-{project_key}-{date}
@@ -22,11 +22,11 @@ if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
   echo ""
   echo "参数:"
   echo "  project_path      项目绝对路径（必需，需包含 *.java 文件）"
-  echo "  chinese_name      [可选] 花名/Agent 中文代号（如 子文、郑和），留空则自动生成未占用花名"
+  echo "  chinese_name      [可选] 花名/Agent 代号（如 John Schulman、Oriol Vinyals），留空则自动生成未占用花名"
   echo "  --gitlab-project  [可选] GitLab project path（如 group/project-name）"
   echo ""
   echo "示例:"
-  echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm 子文"
+  echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm John Schulman"
   echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm  # 花名留空，自动分配"
   echo "  bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm  --gitlab-project at-our/ecrm"
   echo ""
@@ -148,27 +148,26 @@ check_chinese_name_unique() {
 }
 
 generate_chinese_name() {
-  # 基于项目特征自动生成花名（历史人物字号）
+  # 基于项目特征自动生成花名（计算/AI 先驱之名）
   # 参数: $1=项目路径
-  # 输出: 生成的花名（2-3 个汉字）
+  # 输出: 生成的花名（先驱全名）
   local project_path="$1"
   local project_name
   project_name=$(get_project_name "$project_path")
-  
-  # 候选历史人物字号池（避免与现代常用重名）
+
+  # 候选先驱名字池（创造了计算与 AI 时代、名字值得被记住；已避开现有 Hero 占用的名字）
   local candidates=(
-    "子房"  # 张良
-    "仲淹"  # 范仲淹
-    "君实"  # 司马光
-    "幼安"  # 辛弃疾
-    "务观"  # 陆游
-    "永叔"  # 欧阳修
-    "子瞻"  # 苏轼
-    "明远"  # 鲍照
-    "元亮"  # 陶渊明
-    "太冲"  # 左思
-    "安仁"  # 潘岳
-    "士衡"  # 陆机
+    "Dario Amodei"        # Anthropic 联合创始人兼 CEO
+    "Geoffrey Hinton"     # 深度学习教父（学术 · 图灵奖/诺奖）
+    "Yoshua Bengio"       # 深度学习先驱（学术 · 图灵奖）
+    "Shane Legg"          # DeepMind 联合创始人 · AGI 安全
+    "Pieter Abbeel"       # 伯克利 · 机器人/强化学习
+    "Christopher Manning" # 斯坦福 · NLP
+    "Andrew Ng"           # 斯坦福/Google Brain
+    "Stuart Russell"      # 伯克利 · AI 安全
+    "Ilya Sutskever"      # OpenAI 联合创始人/首席科学家（其次）
+    "Andrej Karpathy"     # 前 OpenAI/Tesla（其次）
+    "Yann LeCun"          # Meta 首席 AI 科学家（兜底）
   )
   
   # 获取已分配花名列表（数据源: agents/AGENTS.md YAML frontmatter 的 display_name）
@@ -204,8 +203,9 @@ generate_chinese_name() {
     attempts=$((attempts + 1))
   done
   
-  # 如果使用项目名称生成（兜底方案）
-  echo "${project_name}安"
+  # 兜底方案（候选池用尽）：交给 AI 推荐——打印指引到 stderr，输出哨兵值由上层识别
+  echo "候选花名池已用尽：请让 Claude 按该服务特点，推荐一位当今活跃、且有英文维基页面的 AI 科学家/工程师作为花名，并用 bash scripts/hero-init.sh <项目路径> \"<全名>\" 显式传入。" >&2
+  echo "__AI_RECOMMEND__"
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -281,6 +281,10 @@ require_jq || exit 1
 # 花名处理：留空则自动生成，提供则检查唯一性
 if [ -z "$CHINESE_NAME" ]; then
   CHINESE_NAME=$(generate_chinese_name "$PROJECT_PATH")
+  if [ "$CHINESE_NAME" = "__AI_RECOMMEND__" ]; then
+    echo "ERROR: 候选花名池已用尽，请显式传入由 AI 推荐的花名（见上方提示）" >&2
+    exit 1
+  fi
   echo "🤖 自动生成花名: ${CHINESE_NAME}"
 else
   if ! check_chinese_name_unique "$CHINESE_NAME"; then

@@ -8,7 +8,7 @@
 
 Hero 不是某个人的代码，是团队的资产。这意味着三件事：
 
-1. **看到问题就改**——文远的 prompt 少了一个常用场景？孔明的触发词漏了个关键词？直接提 PR，不需要等人授权。Hackathon mentality。
+1. **看到问题就改**——Jeff Dean的 prompt 少了一个常用场景？Demis Hassabis的触发词漏了个关键词？直接提 PR，不需要等人授权。Hackathon mentality。
 2. **看到好东西就抄**——隔壁组造了一个很酷的 Hero？看看他的 prompt 结构，借鉴思路到你的 Hero。
 3. **分享你的 Hero**——你造了一个帮你写周报的 Hero？提 PR 共享出来，可能十个人都需要。
 
@@ -29,7 +29,7 @@ Hero 不是某个人的代码，是团队的资产。这意味着三件事：
 
 ### 层级 2：改
 
-想改进一个共享 Hero？比如文远的 prompt 应该加上一个你常用的中间件：
+想改进一个共享 Hero？比如Jeff Dean的 prompt 应该加上一个你常用的中间件：
 
 1. 打开 `agents/hero-java-backend-developer.md`
 2. 在 `## 你的职责` 或 `## 工作方式` 下面加上你的改进
@@ -110,11 +110,11 @@ tools: Read, Edit, Write, Grep, Glob, Bash
 
 就像公司里每个人都有花名，你的 Hero 也应该有花名。
 
-- 可以从历史英雄的字号里取（参考已有 9 个 Hero 的风格）
+- 可以从计算/AI 先驱的名字里取（参考已有 9 个 Hero 的风格）
 - 也可以从你喜欢的角色里取
 - 花名要短（2 个字最佳）、好记、有辨识度
 
-> **好的花名**：孔明、文远、子长、希仁、玄成、鹏举、子文、郑和、霞客
+> **好的花名**：Demis Hassabis、Jeff Dean、Fei-Fei Li、Percy Liang、Chris Olah、Jan Leike、John Schulman、Oriol Vinyals、David Silver
 >
 > **不好的花名**：`my_hero_123`、`dev_agent`、`test_helper`
 
@@ -139,7 +139,7 @@ hero 刷新 状态         # 看谁该刷新了
 
 **角色 Hero 的保鲜靠大家：**
 
-- 你觉得文远的 prompt 过时了？提 PR 更新
+- 你觉得Jeff Dean的 prompt 过时了？提 PR 更新
 - 你们项目换了新框架？加进相关 Hero 的职责描述
 - 出了新的好用的 CLI 工具？写到 `cli/` 里
 
@@ -152,7 +152,7 @@ hero 刷新 状态         # 看谁该刷新了
 改一个 prompt、加一行 CLI、修一个 typo：
 
 1. 改文件
-2. `git add && git commit -m "feat(agent): 文远加上 XXX 中间件接入"`
+2. `git add && git commit -m "feat(agent): Jeff Dean加上 XXX 中间件接入"`
 3. `git push && 提 PR`
 4. 至少一位同事 Review 后合入
 

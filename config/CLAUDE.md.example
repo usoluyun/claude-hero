@@ -47,12 +47,12 @@ at-our.com）时，把它们加入 NO_PROXY。
 
 ## Agent Teams（tmux 组队）
 
-让多位 Hero（孔明 + 文远 + 希仁等）在 tmux 分屏里并行协作，共用同一仓库上下文。
+让多位 Hero（Demis Hassabis + Jeff Dean + Percy Liang等）在 tmux 分屏里并行协作，共用同一仓库上下文。
 - 启用条件：在 `~/.claude/settings.json` 配置 `teammateMode: "tmux"` 与
   `env.CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS: "1"`，详见 `config/settings.json.example`
-- 分诊命令：`hero 组队 [孔明+文远+希仁]` 或 `hero team`
+- 分诊命令：`hero 组队 [Demis Hassabis+Jeff Dean+Percy Liang]` 或 `hero team`
 - 启动步骤：先 `tmux new -s work` 建会话，再在目标 pane 执行 `claude --agent <agent 名>`
-- 推荐组合：孔明（tech-lead, 规划）+ 文远（backend-dev, 实现）+ 希仁（test-engineer, 测试）
+- 推荐组合：Demis Hassabis（tech-lead, 规划）+ Jeff Dean（backend-dev, 实现）+ Percy Liang（test-engineer, 测试）
 
 ## 个人段落（按需自行补充）
 

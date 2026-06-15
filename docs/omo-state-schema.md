@@ -74,7 +74,7 @@
     {
       "agent_name": "hero-java-backend-developer",
       "timestamp": "2026-06-13T09:15:00Z",
-      "task_description": "重写 文远 到 5 章节模板",
+      "task_description": "重写 Jeff Dean 到 5 章节模板",
       "duration_ms": 120000,
       "status": "completed"
     }

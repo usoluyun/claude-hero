@@ -28,7 +28,7 @@ agents:
 | 字段 | 类型 | 必填 | 说明 |
 |------|------|------|------|
 | `name` | string | ✅ | 与 frontmatter `name` 字段完全一致 |
-| `display_name` | string | ✅ | 中文花名（孔明、文远、子长…） |
+| `display_name` | string | ✅ | 中文花名（Demis Hassabis、Jeff Dean、Fei-Fei Li…） |
 | `model` | string | ✅ | `opus` / `sonnet` / `haiku` |
 | `role_type` | enum | ✅ | `planner` / `executor` / `reviewer` / `navigator` |
 | `readonly` | boolean | ✅ | `true` 表示 tools 字段不含 Write/Edit |
@@ -43,7 +43,7 @@ agents:
 ```yaml
 agents:
   - name: hero-java-tech-lead
-    display_name: 孔明
+    display_name: Demis Hassabis
     model: opus
     role_type: planner
     readonly: false
@@ -52,7 +52,7 @@ agents:
     tools_count: 9
 
   - name: hero-java-code-reviewer
-    display_name: 玄成
+    display_name: Chris Olah
     model: opus
     role_type: reviewer
     readonly: true
@@ -61,12 +61,12 @@ agents:
     tools_count: 6
 
   - name: hero-java-ecrm
-    display_name: 子文
+    display_name: John Schulman
     model: sonnet
     role_type: navigator
     readonly: true
     skills: [hero-codegraph]
-    triggers: [ecrm, 企业CRM, 子文]
+    triggers: [ecrm, 企业CRM, John Schulman]
     tools_count: 4
 ```
 

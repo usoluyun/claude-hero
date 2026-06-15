@@ -6,7 +6,7 @@ description: 当用户提到 slowql、SQL分析、MyBatis检查、SQL注入检�
 # SlowQL — SQL 静态分析器（安全/性能/合规）
 
 > 272 条规则，支持 14 种 SQL 方言，**支持 MyBatis XML mapper 直接扫描**，区分 `#{}` 安全参数 vs `${}` 注入风险。
-> 覆盖子长的核心职责：SQL 安全审查、性能检查、合规检查。离线运行。
+> 覆盖Fei-Fei Li的核心职责：SQL 安全审查、性能检查、合规检查。离线运行。
 
 ## 安装
 
@@ -79,7 +79,7 @@ slowql --input-file mapper/ --dialect mysql --export html --out ./slowql-report/
 
 支持 MySQL、PostgreSQL、SQL Server（T-SQL）、Oracle、SQLite、Snowflake 等 14 种。
 
-## 子长实战场景
+## Fei-Fei Li实战场景
 
 ```bash
 # 1. 新写 Mapper 文件后检查 SQL 安全

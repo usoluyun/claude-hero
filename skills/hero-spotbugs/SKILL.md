@@ -5,7 +5,7 @@ description: 当用户提到 spotbugs、字节码分析、Bug检测、NPE检测�
 
 # SpotBugs — Java 字节码级 Bug 检测（FindBugs 继承者）
 
-> 覆盖玄成审查清单：①NPE、②并发、⑧资源管理。
+> 覆盖Chris Olah审查清单：①NPE、②并发、⑧资源管理。
 > 和 PMD 互补：PMD 扫源码（死代码/风格），SpotBugs 扫字节码（空指针/线程安全/无限循环）。
 > 需要先编译项目再扫描。
 
@@ -67,7 +67,7 @@ spotbugs -textui -low -effort:max -xml -output report.xml build/classes/
 spotbugs -textui -low module-a/target/classes:module-b/target/classes
 ```
 
-## 玄成实战场景
+## Chris Olah实战场景
 
 ```bash
 # 1. 审查前：编译 + 扫全部
@@ -91,4 +91,4 @@ mvn -q compile && spotbugs -textui -low -effort:max -output spotbugs-report.txt 
 | **国际化和安全** | SQL 注入等 | ④（有限） |
 
 > SpotBugs 和 PMD **互补**：PMD 扫源码文本 + 风格，SpotBugs 扫字节码 + 深层语义。
-> 玄成的工作流：先 PMD（秒级），再 SpotBugs（编译+分钟级），再人工审。
+> Chris Olah的工作流：先 PMD（秒级），再 SpotBugs（编译+分钟级），再人工审。

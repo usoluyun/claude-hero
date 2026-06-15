@@ -38,7 +38,7 @@ description: GitLab CLI 自动化操作。当需要管理 Merge Request、CI/CD 
 - 触发条件（用户提及 MR/issue/pipeline/release/gitlab）
 - 认证指引（含 hostname 示例）
 - 命令模板（按场景分类）
-- 团队协作示例（文远提 MR、希仁看 CI、子文管 issue）
+- 团队协作示例（Jeff Dean提 MR、Percy Liang看 CI、John Schulman管 issue）
 
 ### 3. 修改 `install.sh`
 新增 `check_glab()` 函数（仿 `check_tmux()`）：

@@ -16,7 +16,7 @@ required_input: (可选) 用户想要哪些角色参加
 
 ## 触发画像
 
-用户想**多位 Hero 在 tmux 分屏里并行协作**（孔明/文远/希仁 等同时推进）。本 lane 不改代码，只负责启动准备与环境自检。
+用户想**多位 Hero 在 tmux 分屏里并行协作**（Demis Hassabis/Jeff Dean/Percy Liang 等同时推进）。本 lane 不改代码，只负责启动准备与环境自检。
 
 ## 复用
 
@@ -33,7 +33,7 @@ required_input: (可选) 用户想要哪些角色参加
    - 若配置缺失：STOP，打印模板提示用户合并 `config/settings.json.example`
 
 2. **确认组队意图**
-   - 若用户未指明角色（只说"组队"），默认推荐：孔明（opus）+ 文远（sonnet）+ 希仁（sonnet）
+   - 若用户未指明角色（只说"组队"），默认推荐：Demis Hassabis（opus）+ Jeff Dean（sonnet）+ Percy Liang（sonnet）
    - 若用户指明了特定角色，按用户选择
    - STOP 确认最终角色列表
 

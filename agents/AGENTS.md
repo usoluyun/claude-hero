@@ -1,7 +1,7 @@
 ---
 agents:
   - name: hero-java-tech-lead
-    display_name: 孔明
+    display_name: Demis Hassabis
     model: opus
     role_type: planner
     readonly: false
@@ -9,7 +9,7 @@ agents:
     triggers: [架构设计, 任务拆解, Sprint规划]
 
   - name: hero-java-backend-developer
-    display_name: 文远
+    display_name: Jeff Dean
     model: sonnet
     role_type: executor
     readonly: false
@@ -17,7 +17,7 @@ agents:
     triggers: [实现接口, Controller, Service]
 
   - name: hero-java-data-engineer
-    display_name: 子长
+    display_name: Fei-Fei Li
     model: sonnet
     role_type: executor
     readonly: false
@@ -25,7 +25,7 @@ agents:
     triggers: [SQL, MyBatis, Mapper, DBA]
 
   - name: hero-java-test-engineer
-    display_name: 希仁
+    display_name: Percy Liang
     model: sonnet
     role_type: executor
     readonly: false
@@ -33,7 +33,7 @@ agents:
     triggers: [单元测试, TDD, BDD, Playwright]
 
   - name: hero-java-code-reviewer
-    display_name: 玄成
+    display_name: Chris Olah
     model: opus
     role_type: reviewer
     readonly: true
@@ -41,7 +41,7 @@ agents:
     triggers: [代码审查, review, 质量]
 
   - name: hero-java-security-auditor
-    display_name: 鹏举
+    display_name: Jan Leike
     model: opus
     role_type: reviewer
     readonly: true
@@ -49,7 +49,7 @@ agents:
     triggers: [安全审计, security, OWASP]
 
   - name: hero-java-ecrm
-    display_name: 子文
+    display_name: John Schulman
     model: sonnet
     role_type: navigator
     readonly: true
@@ -57,7 +57,7 @@ agents:
     triggers: [ecrm, 企业CRM, 审批]
 
   - name: hero-java-hotel-product-center
-    display_name: 郑和
+    display_name: Oriol Vinyals
     model: sonnet
     role_type: navigator
     readonly: true
@@ -65,7 +65,7 @@ agents:
     triggers: [hotel-product, 房价码, 产品中心]
 
   - name: hero-java-owner-biz
-    display_name: 霞客
+    display_name: David Silver
     model: sonnet
     role_type: navigator
     readonly: true
@@ -77,12 +77,12 @@ agents:
 
 | 花名 | agent | 类型 | model | readonly |
 |------|-------|------|-------|----------|
-| 孔明 | hero-java-tech-lead | planner | opus | no |
-| 文远 | hero-java-backend-developer | executor | sonnet | no |
-| 子长 | hero-java-data-engineer | executor | sonnet | no |
-| 希仁 | hero-java-test-engineer | executor | sonnet | no |
-| 玄成 | hero-java-code-reviewer | reviewer | opus | yes |
-| 鹏举 | hero-java-security-auditor | reviewer | opus | yes |
-| 子文 | hero-java-ecrm | navigator | sonnet | yes |
-| 郑和 | hero-java-hotel-product-center | navigator | sonnet | yes |
-| 霞客 | hero-java-owner-biz | navigator | sonnet | yes |
+| Demis Hassabis | hero-java-tech-lead | planner | opus | no |
+| Jeff Dean | hero-java-backend-developer | executor | sonnet | no |
+| Fei-Fei Li | hero-java-data-engineer | executor | sonnet | no |
+| Percy Liang | hero-java-test-engineer | executor | sonnet | no |
+| Chris Olah | hero-java-code-reviewer | reviewer | opus | yes |
+| Jan Leike | hero-java-security-auditor | reviewer | opus | yes |
+| John Schulman | hero-java-ecrm | navigator | sonnet | yes |
+| Oriol Vinyals | hero-java-hotel-product-center | navigator | sonnet | yes |
+| David Silver | hero-java-owner-biz | navigator | sonnet | yes |

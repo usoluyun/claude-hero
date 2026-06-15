@@ -32,12 +32,12 @@ Hero 是一个 AI agent——有名字、有花名、有明确的职责边界。
 
 | 花名 | 本名 | 梯队 | 负责什么 |
 |------|------|------|---------|
-| **孔明** | hero-java-tech-lead | 规划 | 技术负责人、拆任务、画架构 |
-| **文远** | hero-java-backend-developer | 执行 | 写 Controller/Service，接入中间件 |
-| **子长** | hero-java-data-engineer | 执行 | MyBatis SQL + DBA |
-| **希仁** | hero-java-test-engineer | 执行 | TDD/BDD/冒烟/端到端测试 |
-| **玄成** | hero-java-code-reviewer | 评审 | 代码审查（只读） |
-| **鹏举** | hero-java-security-auditor | 评审 | 安全设计审计（只读） |
+| **Demis Hassabis** | hero-java-tech-lead | 规划 | 技术负责人、拆任务、画架构 |
+| **Jeff Dean** | hero-java-backend-developer | 执行 | 写 Controller/Service，接入中间件 |
+| **Fei-Fei Li** | hero-java-data-engineer | 执行 | MyBatis SQL + DBA |
+| **Percy Liang** | hero-java-test-engineer | 执行 | TDD/BDD/冒烟/端到端测试 |
+| **Chris Olah** | hero-java-code-reviewer | 评审 | 代码审查（只读） |
+| **Jan Leike** | hero-java-security-auditor | 评审 | 安全设计审计（只读） |
 
 #### ② 领航 Hero（项目型）——按服务只读带路
 
@@ -45,13 +45,13 @@ Hero 是一个 AI agent——有名字、有花名、有明确的职责边界。
 
 | 花名 | 本名 | 带路的服务 |
 |------|------|-----------|
-| **子文** | hero-java-ecrm | 企业/连锁/促销 申请审批工作流（特殊栈） |
-| **郑和** | hero-java-hotel-product-center | 酒店产品中心（房价码 / 定价 / 渠道映射） |
-| **霞客** | hero-java-owner-biz | 雅途业主服务端（大单体多业务域） |
+| **John Schulman** | hero-java-ecrm | 企业/连锁/促销 申请审批工作流（特殊栈） |
+| **Oriol Vinyals** | hero-java-hotel-product-center | 酒店产品中心（房价码 / 定价 / 渠道映射） |
+| **David Silver** | hero-java-owner-biz | 雅途业主服务端（大单体多业务域） |
 
 > 一句话记住分工：**领航 Hero 圈定「在哪改、影响谁」，标准 Hero 负责「具体怎么改」。** 服务越多，领航 Hero 越多——目标是让每个 Java 服务都有一位熟门熟路的带路人。
 
-> **花名取自中国历史英雄的字号。** 它不是排行榜上的名次，而是身边一个同行伙伴的名字——叫得出名字，才有温度。花名是团队的共同语言，也是文化的印记。你也可以给你创造的 Hero 取花名，就像公司里的伙伴都有自己的花名一样。
+> **花名取自创造了计算与 AI 时代的先驱——他们的名字值得被记住。** 它不是排行榜上的名次，而是身边一个同行伙伴的名字——叫得出名字，才有温度。花名是团队的共同语言，也是一份致敬。你也可以给你创造的 Hero 取花名，就像公司里的伙伴都有自己的花名一样。
 
 ---
 
@@ -63,7 +63,7 @@ git clone <repo-url> claude-hero && cd claude-hero && bash install.sh
 
 # 给一个新 Java 服务开荒（花名可选，留空自动分配）
 bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm  # 花名可选，自动分配
-bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm 子文  # 也可显式指定
+bash scripts/hero-init.sh ~/Documents/ATLWork/ecrm John Schulman  # 也可显式指定
 
 # 然后直接用意图叫 Hero
 hero 修一下登录报错          # → 自动分诊到 bugfix 线
@@ -83,9 +83,9 @@ cd claude-hero && bash uninstall.sh
 
 接入后你可以：
 
-- **用现有的 Hero**——文远帮你写代码，鹏举帮你查安全，希仁帮你写测试
-- **用 Agent Teams 组队**——孔明出设计 + 文远写代码 + 希仁补测试，三位并行推进，自动分屏协作（tmux 已自动安装）
-- **改进现有的 Hero**——文远的 prompt 可以更好？提 PR，大家一起变强
+- **用现有的 Hero**——Jeff Dean帮你写代码，Jan Leike帮你查安全，Percy Liang帮你写测试
+- **用 Agent Teams 组队**——Demis Hassabis出设计 + Jeff Dean写代码 + Percy Liang补测试，三位并行推进，自动分屏协作（tmux 已自动安装）
+- **改进现有的 Hero**——Jeff Dean的 prompt 可以更好？提 PR，大家一起变强
 - **创造你自己的 Hero**——你最懂你日常做什么。造一个，命个花名，解放自己
 - **沉淀团队的 Skill**——团队特有的工作流、规范，写成 Skill 共享出来
 
@@ -101,7 +101,7 @@ cd claude-hero && bash uninstall.sh
 
 ### 📋 PRD 驱动开发（hero-prd-to-java）
 
-给一个飞书 PRD 链接 → 自动读取 → 孔明出设计文档 + Sprint 计划 → 多 Hero 并行开发 → 玄成和鹏举把关 → 合并。全程确认门控 + worktree 隔离。
+给一个飞书 PRD 链接 → 自动读取 → Demis Hassabis出设计文档 + Sprint 计划 → 多 Hero 并行开发 → Chris Olah和Jan Leike把关 → 合并。全程确认门控 + worktree 隔离。
 
 ### 🧭 代码图与索引（codegraph）
 
@@ -115,10 +115,10 @@ cd claude-hero && bash uninstall.sh
 
 一个新 Java 服务从无到有接入：`bash scripts/hero-init.sh <项目路径> [花名]` → 自动建 codegraph 索引 + 生成领航 Hero + 登记花名册 + 开好 Git 分支，剩下提 MR 即可。
 
-> **花名是可选参数**：留空时系统会从历史人物字号里随机挑一个未被占用的花名自动分配；显式传入时必须唯一（不与现有 Hero 重复，脚本会校验）。
+> **花名是可选参数**：留空时系统会从先驱名字池里随机挑一个未被占用的花名自动分配；显式传入时必须唯一（不与现有 Hero 重复，脚本会校验）。
 ### 🤝 Agent Teams（团队协作）
 
-多位 Hero 组队协作——孔明出设计、文远写代码、希仁补测试，三位同时在各自 pane 里并行推进，互相通信，合力完成复杂任务。`install.sh` 已自动检测并安装 `tmux`（分屏模式依赖），无需手动配置。
+多位 Hero 组队协作——Demis Hassabis出设计、Jeff Dean写代码、Percy Liang补测试，三位同时在各自 pane 里并行推进，互相通信，合力完成复杂任务。`install.sh` 已自动检测并安装 `tmux`（分屏模式依赖），无需手动配置。
 
 ```bash
 # 进入 tmux 会话
@@ -126,7 +126,7 @@ tmux new -s work
 claude
 
 # 对 Claude 说：
-# "Spawn a team of 3 agents: 孔明（opus）做设计，文远（sonnet）写代码，希仁（haiku）写测试"
+# "Spawn a team of 3 agents: Demis Hassabis（opus）做设计，Jeff Dean（sonnet）写代码，Percy Liang（haiku）写测试"
 ```
 
 ---
@@ -148,7 +148,7 @@ claude
 ```
 1. 人在 GitLab 建主 Issue（标签: hero::type:epic）
    ↓
-2. tech-lead (孔明) 自动拆解子 Issue（分配给各角色 agent）
+2. tech-lead (Demis Hassabis) 自动拆解子 Issue（分配给各角色 agent）
    ↓
 3. 各 agent 认领、执行、建 MR
    ↓

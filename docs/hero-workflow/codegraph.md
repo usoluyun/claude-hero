@@ -83,17 +83,17 @@ Frontmatter 的 `description` 字段遵循**四段式命令规范**：
 
 ```
 角色 agent（横向干活，跨服务通用）
- ├─ 规划层        孔明     hero-java-tech-lead
- ├─ 执行层        文远     hero-java-backend-developer
- │                子长     hero-java-data-engineer
- │                希仁     hero-java-test-engineer
- └─ 评审门控层    玄成     hero-java-code-reviewer
-                  鹏举     hero-java-security-auditor
+ ├─ 规划层        Demis Hassabis     hero-java-tech-lead
+ ├─ 执行层        Jeff Dean     hero-java-backend-developer
+ │                Fei-Fei Li     hero-java-data-engineer
+ │                Percy Liang     hero-java-test-engineer
+ └─ 评审门控层    Chris Olah     hero-java-code-reviewer
+                  Jan Leike     hero-java-security-auditor
 
 项目领航 agent（按服务只读带路 = 领航研究层）
- ├─ 子文     hero-java-ecrm
- ├─ 郑和     hero-java-hotel-product-center
- └─ 霞客     hero-java-owner-biz
+ ├─ John Schulman     hero-java-ecrm
+ ├─ Oriol Vinyals     hero-java-hotel-product-center
+ └─ David Silver     hero-java-owner-biz
 ```
 
 > 一句话记住分工：领航 agent 圈定「在哪改、影响谁」，角色 agent 负责「具体怎么改」

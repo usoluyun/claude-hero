@@ -1,6 +1,6 @@
 ---
 name: hero-jq
-description: 当用户提到 jq、JSON处理、API响应提取、JSON格式化、命令行JSON处理、文远实战场景时触发。
+description: 当用户提到 jq、JSON处理、API响应提取、JSON格式化、命令行JSON处理、Jeff Dean实战场景时触发。
 ---
 
 # jq — JSON 命令行处理器
@@ -80,7 +80,7 @@ done
 | `jq --arg v "val" 'select(.f == $v)'` | 传变量 |
 | `jq -f filter.jq data.json` | 从文件读 filter |
 
-## 文远实战场景
+## Jeff Dean实战场景
 
 ```bash
 # 写完接口自测：调用并格式化响应

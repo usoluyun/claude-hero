@@ -152,7 +152,7 @@ glab issue list \
   --label "hero::agent:<name>,hero::status:pending" \
   --output json
 
-# 示例：文远拉取自己的待办
+# 示例：Jeff Dean拉取自己的待办
 glab issue list \
   --label "hero::agent:wenyuan,hero::status:pending" \
   --output json
@@ -259,7 +259,7 @@ glab mr create --fill --related-issue <iid>
 
 ## 子 Issue 拆解（Tech-Lead 用法）
 
-tech-lead（如孔明）负责将主 Issue（epic）拆解为可执行的子 Issue（task），分配给各 agent。
+tech-lead（如Demis Hassabis）负责将主 Issue（epic）拆解为可执行的子 Issue（task），分配给各 agent。
 
 ### 创建子 Issue
 
@@ -318,9 +318,9 @@ glab issue note <parent-iid> -m "## 📋 子任务拆解完成
 
 | 子任务 | 负责人 | 优先级 |
 |--------|--------|--------|
-| #<child-1-iid> 数据库表设计 | 子长 | high |
-| #<child-2-iid> Service + Controller | 文远 | medium |
-| #<child-3-iid> 冒烟测试 | 希仁 | low |"
+| #<child-1-iid> 数据库表设计 | Fei-Fei Li | high |
+| #<child-2-iid> Service + Controller | Jeff Dean | medium |
+| #<child-3-iid> 冒烟测试 | Percy Liang | low |"
 ```
 
 > 🚨 **重要**：tech-lead 在创建子 Issue **之前必须停下并向用户确认拆解方案**。不要自作主张直接批量创建。让用户确认子任务的划分、负责人分配、优先级设定后再执行。
@@ -452,7 +452,7 @@ glab api projects/:id/pipelines | jq '.[] | {id, status, ref}'
 
 ## Hero 协作场景
 
-### 玄成（代码审查员）
+### Chris Olah（代码审查员）
 
 ```bash
 # 列出待审 MR
@@ -464,7 +464,7 @@ glab mr note -m "逻辑 OK，合并吧" 42
 glab mr approve 42
 ```
 
-### 文远（后端开发）
+### Jeff Dean（后端开发）
 
 ```bash
 # 开发完提 MR → 等 CI → 合并
@@ -473,7 +473,7 @@ glab ci status
 glab mr merge 42 --squash --delete-source-branch
 ```
 
-#### 文远的 Issue 任务流
+#### Jeff Dean的 Issue 任务流
 
 ```bash
 # 1. 拉取自己的待办
@@ -505,7 +505,7 @@ glab issue update 45 \
 glab issue close 45
 ```
 
-### 希仁（测试工程师）
+### Percy Liang（测试工程师）
 
 ```bash
 # 检查 CI → 看失败日志 → 重试
@@ -514,7 +514,7 @@ glab ci view 12345
 glab ci retry 12345
 ```
 
-### 孔明（技术负责人）
+### Demis Hassabis（技术负责人）
 
 ```bash
 # 全景查看

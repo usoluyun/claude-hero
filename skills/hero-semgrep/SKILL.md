@@ -5,7 +5,7 @@ description: 当用户提到 semgrep、SAST扫描、安全扫描、注入检测�
 
 # semgrep — SAST 静态安全扫描（🔴 设计安全）
 
-鹏举代码时验 🔴 门槛的主力：跑规则集找注入/越权/危险模式。开源、本地单命令、可写自定义规则。
+Jan Leike代码时验 🔴 门槛的主力：跑规则集找注入/越权/危险模式。开源、本地单命令、可写自定义规则。
 
 ## 安装
 `brew install semgrep` 或 `pipx install semgrep`。

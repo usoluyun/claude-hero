@@ -24,27 +24,34 @@ for layer in 规划层 执行层 评审门控层 领航研究层; do
   assert_ok "grep -qF '$layer' '$LAYERS'" "layer name $layer in doc"
 done
 
-# 6. 9 个漫威中文代号都在 doc 里
-for hero in 孔明 文远 子长 希仁 玄成 鹏举 子文 郑和 霞客; do
-  assert_ok "grep -qF '$hero' '$LAYERS'" "marvel name $hero in doc"
-done
+# 6. 9 个先驱花名（全名）都在 doc 里
+check_name_in_doc() { assert_ok "grep -qF '$1' '$LAYERS'" "pioneer name $1 in doc"; }
+check_name_in_doc "Demis Hassabis"
+check_name_in_doc "Jeff Dean"
+check_name_in_doc "Fei-Fei Li"
+check_name_in_doc "Percy Liang"
+check_name_in_doc "Chris Olah"
+check_name_in_doc "Jan Leike"
+check_name_in_doc "John Schulman"
+check_name_in_doc "Oriol Vinyals"
+check_name_in_doc "David Silver"
 
-# 7. 9 个 agent 露出行：含本 agent 漫威名 + token（漫威名与 hero 露出都不漏）
+# 7. 9 个 agent 露出行：含本 agent 先驱花名 + token（花名与 hero 露出都不漏）
 TOKEN='🦸 hero ▸'
-check_agent_hero() { # $1=agent file stem, $2=中文漫威名
+check_agent_hero() { # $1=agent file stem, $2=先驱花名（全名，需加引号传入）
   local f="$REPO/agents/$1.md"
   assert_ok "grep -qF '$TOKEN' '$f'" "$1 still has hero token"
-  assert_ok "grep -qF '$2' '$f'" "$1 露出行 has marvel name $2"
+  assert_ok "grep -qF '$2' '$f'" "$1 露出行 has pioneer name $2"
 }
-check_agent_hero hero-java-tech-lead 孔明
-check_agent_hero hero-java-backend-developer 文远
-check_agent_hero hero-java-data-engineer 子长
-check_agent_hero hero-java-test-engineer 希仁
-check_agent_hero hero-java-code-reviewer 玄成
-check_agent_hero hero-java-security-auditor 鹏举
-check_agent_hero hero-java-ecrm 子文
-check_agent_hero hero-java-hotel-product-center 郑和
-check_agent_hero hero-java-owner-biz 霞客
+check_agent_hero hero-java-tech-lead "Demis Hassabis"
+check_agent_hero hero-java-backend-developer "Jeff Dean"
+check_agent_hero hero-java-data-engineer "Fei-Fei Li"
+check_agent_hero hero-java-test-engineer "Percy Liang"
+check_agent_hero hero-java-code-reviewer "Chris Olah"
+check_agent_hero hero-java-security-auditor "Jan Leike"
+check_agent_hero hero-java-ecrm "John Schulman"
+check_agent_hero hero-java-hotel-product-center "Oriol Vinyals"
+check_agent_hero hero-java-owner-biz "David Silver"
 
 # 8. hero-conventions 露出模板含「英雄名（agent）」格式（含全角括号 （ 与 英雄名 字样）
 CONV="$REPO/skills/hero-conventions/SKILL.md"
@@ -106,7 +113,7 @@ assert_ok "grep -qF 'gitleaks' '$LAYERS'" "矩阵含 gitleaks"
 assert_ok "grep -qF '设计时' '$LAYERS'" "矩阵含双模（设计时）"
 assert_ok "grep -qF '强制门槛' '$LAYERS'" "矩阵含强制门槛"
 
-# 14. 合规规范文档（鹏举判定敏感/加密/鉴权的权威口径）
+# 14. 合规规范文档（Jan Leike 判定敏感/加密/鉴权的权威口径）
 STD="$REPO/docs/security-standards.md"
 assert_ok "[ -f '$STD' ]" "security-standards.md 存在"
 assert_ok "grep -qF 'PCI-DSS' '$STD'" "含 PCI-DSS"

@@ -59,12 +59,12 @@ bash scripts/hero-init.sh <project_path> [chinese_name]
 | 参数 | 必填 | 说明 | 示例 |
 |------|------|------|------|
 | `project_path` | ✅ | 目标项目**绝对路径** | `~/Documents/ATLWork/owner-biz` |
-| `chinese_name` | ⚪ 可选 | 花名（历史人物字号，必须唯一不可与现有 agent 冲突）。**留空时由脚本自动从字号池中分配一个未占用的花名** | `霞客`、`子文`、`郑和` |
+| `chinese_name` | ⚪ 可选 | 花名（计算/AI 先驱之名，必须唯一不可与现有 agent 冲突）。**留空时由脚本自动从先驱名字池中分配一个未占用的花名** | `David Silver`、`John Schulman`、`Oriol Vinyals` |
 
 **完整示例**：
 ```bash
 # 显式指定花名
-bash scripts/hero-init.sh ~/Documents/ATLWork/owner-biz 霞客
+bash scripts/hero-init.sh ~/Documents/ATLWork/owner-biz David Silver
 
 # 不指定花名，自动分配
 bash scripts/hero-init.sh ~/Documents/ATLWork/owner-biz
@@ -182,8 +182,8 @@ $ bash scripts/hero-init.sh ~/Documents/ATLWork/some-service 文渊
 #### ② 登记能力矩阵（必做）
 
 在 `docs/hero-agent-layers.md` 的两处各追一行：
-- **「历史英雄代号映射」表** — Agent + 英雄代号 + 取名原因
-- **「领航研究层」能力矩阵** — Agent + 英雄代号 + model + 触发词 + 应加载 skills + 该用 CLI + 怎么用
+- **「先驱花名映射」表** — Agent + 先驱花名 + 取名原因
+- **「领航研究层」能力矩阵** — Agent + 先驱花名 + model + 触发词 + 应加载 skills + 该用 CLI + 怎么用
 
 #### ③ 推送分支（按需）
 
@@ -432,16 +432,16 @@ rm -rf docs/.refresh-drafts/
 
 ### 8.2 花名规范
 
-- 中文历史人物字号，2-4 字
+- 计算/AI 先驱之名（姓氏为主）
 - 不与现有花名册冲突
 - 贴合项目业务特点
 
 **已用花名**（查 `docs/hero-agent-roster.md` 确认最新）：
 | 服务 | 花名 |
 |------|------|
-| ecrm | 子文 |
-| hotel-product-center | 郑和 |
-| owner-biz | 霞客 |
+| ecrm | John Schulman |
+| hotel-product-center | Oriol Vinyals |
+| owner-biz | David Silver |
 
 ---
 

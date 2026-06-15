@@ -52,7 +52,7 @@ hero-dispatch 路由表共 9 条 lane，但 **playbook 只覆盖其中 7 条**�
 
 > 完整骨架见 SKILL.md 的 Archetype B：**调查（领航 agent 摸地图 + codegraph，只读）→ 分析（影响面/可行性/风险/工作量）→ STOP（结论 + 选项 + 建议）**。
 
-**research** 是唯一的 readonly lane。不改代码、不写测试、不产 PR。它的产物是"调研结论文档"，通常作为后续 prd 线或 mutate 线的输入。参与角色全部只读：领航 agent 摸地图 + 孔明（tech-lead）做可行性/风险评估。
+**research** 是唯一的 readonly lane。不改代码、不写测试、不产 PR。它的产物是"调研结论文档"，通常作为后续 prd 线或 mutate 线的输入。参与角色全部只读：领航 agent 摸地图 + Demis Hassabis（tech-lead）做可行性/风险评估。
 
 ### 3. Two-phase（两段式）— 2 个 lane
 
@@ -69,7 +69,7 @@ hero-dispatch 路由表共 9 条 lane，但 **playbook 只覆盖其中 7 条**�
 
 **team** lane 不属于上述三个 archetype，它是独立的 **setup** 原型：环境自检 → STOP 角色确认 → 生成启动指引 → 退场。不改代码、不写测试、不委派子 agent。
 
-流程极简：检查 tmux 是否安装、`settings.json` 是否配置了 Agent Teams → 确认组队角色（默认孔明+文远+希仁）→ 输出 tmux 启动命令清单 → 退出。后续用户在 tmux 里自行启动各 agent。
+流程极简：检查 tmux 是否安装、`settings.json` 是否配置了 Agent Teams → 确认组队角色（默认Demis Hassabis+Jeff Dean+Percy Liang）→ 输出 tmux 启动命令清单 → 退出。后续用户在 tmux 里自行启动各 agent。
 
 ## 对比表
 
@@ -93,8 +93,8 @@ hero-dispatch 路由表共 9 条 lane，但 **playbook 只覆盖其中 7 条**�
 hero login 报 NPE
   → 勘察：领航 agent 摸地图 + systematic-debugging 复现
   → ⏸ STOP①：缺陷定位 + 修复方案确认
-  → RED：希仁写复现测试（触发 NPE 的失败用例）
-  → GREEN：文远修代码，测试转绿
+  → RED：Percy Liang写复现测试（触发 NPE 的失败用例）
+  → GREEN：Jeff Dean修代码，测试转绿
   → REFACTOR：清理
   → ⏸ STOP②：改动 + 测试结果 + 影响面复核报告
 ```
@@ -104,7 +104,7 @@ hero login 报 NPE
 ```
 hero 加个缓存行不行
   → 调查：领航 agent 摸地图 + codegraph 圈调用热点
-  → 分析：孔明评估可行性 / 风险 / 工作量
+  → 分析：Demis Hassabis评估可行性 / 风险 / 工作量
   → ⏸ STOP：结论 + 缓存方案选项 + 建议（不改代码）
 ```
 
@@ -112,7 +112,7 @@ hero 加个缓存行不行
 
 ```
 hero 登录接口 3 秒
-  → B 段诊断：领航 agent 定位热点 + 子长查慢查询执行计划
+  → B 段诊断：领航 agent 定位热点 + Fei-Fei Li查慢查询执行计划
   → ⏸ STOP：瓶颈清单（慢 SQL / N+1 / 未索引字段）
   → 用户挑：只优化索引，不改连接池
   → A 段：RED（基准测试：响应 ≤ 500ms）→ GREEN 优化 → 基准达标
@@ -123,7 +123,7 @@ hero 登录接口 3 秒
 ```
 hero 组队 3 位 Agent
   → 环境自检：tmux ✓ / settings.json ✓
-  → ⏸ STOP：确认角色（孔明 opus + 文远 sonnet + 希仁 sonnet）
+  → ⏸ STOP：确认角色（Demis Hassabis opus + Jeff Dean sonnet + Percy Liang sonnet）
   → 输出 tmux 启动命令 → 退场
 ```
 

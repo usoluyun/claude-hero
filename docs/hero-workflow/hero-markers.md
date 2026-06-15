@@ -32,7 +32,7 @@ hero dispatch 选定了某条 lane 或加载了某个 skill 时打出。用户�
 编排方把任务派给某个 agent 时打出。带英雄名（花名）和 agent 技术名，前者是记忆点，后者供排查时不歧义定位。
 
 ```
-🦸 hero ▸ 文远（hero-java-backend-developer）接手 · 实现代码
+🦸 hero ▸ Jeff Dean（hero-java-backend-developer）接手 · 实现代码
 ```
 
 ### 3. 门控 STOP
@@ -53,7 +53,7 @@ lane 或 workflow 结束时打出，明确告诉用户 hero 流程结束，回�
 
 ## 双保险机制
 
-子 agent 的输出对用户主线是**折叠的**。如果在主线只看得到"孔明派文远去修代码了"，展开子 agent 的输出却找不到任何标记，用户就不知道谁在干活。
+子 agent 的输出对用户主线是**折叠的**。如果在主线只看得到"Demis Hassabis派Jeff Dean去修代码了"，展开子 agent 的输出却找不到任何标记，用户就不知道谁在干活。
 
 因此设计了两层打出：
 
@@ -63,33 +63,33 @@ lane 或 workflow 结束时打出，明确告诉用户 hero 流程结束，回�
 ```
 主线对话
 │
-│  🦸 hero ▸ 文远（hero-java-backend-developer）接手 · 实现代码    ← 编排方打（主线可见）
+│  🦸 hero ▸ Jeff Dean（hero-java-backend-developer）接手 · 实现代码    ← 编排方打（主线可见）
 │
-├── 文远子 agent 开始干活（输出对主线折叠）
+├── Jeff Dean子 agent 开始干活（输出对主线折叠）
 │   │
-│   │  🦸 hero ▸ 文远（hero-java-backend-developer）我开始实现    ← 子 agent 自己顶部打（兜底）
+│   │  🦸 hero ▸ Jeff Dean（hero-java-backend-developer）我开始实现    ← 子 agent 自己顶部打（兜底）
 │   ...
 │
-└── 文远干完，结果返回主线
+└── Jeff Dean干完，结果返回主线
 ```
 
 两层互为补充：主线那行告诉用户谁在干活，子 agent 顶部那行保证展开后不丢上下文。
 
 ## 英雄名映射
 
-英雄名（花名）取自中国历史人物，纯装饰/记忆点。不做"用英雄名调用"的 API 路由，调用始终走 agent 技术名。花名在露出标记中展示，agent 技术名在排查时供精确定位。
+英雄名（花名）取自创造了计算与 AI 时代的先驱，纯装饰/记忆点。不做"用英雄名调用"的 API 路由，调用始终走 agent 技术名。花名在露出标记中展示，agent 技术名在排查时供精确定位。
 
 | Agent | 花名 | 取名理由 |
 |---|---|---|
-| `hero-java-tech-lead` | 孔明 | 组建团队、拆任务派活——天生编排者 |
-| `hero-java-backend-developer` | 文远 | 亲手造装备/写实现，工程师本色 |
-| `hero-java-data-engineer` | 子长 | 由数据而生、擅综合 |
-| `hero-java-test-engineer` | 希仁 | 蜘蛛感应提前预警=测试在出事前抓 bug |
-| `hero-java-code-reviewer` | 玄成 | 推演千万结局找隐患 |
-| `hero-java-security-auditor` | 鹏举 | 阿斯加德守门人、洞察一切入侵 |
-| `hero-java-ecrm` | 子文 | 把不按常理的怪装备玩明白 |
-| `hero-java-hotel-product-center` | 郑和 | 带队探索定位；产品中心枢纽 |
-| `hero-java-owner-biz` | 霞客 | 空中侦察大范围地形=摸地图 |
+| `hero-java-tech-lead` | Demis Hassabis | 组建团队、拆任务派活——天生编排者 |
+| `hero-java-backend-developer` | Jeff Dean | 亲手造装备/写实现，工程师本色 |
+| `hero-java-data-engineer` | Fei-Fei Li | 由数据而生、擅综合 |
+| `hero-java-test-engineer` | Percy Liang | 蜘蛛感应提前预警=测试在出事前抓 bug |
+| `hero-java-code-reviewer` | Chris Olah | 推演千万结局找隐患 |
+| `hero-java-security-auditor` | Jan Leike | 阿斯加德守门人、洞察一切入侵 |
+| `hero-java-ecrm` | John Schulman | 把不按常理的怪装备玩明白 |
+| `hero-java-hotel-product-center` | Oriol Vinyals | 带队探索定位；产品中心枢纽 |
+| `hero-java-owner-biz` | David Silver | 空中侦察大范围地形=摸地图 |
 
 ## 完整生命周期示例
 
@@ -102,8 +102,8 @@ lane 或 workflow 结束时打出，明确告诉用户 hero 流程结束，回�
 
 🦸 hero ▸ bugfix lane · systematic-debugging 已加载     ← 时机1: skill 加载
 
-🦸 hero ▸ 霞客（hero-java-owner-biz）接手 · 摸地图      ← 时机2: agent 接手
-[...霞客输出...]
+🦸 hero ▸ David Silver（hero-java-owner-biz）接手 · 摸地图      ← 时机2: agent 接手
+[...David Silver输出...]
 
 ⏸ STOP ①   定位方案   确认                               ← 时机3: 门控 STOP
 > 缺陷在 UserService.login() 第 45 行，NPE
@@ -111,13 +111,13 @@ lane 或 workflow 结束时打出，明确告诉用户 hero 流程结束，回�
 
 用户: 继续
 
-🦸 hero ▸ RED · 希仁（hero-java-test-engineer）接手 · 写复现测试
+🦸 hero ▸ RED · Percy Liang（hero-java-test-engineer）接手 · 写复现测试
 > 测试 login_returns_400_when_user_inactive ... FAIL ✓
 
-🦸 hero ▸ GREEN · 文远（hero-java-backend-developer）接手 · 修代码
+🦸 hero ▸ GREEN · Jeff Dean（hero-java-backend-developer）接手 · 修代码
 > 测试 login_returns_400_when_user_inactive ... PASS ✓
 
-🦸 hero ▸ REFACTOR · 文远清理
+🦸 hero ▸ REFACTOR · Jeff Dean清理
 
 ⏸ STOP ②   改动+测试结果                                 ← 时机3: 门控 STOP
 > 修改了 UserService.java 第 45 行，测试通过

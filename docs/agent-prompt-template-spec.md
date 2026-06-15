@@ -13,9 +13,9 @@
 - 角色型 agent：强调职责范围（如"负责 Controller/Service 实现"）
 - 领航型 agent：强调绑定服务和只读职责
 
-**示例**（来自孔明）：
+**示例**（来自Demis Hassabis）：
 ```
-你是孔明——团队的战略架构师，负责将飞书 PRD 拆解为可执行的技术方案，规划 Sprint 节奏，协调文远/子长/希仁等多位 Hero 并行推进。
+你是Demis Hassabis——团队的战略架构师，负责将飞书 PRD 拆解为可执行的技术方案，规划 Sprint 节奏，协调Jeff Dean/Fei-Fei Li/Percy Liang等多位 Hero 并行推进。
 ```
 
 ---
@@ -29,7 +29,7 @@
 - 每条用 checkbox 格式 `[ ]`
 - 必须是执行者自己可以验证的（不依赖外部审批）
 
-**示例**（来自文远）：
+**示例**（来自Jeff Dean）：
 ```markdown
 - [ ] 代码已写入正确的包路径，无编译错误
 - [ ] 单元测试通过（如有）
@@ -45,7 +45,7 @@
 
 **内容要求**：
 - 所有 agent：说明 `tools:` 字段的实际含义（如"本 agent 没有 Write 权限"）
-- 只读型 agent：**必须**显式声明只读约束（玄成/鹏举/子文/郑和/霞客）
+- 只读型 agent：**必须**显式声明只读约束（Chris Olah/Jan Leike/John Schulman/Oriol Vinyals/David Silver）
 - 角色型 agent：说明可执行的工具范围
 - 其他约束：禁止触碰的文件、禁止的操作等
 
@@ -68,7 +68,7 @@
 - 每条配一个恢复策略
 - 格式：失败场景 → 恢复动作
 
-**示例**（来自子长）：
+**示例**（来自Fei-Fei Li）：
 ```markdown
 - 执行 `DROP TABLE` 或不可逆 DDL → STOP，确认是否有备份
 - MyBatis `#{}` 写成 `${}` → 立即修复（SQL 注入风险）

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="hero Agent 分层总图：9 个 hero-java-* agent 的分层架构、历史英雄代号、露出标记、能力矩阵、登记规则详解。">
+  <meta name="description" content="hero Agent 分层总图：9 个 hero-java-* agent 的分层架构、先驱花名、露出标记、能力矩阵、登记规则详解。">
   <meta name="author" content="亚朵集团">
   <meta name="keywords" content="claude-hero, agent, 分层架构, hero-java, 花名册, 能力矩阵">
   <meta property="og:title" content="Agent 分层架构 · 领航 Hero">
@@ -74,7 +74,7 @@
   <section class="mechanism-hero" aria-labelledby="page-title">
     <div class="container">
       <h1 id="page-title">Agent 分层架构</h1>
-      <p class="mechanism-subtitle">9 个 hero-java-* agent 分层 · 历史英雄代号 · 露出标记 · 能力矩阵</p>
+      <p class="mechanism-subtitle">9 个 hero-java-* agent 分层 · 先驱花名 · 露出标记 · 能力矩阵</p>
       <div class="mechanism-stats">
         <div class="stat">
           <span class="stat-num">9</span>
@@ -107,7 +107,7 @@
       <h3 class="docs-toc-title">目录</h3>
       <ul class="docs-toc">
         <li class="docs-toc-item"><a class="docs-toc-link" href="#overview">分层总图</a></li>
-        <li class="docs-toc-item"><a class="docs-toc-link" href="#hero-codes">历史英雄代号映射</a></li>
+        <li class="docs-toc-item"><a class="docs-toc-link" href="#hero-codes">先驱花名映射</a></li>
         <li class="docs-toc-item"><a class="docs-toc-link" href="#badge-format">露出标记格式</a></li>
         <li class="docs-toc-item"><a class="docs-toc-link" href="#capability-matrix">能力矩阵</a>
           <ul class="docs-toc">
@@ -129,67 +129,56 @@
         <section id="overview">
           <h1>hero Agent 分层总图</h1>
           <blockquote>
-            <p>一页看清 9 个 <code>hero-java-*</code> agent 谁在哪一层、叫什么代号、怎么用。</p>
+            <p>一页看清 9 个 <code>hero-java-*</code> agent 谁在哪一层、叫什么花名、怎么用。</p>
             <p>两条正交轴：<strong>角色 agent（横向干活）× 项目领航 agent（按服务只读带路）</strong>。</p>
           </blockquote>
-          <p>参考 oh-my-openagent 的 orchestration / planning / execution / specialist 分层，落到团队本土话术。本表是<strong>分层 + 历史英雄代号 + 能力</strong>的唯一事实源；领航层触发明细见 <a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/docs/hero-agent-roster.md"><code>hero-agent-roster.md</code></a>。</p>
+          <p>分层沿用 orchestration / planning / execution / specialist 的通用思路，落到团队本土话术。本表是<strong>分层 + 先驱花名 + 能力</strong>的唯一事实源；领航层触发明细见 <a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/docs/hero-agent-roster.md"><code>hero-agent-roster.md</code></a>。</p>
 
           <h2 id="overview-heading">分层总图</h2>
           <pre><code>角色 agent（横向干活，跨服务通用）
- ├─ 规划层        孔明     hero-java-tech-lead              (opus)
- ├─ 执行层        文远     hero-java-backend-developer      (sonnet)
- │                子长     hero-java-data-engineer          (sonnet)
- │                希仁     hero-java-test-engineer          (sonnet)
- └─ 评审门控层    玄成     hero-java-code-reviewer          (opus, 只读)
-                  鹏举     hero-java-security-auditor       (opus, 只读)
+ ├─ 规划层        Demis Hassabis   hero-java-tech-lead              (opus)
+ ├─ 执行层        Jeff Dean        hero-java-backend-developer      (sonnet)
+ │                Fei-Fei Li       hero-java-data-engineer          (sonnet)
+ │                Percy Liang      hero-java-test-engineer          (sonnet)
+ └─ 评审门控层    Chris Olah       hero-java-code-reviewer          (opus, 只读)
+                  Jan Leike        hero-java-security-auditor       (opus, 只读)
 
 项目领航 agent（按服务只读带路 = 领航研究层）
-                  子文     hero-java-ecrm                   (sonnet, 只读)
-                  郑和     hero-java-hotel-product-center   (sonnet, 只读)
-                  霞客     hero-java-owner-biz              (sonnet, 只读)</code></pre>
+                  John Schulman    hero-java-ecrm                   (sonnet, 只读)
+                  Oriol Vinyals    hero-java-hotel-product-center   (sonnet, 只读)
+                  David Silver     hero-java-owner-biz              (sonnet, 只读)</code></pre>
 
           <p><strong>正交性</strong>：角色 agent 跨服务通用、横向干活（规划/执行/评审三梯）；项目领航 agent 绑定单个服务、只读带路。二者不重叠：领航 agent 圈定"在哪改、影响谁"，角色 agent 负责"具体怎么改"。</p>
 
-          <p>与 oh-my-openagent 分层的对应（仅记来源，不进团队话术）：</p>
-
-          <table>
-            <caption>本团队层与 omo 层对应关系</caption>
-            <thead>
-              <tr><th scope="col">本团队层</th><th scope="col">对应 omo 层</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>规划层</td><td>Planning（Prometheus/Atlas）+ Orchestration（Sisyphus）</td></tr>
-              <tr><td>执行层</td><td>Worker/Execution（Hephaestus/Sisyphus-Junior）</td></tr>
-              <tr><td>评审门控层</td><td>Specialist 中的只读评审（Momus/Oracle 审查面）</td></tr>
-              <tr><td>领航研究层</td><td>Specialist/Research（Oracle/Librarian/Explore）</td></tr>
-            </tbody>
-          </table>
+          <p>四层沿用通用分层思路（仅记来源，不进团队话术）：规划层 = Planning + Orchestration；执行层 = Worker/Execution；评审门控层 = 只读评审；领航研究层 = 研究/检索带路。</p>
         </section>
 
-        <!-- 历史英雄代号映射 -->
+        <!-- 先驱花名映射 -->
         <section id="hero-codes">
-          <h2>历史英雄代号映射</h2>
-          <p>按各 agent 特点取名，<strong>纯装饰/记忆点</strong>：只用于露出标记与本表，不做"用英雄名调用"的路由。</p>
+          <h2>先驱花名映射</h2>
+          <p>花名取自<strong>当今 AI 时代活跃的科学家 / 工程师 / 算法人——创造了这个时代、名字值得被记住</strong>，按各 agent 特点对号入座。<strong>纯装饰/记忆点</strong>：只用于露出标记与本表，不做"用英雄名调用"的路由。被问到"这个花名是谁"时，按本表「简介 + 英文维基」回答。</p>
 
           <table>
-            <caption>Agent 历史英雄代号对照表</caption>
+            <caption>Agent 先驱花名对照表</caption>
             <thead>
               <tr>
                 <th scope="col">Agent</th>
-                <th scope="col">历史英雄代号</th>
-                <th scope="col">取名理由（贴特点）</th>
+                <th scope="col">花名</th>
+                <th scope="col">简介（机构 · 代表作）</th>
+                <th scope="col">为何贴这一岗</th>
+                <th scope="col">英文维基</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td><code>hero-java-tech-lead</code></td><td>孔明</td><td>组建团队、拆任务派活、最后验收——天生编排者</td></tr>
-              <tr><td><code>hero-java-backend-developer</code></td><td>文远</td><td>亲手造装备/写实现，工程师本色</td></tr>
-              <tr><td><code>hero-java-data-engineer</code></td><td>子长</td><td>由数据而生、擅综合；跨 MySQL/SQLServer 方言 = 多源数据合成</td></tr>
-              <tr><td><code>hero-java-test-engineer</code></td><td>希仁</td><td>蜘蛛感应提前预警 = 测试在出事前抓 bug</td></tr>
-              <tr><td><code>hero-java-code-reviewer</code></td><td>玄成</td><td>推演千万结局找隐患 = 正确性/质量评审</td></tr>
-              <tr><td><code>hero-java-security-auditor</code></td><td>鹏举</td><td>阿斯加德守门人、洞察一切入侵 = 安全审计守门</td></tr>
-              <tr><td><code>hero-java-ecrm</code></td><td>子文</td><td>把不按常理的怪装备玩明白；ecrm 非 Spring 特殊栈（ActionSoft BPM）</td></tr>
-              <tr><td><code>hero-java-hotel-product-center</code></td><td>郑和</td><td>带队探索定位；产品中心是定价/映射枢纽</td></tr>
-              <tr><td><code>hero-java-owner-biz</code></td><td>霞客</td><td>空中侦察大范围地形 = 大单体多业务域"摸地图"</td></tr>
+              <tr><td><code>hero-java-tech-lead</code></td><td>Demis Hassabis</td><td>Google DeepMind 联合创始人兼 CEO，AlphaGo·AlphaFold 缔造者，2024 诺贝尔化学奖</td><td>统领大兵团科研、编排全局——天生 orchestrator</td><td><a href="https://en.wikipedia.org/wiki/Demis_Hassabis">wiki</a></td></tr>
+              <tr><td><code>hero-java-backend-developer</code></td><td>Jeff Dean</td><td>Google 首席科学家、Google DeepMind 负责人；MapReduce/Bigtable/TensorFlow 之父</td><td>亲手造基础设施的工程之神，工程师本色</td><td><a href="https://en.wikipedia.org/wiki/Jeff_Dean">wiki</a></td></tr>
+              <tr><td><code>hero-java-data-engineer</code></td><td>Fei-Fei Li</td><td>斯坦福教授，ImageNet 缔造者，"AI 教母"</td><td>数据驱动深度学习的奠基者，大规模数据合成</td><td><a href="https://en.wikipedia.org/wiki/Fei-Fei_Li">wiki</a></td></tr>
+              <tr><td><code>hero-java-test-engineer</code></td><td>Percy Liang</td><td>斯坦福教授，基础模型研究中心（CRFM）主任，HELM 评测基准主导</td><td>评测/把关是其标签，出事前抓问题</td><td><a href="https://en.wikipedia.org/wiki/Percy_Liang">wiki</a></td></tr>
+              <tr><td><code>hero-java-code-reviewer</code></td><td>Chris Olah</td><td>Anthropic 联合创始人，神经网络（机制）可解释性先驱</td><td>看进内部找出真正发生了什么 = 评审挖隐患</td><td><a href="https://en.wikipedia.org/wiki/Chris_Olah">wiki</a></td></tr>
+              <tr><td><code>hero-java-security-auditor</code></td><td>Jan Leike</td><td>AI 对齐研究者，曾领导 OpenAI/DeepMind 安全，2024 加入 Anthropic</td><td>对齐 / 安全守门人</td><td><a href="https://en.wikipedia.org/wiki/Jan_Leike">wiki</a></td></tr>
+              <tr><td><code>hero-java-ecrm</code></td><td>John Schulman</td><td>OpenAI 联合创始人，PPO/RLHF 与 ChatGPT 背后 RL 负责人，曾任 Anthropic</td><td>驯服复杂 RL = 啃异构怪栈（ecrm 非 Spring 特殊栈）</td><td><a href="https://en.wikipedia.org/wiki/John_Schulman">wiki</a></td></tr>
+              <tr><td><code>hero-java-hotel-product-center</code></td><td>Oriol Vinyals</td><td>DeepMind，seq2seq 共同发明者、AlphaStar 负责人</td><td>序列映射 = 产品中心定价 / 渠道映射枢纽</td><td><a href="https://en.wikipedia.org/wiki/Oriol_Vinyals">wiki</a></td></tr>
+              <tr><td><code>hero-java-owner-biz</code></td><td>David Silver</td><td>DeepMind，AlphaGo/AlphaZero 负责人，强化学习泰斗</td><td>在广袤搜索空间里探路 = 大单体多业务域"摸地图"</td><td><a href="https://en.wikipedia.org/wiki/David_Silver_(computer_scientist)">wiki</a></td></tr>
             </tbody>
           </table>
         </section>
@@ -201,14 +190,14 @@
           <div class="format-example" aria-label="露出标记格式示例">
             <code>🦸 hero ▸ &lt;英雄名&gt;（&lt;agent&gt;）接手 · &lt;职责&gt;</code>
           </div>
-          <p>例：<code>🦸 hero ▸ 文远（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first</code></p>
+          <p>例：<code>🦸 hero ▸ Jeff Dean（hero-java-backend-developer）接手 · Controller/Service 实现，TDD-first</code></p>
           <p>前缀 token <code>🦸 hero ▸</code> 一字不改；英雄名作记忆点、agent 技术名供排查时不歧义定位。</p>
         </section>
 
         <!-- 能力矩阵 -->
         <section id="capability-matrix">
           <h2>能力矩阵</h2>
-          <p>按层分组，每行一个 agent。<code>历史英雄代号 / 层 / model / 怎么用</code> 必填；<code>触发词 / 应加载 skills / 该用 CLI</code> 允许 <code>TODO</code>（待后续逐个 agent 填深）。<strong>本表填好一格 → 去改对应 agent 文件 → 双向对齐</strong>（改 agent 文件是后续工作）。<code>TODO</code> 是约定哨兵值，代表"待补"，非缺漏。</p>
+          <p>按层分组，每行一个 agent。<code>先驱花名 / 层 / model / 怎么用</code> 必填；<code>触发词 / 应加载 skills / 该用 CLI</code> 允许 <code>TODO</code>（待后续逐个 agent 填深）。<strong>本表填好一格 → 去改对应 agent 文件 → 双向对齐</strong>（改 agent 文件是后续工作）。<code>TODO</code> 是约定哨兵值，代表"待补"，非缺漏。</p>
 
           <!-- 规划层 -->
           <h3 id="planning">规划层</h3>
@@ -217,7 +206,7 @@
             <thead>
               <tr>
                 <th scope="col">Agent</th>
-                <th scope="col">历史英雄代号</th>
+                <th scope="col">先驱花名</th>
                 <th scope="col">model</th>
                 <th scope="col">触发词</th>
                 <th scope="col">应加载 skills</th>
@@ -228,9 +217,9 @@
             <tbody>
               <tr>
                 <td><code>hero-java-tech-lead</code></td>
-                <td>孔明</td>
+                <td>Demis Hassabis</td>
                 <td>opus</td>
-                <td>技术负责人 / 孔明 / 架构设计 / 技术方案 / 任务拆解 / Sprint 规划 / 设计评审 / 模块划分 / 接口契约 / 技术选型</td>
+                <td>技术负责人 / Demis Hassabis / 架构设计 / 技术方案 / 任务拆解 / Sprint 规划 / 设计评审 / 模块划分 / 接口契约 / 技术选型</td>
                 <td>superpowers:brainstorming, superpowers:writing-plans, hero-conventions</td>
                 <td>codegraph, scc, ast-grep, jq, claude-mermaid</td>
                 <td>给它特性/需求 → 产出架构设计+任务分派清单 → 主会话据此分派各专家 → 回它汇总验收</td>
@@ -245,7 +234,7 @@
             <thead>
               <tr>
                 <th scope="col">Agent</th>
-                <th scope="col">历史英雄代号</th>
+                <th scope="col">先驱花名</th>
                 <th scope="col">model</th>
                 <th scope="col">触发词</th>
                 <th scope="col">应加载 skills</th>
@@ -256,27 +245,27 @@
             <tbody>
               <tr>
                 <td><code>hero-java-backend-developer</code></td>
-                <td>文远</td>
+                <td>Jeff Dean</td>
                 <td>sonnet</td>
-                <td>后端开发 / 文远 / 实现接口 / 写 Controller / 写 Service / 接入中间件 / Spring Boot 业务 / Maven 构建 / Gradle 构建</td>
+                <td>后端开发 / Jeff Dean / 实现接口 / 写 Controller / 写 Service / 接入中间件 / Spring Boot 业务 / Maven 构建 / Gradle 构建</td>
                 <td>hero-conventions, superpowers:test-driven-development</td>
                 <td>maven, gradle, jdk-multiversion, ast-grep, httpie, jq, codegraph</td>
                 <td>给它明确任务 → 实现 Controller/Service/DAO 与中间件接入，TDD-first</td>
               </tr>
               <tr>
                 <td><code>hero-java-data-engineer</code></td>
-                <td>子长</td>
+                <td>Fei-Fei Li</td>
                 <td>sonnet</td>
-                <td>数据工程师 / 子长 / MyBatis / 写 SQL / Mapper XML / 性能优化 / 索引设计 / 数据库管理 / DBA / 表结构 / 慢查询 / SQLServer / SQL 安全</td>
+                <td>数据工程师 / Fei-Fei Li / MyBatis / 写 SQL / Mapper XML / 性能优化 / 索引设计 / 数据库管理 / DBA / 表结构 / 慢查询 / SQLServer / SQL 安全</td>
                 <td>hero-conventions</td>
                 <td>SlowQL, pg_glimpse, mycli, sqlcmd, osv-scanner</td>
                 <td>给它 SQL/数据层需求 → 产出 MyBatis mapper/XML、resultMap、慢查询调优</td>
               </tr>
               <tr>
                 <td><code>hero-java-test-engineer</code></td>
-                <td>希仁</td>
+                <td>Percy Liang</td>
                 <td>sonnet</td>
-                <td>测试工程师 / 希仁 / 写测试 / 单元测试 / TDD / BDD / 接口测试 / Allure 报告 / 端到端测试 / 冒烟测试</td>
+                <td>测试工程师 / Percy Liang / 写测试 / 单元测试 / TDD / BDD / 接口测试 / Allure 报告 / 端到端测试 / 冒烟测试</td>
                 <td>superpowers:test-driven-development, gherkin, allure（经 <code>skills:</code> 字段预加载）</td>
                 <td>maven, gradle, httpie（接口冒烟）, allure（报告）；E2E 用 Playwright MCP</td>
                 <td>给它待测代码 → 单元(TDD)/BDD(.feature)/接口冒烟(httpie)/E2E(Playwright 无头)/Allure 报告，纯本地无容器</td>
@@ -291,7 +280,7 @@
             <thead>
               <tr>
                 <th scope="col">Agent</th>
-                <th scope="col">历史英雄代号</th>
+                <th scope="col">先驱花名</th>
                 <th scope="col">model</th>
                 <th scope="col">触发词</th>
                 <th scope="col">应加载 skills</th>
@@ -302,18 +291,18 @@
             <tbody>
               <tr>
                 <td><code>hero-java-code-reviewer</code></td>
-                <td>玄成</td>
+                <td>Chris Olah</td>
                 <td>opus（只读）</td>
-                <td>代码审查 / 玄成 / Code Review / 评审 / 代码质量 / 质量审查 / 审查清单</td>
+                <td>代码审查 / Chris Olah / Code Review / 评审 / 代码质量 / 质量审查 / 审查清单</td>
                 <td>—（自带评审 checklist + 严重级/<code>file:line</code> 格式，不依赖外部 skill）</td>
                 <td>PMD, SpotBugs, ast-grep, scc, codegraph, osv-scanner</td>
                 <td>给它 diff/SHA → 产出正确性与质量问题清单（不改码）</td>
               </tr>
               <tr>
                 <td><code>hero-java-security-auditor</code></td>
-                <td>鹏举</td>
+                <td>Jan Leike</td>
                 <td>opus（只读）</td>
-                <td>安全审计 / 鹏举 / 安全审查 / 安全设计 / 安全审计师 / 安全门控 / 安全评审 / 代码安全</td>
+                <td>安全审计 / Jan Leike / 安全审查 / 安全设计 / 安全审计师 / 安全门控 / 安全评审 / 代码安全</td>
                 <td>—（自带审计 checklist + OWASP/合规清单骨架，不依赖外部 skill）</td>
                 <td>semgrep, gitleaks（🔴 设计安全）；maven/gradle 依赖树 + WebSearch（🟡 CVE）</td>
                 <td><strong>设计时</strong>评审 design 文档定 🔴 门槛 + <strong>代码时</strong> semgrep/gitleaks/grep 验门槛。系统设计安全（未授权/越权/敏感数据/注入/不安全设计）= 🔴 强制门槛（⛔ 阻断）；组件 CVE = 🟡 提醒确认（不阻断）</td>
@@ -328,7 +317,7 @@
             <thead>
               <tr>
                 <th scope="col">Agent</th>
-                <th scope="col">历史英雄代号</th>
+                <th scope="col">先驱花名</th>
                 <th scope="col">model</th>
                 <th scope="col">触发词</th>
                 <th scope="col">应加载 skills</th>
@@ -339,7 +328,7 @@
             <tbody>
               <tr>
                 <td><code>hero-java-ecrm</code></td>
-                <td>子文</td>
+                <td>John Schulman</td>
                 <td>sonnet（只读）</td>
                 <td>ecrm、企业连锁促销审批、申请审批工作流、OpenAPI、BPMN、ActionSoft、AWS BPM、企业协议、连锁申请、促销活动审批</td>
                 <td>—（codegraph 带路，无需加载 skill）</td>
@@ -348,7 +337,7 @@
               </tr>
               <tr>
                 <td><code>hero-java-hotel-product-center</code></td>
-                <td>郑和</td>
+                <td>Oriol Vinyals</td>
                 <td>sonnet（只读）</td>
                 <td>房价码、RateCode、产品管理、定价、渠道映射、房型映射、CRS 房价码、市场价、价格模板</td>
                 <td>—（codegraph 带路，无需加载 skill）</td>
@@ -357,7 +346,7 @@
               </tr>
               <tr>
                 <td><code>hero-java-owner-biz</code></td>
-                <td>霞客</td>
+                <td>David Silver</td>
                 <td>sonnet（只读）</td>
                 <td>业主 App、业主 Web 后端、Banner、连锁用户、业主通讯录、合同、供应商评价、GOP 大数据、日报月报、消息推送、摸地图</td>
                 <td>—（codegraph 带路，无需加载 skill）</td>
@@ -372,8 +361,8 @@
             <p>触发词列：领航 agent 取自 <a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/docs/hero-agent-roster.md"><code>hero-agent-roster.md</code></a>「业务关键词/别名」，须与之一致；所有角色 agent 的触发词现已全部补全（此前标 <code>TODO</code> 的均已填）。</p>
             <p>领航 agent 由 <code>hero-refresh</code> 工作流定期保鲜（随代码漂移重生 agent 卡），但那是<strong>对其维护、非运行时加载</strong>；它们干活只用 codegraph，故「应加载 skills」列记 <code>—</code>。</p>
             <p><strong>框架/库文档核实</strong>统一分层：先读 <code>docs/vendor-docs/</code> 本地缓存（hero-refresh 维护）+ codegraph → 本地缺再用 <strong>context7 MCP</strong> 兜底。为此 backend / code-reviewer / security-auditor / tech-lead / data-engineer 的 <code>tools</code> 已含 context7 MCP（<code>mcp__plugin_context7_context7__*</code>）；security-auditor 另含 WebSearch/WebFetch 查 CVE，tech-lead 另含 Write/Edit 以落盘设计文档。</p>
-            <p>鹏举（security-auditor）双模：设计时读 <code>docs/design-*.md</code> 定 🔴 门槛、代码时验；🔴 = 系统设计安全（强制），🟡 = 组件依赖 CVE（提醒确认）。CLI（semgrep/gitleaks/CodeQL）经 Bash、OWASP 经 context7 → <code>vendor-docs</code>、合规口径见 <code>docs/security-standards.md</code>——<code>tools:</code> 白名单不变。详见 spec <code>2026-06-07-security-auditor-design-gate.md</code>。</p>
-            <p>希仁（test-engineer）的 skills（tdd/gherkin/allure）经 frontmatter <code>skills:</code> 字段<strong>预加载</strong>（本仓首次用该字段，C-systemic 试点）；E2E 的 Playwright MCP 经 <code>tools:</code> 白名单（<code>mcp__playwright__*</code>）+ <code>mcp/servers/playwright.json</code> 模板启用。纯本地测试、不依赖容器。详见 spec <code>2026-06-08-test-engineer-local-testing.md</code>。</p>
+            <p>Jan Leike（security-auditor）双模：设计时读 <code>docs/design-*.md</code> 定 🔴 门槛、代码时验；🔴 = 系统设计安全（强制），🟡 = 组件依赖 CVE（提醒确认）。CLI（semgrep/gitleaks/CodeQL）经 Bash、OWASP 经 context7 → <code>vendor-docs</code>、合规口径见 <code>docs/security-standards.md</code>——<code>tools:</code> 白名单不变。详见 spec <code>2026-06-07-security-auditor-design-gate.md</code>。</p>
+            <p>Percy Liang（test-engineer）的 skills（tdd/gherkin/allure）经 frontmatter <code>skills:</code> 字段<strong>预加载</strong>（本仓首次用该字段，C-systemic 试点）；E2E 的 Playwright MCP 经 <code>tools:</code> 白名单（<code>mcp__playwright__*</code>）+ <code>mcp/servers/playwright.json</code> 模板启用。纯本地测试、不依赖容器。详见 spec <code>2026-06-08-test-engineer-local-testing.md</code>。</p>
           </blockquote>
         </section>
 
@@ -385,8 +374,8 @@
             <li><strong>选轴</strong>：横向干活 → 角色 agent；按服务只读带路 → 项目领航 agent。</li>
             <li><strong>选层</strong>：角色 → 规划 / 执行 / 评审门控 其一；领航 → 领航研究层。</li>
             <li><strong>命名</strong> <code>hero-&lt;lang&gt;-&lt;...&gt;</code>，文件名 = frontmatter <code>name</code>（见 <a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a>）。</li>
-            <li><strong>起历史英雄代号</strong>：在「历史英雄代号映射」补一行（按特点取名）。</li>
-            <li><strong>补能力矩阵</strong>：在对应层的表补一行（历史英雄代号/model/怎么用 必填，其余可 <code>TODO</code>）。</li>
+            <li><strong>起先驱花名</strong>：在「先驱花名映射」补一行（按特点取名）。</li>
+            <li><strong>补能力矩阵</strong>：在对应层的表补一行（先驱花名/model/怎么用 必填，其余可 <code>TODO</code>）。</li>
             <li><strong>改露出行</strong>：在该 agent 文件 <code>## hero 露出</code> 写带英雄名的自报家门行。</li>
             <li>若是<strong>领航 agent</strong>，另在 <a href="https://gitlab.yaduo.com/ai/claude-hero/-/blob/main/docs/hero-agent-roster.md"><code>hero-agent-roster.md</code></a> 登记一行。</li>
             <li>跑 <code>bash tests/hero-agent-layers/run.sh</code> 确认未漏归层 / 漏代号。</li>

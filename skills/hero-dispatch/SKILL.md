@@ -32,7 +32,7 @@ description: hero 意图分诊入口。触发词：hero <自由意图>。听用�
 | research | 调研、评估、能不能、影响面、怎么改、要不要 | 问题/范围 | `lanes/research.md` |
 | perf | 慢、性能、瓶颈、优化耗时、压测、超时 | 慢的位置/指标 | `lanes/perf.md` |
 | security | 安全、越权、注入、漏洞、CVE、敏感信息 | 审计范围 | `lanes/security.md` |
-| team-组队 | 组队、team、spawn、分屏、并行、多位 Hero 同时干、孔明+文远+希仁 一起 | 组队意图（可选） | `lanes/team.md` |
+| team-组队 | 组队、team、spawn、分屏、并行、多位 Hero 同时干、Demis Hassabis+Jeff Dean+Percy Liang 一起 | 组队意图（可选） | `lanes/team.md` |
 
 ## 分诊三段式
 

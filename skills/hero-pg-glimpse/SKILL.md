@@ -1,6 +1,6 @@
 ---
 name: hero-pg-glimpse
-description: 当用户提到 pg_glimpse、PostgreSQL监控、数据库TUI、锁等待、缓存命中率、DBA排障、死元组、复制延迟、WAL、vacuum、wraparound 时触发。子长（hero-java-data-engineer）DBA 场景必备参考。
+description: 当用户提到 pg_glimpse、PostgreSQL监控、数据库TUI、锁等待、缓存命中率、DBA排障、死元组、复制延迟、WAL、vacuum、wraparound 时触发。Fei-Fei Li（hero-java-data-engineer）DBA 场景必备参考。
 ---
 
 # pg_glimpse — PostgreSQL 实时 TUI 监控
@@ -65,7 +65,7 @@ pg_glimpse -H localhost -d mydb -U postgres -r 1   # 每秒刷新
 - 复制延迟、检查点统计
 - TPS、WAL 速率、最老事务年龄
 
-## 子长实战场景
+## Fei-Fei Li实战场景
 
 ```bash
 # 1. 收到慢SQL告警 → 看当前活跃查询

@@ -1,6 +1,6 @@
 # 项目领航 Agent 花名册（roster）
 
-> 本表是**领航研究层**明细；全局分层（含角色 agent）+ 漫威代号见 [`hero-agent-layers.md`](./hero-agent-layers.md)。
+> 本表是**领航研究层**明细；全局分层（含角色 agent）+ 先驱花名见 [`hero-agent-layers.md`](./hero-agent-layers.md)。
 
 > 所有 `hero-java-<proj>` 项目领航 agent 的**确定性查找表**。
 >

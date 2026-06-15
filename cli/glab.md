@@ -136,7 +136,7 @@ glab api projects/:id/pipelines | jq '.[] | {id, status, ref}'
 
 ## Hero 协作场景
 
-### 玄成（代码审查员）——审 MR
+### Chris Olah（代码审查员）——审 MR
 
 ```bash
 # 列出待审 MR
@@ -150,7 +150,7 @@ glab mr note -m "逻辑没问题，把 TODO 清掉后合并" 42
 glab mr approve 42
 ```
 
-### 文远（后端开发）——提 MR
+### Jeff Dean（后端开发）——提 MR
 
 ```bash
 # 开发完成后提 MR
@@ -161,7 +161,7 @@ glab ci status
 glab mr merge 42 --squash --delete-source-branch
 ```
 
-### 希仁（测试工程师）——看 CI
+### Percy Liang（测试工程师）——看 CI
 
 ```bash
 # 检查 CI 状态
@@ -174,7 +174,7 @@ glab ci view 12345
 glab ci retry 12345
 ```
 
-### 孔明（技术负责人）——管 Release
+### Demis Hassabis（技术负责人）——管 Release
 
 ```bash
 # 查看项目 MR 全景
