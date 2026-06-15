@@ -6,9 +6,9 @@
 
 # 🦸 claude-hero
 
-> 在路上的开发者，需要一个替你背行囊的伙伴。
+> 了解英雄，学习英雄，成为英雄。
 
-**开发的路上不必独行——让 Hero 替你背起繁琐，把创造力和温度，留给只有你能做的事。**
+**了解英雄**——看现有的 Hero 都有哪些能力；**学习英雄**——学怎么写一个 Hero、怎么给它配齐工具与技能；**成为英雄**——把你最熟的活写成一个 Hero，创建并提交给团队。Hero 就是一个个配好工具与技能的 AI agent，花名取自 AI 时代的先驱。
 
 </div>
 
@@ -32,12 +32,12 @@ Hero 是一个 AI agent——有名字、有花名、有明确的职责边界。
 
 | 花名 | 本名 | 梯队 | 负责什么 |
 |------|------|------|---------|
-| **Demis Hassabis** | hero-java-tech-lead | 规划 | 技术负责人、拆任务、画架构 |
-| **Jeff Dean** | hero-java-backend-developer | 执行 | 写 Controller/Service，接入中间件 |
-| **Fei-Fei Li** | hero-java-data-engineer | 执行 | MyBatis SQL + DBA |
-| **Percy Liang** | hero-java-test-engineer | 执行 | TDD/BDD/冒烟/端到端测试 |
-| **Chris Olah** | hero-java-code-reviewer | 评审 | 代码审查（只读） |
-| **Jan Leike** | hero-java-security-auditor | 评审 | 安全设计审计（只读） |
+| **[Demis Hassabis](https://en.wikipedia.org/wiki/Demis_Hassabis)** | hero-java-tech-lead | 规划 | 技术负责人、拆任务、画架构 |
+| **[Jeff Dean](https://en.wikipedia.org/wiki/Jeff_Dean)** | hero-java-backend-developer | 执行 | 写 Controller/Service，接入中间件 |
+| **[Fei-Fei Li](https://en.wikipedia.org/wiki/Fei-Fei_Li)** | hero-java-data-engineer | 执行 | MyBatis SQL + DBA |
+| **[Percy Liang](https://en.wikipedia.org/wiki/Percy_Liang)** | hero-java-test-engineer | 执行 | TDD/BDD/冒烟/端到端测试 |
+| **[Chris Olah](https://en.wikipedia.org/wiki/Chris_Olah)** | hero-java-code-reviewer | 评审 | 代码审查（只读） |
+| **[Jan Leike](https://en.wikipedia.org/wiki/Jan_Leike)** | hero-java-security-auditor | 评审 | 安全设计审计（只读） |
 
 #### ② 领航 Hero（项目型）——按服务只读带路
 
@@ -45,13 +45,13 @@ Hero 是一个 AI agent——有名字、有花名、有明确的职责边界。
 
 | 花名 | 本名 | 带路的服务 |
 |------|------|-----------|
-| **John Schulman** | hero-java-ecrm | 企业/连锁/促销 申请审批工作流（特殊栈） |
-| **Oriol Vinyals** | hero-java-hotel-product-center | 酒店产品中心（房价码 / 定价 / 渠道映射） |
-| **David Silver** | hero-java-owner-biz | 雅途业主服务端（大单体多业务域） |
+| **[John Schulman](https://en.wikipedia.org/wiki/John_Schulman)** | hero-java-ecrm | 企业/连锁/促销 申请审批工作流（特殊栈） |
+| **[Oriol Vinyals](https://en.wikipedia.org/wiki/Oriol_Vinyals)** | hero-java-hotel-product-center | 酒店产品中心（房价码 / 定价 / 渠道映射） |
+| **[David Silver](https://en.wikipedia.org/wiki/David_Silver_(computer_scientist))** | hero-java-owner-biz | 雅途业主服务端（大单体多业务域） |
 
 > 一句话记住分工：**领航 Hero 圈定「在哪改、影响谁」，标准 Hero 负责「具体怎么改」。** 服务越多，领航 Hero 越多——目标是让每个 Java 服务都有一位熟门熟路的带路人。
 
-> **花名取自创造了计算与 AI 时代的先驱——他们的名字值得被记住。** 它不是排行榜上的名次，而是身边一个同行伙伴的名字——叫得出名字，才有温度。花名是团队的共同语言，也是一份致敬。你也可以给你创造的 Hero 取花名，就像公司里的伙伴都有自己的花名一样。
+> **花名取自创造了计算与 AI 时代的先驱——他们的名字值得被记住。** 上面表格里每个花名都链到了那位先驱的维基百科，点开就能了解本人。它不是排行榜上的名次，而是身边一个同行伙伴的名字——叫得出名字，才有温度。花名是团队的共同语言，也是一份致敬。你也可以给你创造的 Hero 取花名，就像公司里的伙伴都有自己的花名一样。
 
 ---
 

@@ -484,6 +484,23 @@ img, svg { display: block; max-width: 100%; }
   margin-left: var(--space-sm);
 }
 
+/* 英雄名 → 维基百科外链（卡片内 & 正文内统一样式） */
+.pilot-name a,
+.role-name a,
+.wiki-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-bronze-soft);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.pilot-name a:hover,
+.role-name a:hover,
+.wiki-link:hover {
+  color: var(--color-bronze);
+  border-bottom-color: var(--color-bronze);
+}
+.wiki-link { color: var(--color-bronze); }
+
 /* ========================================
    9. 客栈入口 CTA
    ======================================== */
