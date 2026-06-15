@@ -58,6 +58,7 @@ Claude Code 使用习惯。**安装靠软链**，`git pull` 即全员生效，�
   （无关联数组 `declare -A`、无 `${var^^}`），注意 `set -u`/`set -e` 与空数组/子 shell 的坑。
 - **新增资源**：新 skill/agent/hook/MCP/CLI 的落位规则见 `CONTRIBUTING.md`；需安装到 `~/.claude` 的
   新类别才改 `manifest.yaml`。
+- **`site/` CSS 版本管理**：`site/public/css/*.css` 的引用必须带 `?v=YYYYMMDD<letter>` 做 cache bust（如 `tokens.css?v=20260614b`）。改任何 CSS 后**必须递增所有引用它的 HTML 里的版本号**，否则中间层/浏览器缓存会让用户滞后 4+ 小时看到旧样式。Caddyfile 未配 cache-control，全靠 query string 破缓存。
 
 ## 开荒 vs 保鲜（领航 agent 的两条路）
 

@@ -12,3 +12,4 @@ node_modules/
 .omo/state/.cache/
 docs/.refresh-work/
 docs/.refresh-drafts/
+CLAUDE.local.md
