@@ -51,8 +51,8 @@ state file 迁移校验：`bash scripts/validate-state-migration.sh`
 - 仓库自身导航 `CLAUDE.md` ≠ 团队基线模板 `config/CLAUDE.md.example`（前者描述本仓库，后者是成员合并进自己 `~/.claude/CLAUDE.md` 的起点）
 - `agents/AGENTS.md` 是 agent 花名册 registry（frontmatter YAML + roster 表）
 - `docs/.refresh-state.json`、`docs/.refresh-work/`、`docs/.refresh-drafts/` 是 `hero-refresh` 的中间产物（后两个已 gitignore，勿提交）
-- `site/public/css/*.css` 的引用必须带 `?v=YYYYMMDD<letter>` 缓存打散（如 `tokens.css?v=20260614b`）。改任何 CSS 后**必须递增**所有引用它的 HTML 里的版本号，否则中间层/浏览器缓存会让用户滞后 4 小时看到旧样式。Caddyfile 未配 cache-control，全靠 query string 破缓存。
-- `site/` 是对外宣传页（Caddy 静态站，`site.json` 配 `static_root`），与核心资产无关
+- `web/public/css/*.css` 的引用必须带 `?v=YYYYMMDD<letter>` 缓存打散（如 `tokens.css?v=20260614b`）。改任何 CSS 后**必须递增**所有引用它的 HTML 里的版本号，否则中间层/浏览器缓存会让用户滞后看到旧样式。Caddyfile 未配 cache-control，全靠 query string 破缓存。
+- `web/` 是对外宣传页（podman 容器化的 Caddy 静态站，`web/public` 为站点根，`:10086` 对外），与核心资产无关
 
 ## 安全红线
 

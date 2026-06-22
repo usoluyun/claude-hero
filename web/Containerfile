@@ -1,0 +1,10 @@
+# claude-hero 宣传站 —— 静态托管镜像
+FROM docker.io/library/caddy:2-alpine
+
+# 容器内 Caddy 配置
+COPY Caddyfile /etc/caddy/Caddyfile
+
+# 静态站点内容
+COPY public /srv
+
+EXPOSE 80

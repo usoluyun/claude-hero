@@ -1,0 +1,8 @@
+# 容器内 Caddy 配置：静态托管 claude-hero 宣传站。
+# 缓存策略：不配 cache-control，全靠 HTML 里 css 链接的 ?v=YYYYMMDD<letter> 破缓存
+# （见 README.md「CSS 版本管理」），改 CSS 必须递增版本号。
+:80 {
+	root * /srv
+	file_server
+	encode gzip
+}

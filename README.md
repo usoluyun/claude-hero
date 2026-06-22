@@ -93,7 +93,7 @@ cd claude-hero && bash uninstall.sh
 
 ## 核心子系统
 
-> 想看运行机制全景（五层架构 / Wave 工作流 / Skill 调度 / 工作流执行可视化），见项目主页机制页 [`site/public/mechanism.html`](site/public/mechanism.html)。
+> 想看运行机制全景（五层架构 / Wave 工作流 / Skill 调度 / 工作流执行可视化），见项目主页机制页 [`web/public/mechanism.html`](web/public/mechanism.html)。
 
 ### 🎯 意图分诊（hero-dispatch）
 
@@ -184,7 +184,7 @@ claude
 | `mcp/` | MCP server 配置模板 | 配自己的 MCP |
 | `scripts/` | `hero-refresh.sh`（保鲜）/ `hero-init.sh`（开荒）等入口 | 跑保鲜 / 开荒 |
 | `templates/` | 领航 Agent 模板（`navigator-agent.md.tmpl`） | hero-init 生成 Hero 用 |
-| `site/` | 宣传页（Caddy 静态站） | 对外展示 |
+| `web/` | 宣传站（podman 容器化 Caddy，`:10086`） | 对外展示 |
 | `docs/` | 文档手册 | 看 onboarding / 维护手册 |
 | `tests/` | dispatch / refresh / 分层 / 可见性测试 | 改核心子系统前后跑 |
 

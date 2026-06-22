@@ -291,6 +291,8 @@ img, svg { display: block; max-width: 100%; }
 .btn-primary:hover { background: var(--color-bronze-soft); color: var(--color-white); }
 .btn-ghost { border-color: var(--color-line-light); color: var(--color-baiyan); }
 .btn-ghost:hover { border-color: var(--color-bronze-soft); color: var(--color-bronze-soft); }
+.hero-gitlab-btn { gap: var(--space-xs); }
+.hero-gitlab-icon { width: 18px; height: 18px; flex-shrink: 0; }
 .btn-light { background: var(--color-baiyan); color: var(--color-woye); }
 .btn-light:hover { background: var(--color-white); }
 
@@ -563,6 +565,8 @@ img, svg { display: block; max-width: 100%; }
 .footer-links { display: flex; justify-content: center; gap: var(--space-xl); margin-bottom: var(--space-lg); flex-wrap: wrap; }
 .footer-links a { font-size: var(--text-sm); opacity: 0.75; }
 .footer-links a:hover { opacity: 1; color: var(--color-bronze-soft); }
+.footer-gitlab-link { display: inline-flex; align-items: center; gap: var(--space-xs); }
+.footer-gitlab-icon { width: 16px; height: 16px; vertical-align: middle; }
 .footer-copyright { font-size: var(--text-xs); opacity: 0.5; letter-spacing: 0.04em; }
 
 /* ========================================
