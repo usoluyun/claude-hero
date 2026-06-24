@@ -79,7 +79,7 @@ agents:
 |------|-------|------|-------|----------|
 | Demis Hassabis | hero-java-tech-lead | planner | opus | no |
 | Jeff Dean | hero-java-backend-developer | executor | sonnet | no |
-| Fei-Fei Li | hero-java-data-engineer | executor | sonnet | no |
+| Fei-Fei Li | hero-java-data-engineer | executor | opus | no |
 | Percy Liang | hero-java-test-engineer | executor | sonnet | no |
 | Chris Olah | hero-java-code-reviewer | reviewer | opus | yes |
 | Jan Leike | hero-java-security-auditor | reviewer | opus | yes |

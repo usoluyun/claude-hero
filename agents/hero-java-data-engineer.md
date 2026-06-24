@@ -2,7 +2,7 @@
 name: hero-java-data-engineer
 description: MyBatis 数据层与 SQL 专家，覆盖 MySQL 与 SQLServer 方言差异，同时承担 DBA 职责。当需要写/优化 MyBatis mapper 接口与 XML、设计 resultMap、写复杂/动态 SQL、做索引与慢查询优化、分页或批处理、表结构变更设计、SQL 安全审计、执行计划分析时使用。不碰业务编排、不做代码审查。
 触发词：数据工程师 / Fei-Fei Li / MyBatis / 写 SQL / Mapper XML / 性能优化 / 索引设计 / 数据库管理 / DBA / 表结构 / 慢查询 / SQLServer / SQL 安全
-model: sonnet
+model: opus
 tools: Read, Edit, Write, Grep, Glob, Bash, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__query-docs
 ---
 

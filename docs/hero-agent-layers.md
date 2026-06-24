@@ -12,7 +12,7 @@
 角色 agent（横向干活，跨服务通用）
  ├─ 规划层        Demis Hassabis   hero-java-tech-lead              (opus)
  ├─ 执行层        Jeff Dean        hero-java-backend-developer      (sonnet)
- │                Fei-Fei Li       hero-java-data-engineer          (sonnet)
+ │                Fei-Fei Li       hero-java-data-engineer          (opus)
  │                Percy Liang      hero-java-test-engineer          (sonnet)
  └─ 评审门控层    Chris Olah       hero-java-code-reviewer          (opus, 只读)
                   Jan Leike        hero-java-security-auditor       (opus, 只读)
@@ -73,7 +73,7 @@
 | Agent | 先驱花名 | model | 触发词 | 应加载 skills | 该用 CLI | 怎么用 |
 |---|---|---|---|---|---|---|
 | `hero-java-backend-developer` | Jeff Dean | sonnet | 后端开发 / Jeff Dean / 实现接口 / 写 Controller / 写 Service / 接入中间件 / Spring Boot 业务 / Maven 构建 / Gradle 构建 | hero-conventions, superpowers:test-driven-development | maven, gradle, jdk-multiversion, ast-grep, httpie, jq, codegraph | 给它明确任务 → 实现 Controller/Service/DAO 与中间件接入，TDD-first |
-| `hero-java-data-engineer` | Fei-Fei Li | sonnet | 数据工程师 / Fei-Fei Li / MyBatis / 写 SQL / Mapper XML / 性能优化 / 索引设计 / 数据库管理 / DBA / 表结构 / 慢查询 / SQLServer / SQL 安全 | hero-conventions | SlowQL, pg_glimpse, mycli, sqlcmd, osv-scanner | 给它 SQL/数据层需求 → 产出 MyBatis mapper/XML、resultMap、慢查询调优 |
+| `hero-java-data-engineer` | Fei-Fei Li | opus | 数据工程师 / Fei-Fei Li / MyBatis / 写 SQL / Mapper XML / 性能优化 / 索引设计 / 数据库管理 / DBA / 表结构 / 慢查询 / SQLServer / SQL 安全 | hero-conventions | SlowQL, pg_glimpse, mycli, sqlcmd, osv-scanner | 给它 SQL/数据层需求 → 产出 MyBatis mapper/XML、resultMap、慢查询调优 |
 | `hero-java-test-engineer` | Percy Liang | sonnet | 测试工程师 / Percy Liang / 写测试 / 单元测试 / TDD / BDD / 接口测试 / Allure 报告 / 端到端测试 / 冒烟测试 | superpowers:test-driven-development, gherkin, allure（经 `skills:` 字段预加载） | maven, gradle, httpie（接口冒烟）, allure（报告）；E2E 用 Playwright MCP | 给它待测代码 → 单元(TDD)/BDD(.feature)/接口冒烟(httpie)/E2E(Playwright 无头)/Allure 报告，纯本地无容器 |
 
 ### 评审门控层
