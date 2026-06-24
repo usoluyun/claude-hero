@@ -19,7 +19,6 @@
   },
 
   "env": {
-    "NO_PROXY": "yaduo.com,at-our.com,localhost,127.0.0.1",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
 
