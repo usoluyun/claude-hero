@@ -7,15 +7,6 @@
 
 * 无论使用什么语言提问，都用中文回复。
 
-## 代理访问
-
-命令行通过 127.0.0.1:7890 代理访问互联网；遇到企业内部域名（如 yaduo.com、
-at-our.com）时，把它们加入 NO_PROXY。
-
-## 容器镜像
-
-远程私有 Podman 镜像仓库地址：zot.chester.monster
-
 ## 数据库
 
 * 查询 PostgreSQL 用 pgcli
