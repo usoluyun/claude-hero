@@ -46,14 +46,36 @@ Claude Code 使用习惯。**安装靠软链**，`git pull` 即全员生效，�
 - **`config/`** — `hooks/`（含 `hero-refresh-check.sh` 的 SessionStart 漂移提醒）、`CLAUDE.md.example`、`settings.json.example`。
 - **`cli/`** — CLI 工具清单与用法（[`README.md`](./cli/README.md) 总表、`jdk-multiversion.md` / `maven.md` / `gradle.md`）。
 - **`mcp/`** — MCP server 配置模板（密钥占位符）+ 说明。
-- **`manifest.yaml`** — 资源映射清单，`install.sh` / `uninstall.sh` 都读它。
+- **`manifest.yaml`** — 资源映射清单，`install.sh` / `uninstall.sh` 都读它。每条三态：`link`（软链，随 `git pull` 自动更新）/ `copy`（一次性复制，不跟仓库更新）/ `template`（含密钥/个人化的 `CLAUDE.md`、`settings.json`、`.mcp.json`，**不自动写入**，只打印提示手动合并）。
+
+## 常用命令
+
+> 日常意图类调用走 `hero <意图>`（见上方三大子系统）；下表是**底层脚本/测试**入口，开发本仓库资产时用。
+
+| 场景 | 命令 |
+|---|---|
+| 安装到 `~/.claude` | `bash install.sh` |
+| 演练安装（不碰真实环境） | `CLAUDE_HOME=/tmp/xxx bash install.sh` |
+| 卸载（只删指向本仓库的软链） | `bash uninstall.sh` |
+| 开荒：为新服务生成领航 agent + 登记花名册 | `bash scripts/hero-init.sh <项目路径> [花名]` |
+| 保鲜确定性层（codegraph 重索引 + evidence + vendor docs） | `bash scripts/hero-refresh.sh [<proj>] [--force]` |
+| 宣传站重建重启（:10086） | `cd web && bash run.sh` |
+
+**测试与校验**（`tests/` 是纯 bash 套件，无统一 runner，按套件跑）：
+
+- 跑某测试套件全部用例：`bash tests/<suite>/run.sh`（套件：`hero-dispatch` / `hero-refresh` / `hero-agent-layers` / `hero-visibility`）。
+- **跑单个测试**：`bash tests/<suite>/test_<name>.sh`（套件内自带零依赖 `assert.sh`）。
+- 安装链路自测：`bash scripts/test-install.sh`（隔离临时目录验证软链正确性）。
+- 一致性校验（CI/提交前可跑）：
+  - `bash scripts/validate-agents-md-coverage.sh` —— 每个 `agents/hero-java-*.md` 都须在 `agents/AGENTS.md` 登记。
+  - `bash scripts/validate-chapters.sh`、`bash scripts/validate-state-migration.sh`。
 
 ## 在本仓库工作的约定（改这里前必读）
 
 - **命名**：agent `hero-<lang>-<...>`（带语言）；skill `hero-<能力>`（不带语言）；全小写 kebab-case，
   文件名 = frontmatter `name`。详见 [`CONTRIBUTING.md`](./CONTRIBUTING.md)。
 - **安全红线**：**绝不提交真实密钥 / token / 内网敏感信息**，一律用 `*.example` + 占位符。
-- **改 install/uninstall 后**：用 `CLAUDE_HOME=/tmp/xxx bash install.sh` 演练再提交，别碰真实 `~/.claude`。
+- **改 install/uninstall 后**：用 `CLAUDE_HOME=/tmp/xxx bash install.sh` 演练再提交，别碰真实 `~/.claude`；可用 `bash scripts/test-install.sh` 在隔离目录做可执行校验。
 - **bash 3.2 兼容**（macOS 自带）：`scripts/` 与 `config/hooks/` 的脚本避免 bash 4+ 特性
   （无关联数组 `declare -A`、无 `${var^^}`），注意 `set -u`/`set -e` 与空数组/子 shell 的坑。
 - **新增资源**：新 skill/agent/hook/MCP/CLI 的落位规则见 `CONTRIBUTING.md`；需安装到 `~/.claude` 的
