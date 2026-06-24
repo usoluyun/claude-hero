@@ -23,8 +23,6 @@ FAIL=0
 MISSING_LIST=""
 
 for agent in $FILES; do
-  # Skip atour-life-api (not in 9-agent enhancement scope - tracked separately)
-  [[ "$agent" == "hero-java-atour-life-api" ]] && { echo "  SKIP:  $agent (out of scope)"; continue; }
   if echo "$REGISTERED" | grep -qF "$agent"; then
     echo "  COVERED: $agent"
   else
